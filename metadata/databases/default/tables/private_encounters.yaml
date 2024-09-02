@@ -1,3 +1,3 @@
 table:
   name: encounters
-  schema: public
+  schema: private

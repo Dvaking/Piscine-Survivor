@@ -1,1 +1,0 @@
-CREATE TABLE "public"."events" ("uuid" uuid NOT NULL, "name" text NOT NULL, "date" text NOT NULL, "max_participants" integer NOT NULL, "location_x" text NOT NULL, "location_y" text NOT NULL, "type" text NOT NULL, "employee_uuid" uuid NOT NULL, "location_name" text NOT NULL, PRIMARY KEY ("uuid") , UNIQUE ("uuid"));
