@@ -1,1 +1,2 @@
+- "!include public_customers.yaml"
 - "!include public_employees.yaml"
