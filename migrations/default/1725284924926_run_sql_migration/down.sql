@@ -1,0 +1,9 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE TABLE payments_history (
+--     id SERIAL PRIMARY KEY,
+--     date DATE NOT NULL,
+--     payment_method TEXT NOT NULL,
+--     amount DECIMAL(10, 2) NOT NULL,
+--     comment TEXT
+-- );
