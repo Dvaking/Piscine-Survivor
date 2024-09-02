@@ -1,32 +1,25 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { client } from './graphql-request';
-import { gql } from 'graphql-request';
+import { client } from '../backend/graphql-request';
+import { getUsersGlobalInfomation } from '../backend/request/users/Get';
 
-const GET_EMPLOYEES = gql`
-  query {
-    employees {
-      id
-      name
-    }
-  }
-`;
 
 interface Employee {
-  id: number;
   name: string;
+  email: string;
 }
 
 export default function Employee() {
-  const [employees, setEmployees] = useState<Employee[] | undefined>([]);
+  const [users, setUsers] = useState<Employee[] | undefined>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const fetchEmployees = async () => {
+    const fetchUsers = async () => {
       try {
-        const data = await client.request(GET_EMPLOYEES);
-        setEmployees(data.employees);
+        const data = await client.request(getUsersGlobalInfomation);
+        console.log(data);
+        setUsers(data.users);
       } catch (error) {
         setError(error as Error);
       } finally {
@@ -34,7 +27,7 @@ export default function Employee() {
       }
     };
 
-    fetchEmployees();
+    fetchUsers();
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -44,9 +37,9 @@ export default function Employee() {
     <div>
       <h1>Employees List</h1>
       <ul>
-        {employees ? employees.map(employee => (
-          <li key={employee.id}>
-            {employee.name} - {employee.id}
+        {users ? users.map(employee => (
+          <li key={employee.email}>
+            {employee.name} - {employee.email}
           </li>
         )) : "Il n'y a rien" }
       </ul>
