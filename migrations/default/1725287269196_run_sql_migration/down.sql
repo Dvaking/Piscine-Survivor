@@ -1,0 +1,7 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE TABLE users (
+--   uuid SERIAL PRIMARY KEY,
+--   name TEXT NOT NULL,
+--   email TEXT NOT NULL UNIQUE
+-- );

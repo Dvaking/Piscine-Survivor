@@ -1,0 +1,5 @@
+CREATE TABLE users (
+  uuid SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE
+);

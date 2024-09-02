@@ -4,3 +4,6 @@ metadata_directory: metadata
 actions:
   kind: synchronous
   handler_webhook_baseurl: http://localhost:3000
+  metadata_directory: ./database/metadata
+  migrations_directory: ./database/migrations
+  seed_directory: ./database/seed
