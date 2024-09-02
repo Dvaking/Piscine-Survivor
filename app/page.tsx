@@ -1,33 +1,52 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const aboutUsRef = useRef(null);
+  const statisticsRef = useRef(null);
+
+  const scrollToSection = (ref:any) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
-    <main className={styles.main}>
-      <div className="field">
-        <p className="control has-icons-left has-icons-right">
-          <input className="input" type="email" placeholder="Email" />
-          <span className="icon is-small is-left">
-            <i className="fas fa-envelope"></i>
-          </span>
-          <span className="icon is-small is-right">
-            <i className="fas fa-check"></i>
-          </span>
-        </p>
-      </div>
-      <div className="field">
-        <p className="control has-icons-left">
-          <input className="input" type="password" placeholder="Password" />
-          <span className="icon is-small is-left">
-            <i className="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
-      <div className="field">
-        <p className="control">
-          <button className="button is-success is-dark is-large">Login</button>
-        </p>
-      </div>
-    </main>
+    <body>
+      <main className={styles.main}>
+        <nav className="navbar is-fixed-top">
+          <div className="navbar-brand">
+            <a className="navbar-item">
+            - insert logo here -
+            </a>
+          </div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <a className="button is-link">Log in</a>
+              </div>
+            </div>
+        </nav>
+        <div className={styles.heading}>
+          <div className={styles.title}>
+            <h1>Soul Connection</h1>
+          </div>
+          <div className={styles.buttons}>
+            <button className="button is-outlined is-large" onClick={() => scrollToSection(aboutUsRef)}>About Us</button>
+            <button className="button is-outlined is-large" onClick={() => scrollToSection(statisticsRef)}>Statistics</button>
+          </div>
+        </div>
+        <section ref={aboutUsRef} style={{ marginTop: "100vh", padding: "50px", backgroundColor: "#f4f4f4" }}>
+          <h2>About Us</h2>
+          <p>CBla bla bla...</p>
+        </section>
+
+        <section ref={statisticsRef} style={{ marginTop: "50vh", padding: "50px", backgroundColor: "#e0e0e0" }}>
+          <h2>Statistics</h2>
+          <p>CBla bla bla...</p>
+        </section>
+      </main>
+    </body>
   );
 }

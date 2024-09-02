@@ -1,15 +1,61 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
+
 .main {
+  background-color: white;
+}
+
+.heading {
+  background-color: cornflowerblue;
+  min-height: 100vh;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.title h1 {
+  font-size: 12rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12rem;
+  margin: -5rem;
+}
+
+.buttons button {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+
+/* mobile */
+/* @media (max-width: 700px) {
+  .main {
+    --bulma-navbar-
+  }
+} */
+
+
+/* .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-}
+} */
 
-.description {
+/* .description {
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
@@ -46,9 +92,9 @@
   grid-template-columns: repeat(4, minmax(25%, auto));
   max-width: 100%;
   width: var(--max-width);
-}
+} */
 
-.card {
+/* .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
@@ -109,7 +155,8 @@
 
 .logo {
   position: relative;
-}
+} */
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -129,7 +176,7 @@
 }
 
 /* Mobile */
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
   .content {
     padding: 4rem;
   }
@@ -203,10 +250,10 @@
     );
     z-index: 1;
   }
-}
+} */
 
 /* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
+/* @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
   }
@@ -229,4 +276,4 @@
   to {
     transform: rotate(0deg);
   }
-}
+} */
