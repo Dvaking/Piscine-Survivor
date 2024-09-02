@@ -25,7 +25,7 @@ export default function Home() {
       </div>
       <div className="field">
         <p className="control">
-          <button className="button is-success">Login</button>
+          <button className="button is-success is-dark is-large">Login</button>
         </p>
       </div>
     </main>
