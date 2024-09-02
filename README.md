@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Dependances:
+```
+sudo npm install -g typescript nodemon
+sudo curl -L https://graphql-engine-cdn.hasura.io/ddn/cli/v4/get.sh | bash
+sudo curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+npm i
+```
+
+
 ## Getting Started
 
 First, run the development server:
