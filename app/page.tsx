@@ -1,13 +1,18 @@
 "use client";
 
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
   const aboutUsRef = useRef(null);
   const statisticsRef = useRef(null);
+  const router = useRouter();
 
+  const handleLoginClick = () => {
+    router.push("/login");
+  };
   const scrollToSection = (ref:any) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +29,7 @@ export default function Home() {
           </div>
             <div className="navbar-end">
               <div className="navbar-item">
-                <a className="button is-link">Log in</a>
+                <a className="button is-link" onClick={handleLoginClick}>Log in</a>
               </div>
             </div>
         </nav>
@@ -37,14 +42,13 @@ export default function Home() {
             <button className="button is-outlined is-large" onClick={() => scrollToSection(statisticsRef)}>Statistics</button>
           </div>
         </div>
-        <section ref={aboutUsRef} style={{ marginTop: "100vh", padding: "50px", backgroundColor: "#f4f4f4" }}>
+        <section ref={aboutUsRef}>
           <h2>About Us</h2>
-          <p>CBla bla bla...</p>
+          <p>Bla bla bla...</p>
         </section>
-
-        <section ref={statisticsRef} style={{ marginTop: "50vh", padding: "50px", backgroundColor: "#e0e0e0" }}>
+        <section ref={statisticsRef}>
           <h2>Statistics</h2>
-          <p>CBla bla bla...</p>
+          <p>Bla bla bla...</p>
         </section>
       </main>
     </body>

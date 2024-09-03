@@ -37,6 +37,11 @@
   font-weight: 600;
 }
 
+.main section {
+  background-color: white;
+  padding: 2rem;
+}
+
 
 /* mobile */
 /* @media (max-width: 700px) {
