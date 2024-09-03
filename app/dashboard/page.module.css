@@ -1,0 +1,17 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+
+/* Laptop & Desktop */
+.main {
+  background-color: white;
+}
+
+
+
+
+/* mobile & tablet */
+@media (max-width: 1920px) {
+  .main {
+    background-color: white;
+  }
+}

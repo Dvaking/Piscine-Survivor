@@ -16,8 +16,13 @@ export default function Home() {
   const handleTipsClick = () => {
     router.push("/tips");
   };
+<<<<<<< Updated upstream
   const handleStaticticsClick = () => {
     router.push("/statistics");
+=======
+  const handleDashboardClick = () => {
+    router.push("/dashboard");
+>>>>>>> Stashed changes
   };
   const scrollToSection = (ref:any) => {
     if (ref.current) {
@@ -34,7 +39,11 @@ export default function Home() {
           </div>
             <div className="navbar-end">
               <div className="navbar-item">
+<<<<<<< Updated upstream
                 <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
+=======
+                <a className="button is-link" onClick={handleDashboardClick}>Dashboard</a>
+>>>>>>> Stashed changes
                 <a className="button is-link" onClick={handleTipsClick}>Tips</a>
                 <a className="button is-link" onClick={handleLoginClick}>Log in</a>
               </div>
