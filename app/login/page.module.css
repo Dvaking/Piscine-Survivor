@@ -1,112 +1,11 @@
-/* @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"; */
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
-/* CSS for Login Page */
-
-/* Large Laptop */
-@media (min-width: 1600px) {
-  .LoginPage {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: center;
-    padding-top: 10%;
-  }
-
-  .Mail {
-    background-color: white;
-    margin-top: 5%;
-  }
-
-  .Password {
-    margin-top: 5%;
-  }
-
-  .Login {
-    margin-top: 8%;
-  }
-}
-
-/* Desktop and Tablet Landscap */
-@media (min-width: 960px) and (max-width: 1599px) {
-  .LoginPage {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: center;
-    padding-top: 10%;
-  }
-
-  .Mail {
-    background-color: white;
-    margin-top: 5%;
-  }
-
-  .Password {
-    margin-top: 5%;
-  }
-
-  .Login {
-    margin-top:8%;
-  }
-}
-
-/* Tablet Portrait */
-@media (min-width: 768px) and (max-width: 959px) {
-  .LoginPage {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: center;
-    padding-top: 30%;
-  }
-
-  .Mail {
-    background-color: white;
-    margin-top: 10%;
-  }
-
-  .Password {
-    margin-top: 10%;
-  }
-
-  .Login {
-    margin-top: 15%;
-  }
-}
-
-
-/* Mobile */
-@media (min-width: 320px) and (max-width: 767px) {
-  .LoginPage {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    align-items: center;
-    padding-top: 50%;
-  }
-
-  .Mail {
-    background-color: white;
-    margin-top: 15%;
-  }
-
-  .Password {
-    margin-top: 15%;
-  }
-
-  .Login {
-    margin-top: 20%;
-  }
-}
-
-/* @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
-
- .main {
+.main {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: 20rem;
+  padding: 6rem;
   min-height: 100vh;
 }
 
@@ -210,8 +109,8 @@
 
 .logo {
   position: relative;
-} */
-/* Enable hover only on non-touch devices
+}
+/* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
@@ -227,9 +126,9 @@
   .card:hover span {
     transform: none;
   }
-} */
+}
 
-/* Mobile
+/* Mobile */
 @media (max-width: 700px) {
   .content {
     padding: 4rem;
@@ -304,9 +203,9 @@
     );
     z-index: 1;
   }
-} */
+}
 
-/* Tablet and Smaller Desktop
+/* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
@@ -330,4 +229,4 @@
   to {
     transform: rotate(0deg);
   }
-} */
+}
