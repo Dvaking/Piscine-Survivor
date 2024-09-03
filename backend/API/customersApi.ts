@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios";
 import { login } from "./authApi";
 import { Token } from "../types/token";
 
-const url = "https://soul-connection.fr/api/employees";
+const url = "https://soul-connection.fr/api/customers";
 const headers = {
   accept: "application/json",
   "X-Group-Authorization": "e6e70c63639f039518f84a0f3c517837",
 };
 
-export async function getEmployees(token: Token): Promise<AxiosResponse<any>> {
+export async function getCustomers(token: Token): Promise<AxiosResponse<any>> {
   try {
     let response: AxiosResponse<any>;
 

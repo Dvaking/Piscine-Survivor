@@ -1,6 +1,7 @@
 import * as cron from "node-cron";
 import { login } from "./authApi";
 import { getEmployees } from "./employeesApi";
+import { getCustomers } from "./customersApi";
 import { Token } from "../types/token";
 
 async function fetchData(): Promise<void> {
@@ -8,8 +9,7 @@ async function fetchData(): Promise<void> {
     const token = await login();
 
     const employees = await getEmployees(token);
-
-    console.log("Employees data:", employees.data);
+    const customers = await getCustomers(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
