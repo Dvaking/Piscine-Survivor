@@ -8,10 +8,39 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
       <main className={styles.main}>
-        hello world
-        {/* nav bar */}
-        {/* h1 & subtitle */}
+        <nav className="navbar is-fixed-top">
+          <div className="navbar-brand">
+            <a className="navbar-item">
+              <strong>Soul Connection</strong>
+            </a>
+          </div>
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <a className="button">Dashboard</a>
+              <a className="button">Customers</a>
+              <a className="button">Events</a>
+              <a className="button">Tips</a>
+              <a className="button">Statistics</a>
+              <a className="button">Accounts</a>
+            </div>
+            <div className="navbar-item">
+              <img className="is-rounded" src="https://bulma.io/assets/images/placeholders/128x128.png" />
+            </div>
+          </div>
+        </nav>
+        <div className={styles.heading}>
+          <h1>Dashboard</h1>
+          <p>Welcome!</p>
+        </div>
         {/* div 1 */}
+        <div className={styles.firstCharts}>
+          <div className="box">
+            Number of customers per month chart
+          </div>
+          <div className="box">
+            Events chart
+          </div>
+        </div>
         {/* box 1 */}
         {/* box 2 */}
         {/* div 2 */}

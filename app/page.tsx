@@ -37,8 +37,8 @@ export default function Home() {
         </div>
           <div className="navbar-end">
             <div className="navbar-item">
-              <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
               <a className="button is-link" onClick={handleDashboardClick}>Dashboard</a>
+              <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
               <a className="button is-link" onClick={handleTipsClick}>Tips</a>
               <a className="button is-link" onClick={handleLoginClick}>Log in</a>
             </div>
