@@ -115,6 +115,36 @@
   .buttons button {
     font-size: 1.6rem;
   }
+  .aboutUs {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .aboutUs div {
+    width: 85%;
+  }
+  .aboutUs p {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  .stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .stats div {
+    width: 80%;
+  }
+  .stats h2 {
+    font-size: 3.2rem;
+    padding: 0rem;
+  }
+  .stats p {
+    font-size: 1.2rem;
+    padding: 0rem;
+  }
 }
 
 

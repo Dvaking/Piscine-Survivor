@@ -50,7 +50,6 @@ export default function Home() {
           </div>
           </div>
         </section>
-        
         <section ref={statisticsRef} style={{backgroundColor: 'aliceblue'}}>
           <div className={styles.stats}>
             <div className="box">
