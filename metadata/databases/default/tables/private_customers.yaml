@@ -6,8 +6,17 @@ object_relationships:
     using:
       manual_configuration:
         column_mapping:
-          id: customer_uuid
+          uuid: customer_uuid
         insertion_order: null
         remote_table:
           name: users
           schema: public
+  - name: payments_history
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer__uuid
+        insertion_order: null
+        remote_table:
+          name: payments_history
+          schema: private

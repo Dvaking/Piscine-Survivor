@@ -10,7 +10,7 @@ export const getUsersGlobalInfomation = gql`
 `;
 
 export const getEmployees = gql`
-  query MyQuery {
+  query {
     users {
       employee_link {
         work
