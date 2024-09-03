@@ -1,13 +1,3 @@
 table:
   name: users
   schema: public
-object_relationships:
-  - name: employee_link
-    using:
-      manual_configuration:
-        column_mapping:
-          user_id: user_id
-        insertion_order: null
-        remote_table:
-          name: employees
-          schema: private
