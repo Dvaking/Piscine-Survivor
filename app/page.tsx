@@ -20,7 +20,7 @@ export default function Home() {
   };
   return (
       <main className={styles.main}>
-        <nav className="navbar is-fixed-top is-flex-mobile">
+        <nav className="navbar is-fixed-top is-flex-mobile is-flex">
           <div className="navbar-brand">
             <a className="navbar-item is-hidden-mobile">
             - insert logo here -
