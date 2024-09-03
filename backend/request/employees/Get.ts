@@ -8,3 +8,17 @@ export const getUsersGlobalInfomation = gql`
     }
   }
 `;
+
+export const getEmployees = gql`
+  query MyQuery {
+    users {
+      employee_link {
+        work
+        uuid
+      }
+      name
+      email
+      surname
+    }
+  }
+`;
