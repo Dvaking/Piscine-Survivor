@@ -24,6 +24,28 @@
   font-size: 1.5rem;
 }
 
+.firstCharts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+}
+
+.firstCharts div {
+  padding: 2rem;
+}
+
+.secondCharts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+}
+
+.secondCharts div {
+  padding: 2rem;
+}
+
 
 /* mobile & tablet */
 @media (max-width: 1920px) {

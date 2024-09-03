@@ -43,20 +43,22 @@ export default function Home() {
           <h1>Dashboard</h1>
           <p>Welcome!</p>
         </div>
-        {/* div 1 */}
         <div className={styles.firstCharts}>
-          <div className="box">
+          <div className="card">
             Number of customers per month chart
           </div>
-          <div className="box">
+          <div className="card">
             Events chart
           </div>
         </div>
-        {/* box 1 */}
-        {/* box 2 */}
-        {/* div 2 */}
-        {/* box 3 */}
-        {/* box 4 */}
+        <div className={styles.secondCharts}>
+          <div className="card">
+            Customers by country map
+          </div>
+          <div className="card">
+            Meetings top sources pie chart
+          </div>
+        </div>
       </main>
   );
 }
