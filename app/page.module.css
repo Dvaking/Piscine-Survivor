@@ -1,147 +1,91 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
-
-
-/* Laptop & Desktop */
-.main {
-  background-color: white;
+/* Conteneur principal pour le login */
+.login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.main nav {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.heading {
-  background-color: cornflowerblue;
-  min-height: 100vh;
+.loginContainer {
+  background-color: rgb(235, 235, 235);
+  padding: 8rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70vh;
-}
-
-.title h1 {
-  font-size: 12rem;
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14rem;
-  margin: -2rem;
-}
-
-.buttons button {
-  font-size: 2.5rem;
-  font-weight: 600;
-}
-
-.main section {
-  background-color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.aboutUs {
-  display: flex;
-  justify-content: center;
-}
-
-.aboutUs div {
-  width: 90%;
-}
-
-.aboutUs p {
-  font-size: 1.9rem;
-  padding: 2rem;
-  text-align: justify;
-}
-
-.stats {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.numbers {
-  display: flex;
-  justify-self: center;
-  background-color: cornflowerblue;
-}
-
-.stats div {
-  width: 25%;
-}
-
-.stats h2 {
-  font-size: 7.5rem;
-  font-weight: 700;
-  text-align: center;
-  padding: 1rem;
-}
-
-.stats p {
   font-size: 2rem;
-  padding: 2rem;
-  text-align: justify;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 }
 
+.field {
+  margin-bottom: 1.5rem;
+}
 
-/* mobile & tablet */
-@media (max-width: 1920px) {
-  .heading {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .title h1 {
-    font-size: 2.8rem;
-    padding-left: 1rem;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    margin: -3rem;
-  }
-  .buttons button {
-    font-size: 1.6rem;
-  }
-  .aboutUs {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  .aboutUs div {
-    width: 85%;
-  }
-  .aboutUs p {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-  .stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  .stats div {
-    width: 80%;
-  }
-  .stats h2 {
-    font-size: 3.2rem;
-    padding: 0rem;
-  }
-  .stats p {
-    font-size: 1.2rem;
-    padding: 0rem;
-  }
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.checkbox input {
+  margin-right: 0.5rem;
+}
+
+.vSmallMarginLeft {
+  margin-left: 0;
+}
+
+.buttonText {
+  background: none;
+  border: none;
+  color: #3273dc;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.actions {
+  text-align: right;
+}
+
+.buttonLink {
+  padding: 0.75rem 1.5rem;
+  background-color: #3273dc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonLink:hover {
+  background-color: #275a9e;
 }
