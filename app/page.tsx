@@ -16,6 +16,9 @@ export default function Home() {
   const handleTipsClick = () => {
     router.push("/tips");
   };
+  const handleStaticticsClick = () => {
+    router.push("/statistics");
+  };
   const scrollToSection = (ref:any) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -31,6 +34,7 @@ export default function Home() {
           </div>
             <div className="navbar-end">
               <div className="navbar-item">
+                <a className="button is-link" onClick={handleStaticticsClick}>Tips</a>
                 <a className="button is-link" onClick={handleTipsClick}>Tips</a>
                 <a className="button is-link" onClick={handleLoginClick}>Log in</a>
               </div>
