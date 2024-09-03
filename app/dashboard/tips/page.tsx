@@ -10,10 +10,10 @@ export default function Tips() {
     router.push("/tips");
   };
   const handleStaticticsClick = () => {
-    router.push("/statistics");
+    router.push("../dashboard/statistics");
   }
   const handleDashboardClick = () => {
-    router.push("/../dashboard");
+    router.push("../dashboard");
   };
   return (
     <body>

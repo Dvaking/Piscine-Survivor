@@ -56,13 +56,13 @@ const MyChart: React.FC = () => {
   const router = useRouter();
 
   const handleTipsClick = () => {
-    router.push("/tips");
+    router.push("../dashboard/tips");
   };
   const handleStaticticsClick = () => {
     router.push("/statistics");
   }
   const handleDashboardClick = () => {
-    router.push("/../dashboard");
+    router.push("../dashboard");
   };
   return (
     <main className={styles.main}>
