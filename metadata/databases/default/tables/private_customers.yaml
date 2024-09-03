@@ -1,3 +1,13 @@
 table:
   name: customers
   schema: private
+object_relationships:
+  - name: customer_auth
+    using:
+      manual_configuration:
+        column_mapping:
+          id: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: users
+          schema: public
