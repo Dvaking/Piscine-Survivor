@@ -1,9 +1,43 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function Tips() {
+  const router = useRouter();
+
+  const handleTipsClick = () => {
+    router.push("/tips");
+  };
+  const handleStaticticsClick = () => {
+    router.push("/statistics");
+  }
+  const handleDashboardClick = () => {
+    router.push("/../dashboard");
+  };
   return (
     <body>
       <main className={styles.tips}>
+      <nav className="navbar is-fixed-top">
+          <div className="navbar-brand">
+            <a className="navbar-item">
+              <strong>Soul Connection</strong>
+            </a>
+          </div>
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <a className="button">Customers</a>
+              <a className="button">Events</a>
+              <a className="button is-link" onClick={handleDashboardClick}>Dashboard</a>
+              <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
+              <a className="button is-link" onClick={handleTipsClick}>Tips</a>
+              <a className="button">Accounts</a>
+            </div>
+            <div className="navbar-item">
+              <img className="is-rounded" src="https://bulma.io/assets/images/placeholders/128x128.png" />
+            </div>
+          </div>
+        </nav>
         <div className={styles.tipsContainer}>
           <h1 className={styles.title}>
             Tips for Coaches

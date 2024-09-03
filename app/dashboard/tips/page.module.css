@@ -1,4 +1,8 @@
 /* Conteneur principal pour les tips */
+.main nav {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .tips {
   margin: 0;
   padding: 0;
@@ -6,6 +10,7 @@
   background-color: rgb(235, 235, 235);
   height: 100vh;
   display: flex;
+  padding-top: 5rem;
 }
 
 .title {
