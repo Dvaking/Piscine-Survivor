@@ -1,3 +1,43 @@
 table:
   name: users
   schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - customer_uuid
+        - email
+        - employee_uuid
+        - password
+        - role
+      filter:
+        _or:
+          - employee_uuid:
+              _eq: X-Hasura-User-Id
+          - customer_uuid:
+              _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - password
+      filter:
+        _or:
+          - employee_uuid:
+              _eq: X-Hasura-User-Id
+          - customer_uuid:
+              _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        _or:
+          - employee_uuid:
+              _eq: X-Hasura-User-Id
+          - customer_uuid:
+              _eq: X-Hasura-User-Id
+    comment: ""

@@ -20,3 +20,37 @@ object_relationships:
         remote_table:
           name: payments_history
           schema: private
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - astrological_sign
+        - birth_date
+        - description
+        - gender
+        - name
+        - surname
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - astrological_sign
+        - birth_date
+        - description
+        - gender
+        - name
+        - surname
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
