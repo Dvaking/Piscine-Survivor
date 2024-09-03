@@ -59,7 +59,7 @@ const MyChart: React.FC = () => {
     router.push("../dashboard/tips");
   };
   const handleStaticticsClick = () => {
-    router.push("/statistics");
+    router.push("../dashboard/statistics");
   }
   const handleDashboardClick = () => {
     router.push("../dashboard");
