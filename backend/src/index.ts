@@ -26,8 +26,8 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    const employees = await getEmployees(token);
-    // put all employees in the database
+    console.log("Fetching employees...----------------------");
+
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
