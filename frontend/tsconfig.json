@@ -18,9 +18,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@backend": ["./backend/index.ts"],
+      "@types": ["./types/index.ts"],
       "@components": ["./app/Components/index.ts"],
+      "@queries": ["./queries/index.ts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

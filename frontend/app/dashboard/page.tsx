@@ -1,10 +1,8 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import Navbar from '../Components/Navbar/Navbar';
 import styles from "./page.module.css";
-import 'bulma/css/bulma.css';
-import Image from "next/image";
+import "bulma/css/bulma.css";
 
 export default function Home() {
   const router = useRouter();
@@ -17,7 +15,7 @@ export default function Home() {
   };
   const handleStaticticsClick = () => {
     router.push("/dashboard/statistics");
-  }
+  };
   const handleAccountsClick = () => {
     router.push("/dashboard/account_man");
   };
@@ -32,21 +30,21 @@ export default function Home() {
           <p>Welcome!</p>
         </div>
         <div className={styles.firstCharts}>
-          <div className="card">
+          <div>
             Number of customers per month chart
           </div>
-          <div className="card">
+          <div>
             Events chart
           </div>
         </div>
         <div className={styles.secondCharts}>
-          <div className="card">
+          <div>
             Customers by country map
           </div>
-          <div className="card">
+          <div>
             Meetings top sources pie chart
           </div>
         </div>
-      </main>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
+    "module" : "node16",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -10,7 +10,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@types": ["src/types/index.ts"]
+      "@types": ["src/types/index.ts"],
+      "@api": ["src/api/index.ts"],
     }
   },
   "include": ["src/**/*"],

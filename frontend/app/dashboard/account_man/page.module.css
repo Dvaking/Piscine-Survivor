@@ -5,6 +5,7 @@
 .main {
   background-color: whitesmoke;
   padding-bottom: 2rem; /* remove later */
+  height: 100vh;
 }
 
 .heading {
@@ -24,8 +25,11 @@
   font-size: 1.1rem;
 }
 
-.addAccount {
+.exportAddButtons {
+  display: flex;
+  flex-direction: row;
   padding-top: 1rem;
+  gap: 2rem;
 }
 
 .containerBg {
@@ -36,16 +40,39 @@
 .container {
   width: 98%;
   background-color: white;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 }
 
-.filter {
+.filterBar {
   padding: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   gap: 1rem;
+}
+
+.dropApply {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+}
+
+.filterBar i {
+  font-size: 1.4rem;
+  font-weight: 600;
+  align-self: center;
+}
+
+.employee i {
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .category {
@@ -59,6 +86,14 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
+.category div {
+  width: 100%;
+}
+
+.actions {
+  text-align: right;
+}
+
 .employee {
   padding: 2rem;
   display: flex;
@@ -67,8 +102,96 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
-.container p {
+.employee div {
   width: 100%;
+}
+
+.checkName {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.checkName i {
+  font-weight: 100;
+  align-self: center;
+}
+
+.container button {
+  width: 100%;
+}
+
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background-color: whitesmoke;
+  width: 50%;
+  height: 50%;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+}
+
+.popupContent h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding-bottom: 3.5rem;
+}
+
+.popupContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formButtons {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1.5rem;
+  gap: 2rem;
+}
+
+.addClientButton {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  width: 100%;
+}
+
+.addClientButton ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: #f1f1f1;
 }
 
 /* mobile & tablet */

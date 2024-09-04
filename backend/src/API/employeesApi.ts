@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { login } from "./authApi";
-import { Token } from "@types";
+import { Employee, Token } from "@types";
 
 const url = "https://soul-connection.fr/api/employees";
 const headers = {
@@ -8,12 +8,12 @@ const headers = {
   "X-Group-Authorization": "e6e70c63639f039518f84a0f3c517837",
 };
 
-export async function getEmployees(token: Token): Promise<AxiosResponse<any>> {
+export async function getEmployees(token: Token): Promise<AxiosResponse<Employee[]>> {
   try {
-    let response: AxiosResponse<any>;
+    let response: AxiosResponse<Employee[]>;
 
     try {
-      response = await axios.get(url, {
+      response = await axios.get<Employee[]>(url, {
         headers: {
           ...headers,
           Authorization: `Bearer ${token.access_token}`,
@@ -22,7 +22,7 @@ export async function getEmployees(token: Token): Promise<AxiosResponse<any>> {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         let newToken = await login();
-        response = await axios.get(url, {
+        response = await axios.get<Employee[]>(url, {
           headers: {
             ...headers,
             Authorization: `Bearer ${newToken.access_token}`,
@@ -47,13 +47,13 @@ export async function getEmployees(token: Token): Promise<AxiosResponse<any>> {
 export async function getEmployeeById(
   token: Token,
   id: number
-): Promise<AxiosResponse<any>> {
+): Promise<AxiosResponse<Employee>> {
   const newUrl = `https://soul-connection.fr/api/employees/${id}`;
   try {
-    let response: AxiosResponse<any>;
+    let response: AxiosResponse<Employee>;
 
     try {
-      response = await axios.get(newUrl, {
+      response = await axios.get<Employee>(newUrl, {
         headers: {
           ...headers,
           Authorization: `Bearer ${token.access_token}`,
@@ -62,7 +62,7 @@ export async function getEmployeeById(
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         let newToken = await login();
-        response = await axios.get(newUrl, {
+        response = await axios.get<Employee>(newUrl, {
           headers: {
             ...headers,
             Authorization: `Bearer ${newToken.access_token}`,
@@ -84,13 +84,13 @@ export async function getEmployeeById(
   }
 }
 
-export async function getEmployeeMe(token: Token): Promise<AxiosResponse<any>> {
+export async function getEmployeeMe(token: Token): Promise<AxiosResponse<Employee>> {
   const newUrl = `https://soul-connection.fr/api/employees/me`;
   try {
-    let response: AxiosResponse<any>;
+    let response: AxiosResponse<Employee>;
 
     try {
-      response = await axios.get(newUrl, {
+      response = await axios.get<Employee>(newUrl, {
         headers: {
           ...headers,
           Authorization: `Bearer ${token.access_token}`,
@@ -99,7 +99,7 @@ export async function getEmployeeMe(token: Token): Promise<AxiosResponse<any>> {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         let newToken = await login();
-        response = await axios.get(newUrl, {
+        response = await axios.get<Employee>(newUrl, {
           headers: {
             ...headers,
             Authorization: `Bearer ${newToken.access_token}`,
