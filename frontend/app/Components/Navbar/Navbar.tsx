@@ -40,13 +40,13 @@ export default function Navbar() {
             <a onClick={handleCustomersClick}>Customers</a>
           </div>
           <div className="navbar-item">
-            <a>Events</a>
-          </div>
-          <div className="navbar-item">
             <a onClick={handleTipsClick}>Tips</a>
           </div>
           <div className="navbar-item">
             <a onClick={handleStaticticsClick}>Statictics</a>
+          </div>
+          <div className="navbar-item">
+            <a>Events</a>
           </div>
           <div className="navbar-item">
             <a onClick={handleAccountsClick}>Accounts</a>
