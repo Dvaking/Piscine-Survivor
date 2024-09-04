@@ -1,6 +1,4 @@
 import * as cron from "node-cron";
-import * as fs from "fs";
-import * as path from "path";
 import { login } from "./authApi";
 import {
   getEmployees,
@@ -18,6 +16,7 @@ import {
   getEncounterByCustomerId,
   getEncounterById,
 } from "./encountersApi";
+import { getEventById, getEvents } from "./tipsApi";
 
 async function fetchData(): Promise<void> {
   try {
@@ -33,6 +32,9 @@ async function fetchData(): Promise<void> {
     const encounters = await getEncounters(token);
     const encounter = await getEncounterById(token, 1);
     const encounterByCustomerId = await getEncounterByCustomerId(token, 1);
+    const events = await getEvents(token);
+    const event = await getEventById(token, 1);
+
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
