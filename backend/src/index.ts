@@ -49,6 +49,7 @@ async function fetchData(): Promise<void> {
     const token = await login();
 
     putEmployeesInDb(token);
+    putCustomersInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
