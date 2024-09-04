@@ -1,9 +1,7 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import 'bulma/css/bulma.css';
-import Image from "next/image";
+import "bulma/css/bulma.css";
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +14,7 @@ export default function Home() {
   };
   const handleStaticticsClick = () => {
     router.push("/dashboard/statistics");
-  }
+  };
   const handleAccountsClick = () => {
     router.push("/dashboard/account_man");
   };
@@ -24,8 +22,8 @@ export default function Home() {
     router.push("/dashboard");
   };
   return (
-      <main className={styles.main}>
-        <nav className="navbar is-fixed-top">
+    <main className={styles.main}>
+      <nav className="navbar is-fixed-top">
           <div className="navbar-brand">
             <a className="navbar-item">
               <strong>Soul Connection</strong>
@@ -45,7 +43,7 @@ export default function Home() {
             </div>
           </div>
         </nav>
-        <div className={styles.heading}>
+      <div className={styles.heading}>
           <h1>Dashboard</h1>
           <p>Welcome!</p>
         </div>
@@ -65,6 +63,6 @@ export default function Home() {
             Meetings top sources pie chart
           </div>
         </div>
-      </main>
+    </main>
   );
 }

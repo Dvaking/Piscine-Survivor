@@ -1,15 +1,15 @@
 export type InsertEmployeeProps = {
-  gender: String
-  name: String
-  surname: String
-  id: Number
-  birth_date: String
+  gender: string
+  name: string
+  surname: string
+  id: number
+  birth_date: string
 };
 
 export type GetEmployeesInformationProps = {
-  birth_date: String
-  gender: String
-  id: Number
-  name: String
-  surname: String
+  birth_date: string
+  gender: string
+  id: number
+  name: string
+  surname: string
 };

@@ -5,7 +5,7 @@ interface Employee {
   private_employees: InsertEmployeeProps[];
 }
 
-export async function insertUser(employees: InsertEmployeeProps) {
+export async function insertEmployee(employees: InsertEmployeeProps) {
   let response: Employee | undefined = undefined;
   try {
     response = await client.request(InsertEmployee, employees);
