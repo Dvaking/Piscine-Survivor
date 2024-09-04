@@ -120,6 +120,79 @@
   width: 100%;
 }
 
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background-color: whitesmoke;
+  width: 50%;
+  height: 50%;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+}
+
+.popupContent h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding-bottom: 3.5rem;
+}
+
+.popupContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formButtons {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1.5rem;
+  gap: 2rem;
+}
+
+.addClientButton {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  width: 100%;
+}
+
+.addClientButton ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: #f1f1f1;
+}
+
 /* mobile & tablet */
 @media (max-width: 1920px) {
   .main {

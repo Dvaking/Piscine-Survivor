@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -8,15 +9,12 @@ import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Home() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     const dropdown = dropdownRef.current;
-
     if (dropdown) {
       const trigger = dropdown.querySelector(
         ".dropdown-trigger"
       ) as HTMLDivElement | null;
-
       const handleClick = (event: MouseEvent) => {
         event.stopPropagation();
         console.log("Dropdown clicked");
@@ -26,19 +24,15 @@ export default function Home() {
           dropdown.classList.contains("is-active")
         );
       };
-
       const handleClickOutside = (event: MouseEvent) => {
         if (dropdown && !dropdown.contains(event.target as Node)) {
           dropdown.classList.remove("is-active");
         }
       };
-
       if (trigger) {
         trigger.addEventListener("click", handleClick);
       }
-
       document.addEventListener("click", handleClickOutside);
-
       return () => {
         if (trigger) {
           trigger.removeEventListener("click", handleClick);
@@ -47,6 +41,21 @@ export default function Home() {
       };
     }
   }, []);
+
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const togglePopup = () => {
+    setPopupVisible(!isPopupVisible);
+  };
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedName, setSelectedName] = useState<string | null>(null);
+  const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+  const handleNameClick = (name: string) => {
+    setSelectedName(name);
+    setDropdownOpen(false);
+  };
 
   return (
     <main className={styles.main}>
@@ -61,10 +70,84 @@ export default function Home() {
             <button className="button is-medium">Export</button>
           </div>
           <div>
-            <button className="button is-link is-medium">+</button>
+            <button className="button is-link is-medium" onClick={togglePopup}>
+              +
+            </button>
           </div>
         </div>
       </div>
+
+      {isPopupVisible && (
+        <div className={styles.popupOverlay} onClick={togglePopup}>
+          <div
+            className={styles.popupContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>New Employee</h2>
+            <form>
+              <div className="field">
+                <label className="label">Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="email"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Phone</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="phone"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Job</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="job"
+                    placeholder="Enter your job type (ex: coach)"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <div className={styles.formButtons}>
+                  <div>
+                    <button className="button is-link" type="submit">
+                      Save
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={togglePopup}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className={styles.containerBg}>
         <div className={styles.container}>
           <div className={styles.filterBar}>
@@ -122,10 +205,26 @@ export default function Home() {
             <div>Email Address</div>
             <div>Phone Number</div>
             <div>No.</div>
-            <div>
-              <button className={styles.actions}>
+            <div className={styles.addClientButton}>
+              <button className={styles.actions} onClick={toggleDropdown}>
+                {selectedName ? `Selected: ${selectedName}` : ""}{" "}
                 <i className="fas fa-ellipsis-h"></i>
               </button>
+              {isDropdownOpen && (
+            <div className={styles.dropdown}>
+              <ul>
+                {names.map((name, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleNameClick(name)}
+                    className={styles.listItem}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
             </div>
           </div>
         </div>
