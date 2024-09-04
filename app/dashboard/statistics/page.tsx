@@ -29,10 +29,9 @@ const MyChart: React.FC = () => {
   const chartRef = useRef(null);
 
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Coach 1', 'Coach 2', 'Coach 3', 'Coach 4', 'Coach 5', 'Coach 6', 'Coach 7'],
     datasets: [
       {
-        label: 'My First dataset',
         data: [65, 59, 80, 81, 56, 55, 40],
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
@@ -49,7 +48,7 @@ const MyChart: React.FC = () => {
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: 'Coaches statistics',
       },
     },
   };
