@@ -95,7 +95,7 @@ export default function Customers() {
                   </p>
                   <hr />
                   <p>
-                    <strong>User ID:</strong> NUMBER
+                    <strong>User ID:</strong> NUMBER_ID
                   </p>
                   <p>
                     <strong>Email:</strong> EMAIL_CUSTOMER
