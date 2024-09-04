@@ -1,13 +1,17 @@
-import { InsertEmployee, InsertEmployeeProps, client } from "@backend";
+import { client, InsertEmployee } from "@queries";
+import { InsertEmployeeProps } from "@types";
+
+interface Employee {
+  private_employees: InsertEmployeeProps[];
+}
 
 export async function insertUser(employees: InsertEmployeeProps) {
+  let response: Employee | undefined = undefined;
   try {
-    const response = await client.request(InsertEmployee, employees);
-    console.log(
-      "Utilisateur inséré avec succès:",
-      (response as any).insert_users_one
-    );
+    response = await client.request(InsertEmployee, employees);
+    console.log("Utilisateur inséré avec succès:", response);
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }
+  return response ? response.private_employees : [];
 }

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { GetEmployeesInformationProps } from '@backend';
-import { getEmployeesInformation } from '@components';
+import { GetEmployeesInformationProps } from '@types';
+import { getEmployeesInformation, Employee } from '@components';
 
 const EmployeeList: React.FC = () => {
   const [employees, setEmployees] = useState<GetEmployeesInformationProps[]>([]);
@@ -10,14 +10,13 @@ const EmployeeList: React.FC = () => {
 
   useEffect(() => {
     const fetchEmployees = async () => {
-      try {
-        const data = await getEmployeesInformation();
-        setEmployees(data);
-      } catch (err) {
-        setError('Erreur lors de la récupération des employés.');
-      } finally {
+        try {
+            const data = await getEmployeesInformation();
+            setEmployees(data);
+        } catch (error) {
+            setError('Erreur lors de la récupération des employés.');
+        }
         setLoading(false);
-      }
     };
 
     fetchEmployees();
