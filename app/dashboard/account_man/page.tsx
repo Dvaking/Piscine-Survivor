@@ -8,9 +8,6 @@ import Image from "next/image";
 export default function Home() {
   const router = useRouter();
 
-  const handleCustomersClick = () => {
-    router.push("/dashboard/customers");
-  };
   const handleTipsClick = () => {
     router.push("/dashboard/tips");
   };
@@ -33,7 +30,7 @@ export default function Home() {
           </div>
           <div className="navbar-end">
             <div className="navbar-item">
-              <a className="button is-link" onClick={handleCustomersClick}>Customers</a>
+              <a className="button">Customers</a>
               <a className="button">Events</a>
               <a className="button is-link" onClick={handleDashboardClick}>Dashboard</a>
               <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
@@ -46,23 +43,20 @@ export default function Home() {
           </div>
         </nav>
         <div className={styles.heading}>
-          <h1>Dashboard</h1>
-          <p>Welcome!</p>
-        </div>
-        <div className={styles.firstCharts}>
-          <div className="card">
-            Number of customers per month chart
+          <div className={styles.title}>
+            <h1>Employee List</h1> {/* Have it change from employee to coach when filter is applied */}
+            <p>You have 87 employees</p> {/* Have it change from employees to coach when filter is applied. Number changes as well */}
           </div>
-          <div className="card">
-            Events chart
+          <div className={styles.addAccount}>
+            <button className="button is-link is-medium">+</button>
           </div>
         </div>
-        <div className={styles.secondCharts}>
-          <div className="card">
-            Customers by country map
-          </div>
-          <div className="card">
-            Meetings top sources pie chart
+        <div className={styles.containerBg}>
+          <div className={styles.container}>
+            {/* add filter all, coaches, employees filter buttons (maybe) */}
+            <div className={styles.category}>
+              <p>Employee</p> {/* Change to coach when filter is applied */}
+            </div>
           </div>
         </div>
       </main>
