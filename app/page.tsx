@@ -1,5 +1,4 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import 'bulma/css/bulma.css';
@@ -53,4 +52,4 @@ export default function Login() {
         </div>
       </main>
   );
-}
+};
