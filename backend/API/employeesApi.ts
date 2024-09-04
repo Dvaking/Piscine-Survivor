@@ -121,7 +121,10 @@ export async function getEmployeeMe(token: Token): Promise<AxiosResponse<any>> {
   }
 }
 
-export async function getEmployeeImageById(token: Token, id: number): Promise<AxiosResponse<any>> {
+export async function getEmployeeImageById(
+  token: Token,
+  id: number
+): Promise<AxiosResponse<any>> {
   const newUrl = `https://soul-connection.fr/api/employees/${id}/image`;
   try {
     let response: AxiosResponse<any>;
