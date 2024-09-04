@@ -13,7 +13,11 @@ import {
   getCustomerById,
   getPaymentsHistory,
 } from "./customersApi";
-import { Token } from "../types/token";
+import {
+  getEncounters,
+  getEncounterByCustomerId,
+  getEncounterById,
+} from "./encountersApi";
 
 async function fetchData(): Promise<void> {
   try {
@@ -26,8 +30,9 @@ async function fetchData(): Promise<void> {
     const employeeMe = await getEmployeeMe(token);
     const employeeImage = await getEmployeeImageById(token, 1);
     const paymentsHistory = await getPaymentsHistory(token, 1);
-
-    console.log("paymentsHistory", paymentsHistory.data);
+    const encounters = await getEncounters(token);
+    const encounter = await getEncounterById(token, 1);
+    const encounterByCustomerId = await getEncounterByCustomerId(token, 1);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
