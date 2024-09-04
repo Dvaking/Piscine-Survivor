@@ -1,0 +1,3 @@
+table:
+  name: encounters
+  schema: private
