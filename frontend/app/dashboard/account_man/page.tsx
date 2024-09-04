@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import React, { useState } from "react";
 import styles from "./page.module.css";
 import "bulma/css/bulma.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Home() {
