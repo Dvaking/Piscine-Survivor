@@ -1,2 +1,0 @@
-import { insertUser } from '@components';
-
