@@ -24,8 +24,11 @@
   font-size: 1.1rem;
 }
 
-.addAccount {
+.exportAddButtons {
+  display: flex;
+  flex-direction: row;
   padding-top: 1rem;
+  gap: 2rem;
 }
 
 .containerBg {
@@ -36,16 +39,24 @@
 .container {
   width: 98%;
   background-color: white;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 }
 
-.filter {
+.filterBar {
   padding: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   gap: 1rem;
+}
+
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown.is-active .dropdown-menu {
+  display: block;
 }
 
 .category {
