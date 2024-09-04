@@ -74,14 +74,6 @@
   font-weight: 600;
 }
 
-.dropdown-menu {
-  display: none;
-}
-
-.dropdown.is-active .dropdown-menu {
-  display: block;
-}
-
 .category {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -91,6 +83,10 @@
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.category div {
+  width: 100%;
 }
 
 .actions {
@@ -105,6 +101,10 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
+.employee div {
+  width: 100%;
+}
+
 .checkName {
   display: flex;
   flex-direction: row;
@@ -114,10 +114,6 @@
 .checkName i {
   font-weight: 100;
   align-self: center;
-}
-
-.container div {
-  width: 100%;
 }
 
 .container button {

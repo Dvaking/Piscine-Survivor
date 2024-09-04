@@ -91,7 +91,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <a className="button is-static">Apply</a>
+                <div className="button is-static">Apply</div>
               </div>
             </div>
             <div className={styles.icons}>
@@ -105,15 +105,9 @@ export default function Home() {
               <i className="far fa-square"></i>
               Employee
             </div>
-            <div>
-              Email
-            </div>
-            <div>
-              Phone
-            </div>
-            <div>
-              Number of Customers
-            </div>
+            <div>Email</div>
+            <div>Phone</div>
+            <div>Number of Customers</div>
             <div>
               <p className={styles.actions}>Actions</p>
             </div>
@@ -125,15 +119,9 @@ export default function Home() {
                 <strong>Firstname LastName</strong>
               </p>
             </div>
-            <div>
-              Email Address
-            </div>
-            <div>
-              Phone Number
-            </div>
-            <div>
-              No.
-            </div>
+            <div>Email Address</div>
+            <div>Phone Number</div>
+            <div>No.</div>
             <div>
               <button className={styles.actions}>
                 <i className="fas fa-ellipsis-h"></i>
