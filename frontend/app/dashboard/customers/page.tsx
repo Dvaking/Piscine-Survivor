@@ -1,10 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import Image from "next/image";
-import "bulma/css/bulma.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Customers() {
@@ -24,35 +21,36 @@ export default function Customers() {
   };
 
   return (
-    <main className="page-background">
+    <main className={styles.pageBackground}>
       <Navbar />
-      <div className="container">
-        <div className="columns">
-          <div className="column is-one-quarter">
+      <div className={styles.container}>
+        <div className={styles.columns}>
+          <div className={styles.column}>
             <div className={styles.hasMarginTop}>
-              <div className="box my-6 ml-0">
-                <figure className="image is-128x128">
+              <div className={styles.box}>
+                <figure className={styles.imageWrapper}>
                   <img
-                    className="is-rounded"
+                    className={styles.profileImage}
                     src="path-to-profile-pic.jpg"
                     alt="Profile"
                   />
                 </figure>
-                <h1 className="title is-4 has-text-centered">NAME_CUSTOMER</h1>
-                <div className="has-text-centered">
-                  <button className="button is-small is-light">
-                    <span className="icon">
+                <h1 className={styles.title}>NAME_CUSTOMER</h1>
+                <p className={styles.seperate}/>
+                <div className={styles.buttonGroup}>
+                  <button className={styles.button}>
+                    <span className={styles.icon}>
                       <i className="fas fa-envelope"></i>
                     </span>
                   </button>
-                  <button className="button is-small is-light">
-                    <span className="icon">
+                  <button className={styles.button}>
+                    <span className={styles.icon}>
                       <i className="fas fa-bookmark"></i>
                     </span>
                   </button>
                 </div>
-                <hr />
-                <div className="content">
+                <p className={styles.seperate}/>
+                <div className={styles.content}>
                   <p>
                     <strong>Total Encounters:</strong> 23
                   </p>
@@ -62,7 +60,7 @@ export default function Customers() {
                   <p>
                     <strong>In Progress:</strong> 3
                   </p>
-                  <hr />
+                  <p className={styles.seperate}/>
                   <p>
                     <strong>User ID:</strong> NUMBER_ID
                   </p>
