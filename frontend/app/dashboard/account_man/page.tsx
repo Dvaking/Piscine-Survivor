@@ -70,8 +70,8 @@ export default function Home() {
             <button className="button is-medium">Export</button>
           </div>
           <div>
-            <button className="button is-link is-medium" onClick={togglePopup}>
-              +
+            <button className="button is-link is-large" onClick={togglePopup}>
+            <i className="fas fa-plus" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -207,7 +207,6 @@ export default function Home() {
             <div>No.</div>
             <div className={styles.addClientButton}>
               <button className={styles.actions} onClick={toggleDropdown}>
-                {selectedName ? `Selected: ${selectedName}` : ""}{" "}
                 <i className="fas fa-ellipsis-h"></i>
               </button>
               {isDropdownOpen && (

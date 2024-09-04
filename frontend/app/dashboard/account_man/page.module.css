@@ -5,6 +5,7 @@
 .main {
   background-color: whitesmoke;
   padding-bottom: 2rem; /* remove later */
+  height: 100vh;
 }
 
 .heading {
