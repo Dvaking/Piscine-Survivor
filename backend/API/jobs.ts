@@ -18,12 +18,16 @@ import {
   getEncounterByCustomerId,
   getEncounterById,
 } from "./encountersApi";
-import { getEventById, getEvents, getClotheImage } from "./tipsApi";
+import { getTips } from "./tipsApi";
+import { getEvents, getEventById } from "./eventsApi";
+import { getClotheImage } from "./clothesApi";
 
 async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
+    const employees = await getEmployees(token);
+    // put all employees in the database
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
