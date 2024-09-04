@@ -81,6 +81,55 @@ export default function Customers() {
             </div>
           </div>
         </div>
+
+        {/* Right Section - Meetings and Payments */}
+        <div className="column">
+          <div className="box">
+            <h2 className="title is-5">Recent Meetings</h2>
+            <table className="table is-fullwidth">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Rating</th>
+                  <th>Report</th>
+                  <th>Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>23 Jul, 2024</td>
+                  <td>⭐⭐⭐⭐</td>
+                  <td>A very good moment!</td>
+                  <td><span className="tag is-warning">Dating App</span></td>
+                </tr>
+                <tr>
+                  <td>21 Jul, 2024</td>
+                  <td>⭐⭐⭐</td>
+                  <td>She was very good person but not my type.</td>
+                  <td><span className="tag is-success">Friends</span></td>
+                </tr>
+                <tr>
+                  <td>19 Jun, 2024</td>
+                  <td>⭐</td>
+                  <td>The meeting was not good, she was not interested.</td>
+                  <td><span className="tag is-warning">Dating App</span></td>
+                </tr>
+                <tr>
+                  <td>02 Jun, 2024</td>
+                  <td>⭐⭐</td>
+                  <td>Not bad, but not good.</td>
+                  <td><span className="tag is-warning">Dating App</span></td>
+                </tr>
+                <tr>
+                  <td>12 May, 2024</td>
+                  <td>⭐⭐⭐</td>
+                  <td>Need to see her again, she was interesting.</td>
+                  <td><span className="tag is-info">Social Network</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
       </div>
     </main>
   );
