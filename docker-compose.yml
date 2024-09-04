@@ -53,7 +53,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
+      - graphql-engine
 
 volumes:
   db_data:
