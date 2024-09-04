@@ -55,6 +55,9 @@ const StaticticsGraph: React.FC = () => {
   };
   const router = useRouter();
 
+  const handleCustomersClick = () => {
+    router.push("/dashboard/customers");
+  };
   const handleTipsClick = () => {
     router.push("../dashboard/tips");
   };
@@ -74,7 +77,7 @@ const StaticticsGraph: React.FC = () => {
           </div>
           <div className="navbar-end">
             <div className="navbar-item">
-              <a className="button">Customers</a>
+              <a className="button is-link" onClick={handleCustomersClick}>Customers</a>
               <a className="button">Events</a>
               <a className="button is-link" onClick={handleDashboardClick}>Dashboard</a>
               <a className="button is-link" onClick={handleStaticticsClick}>Statictics</a>
