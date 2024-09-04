@@ -67,7 +67,3 @@
   padding: 15px 20px;
   border-bottom: 1px solid #e0e0e0;
 }
-
-.dropdown:last-of-type summary {
-  border-bottom: none;
-}
