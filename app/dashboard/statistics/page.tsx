@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const MyChart: React.FC = () => {
+const StaticticsGraph: React.FC = () => {
   const chartRef = useRef(null);
 
   const data = {
@@ -92,4 +92,4 @@ const MyChart: React.FC = () => {
   );
 };
 
-export default MyChart;
+export default StaticticsGraph;
