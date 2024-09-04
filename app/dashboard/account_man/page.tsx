@@ -56,6 +56,7 @@ export default function Home() {
             {/* add filter all, coaches, employees filter buttons (maybe) */}
             <div className={styles.category}>
               <p>Employee</p> {/* Change to coach when filter is applied */}
+              
             </div>
           </div>
         </div>
