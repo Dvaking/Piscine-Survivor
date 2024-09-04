@@ -30,18 +30,18 @@ export default function Home() {
           <p>Welcome!</p>
         </div>
         <div className={styles.firstCharts}>
-          <div className="card">
+          <div>
             Number of customers per month chart
           </div>
-          <div className="card">
+          <div>
             Events chart
           </div>
         </div>
         <div className={styles.secondCharts}>
-          <div className="card">
+          <div>
             Customers by country map
           </div>
-          <div className="card">
+          <div>
             Meetings top sources pie chart
           </div>
         </div>
