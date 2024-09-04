@@ -36,7 +36,7 @@ export default function Customers() {
                   />
                 </figure>
                 <h1 className={styles.title}>NAME_CUSTOMER</h1>
-                <p className={styles.seperate}/>
+                <p className={styles.seperate} />
                 <div className={styles.buttonGroup}>
                   <button className={styles.button}>
                     <span className={styles.icon}>
@@ -49,7 +49,7 @@ export default function Customers() {
                     </span>
                   </button>
                 </div>
-                <p className={styles.seperate}/>
+                <p className={styles.seperate} />
                 <div className={styles.content}>
                   <p>
                     <strong>Total Encounters:</strong> 23
@@ -60,7 +60,7 @@ export default function Customers() {
                   <p>
                     <strong>In Progress:</strong> 3
                   </p>
-                  <p className={styles.seperate}/>
+                  <p className={styles.seperate} />
                   <p>
                     <strong>User ID:</strong> NUMBER_ID
                   </p>
@@ -100,36 +100,46 @@ export default function Customers() {
                   <td>23 Jul, 2024</td>
                   <td>⭐⭐⭐⭐</td>
                   <td>A very good moment!</td>
-                  <td><span className="tag is-warning">Dating App</span></td>
+                  <td>
+                    <span className="tag is-warning">Dating App</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>21 Jul, 2024</td>
                   <td>⭐⭐⭐</td>
                   <td>She was very good person but not my type.</td>
-                  <td><span className="tag is-success">Friends</span></td>
+                  <td>
+                    <span className="tag is-success">Friends</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>19 Jun, 2024</td>
                   <td>⭐</td>
                   <td>The meeting was not good, she was not interested.</td>
-                  <td><span className="tag is-warning">Dating App</span></td>
+                  <td>
+                    <span className="tag is-warning">Dating App</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>02 Jun, 2024</td>
                   <td>⭐⭐</td>
                   <td>Not bad, but not good.</td>
-                  <td><span className="tag is-warning">Dating App</span></td>
+                  <td>
+                    <span className="tag is-warning">Dating App</span>
+                  </td>
                 </tr>
                 <tr>
                   <td>12 May, 2024</td>
                   <td>⭐⭐⭐</td>
                   <td>Need to see her again, she was interesting.</td>
-                  <td><span className="tag is-info">Social Network</span></td>
+                  <td>
+                    <span className="tag is-info">Social Network</span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          </div>
+        </div>
       </div>
     </main>
   );
