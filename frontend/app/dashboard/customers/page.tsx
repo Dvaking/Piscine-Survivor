@@ -2,10 +2,10 @@
 
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import styles from "./page.module.css";
+import Image from "next/image";
 import "bulma/css/bulma.css";
-import Navbar from '../../Components/Navbar/Navbar';
+import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Customers() {
   const router = useRouter();
@@ -22,14 +22,15 @@ export default function Customers() {
   const handleDashboardClick = () => {
     router.push("../dashboard");
   };
+
   return (
-    <main className={styles.main}>
+    <main className="page-background">
       <Navbar />
-      <div className={styles.pageBackground}>
-        <div className="container">
-          <div className="columns">
-            <div className="column is-one-quarter">
-              <div className="box">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-one-quarter">
+            <div className={styles.hasMarginTop}>
+              <div className="box my-6 ml-0">
                 <figure className="image is-128x128">
                   <img
                     className="is-rounded"
@@ -37,9 +38,7 @@ export default function Customers() {
                     alt="Profile"
                   />
                 </figure>
-                <h1 className="title is-4 has-text-centered">
-                  NAME_CUSTOMER
-                </h1>
+                <h1 className="title is-4 has-text-centered">NAME_CUSTOMER</h1>
                 <div className="has-text-centered">
                   <button className="button is-small is-light">
                     <span className="icon">
@@ -82,7 +81,6 @@ export default function Customers() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

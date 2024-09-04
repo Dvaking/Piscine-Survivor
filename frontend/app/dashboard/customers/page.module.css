@@ -1,7 +1,12 @@
 /* Général */
-.pageBackground {
+.main pageBackground {
   background-color: rgb(243, 243, 243);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.hasMarginTop {
+  margin-top: 10rem; /* Ajustez la valeur selon vos besoins */
+  margin-left: none;
 }

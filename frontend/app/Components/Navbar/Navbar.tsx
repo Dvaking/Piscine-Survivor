@@ -37,7 +37,7 @@ export default function Navbar() {
             <a onClick={handleDashboardClick}>Dashboard</a>
           </div>
           <div className="navbar-item">
-            <a>Customers</a>
+            <a onClick={handleCustomersClick}>Customers</a>
           </div>
           <div className="navbar-item">
             <a>Events</a>
