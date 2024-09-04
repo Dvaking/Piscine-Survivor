@@ -45,5 +45,15 @@ services:
       timeout: 10s
       retries: 5
       start_period: 5s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
 volumes:
   db_data:
