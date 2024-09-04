@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios";
 import { login } from "./authApi";
 import { Token } from "../types/token";
 
-const url = "https://soul-connection.fr/api/customers";
+const url = "https://soul-connection.fr/api/encounters";
 const headers = {
   accept: "application/json",
   "X-Group-Authorization": "e6e70c63639f039518f84a0f3c517837",
 };
 
-export async function getCustomers(token: Token): Promise<AxiosResponse<any>> {
+export async function getEncounters(token: Token): Promise<AxiosResponse<any>> {
   try {
     let response: AxiosResponse<any>;
 
@@ -44,11 +44,11 @@ export async function getCustomers(token: Token): Promise<AxiosResponse<any>> {
   }
 }
 
-export async function getCustomerById(
+export async function getEncounterById(
   token: Token,
   id: number
 ): Promise<AxiosResponse<any>> {
-  const newUrl = `https://soul-connection.fr/api/customers/${id}`;
+  const newUrl = `https://soul-connection.fr/api/encounters/${id}`;
   try {
     let response: AxiosResponse<any>;
 
@@ -84,91 +84,11 @@ export async function getCustomerById(
   }
 }
 
-export async function getCustomerImageById(
+export async function getEncounterByCustomerId(
   token: Token,
-  id: number
+  customer_id: number
 ): Promise<AxiosResponse<any>> {
-  const newUrl = `https://soul-connection.fr/api/customers/${id}/image`;
-  try {
-    let response: AxiosResponse<any>;
-
-    try {
-      response = await axios.get(newUrl, {
-        headers: {
-          ...headers,
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      });
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        let newToken = await login();
-        response = await axios.get(newUrl, {
-          headers: {
-            ...headers,
-            Authorization: `Bearer ${newToken.access_token}`,
-          },
-        });
-      } else {
-        throw error;
-      }
-    }
-
-    return response;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Request failed:", error.response?.data || error.message);
-    } else {
-      console.error("Unexpected error:", error);
-    }
-    throw new Error("Request failed");
-  }
-}
-
-export async function getPaymentsHistory(
-  token: Token,
-  id: number
-): Promise<AxiosResponse<any>> {
-  const newUrl = `https://soul-connection.fr/api/customers/${id}/payments_history`;
-  try {
-    let response: AxiosResponse<any>;
-
-    try {
-      response = await axios.get(newUrl, {
-        headers: {
-          ...headers,
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      });
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        let newToken = await login();
-        response = await axios.get(newUrl, {
-          headers: {
-            ...headers,
-            Authorization: `Bearer ${newToken.access_token}`,
-          },
-        });
-      } else {
-        throw error;
-      }
-    }
-
-    return response;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error("Request failed:", error.response?.data || error.message);
-    } else {
-      console.error("Unexpected error:", error);
-    }
-    throw new Error("Request failed");
-  }
-}
-
-export async function getClothes(
-  token: Token,
-  id: number
-): Promise<AxiosResponse<any>> {
-  const newUrl = `https://soul-connection.fr/api/customers/${id}/clothes`;
+  const newUrl = `https://soul-connection.fr/api/encounters/customer/${customer_id}`;
   try {
     let response: AxiosResponse<any>;
 
