@@ -22,6 +22,7 @@ import { getTips } from "./API/tipsApi";
 import { getEvents, getEventById } from "./API/eventsApi";
 import { getClotheImage } from "./API/clothesApi";
 import { Token, Employee } from "@types";
+import { gql } from "graphql-request";
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
