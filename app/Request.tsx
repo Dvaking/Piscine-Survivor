@@ -1,49 +1,45 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { client } from '../backend/graphql-request';
-import { getUsersGlobalInfomation } from '../backend/request/users/Get';
+import React, { useEffect, useState } from 'react';
+import { GetEmployeesInformationProps } from '@backend';
+import { getEmployeesInformation } from '@components';
 
-
-interface Employee {
-  name: string;
-  email: string;
-}
-
-export default function Employee() {
-  const [users, setUsers] = useState<Employee[] | undefined>([]);
+const EmployeeList: React.FC = () => {
+  const [employees, setEmployees] = useState<GetEmployeesInformationProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchEmployees = async () => {
       try {
-        const data = await client.request(getUsersGlobalInfomation);
-        console.log(data);
-        setUsers(data.users);
-      } catch (error) {
-        setError(error as Error);
+        const data = await getEmployeesInformation();
+        setEmployees(data);
+      } catch (err) {
+        setError('Erreur lors de la récupération des employés.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchEmployees();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  console.log(employees);
+
+  if (loading) return <p>Chargement des employés...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
-      <h1>Employees List</h1>
+      <h1>Liste des Employés</h1>
       <ul>
-        {users ? users.map(employee => (
-          <li key={employee.email}>
-            {employee.name} - {employee.email}
+        {employees ? employees.map((employee) => (
+          <li key={employee.id.toString()}>
+            {employee.name} - {employee.surname}
           </li>
-        )) : "Il n'y a rien" }
+        )): "Aucun employé trouvé."}
       </ul>
     </div>
   );
 };
 
+export default EmployeeList;
