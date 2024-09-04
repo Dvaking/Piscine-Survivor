@@ -51,6 +51,29 @@
   gap: 1rem;
 }
 
+.dropApply {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+}
+
+.filterBar i {
+  font-size: 1.4rem;
+  font-weight: 600;
+  align-self: center;
+}
+
+.employee i {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
 .dropdown-menu {
   display: none;
 }
@@ -70,6 +93,10 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
+.actions {
+  text-align: right;
+}
+
 .employee {
   padding: 2rem;
   display: flex;
@@ -78,7 +105,22 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
-.container p {
+.checkName {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.checkName i {
+  font-weight: 100;
+  align-self: center;
+}
+
+.container div {
+  width: 100%;
+}
+
+.container button {
   width: 100%;
 }
 

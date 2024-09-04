@@ -68,43 +68,77 @@ export default function Home() {
       <div className={styles.containerBg}>
         <div className={styles.container}>
           <div className={styles.filterBar}>
-            <div className="dropdown" ref={dropdownRef}>
-              <div className="dropdown-trigger">
-                <button
-                  className="button"
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>Bulk Action</span>
-                  <span className="icon is-small">
-                    <i className="fas fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </button>
-              </div>
-              <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                <div className="dropdown-content">
-                  <div className="dropdown-item">Insert here</div>
-                  <hr className="dropdown-divider" />
-                  <div className="dropdown-item">Insert here</div>
+            <div className={styles.dropApply}>
+              <div className="dropdown" ref={dropdownRef}>
+                <div className="dropdown-trigger">
+                  <button
+                    className="button"
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu"
+                  >
+                    <span>Bulk Action</span>
+                    <span className="icon is-small">
+                      <i className="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
+                    <div className="dropdown-item">Insert here</div>
+                    <hr className="dropdown-divider" />
+                    <div className="dropdown-item">Insert here</div>
+                  </div>
                 </div>
               </div>
+              <div>
+                <a className="button is-static">Apply</a>
+              </div>
+            </div>
+            <div className={styles.icons}>
+              <i className="fas fa-search" aria-hidden="true"></i>
+              <i className="fas fa-sort-amount-down" aria-hidden="true"></i>
+              <i className="fas fa-cog" aria-hidden="true"></i>
             </div>
           </div>
           <div className={styles.category}>
-            <p>Employee</p>
-            <p>Email</p>
-            <p>Phone</p>
-            <p>Number of Customers</p>
-            <p>Actions</p>
+            <div className={styles.checkName}>
+              <i className="far fa-square"></i>
+              Employee
+            </div>
+            <div>
+              Email
+            </div>
+            <div>
+              Phone
+            </div>
+            <div>
+              Number of Customers
+            </div>
+            <div>
+              <p className={styles.actions}>Actions</p>
+            </div>
           </div>
           <div className={styles.employee}>
-            <p>
-              <strong>Firstname LastName</strong>
-            </p>
-            <p>Email Address</p>
-            <p>Phone Number</p>
-            <p>No.</p>
-            <p>...</p>
+            <div className={styles.checkName}>
+              <i className="far fa-square"></i>
+              <p>
+                <strong>Firstname LastName</strong>
+              </p>
+            </div>
+            <div>
+              Email Address
+            </div>
+            <div>
+              Phone Number
+            </div>
+            <div>
+              No.
+            </div>
+            <div>
+              <button className={styles.actions}>
+                <i className="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
