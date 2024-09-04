@@ -1,7 +1,5 @@
 version: 3
 endpoint: http://localhost:8080
-graphql_endpoint: http://localhost:8080/v1/graphql  
-admin_secret: azerty
 metadata_directory: metadata
 actions:
   kind: synchronous
