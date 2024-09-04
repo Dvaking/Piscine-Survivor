@@ -1,26 +1,26 @@
 import * as cron from "node-cron";
-import { login } from "./authApi";
+import { login } from "./API/authApi";
 import {
   getEmployees,
   getEmployeeById,
   getEmployeeImageById,
   getEmployeeMe,
-} from "./employeesApi";
+} from "./API/employeesApi";
 import {
   getCustomers,
   getCustomerById,
   getPaymentsHistory,
   getCustomerImageById,
   getClothes,
-} from "./customersApi";
+} from "./API/customersApi";
 import {
   getEncounters,
   getEncounterByCustomerId,
   getEncounterById,
-} from "./encountersApi";
-import { getTips } from "./tipsApi";
-import { getEvents, getEventById } from "./eventsApi";
-import { getClotheImage } from "./clothesApi";
+} from "./API/encountersApi";
+import { getTips } from "./API/tipsApi";
+import { getEvents, getEventById } from "./API/eventsApi";
+import { getClotheImage } from "./API/clothesApi";
 
 async function fetchData(): Promise<void> {
   try {
