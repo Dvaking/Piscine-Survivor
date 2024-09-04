@@ -21,30 +21,86 @@ import {
 import { getTips } from "./API/tipsApi";
 import { getEvents, getEventById } from "./API/eventsApi";
 import { getClotheImage } from "./API/clothesApi";
-import { Token, Employee } from "@types";
-import { gql } from "graphql-request";
+import { Token } from "@types";
+import express from "express";
+import { ApolloServer, gql } from "apollo-server-express";
+import { GraphQLClient } from "graphql-request";
 
-const { request } = require("graphql-request");
+interface Employee {
+  private_employees: InsertEmployeeProps[];
+}
 
-const graphqlURL = "http://localhost:8080/v1/graphql"; // Remplacez par votre URL Hasura
-
-const mutation = `
-  mutation AddEmployee($gender: String, $id: Int, $name: String, $surname: String, $birth_date: String, $work: String) {
-    insert_private_employees(objects: {birth_date: $birth_date, id: $id, gender: $gender, name: $name, surname: $surname, work: $work}) {
-    returning {
-      uuid
+export const InsertEmployee = gql`
+  mutation MyMutation(
+    $gender: String
+    $name: String
+    $surname: String
+    $id: Int
+    $birth_date: String
+  ) {
+    insert_private_employees(
+      objects: {
+        gender: $gender
+        name: $name
+        surname: $surname
+        id: $id
+        birth_date: $birth_date
+      }
+    ) {
+      returning {
+        surname
+        name
+        gender
+        birth_date
+        id
+        uuid
+      }
     }
   }
 `;
 
-const variables = {
+export const client = new GraphQLClient("http://localhost:8080/v1/graphql", {
+  headers: {
+    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
+  } as HeadersInit,
+});
+
+export type InsertEmployeeProps = {
+  gender: string;
+  name: string;
+  surname: string;
+  id: number;
+  birth_date: string;
+};
+
+const variables: InsertEmployeeProps = {
   gender: "M",
-  id: 10,
   name: "John",
   surname: "Doe",
+  id: 10,
   birth_date: "1990-01-01",
-  work: "Manager",
 };
+
+export async function insertEmployee(employees: InsertEmployeeProps) {
+  let response: Employee | undefined = undefined;
+  try {
+    response = await client.request(InsertEmployee, employees);
+    console.log("Utilisateur inséré avec succès:", response);
+  } catch (error) {
+    console.error("Erreur lors de l'insertion:", error);
+  }
+  return response ? response.private_employees : [];
+}
+
+async function sendDataToDatabase(variables: any) {
+  try {
+    console.log("Sending data to database...");
+
+    insertEmployee(variables);
+  } catch (error) {
+    console.error("Error sending data:", error);
+  }
+}
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
@@ -60,11 +116,14 @@ async function putCustomersInDb(token: Token) {
 
 async function putEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
+  const employee = await getEmployeeById(token, 1);
 
-  employees.data.forEach(async (employee: Employee) => {
-    const employeeById = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
-  });
+  sendDataToDatabase(variables);
+
+  // employees.data.forEach(async (employee: Employee) => {
+  //   const employeeById = await getEmployeeById(token, employee.id);
+  //   const employeeImage = await getEmployeeImageById(token, employee.id);
+  // });
 }
 
 async function fetchData(): Promise<void> {
@@ -81,7 +140,4 @@ async function fetchData(): Promise<void> {
 cron.schedule("* * * * * *", () => {
   fetchData();
   console.log("-----------------------------------");
-  request(graphqlURL, mutation, variables)
-    .then((data: any) => console.log(data))
-    .catch((error: any) => console.error(error));
 });
