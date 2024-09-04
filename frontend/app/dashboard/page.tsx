@@ -1,10 +1,8 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import Navbar from '../Components/Navbar/Navbar';
 import styles from "./page.module.css";
-import 'bulma/css/bulma.css';
-import Image from "next/image";
+import "bulma/css/bulma.css";
 
 export default function Home() {
   const router = useRouter();
@@ -17,7 +15,7 @@ export default function Home() {
   };
   const handleStaticticsClick = () => {
     router.push("/dashboard/statistics");
-  }
+  };
   const handleAccountsClick = () => {
     router.push("/dashboard/account_man");
   };
@@ -47,6 +45,6 @@ export default function Home() {
             Meetings top sources pie chart
           </div>
         </div>
-      </main>
+    </main>
   );
 }

@@ -1,18 +1,33 @@
-import {GetEmployeesInformationProps,
+import {
+  client,
   GetEmployeesInformation,
-} from "@backend";
-import { client } from "@backend";
+  GetEmployeesInformationByUuid,
+} from "@queries";
+import {
+  GetEmployeesInformationProps,
+  GetEmployeesInformationByUuidProps,
+} from "@types";
 
-interface Employee {
-  private_employees: GetEmployeesInformationProps[];
+export interface Employees {
+  private_employees:
+    | GetEmployeesInformationProps[]
+    | GetEmployeesInformationByUuidProps[];
 }
 
-
 export async function getEmployeesInformation() {
-  let response: Employee | undefined = undefined;
+  let response: Employees | undefined = undefined;
   try {
     response = await client.request(GetEmployeesInformation);
-    console.log("Utilisateur inséré avec succès:", response?.private_employees);
+  } catch (error) {
+    console.error("Erreur lors de l'insertion:", error);
+  }
+  return response ? response.private_employees : [];
+}
+
+export async function getEmployeesInformationByUuid() {
+  let response: Employees | undefined = undefined;
+  try {
+    response = await client.request(GetEmployeesInformationByUuid);
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }

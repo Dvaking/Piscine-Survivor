@@ -13,6 +13,19 @@ export const GetEmployeesInformation = gql`
   }
 `;
 
+export const GetEmployeesInformationByUuid = gql`
+  query GetEmployeesInformationByUuid($uuid: uuid) {
+    private_employees(where: { uuid: { _eq: $uuid } }) {
+      birth_date
+      gender
+      name
+      surname
+      id
+      uuid
+    }
+  }
+`;
+
 //UPDATE
 
 // INSERT
