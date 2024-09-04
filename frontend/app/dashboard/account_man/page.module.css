@@ -8,28 +8,50 @@
 }
 
 .main nav {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.main nav p {
+  font-size: 1.6rem;
+  font-weight: 650;
+}
+
+.navbarLinks {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbarLinks a {
+  color: black;
 }
 
 .heading {
   padding: 2rem;
-  padding-top: 5rem;
+  padding-top: 6rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .title h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 650;
 }
 
 .title p {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .addAccount {
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .containerBg {
@@ -44,14 +66,36 @@
   border-radius: 2px;
 }
 
-.category {
-  padding: 1rem;
+.filter {
+  padding: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.category {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
+.employee {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.container p {
+  width: 100%;
+}
 
 /* mobile & tablet */
 @media (max-width: 1920px) {
