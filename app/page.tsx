@@ -1,8 +1,9 @@
 "use client";
 
-import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import 'bulma/css/bulma.css';
+import styles from "./page.module.css";
 
 
 export default function Login() {
@@ -12,7 +13,6 @@ export default function Login() {
     router.push("/dashboard");
   };
   return (
-    <body>
       <main className={styles.login}>
         <div className={styles.loginContainer}>
           <h4 className={styles.title}>Login to your account</h4>
@@ -52,6 +52,5 @@ export default function Login() {
           </form>
         </div>
       </main>
-    </body>
   );
 }

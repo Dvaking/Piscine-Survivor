@@ -14,6 +14,7 @@ import {
   Legend,
 } from 'chart.js';
 import styles from './page.module.css';
+import 'bulma/css/bulma.css';
 
 ChartJS.register(
   CategoryScale,
