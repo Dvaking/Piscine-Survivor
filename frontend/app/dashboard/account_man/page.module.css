@@ -1,0 +1,54 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+
+/* Laptop & Desktop */
+.main {
+  background-color: whitesmoke;
+  padding-bottom: 2rem; /* remove later */
+}
+
+.main nav {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  padding: 2rem;
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title h1 {
+  font-size: 3rem;
+  font-weight: 650;
+}
+
+.title p {
+  font-size: 1.5rem;
+}
+
+.addAccount {
+  padding-top: 3rem;
+}
+
+.containerBg {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 98%;
+  background-color: white;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem;
+}
+
+
+/* mobile & tablet */
+@media (max-width: 1920px) {
+  .main {
+    background-color: white;
+  }
+}
