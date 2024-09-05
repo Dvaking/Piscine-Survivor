@@ -51,9 +51,10 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
-      - graphql-engine
+      data-connector-agent:
+        condition: service_healthy
 
 volumes:
   db_data:
