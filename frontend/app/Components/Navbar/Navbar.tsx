@@ -23,6 +23,9 @@ export default function Navbar() {
   const handleClientProfileClick = () => {
     router.push("../../dashboard/client_profile");
   };
+  const handleSignsClick = () => {
+    router.push("../../dashboard/signs");
+  };
   const handleDashboardClick = () => {
     router.push("../../dashboard");
   };
@@ -37,16 +40,13 @@ export default function Navbar() {
         </div>
         <div className={styles.navbarLinks}>
           <div className="navbar-item">
-            <a onClick={handleClientProfileClick}>Dashboard</a>
+            <a onClick={handleClientProfileClick}>Client Profile</a>
           </div>
           <div className="navbar-item">
             <a onClick={handleDashboardClick}>Dashboard</a>
           </div>
           <div className="navbar-item">
-            <a>Customers</a>
-          </div>
-          <div className="navbar-item">
-            <a>Events</a>
+            <a onClick={handleCustomersClick}>Customers</a>
           </div>
           <div className="navbar-item">
             <a onClick={handleTipsClick}>Tips</a>
@@ -55,7 +55,13 @@ export default function Navbar() {
             <a onClick={handleStaticticsClick}>Statictics</a>
           </div>
           <div className="navbar-item">
+            <a>Events</a>
+          </div>
+          <div className="navbar-item">
             <a onClick={handleAccountsClick}>Accounts</a>
+          </div>
+          <div className="navbar-item">
+            <a onClick={handleSignsClick}>Signs</a>
           </div>
         </div>
         <div className="navbar-end">

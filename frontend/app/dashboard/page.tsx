@@ -1,10 +1,8 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import Navbar from '../Components/Navbar/Navbar';
 import styles from "./page.module.css";
-import 'bulma/css/bulma.css';
-import Image from "next/image";
+import "bulma/css/bulma.css";
 
 export default function Home() {
   return (
@@ -30,6 +28,6 @@ export default function Home() {
             Meetings top sources pie chart
           </div>
         </div>
-      </main>
+    </main>
   );
 }

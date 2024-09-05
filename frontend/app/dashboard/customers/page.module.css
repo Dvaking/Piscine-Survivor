@@ -1,7 +1,65 @@
-/* Général */
-.pageBackground {
-  background-color: rgb(243, 243, 243);
-  min-height: 100vh;
+.container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.button {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+
+/* Conteneur pour aligner le titre et le bouton sur la même ligne */
+.headerContainer {
+  display: flex;
+  justify-content: space-between; /* Pour espacer les éléments */
+  align-items: center; /* Pour les aligner verticalement */
+  margin-top: 2rem; /* Ajustement des marges supérieures */
+  margin-bottom: 2rem; /* Ajustement des marges inférieures */
+}
+
+/* Style du titre */
+.title {
+  font-size: 2rem;
+  margin: 0; /* Supprime les marges par défaut */
+}
+
+/* Style du bouton "Back" */
+.backButton {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Aligne l'icône et le texte au centre */
+}
+
+.backButton i {
+  margin-right: 0.5rem; /* Espace entre l'icône et le texte */
+}
+
+.box {
+  border: 1px solid #ddd; /* Bordure autour de la boîte */
+  border-radius: 4px; /* Coins arrondis pour les boîtes */
+}
+
+.box + .box {
+  margin-top: 1.5rem; /* Espacement entre les boîtes */
+}
+
+.table {
+  border-collapse: collapse; /* Assure que les bordures des cellules sont fusionnées */
+}
+
+.table th, .table td {
+  border: 1px solid #ddd; /* Bordure des cellules du tableau */
+  padding: 0.75rem; /* Espacement intérieur des cellules */
+}
+
+.table thead th {
+  background-color: #f5f5f5; /* Couleur de fond des en-têtes du tableau */
 }

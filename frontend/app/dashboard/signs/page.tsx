@@ -1,0 +1,130 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import React, { useState } from "react";
+import styles from "./page.module.css";
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Navbar from "../../Components/Navbar/Navbar";
+
+export default function Home() {
+  const [selectedClient1, setSelectedClient1] = useState<string | null>(null);
+  const [selectedClient2, setSelectedClient2] = useState<string | null>(null);
+  const [dropdownForClient1, setDropdownForClient1] = useState(false);
+  const [dropdownForClient2, setDropdownForClient2] = useState(false);
+  const clients = [
+    { name: "Diana White", sign: "Aries" },
+    { name: "Charlie Brown", sign: "Taurus" },
+  ];
+  const handleClient1Click = () => {
+    setDropdownForClient1(!dropdownForClient1);
+    setDropdownForClient2(false);
+  };
+  const handleClient2Click = () => {
+    setDropdownForClient2(!dropdownForClient2);
+    setDropdownForClient1(false);
+  };
+  const selectClient1 = (client: { name: string; sign: string }) => {
+    setSelectedClient1(client.name);
+    setDropdownForClient1(false);
+  };
+  const selectClient2 = (client: { name: string; sign: string }) => {
+    setSelectedClient2(client.name);
+    setDropdownForClient2(false);
+  };
+
+  return (
+    <main className={styles.main}>
+      <Navbar />
+      <div className={styles.heading}>
+        <div className={styles.title}>
+          <h1>
+            Astrological Sign
+            <br />
+            Compatibility<i className="far fa-star"></i>
+          </h1>
+          <p>Check if you're a match</p>
+        </div>
+      </div>
+      <div className={styles.containerBg}>
+        <div className={styles.container}>
+          <div className={styles.boxWrapper}>
+            <div className={
+                selectedClient1 ? styles.clientBoxSelected : styles.clientBoxNotSelected
+              } onClick={handleClient1Click}>
+              {selectedClient1 ? (
+                <>
+                  <figure className="image">
+                    <img
+                      className="is-rounded"
+                      src="https://bulma.io/assets/images/placeholders/128x128.png"
+                    />
+                  </figure>
+                  <div className={styles.clientInfo}>
+                    <h2>{selectedClient1}</h2>
+                    <p>Astrological Sign</p>
+                  </div>
+                </>
+              ) : (
+                <p>Select Client...</p>
+              )}
+            </div>
+            {dropdownForClient1 && (
+              <div className={styles.dropdown}>
+                <ul>
+                  {clients.map((client, index) => (
+                    <li
+                      key={index}
+                      className={styles.listItem}
+                      onClick={() => selectClient1(client)}
+                    >
+                      {client.name} ({client.sign})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className={styles.resultsBox}>
+              <p>(results)</p>
+            </div>
+            <div className={
+                selectedClient2 ? styles.clientBoxSelected : styles.clientBoxNotSelected
+              } onClick={handleClient2Click}>
+              {selectedClient2 ? (
+                <>
+                  <figure className="image">
+                    <img
+                      className="is-rounded"
+                      src="https://bulma.io/assets/images/placeholders/128x128.png"
+                    />
+                  </figure>
+                  <div className={styles.clientInfo}>
+                    <h2>{selectedClient2}</h2>
+                    <p>Astrological Sign</p>
+                  </div>
+                </>
+              ) : (
+                <p>Select Client...</p>
+              )}
+            </div>
+            {dropdownForClient2 && (
+              <div className={styles.dropdown}>
+                <ul>
+                  {clients.map((client, index) => (
+                    <li
+                      key={index}
+                      className={styles.listItem}
+                      onClick={() => selectClient2(client)}
+                    >
+                      {client.name} ({client.sign})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}

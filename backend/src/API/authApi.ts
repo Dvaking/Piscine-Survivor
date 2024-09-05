@@ -1,5 +1,5 @@
 import axios, { Axios, AxiosResponse } from "axios";
-import { Token} from "@types";
+import { Token } from "@types";
 
 const url = "https://soul-connection.fr/api/employees/login";
 const headers = {
