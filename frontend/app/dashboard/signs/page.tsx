@@ -8,8 +8,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Home() {
-  const [selectedClient1, setSelectedClient1] = useState<string | null>(null);
-  const [selectedClient2, setSelectedClient2] = useState<string | null>(null);
+  const [selectedClient1, setSelectedClient1] = useState<{
+    name: string;
+    sign: string;
+  } | null>(null);
+  const [selectedClient2, setSelectedClient2] = useState<{
+    name: string;
+    sign: string;
+  } | null>(null);
   const [dropdownForClient1, setDropdownForClient1] = useState(false);
   const [dropdownForClient2, setDropdownForClient2] = useState(false);
   const clients = [
@@ -25,13 +31,20 @@ export default function Home() {
     setDropdownForClient1(false);
   };
   const selectClient1 = (client: { name: string; sign: string }) => {
-    setSelectedClient1(client.name);
+    setSelectedClient1(client);
     setDropdownForClient1(false);
   };
   const selectClient2 = (client: { name: string; sign: string }) => {
-    setSelectedClient2(client.name);
+    setSelectedClient2(client);
     setDropdownForClient2(false);
   };
+
+  const [result, setResult] = useState<number | null>(null);
+  const handleButtonClick = () => {
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    setResult(randomNumber);
+  };
+  const isButtonDisabled = !selectedClient1 || !selectedClient2;
 
   return (
     <main className={styles.main}>
@@ -39,9 +52,7 @@ export default function Home() {
       <div className={styles.heading}>
         <div className={styles.title}>
           <h1>
-            Astrological Sign
-            <br />
-            Compatibility<i className="far fa-star"></i>
+            Astrological Sign Compatibility<i className="far fa-star"></i>
           </h1>
           <p>Check if you're a match</p>
         </div>
@@ -49,9 +60,14 @@ export default function Home() {
       <div className={styles.containerBg}>
         <div className={styles.container}>
           <div className={styles.boxWrapper}>
-            <div className={
-                selectedClient1 ? styles.clientBoxSelected : styles.clientBoxNotSelected
-              } onClick={handleClient1Click}>
+            <div
+              className={
+                selectedClient1
+                  ? styles.clientBoxSelected
+                  : styles.clientBoxNotSelected
+              }
+              onClick={handleClient1Click}
+            >
               {selectedClient1 ? (
                 <>
                   <figure className="image">
@@ -61,8 +77,8 @@ export default function Home() {
                     />
                   </figure>
                   <div className={styles.clientInfo}>
-                    <h2>{selectedClient1}</h2>
-                    <p>Astrological Sign</p>
+                    <h2>{selectedClient1.name}</h2>
+                    <p>{selectedClient1.sign}</p>
                   </div>
                 </>
               ) : (
@@ -72,24 +88,48 @@ export default function Home() {
             {dropdownForClient1 && (
               <div className={styles.dropdown}>
                 <ul>
-                  {clients.map((client, index) => (
-                    <li
-                      key={index}
-                      className={styles.listItem}
-                      onClick={() => selectClient1(client)}
-                    >
-                      {client.name} ({client.sign})
-                    </li>
-                  ))}
+                  {clients
+                    .filter((client) => client.name !== selectedClient2?.name)
+                    .map((client, index) => (
+                      <li
+                        key={index}
+                        className={styles.listItem}
+                        onClick={() => selectClient1(client)}
+                      >
+                        {client.name} ({client.sign})
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
-            <div className={styles.resultsBox}>
-              <p>(results)</p>
-            </div>
+
             <div className={
-                selectedClient2 ? styles.clientBoxSelected : styles.clientBoxNotSelected
-              } onClick={handleClient2Click}>
+                result
+                  ? styles.resultsBoxActive
+                  : styles.resultsBoxInactive
+              }>
+              {result !== null ? (
+                <>
+                  <p><strong>{result}%</strong></p>
+                  <p>Compatible</p>
+                </>
+              ) : (
+                <p>
+                  Astrological Sign
+                  <br />
+                  Compatibility Tester
+                </p>
+              )}
+            </div>
+
+            <div
+              className={
+                selectedClient2
+                  ? styles.clientBoxSelected
+                  : styles.clientBoxNotSelected
+              }
+              onClick={handleClient2Click}
+            >
               {selectedClient2 ? (
                 <>
                   <figure className="image">
@@ -99,8 +139,8 @@ export default function Home() {
                     />
                   </figure>
                   <div className={styles.clientInfo}>
-                    <h2>{selectedClient2}</h2>
-                    <p>Astrological Sign</p>
+                    <h2>{selectedClient2.name}</h2>
+                    <p>{selectedClient2.sign}</p>
                   </div>
                 </>
               ) : (
@@ -110,18 +150,29 @@ export default function Home() {
             {dropdownForClient2 && (
               <div className={styles.dropdown}>
                 <ul>
-                  {clients.map((client, index) => (
-                    <li
-                      key={index}
-                      className={styles.listItem}
-                      onClick={() => selectClient2(client)}
-                    >
-                      {client.name} ({client.sign})
-                    </li>
-                  ))}
+                  {clients
+                    .filter((client) => client.name !== selectedClient1?.name)
+                    .map((client, index) => (
+                      <li
+                        key={index}
+                        className={styles.listItem}
+                        onClick={() => selectClient2(client)}
+                      >
+                        {client.name} ({client.sign})
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
+          </div>
+          <div className={styles.buttonWrapper}>
+            <button
+              className="button is-link is-medium"
+              onClick={handleButtonClick}
+              disabled={isButtonDisabled}
+            >
+              Calculate
+            </button>
           </div>
         </div>
       </div>

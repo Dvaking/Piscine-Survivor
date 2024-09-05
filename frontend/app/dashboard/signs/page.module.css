@@ -55,12 +55,22 @@
   justify-content: space-evenly;
 }
 
-.resultsBox {
+.resultsBoxInactive {
   width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 3rem;
+}
+
+.resultsBoxActive {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
 }
 
 .clientBoxNotSelected {
@@ -74,6 +84,7 @@
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  position: relative;
 }
 
 .clientBoxNotSelected p {
@@ -92,6 +103,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  position: relative;
 }
 
 .clientBoxSelected figure {
@@ -115,12 +127,12 @@
 
 .dropdown {
   position: absolute;
-  top: 160px;
   background-color: white;
+  width: 10%;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 200px;
   z-index: 10;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .listItem {
@@ -130,7 +142,12 @@
 }
 
 .listItem:hover {
-  background-color: #f0f0f0;
+  background-color: #587fe9;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
 }
 
 
