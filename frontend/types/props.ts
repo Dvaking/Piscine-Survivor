@@ -15,10 +15,31 @@ export type GetEmployeesInformationProps = {
 };
 
 export type GetEmployeesInformationByUuidProps = {
-  birth_date: string;
-  gender: string;
   id: number;
   name: string;
   surname: string;
+  astrological_sign: string;
+  uuid: string;
+};
+
+export type InsertCustomerProps = {
+  id: number;
+  name: string;
+  surname: string;
+  astrological_sign: string;
+};
+
+export type GetCustomersInformationProps = {
+  id: number;
+  name: string;
+  surname: string;
+  astrological_sign: string;
+};
+
+export type GetCustomersInformationByUuidProps = {
+  id: number;
+  name: string;
+  surname: string;
+  astrological_sign: string;
   uuid: string;
 };
