@@ -91,7 +91,7 @@ export default function Customers() {
 
       <div className={`${styles.clothes} is-clipped`}>
         <div className={`${styles.clothesContainer} is-clipped`}>
-          <div className="form-container">
+          <div className="form-container is-clipped">
             <form
               onSubmit={handleSubmit}
               className="box is-shadowless has-background-white-ter"
@@ -120,7 +120,7 @@ export default function Customers() {
             </form>
           </div>
 
-          <div className="carousel-container">
+          <div className="carousel-container is-clipped">
             {hatImages.length > 0 && (
               <>
                 <div className={`${styles.carouselContainer} mt-4`}>
