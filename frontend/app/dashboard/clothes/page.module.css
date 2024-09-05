@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f5f5f5;
+  background-color: rgb(235, 235, 235);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,11 +11,11 @@
 }
 
 .clothesContainer {
-  background-color: rgb(235, 235, 235);
+  background-color: #f5f5f5;
   padding: 2rem; /* Utilisez des unités relatives pour le padding */
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  width: 90%; /* Utilisez un pourcentage pour la largeur */
+  width: 70%; /* Utilisez un pourcentage pour la largeur */
   text-align: center;
 }
 

@@ -20,3 +20,13 @@ object_relationships:
         remote_table:
           name: users
           schema: public
+array_relationships:
+  - name: clothes
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: clothe
+          schema: private

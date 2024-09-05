@@ -33,3 +33,11 @@ export type UpdateEmployeeProps = {
   surname: string;
   work: string;
 };
+
+export type GetClothesProps = {
+  clothes: [{
+    clothe_id: number;
+    image: string;
+    type: string;
+  }]
+}
