@@ -40,9 +40,9 @@ async function putEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
   employees.data.forEach(async (employee) => {
     const employeeToSend = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
+    // const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    insertEmployee(employeeToSend.data, employeeImage.data);
+    insertEmployee(employeeToSend.data, "employeeImage.data");
   });
 }
 
@@ -62,9 +62,9 @@ async function updateEmployeesInDb(token: Token) {
 
   employees.data.forEach(async (employee) => {
     const employeeById = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
+    // const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    updateEmployee(employeeById.data, employeeImage.data);
+    updateEmployee(employeeById.data, "employeeImage.data");
   });
 }
 
