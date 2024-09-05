@@ -1,4 +1,4 @@
-import { gql } from 'graphql';
+import { gql } from 'graphql-tag';
 //GET
 export const GetEmployeesInformation = gql`
   query GetEmployeesInformation {
