@@ -1,11 +1,57 @@
-/* Laptop & Desktop */
-.main {
-  background-color: whitesmoke;
+/* Conteneur principal pour le login */
+.clothes {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* mobile & tablet */
-@media (max-width: 1920px) {
-  .main {
-    background-color: white;
+.clothesContainer {
+  background-color: rgb(235, 235, 235);
+  padding: 2rem; /* Utilisez des unités relatives pour le padding */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 90%; /* Utilisez un pourcentage pour la largeur */
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Styles des images dans le carousel */
+.carouselImage {
+  max-width: 150px; /* Les images s'adaptent à la largeur du conteneur */
+  height: 150px; /* La hauteur ajuste automatiquement pour préserver les proportions */
+  object-fit: cover; /* Ajuste l'image pour couvrir le conteneur tout en préservant ses proportions */
+}
+
+/* Styles des boutons de navigation */
+.arrow {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Media queries pour les petits écrans */
+@media (max-width: 768px) {
+  .clothesContainer {
+    padding: 1rem; /* Réduire le padding sur les petits écrans */
+  }
+
+  .carouselImage {
+    width: 100px; /* Taille plus petite des images sur les petits écrans */
+    height: 100px; /* Taille plus petite des images sur les petits écrans */
+  }
+}
+
+@media (max-width: 480px) {
+  .carouselImage {
+    width: 80px; /* Taille encore plus petite des images sur les très petits écrans */
+    height: 80px; /* Taille encore plus petite des images sur les très petits écrans */
   }
 }
