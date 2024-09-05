@@ -15,7 +15,6 @@ export async function insertEmployee(
     image: employeeImage,
   };
   try {
-    console.log("Juste avant l'insertion : ", variables);
     response = await Client.request(InsertEmployee, variables);
     console.log("Utilisateur inséré avec succès");
   } catch (error) {

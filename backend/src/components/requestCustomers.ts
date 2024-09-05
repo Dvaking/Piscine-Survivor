@@ -9,7 +9,6 @@ export async function insertCustomer(customer: CustomerProps) {
   let response: Customer | undefined = undefined;
 
   try {
-    console.log("Juste avant l'insertion : ", customer);
     response = await Client.request(InsertCustomer, customer);
     console.log("Utilisateur inséré avec succès");
   } catch (error) {

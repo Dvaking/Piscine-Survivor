@@ -23,7 +23,7 @@ export const InsertEmployee = gql`
     $birth_date: String
     $gender: String
     $work: String
-    $image: bytea
+    $image: String
   ) {
     insert_private_employees(
       objects: {
@@ -32,7 +32,7 @@ export const InsertEmployee = gql`
         surname: $surname
         id: $id
         birth_date: $birth_date
-        image: $bytea
+        image: $image
         email: $email
         work: $work
       }
@@ -52,7 +52,7 @@ export const UpdateEmployee = gql`
     $name: String
     $surname: String
     $work: String
-    $image: bytea
+    $image: String
   ) {
     update_private_employees(
       where: { id: { _eq: $id } }
@@ -63,7 +63,7 @@ export const UpdateEmployee = gql`
         name: $name
         surname: $surname
         work: $work
-        image: $bytea
+        image: $image
       }
     ) {
       affected_rows
