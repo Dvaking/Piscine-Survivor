@@ -25,6 +25,7 @@ export const InsertCustomer = gql`
     $astrological_sign: String
     $phone_number: String
     $address: String
+    $image: String
   ) {
     insert_private_customers(
       objects: {
@@ -38,6 +39,7 @@ export const InsertCustomer = gql`
         astrological_sign: $astrological_sign
         phone_number: $phone_number
         address: $address
+        image: $image
       }
     ) {
       affected_rows
@@ -58,6 +60,7 @@ export const UpdateCustomer = gql`
     $astrological_sign: String
     $phone_number: String
     $address: String
+    $image: String
   ) {
     update_private_employees(
       where: { id: { _eq: $id } }
@@ -72,6 +75,7 @@ export const UpdateCustomer = gql`
         astrological_sign: $astrological_sign
         phone_number: $phone_number
         address: $address
+        image: $image
       }
     ) {
       affected_rows
