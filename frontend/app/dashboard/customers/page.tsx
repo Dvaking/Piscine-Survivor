@@ -8,20 +8,6 @@ import "bulma/css/bulma.css";
 import Navbar from '../../Components/Navbar/Navbar';
 
 export default function Customers() {
-  const router = useRouter();
-
-  const handleCustomersClick = () => {
-    router.push("/dashboard/customers");
-  };
-  const handleTipsClick = () => {
-    router.push("../dashboard/tips");
-  };
-  const handleStaticticsClick = () => {
-    router.push("../dashboard/statistics");
-  };
-  const handleDashboardClick = () => {
-    router.push("../dashboard");
-  };
   return (
     <main className={styles.main}>
       <Navbar />

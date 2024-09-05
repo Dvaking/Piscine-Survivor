@@ -7,23 +7,6 @@ import 'bulma/css/bulma.css';
 import Image from "next/image";
 
 export default function Home() {
-  const router = useRouter();
-
-  const handleCustomersClick = () => {
-    router.push("/dashboard/customers");
-  };
-  const handleTipsClick = () => {
-    router.push("/dashboard/tips");
-  };
-  const handleStaticticsClick = () => {
-    router.push("/dashboard/statistics");
-  }
-  const handleAccountsClick = () => {
-    router.push("/dashboard/account_man");
-  };
-  const handleDashboardClick = () => {
-    router.push("/dashboard");
-  };
   return (
       <main className={styles.main}>
         <Navbar />
