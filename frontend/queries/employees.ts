@@ -27,6 +27,33 @@ export const GetEmployeesInformationByUuid = gql`
 `;
 
 //UPDATE
+export const UpdateEmployee = gql`
+  mutation UpdateEmployee(
+    $uuid: uuid
+    $birth_date: String
+    $email: String
+    $gender: String
+    $image: String
+    $name: String
+    $surname: String
+    $work: String
+  ) {
+    update_private_employees(
+      where: { uuid: { _eq: $uuid } }
+      _set: {
+        birth_date: $birth_date
+        email: $email
+        gender: $gender
+        image: $image
+        work: $work
+        name: $name
+        surname: $surname
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
 
 // INSERT
 export const InsertEmployee = gql`

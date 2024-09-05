@@ -22,3 +22,14 @@ export type GetEmployeesInformationByUuidProps = {
   surname: string;
   uuid: string;
 };
+
+export type UpdateEmployeeProps = {
+  uuid: string;
+  birth_date: string;
+  email: string;
+  gender: string;
+  image: string;
+  name: string;
+  surname: string;
+  work: string;
+};

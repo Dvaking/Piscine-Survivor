@@ -3,9 +3,12 @@
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import Navbar from "../../Components/Navbar/Navbar";
+import { useEffect } from "react";
 
 export default function Customers() {
   const router = useRouter();
+
+
 
   return (
     <div className={`${styles.container} mt-6`}>
