@@ -1,0 +1,11 @@
+/* Laptop & Desktop */
+.main {
+  background-color: whitesmoke;
+}
+
+/* mobile & tablet */
+@media (max-width: 1920px) {
+  .main {
+    background-color: white;
+  }
+}

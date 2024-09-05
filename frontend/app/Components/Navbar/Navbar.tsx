@@ -8,6 +8,9 @@ import "bulma/css/bulma.css";
 export default function Navbar() {
   const router = useRouter();
 
+  const handleClothesClick = () => {
+    router.push("../../dashboard/clothes");
+  };
   const handleCustomersClick = () => {
     router.push("../../dashboard/customers");
   };
@@ -50,6 +53,9 @@ export default function Navbar() {
           </div>
           <div className="navbar-item">
             <a onClick={handleAccountsClick}>Accounts</a>
+          </div>
+          <div className="navbar-item">
+            <a onClick={handleClothesClick}>Clothes</a>
           </div>
         </div>
         <div className="navbar-end">
