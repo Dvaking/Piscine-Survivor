@@ -7,6 +7,16 @@ import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
+// async function fetchCompatibility(sign1: string, sign2: string) {
+//   const userId = '<Your User Id>';
+//   const apiKey = 'e6e70c63639f039518f84a0f3c517837';
+//   const language = 'en';
+//   const data = {
+//     zodiac_sign1: sign1,
+//     zodiac_sign2: sign2
+//   };
+// }
+
 export default function Home() {
   const [selectedClient1, setSelectedClient1] = useState<{
     name: string;

@@ -190,18 +190,46 @@
     font-size: 1rem;
   }
   .clientBoxSelected {
-    width: 100%;
-    min-height: 0;
+    min-width: 12rem;
+    min-height: 6rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
   }
   .clientBoxSelected p {
     font-size: 1rem;
   }
+  .clientBoxSelected figure {
+    width: 30%;
+  }
+  .clientInfo {
+    font-size: 1rem;
+    padding: 1rem;
+    width: 60%;
+  }
+  .clientInfo h2 {
+    font-size: 0.8rem;
+
+  }
+
+  .clientInfo p {
+    font-size: 0.8rem;
+  }
+
   .resultsBoxInactive {
     width: 100%;
     font-size: 1rem;
   }
+  .resultsBoxActive {
+    width: 100%;
+    font-size: 1.2rem;
+  }
   .buttonWrapper {
     padding-top: 0;
     font-size: 1rem;
+  }
+  .dropdown {
+    width: 100%;
   }
 }
