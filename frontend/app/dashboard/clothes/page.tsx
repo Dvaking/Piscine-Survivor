@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Navbar from "../../Components/Navbar/Navbar";
-import { getClothesByCustomerEMail } from "@components"; // Assurez-vous que cette fonction est bien importée et définie
-import { GetClothesProps } from "@types"; // Assurez-vous que ce type correspond à la structure attendue
+import { getClothesByCustomerEMail } from "@components";
+import { GetClothesProps } from "@types";
 
 export default function Customers() {
 
@@ -21,17 +21,14 @@ export default function Customers() {
   const [shoesImages, setShoesImages] = useState<string[]>([]);
   const [shoesIndex, setShoesIndex] = useState(0);
 
-  // Initialisation de l'état pour stocker l'EMAIL du client
   const [customerEMail, setCustomerEMail] = useState("");
 
-  // Gestion des changements dans le champ EMAIL
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCustomerEMail(e.target.value);
   };
 
-  // Gestion de la soumission du formulaire
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
 
     console.log("Soumission du formulaire avec EMail :", customerEMail);
 
@@ -46,7 +43,6 @@ export default function Customers() {
   useEffect(() => {
     const setClothesData = () => {
       if (clothes && clothes.length > 0) {
-        console.log("hello!");
         clothes.map((c) => {
           const { clothes } = c;
           const hats = clothes
@@ -66,20 +62,13 @@ export default function Customers() {
           setBottomsImages(bottoms);
           setShoesImages(shoes);
         });
-        console.log("Vêtements triés par type:", {
-          hatImages,
-          topsImages,
-          bottomsImages,
-          shoesImages,
-        });
       } else {
         console.log("Aucun vêtement trouvé pour cette adresse E-mail.");
       }
     };
     setClothesData();
-  }, [clothes]);
+  }, [bottomsImages, clothes, hatImages, shoesImages, topsImages]);
 
-  // Fonctions pour naviguer entre les images de chaque type
   const handlePrevious = (
     index: number,
     setIndex: React.Dispatch<React.SetStateAction<number>>,
@@ -100,9 +89,8 @@ export default function Customers() {
     <main className="is-clearfix">
       <Navbar />
 
-      <div className={`${styles.clothes}`}>
-        <div className={styles.clothesContainer}>
-          {/* Formulaire pour entrer l'EMail */}
+      <div className={`${styles.clothes} is-clipped`}>
+        <div className={`${styles.clothesContainer} is-clipped`}>
           <div className="form-container">
             <form
               onSubmit={handleSubmit}
@@ -132,12 +120,9 @@ export default function Customers() {
             </form>
           </div>
 
-          {/* Carrousels pour chaque type de vêtements */}
           <div className="carousel-container">
-            {/* Carrousel pour les Hats */}
             {hatImages.length > 0 && (
               <>
-                <h3>Hats</h3>
                 <div className={`${styles.carouselContainer} mt-4`}>
                   <button
                     className={`${styles.arrow} ${styles.leftArrow}`}
@@ -164,7 +149,6 @@ export default function Customers() {
               </>
             )}
 
-            {/* Carrousel pour les Tops */}
             {topsImages.length > 0 && (
               <>
                 <div className={`${styles.carouselContainer} mt-4`}>
@@ -195,10 +179,8 @@ export default function Customers() {
               </>
             )}
 
-            {/* Carrousel pour les Bottoms */}
             {bottomsImages.length > 0 && (
               <>
-                <h3>Bottoms</h3>
                 <div className={`${styles.carouselContainer} mt-4`}>
                   <button
                     className={`${styles.arrow} ${styles.leftArrow}`}
@@ -231,10 +213,8 @@ export default function Customers() {
               </>
             )}
 
-            {/* Carrousel pour les Shoes */}
             {shoesImages.length > 0 && (
               <>
-                <h3>Shoes</h3>
                 <div className={`${styles.carouselContainer} mt-4`}>
                   <button
                     className={`${styles.arrow} ${styles.leftArrow}`}

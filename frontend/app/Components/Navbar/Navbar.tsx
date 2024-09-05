@@ -46,7 +46,7 @@ export default function Navbar() {
             <a onClick={handleTipsClick}>Tips</a>
           </div>
           <div className="navbar-item">
-            <a onClick={handleStaticticsClick}>Statictics</a>
+            <a onClick={handleStaticticsClick}>Statistics</a>
           </div>
           <div className="navbar-item">
             <a>Events</a>

@@ -1,77 +1,84 @@
-/* Conteneur principal pour le login */
+/* Conteneur principal pour les habits */
 .clothes {
-  margin: 0;
+  margin-top: 2rem;
   padding: 0;
   box-sizing: border-box;
   background-color: rgb(235, 235, 235);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .clothesContainer {
   background-color: #f5f5f5;
-  padding: 2rem; /* Utilisez des unités relatives pour le padding */
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  width: 70%; /* Utilisez un pourcentage pour la largeur */
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 62.5rem;
   text-align: center;
+  overflow: hidden;
 }
 
-/* Styles des images dans le carousel */
 .carouselImage {
-  max-width: 200px; /* Les images s'adaptent à la largeur du conteneur */
-  height: 200px; /* La hauteur ajuste automatiquement pour préserver les proportions */
-  object-fit: cover; /* Ajuste l'image pour couvrir le conteneur tout en préservant ses proportions */
+  max-width: 9.30rem;
+  height: auto;
+  object-fit: cover;
 }
 
 .carouselContainer {
   display: flex;
-  align-items: center; /* Centre les éléments verticalement */
+  align-items: center;
   position: relative;
-  width: 100%; /* ou une largeur fixe si tu préfères */
-  max-width: 600px; /* ajuste selon tes besoins */
-  margin: 0 auto; /* centre le carrousel */
+  width: 100%;
+  max-width: 37.5rem;
+  margin: 0 auto;
 }
 
 .carousel {
-  flex: 1; /* Permet à la zone de l'image de prendre tout l'espace restant */
-  overflow: hidden; /* Cache les parties des flèches qui pourraient dépasser */
+  flex: 1;
+  overflow: hidden;
 }
 
 .arrow {
-  color: rgb(86, 112, 255); /* couleur des flèches */
+  color: rgb(86, 112, 255);
   border: none;
-  padding: 10px;
+  padding: 0.625rem;
   cursor: pointer;
-  font-size: 24px; /* taille de la flèche */
+  font-size: 1.5rem;
 }
 
-.leftArrow {
-  margin-left: 6rem; /* espace entre la flèche gauche et l'image */
-}
-
+.leftArrow,
 .rightArrow {
-  margin-right: 6rem; /* espace entre l'image et la flèche droite */
+  margin: 0 2vw;
 }
-
 
 /* Media queries pour les petits écrans */
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .clothesContainer {
-    padding: 2rem; /* Réduire le padding sur les petits écrans */
+    padding: 1rem;
+    width: 95%;
   }
 
   .carouselImage {
-    width: 100px; /* Taille plus petite des images sur les petits écrans */
-    height: 100px; /* Taille plus petite des images sur les petits écrans */
+    max-width: 7.5rem;
+  }
+
+  .leftArrow,
+  .rightArrow {
+    margin: 0 1rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .carouselImage {
-    width: 80px; /* Taille encore plus petite des images sur les très petits écrans */
-    height: 80px; /* Taille encore plus petite des images sur les très petits écrans */
+    max-width: 6.25rem;
+  }
+
+  .leftArrow,
+  .rightArrow {
+    margin: 0 0.5rem;
   }
 }

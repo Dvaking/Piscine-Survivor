@@ -50,6 +50,5 @@ export async function getClothesByCustomerEMail(email: string) {
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }
-  console.log(response);
   return response ? response.private_customers : [];
 }
