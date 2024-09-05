@@ -1,4 +1,4 @@
-export type Customer = {
+export type CustomerProps = {
   id: 0;
   email: "string";
   name: "string";
