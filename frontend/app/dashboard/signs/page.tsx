@@ -17,6 +17,8 @@ import Navbar from "../../Components/Navbar/Navbar";
 //   };
 // }
 
+
+
 export default function Home() {
   const [selectedClient1, setSelectedClient1] = useState<{
     name: string;
@@ -106,7 +108,7 @@ export default function Home() {
                         className={styles.listItem}
                         onClick={() => selectClient1(client)}
                       >
-                        {client.name} ({client.sign})
+                        {client.name}
                       </li>
                     ))}
                 </ul>
@@ -168,7 +170,7 @@ export default function Home() {
                         className={styles.listItem}
                         onClick={() => selectClient2(client)}
                       >
-                        {client.name} ({client.sign})
+                        {client.name}
                       </li>
                     ))}
                 </ul>
