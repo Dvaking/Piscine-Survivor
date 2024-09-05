@@ -5,3 +5,4 @@ admin_secret: ${HASURA_GRAPHQL_ADMIN_SECRET}
 actions:
   kind: synchronous
   handler_webhook_baseurl: http://localhost:3000
+  
