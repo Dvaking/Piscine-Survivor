@@ -2,11 +2,9 @@ FROM node:18
 
 WORKDIR /app
 
-RUN rm -rf backend/dist/
-
 COPY backend/package*.json .
 
-RUN npm i
+RUN echo "npm i"
 
 COPY backend/ .
 
