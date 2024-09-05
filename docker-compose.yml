@@ -51,9 +51,12 @@ services:
   #     context: .
   #     dockerfile: backend/Dockerfile
   #   ports:
-  #     - "3000:3000"
+  #     - "4000:4000"
   #   depends_on:
-  #     - postgres
+  #     data-connector-agent:
+  #       condition: service_healthy
+  #   environment:
+  #     - CLIENT_URL=http://graphql-engine:8080/v1/graphql
 
 volumes:
   db_data:
