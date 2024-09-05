@@ -25,4 +25,15 @@
   .navbarLinks a {
     color: black;
   }
+
+/* mobile & tablet */
+@media (max-width: 1920px) {
+  .bar nav {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-top: 1rem;
+  }
+}
   

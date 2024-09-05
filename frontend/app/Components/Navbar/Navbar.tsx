@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <div className={styles.bar}>
       <nav className="navbar is-fixed-top">
-        <div className="navbar-brand">
+        <div className="navbar-brand is-hidden-mobile">
           <p className="navbar-item">
             <strong>Soul Connection</strong>
           </p>
@@ -64,7 +64,7 @@ export default function Navbar() {
             <a onClick={handleSignsClick}>Signs</a>
           </div>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end is-hidden-mobile">
           <div className="navbar-item">
             <img
               className="is-rounded"

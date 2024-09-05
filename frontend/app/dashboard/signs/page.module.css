@@ -70,7 +70,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 4rem;
+  font-size: 5rem;
 }
 
 .clientBoxNotSelected {
@@ -153,7 +153,55 @@
 
 /* mobile & tablet */
 @media (max-width: 1920px) {
-  .main {
-    background-color: white;
+  .heading {
+    padding-top: 5.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .title h1 {
+    font-size: 1.5rem;
+    padding:0;
+  }
+  .title p {
+    font-size: 1rem;
+  }
+  .containerBg {
+    padding: 0;
+  }
+  .container {
+    width: 100%;
+    height: 69vh;
+    padding: 0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    gap: 1.5rem;
+  }
+  .boxWrapper {
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .clientBoxNotSelected {
+    min-height: 6rem;
+    min-width: 12rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  }
+  .clientBoxNotSelected p {
+    font-size: 1rem;
+  }
+  .clientBoxSelected {
+    width: 100%;
+    min-height: 0;
+  }
+  .clientBoxSelected p {
+    font-size: 1rem;
+  }
+  .resultsBoxInactive {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .buttonWrapper {
+    padding-top: 0;
+    font-size: 1rem;
   }
 }
