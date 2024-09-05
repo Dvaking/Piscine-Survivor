@@ -14,6 +14,9 @@ export async function insertEmployee(
     ...employee,
     image: employeeImage,
   };
+  if (variables.image === undefined) {
+    variables.image = "";
+  }
   try {
     response = await Client.request(InsertEmployee, variables);
     console.log("Utilisateur inséré avec succès");
@@ -32,6 +35,9 @@ export async function updateEmployee(
     ...employee,
     image: employeeImage,
   };
+  if (variables.image === undefined) {
+    variables.image = "";
+  }
   try {
     response = await Client.request(UpdateEmployee, variables);
     console.log("Utilisateur mis à jour avec succès");
