@@ -60,7 +60,7 @@ export const InsertEmployee = gql`
   }
 `;
 
-export const client = new GraphQLClient("http://localhost:8080/v1/graphql", {
+export const client = new GraphQLClient("http://graphql-engine:8080/v1/graphql", {
   headers: {
     "x-hasura-admin-secret": process.env.HASURA_GRAPHQL_ADMIN_SECRET,
   } as HeadersInit,
@@ -82,10 +82,6 @@ async function putCustomersInDb(token: Token) {
 
   customers.data.forEach(async (customer) => {
     const customerById = await getCustomerById(token, customer.id);
-    // const paymentsHistory = await getPaymentsHistory(token, customer.id);
-    // const customerImage = await getCustomerImageById(token, customer.id);
-    // const clothes = await getClothes(token, customer.id);
-    // const encounters = await getEncounterByCustomerId(token, customer.id);
   });
 }
 
@@ -103,7 +99,6 @@ async function putEmployeesInDb(token: Token) {
     };
     insertEmployee(employeeToSend);
   });
-
 }
 
 async function fetchData(): Promise<void> {
