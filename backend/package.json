@@ -2,7 +2,6 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -18,10 +17,8 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.7",
-    "apollo-server-express": "^3.13.0",
     "axios": "^1.7.7",
-    "express": "^4.19.2",
+    "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
     "graphql-request": "^5.0.0",
     "node-cron": "^3.0.3",
