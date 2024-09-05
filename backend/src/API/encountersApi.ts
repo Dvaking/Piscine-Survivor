@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { login } from "./authApi";
-import { Token } from '@types';
+import { Token } from '../types/token';
 
 const url = "https://soul-connection.fr/api/encounters";
 const headers = {

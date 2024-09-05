@@ -1,9 +1,11 @@
 // Définition du type Employee
-export type InsertEmployeeProps = {
-  id: number;
+export type EmployeeProps = {
+  birth_date: string;
+  email: string;
+  gender: string;
   name: string;
   surname: string;
-  birth_date: string;
-  gender: string;
   work: string;
-}
+  id: number;
+  image: string;
+};
