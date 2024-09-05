@@ -39,9 +39,9 @@ async function putEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
   employees.data.forEach(async (employee) => {
     const employeeToSend = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
+    // const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    insertEmployee(employeeToSend.data, employeeImage.data);
+    insertEmployee(employeeToSend.data, "employeeImage.data");
   });
 }
 
@@ -50,7 +50,7 @@ async function fetchData(): Promise<void> {
     const token = await login();
 
     putEmployeesInDb(token);
-    // putCustomersInDb(token);
+    putCustomersInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
@@ -61,9 +61,9 @@ async function updateEmployeesInDb(token: Token) {
 
   employees.data.forEach(async (employee) => {
     const employeeById = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
+    // const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    updateEmployee(employeeById.data, employeeImage.data);
+    updateEmployee(employeeById.data, "employeeImage.data");
   });
 }
 
@@ -82,7 +82,7 @@ async function updateData(): Promise<void> {
     const token = await login();
 
     updateEmployeesInDb(token);
-    // updateCustomersInDb(token);
+    updateCustomersInDb(token);
   } catch (error) {
     console.error("An error occurred while updating data:", error);
   }
