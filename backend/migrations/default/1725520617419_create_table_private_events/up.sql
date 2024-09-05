@@ -1,0 +1,1 @@
+CREATE TABLE "private"."events" ("id" integer NOT NULL, "name" text NOT NULL, "date" text NOT NULL, "duration" integer NOT NULL, "max_participants" text NOT NULL, "location_x" text NOT NULL, "location_y" text NOT NULL, "type" text NOT NULL, "employee_id" integer NOT NULL, "location_name" text NOT NULL, PRIMARY KEY ("id") , UNIQUE ("id"), UNIQUE ("employee_id"));

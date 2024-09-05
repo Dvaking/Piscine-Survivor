@@ -1,0 +1,1 @@
+CREATE TABLE "private"."encounters" ("id" integer NOT NULL, "customer_id" uuid, "date" text NOT NULL, "rating" integer NOT NULL, "comment" text NOT NULL, "source" text NOT NULL, PRIMARY KEY ("id") , UNIQUE ("id"));
