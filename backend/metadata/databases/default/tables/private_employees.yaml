@@ -2,15 +2,6 @@ table:
   name: employees
   schema: private
 object_relationships:
-  - name: events
-    using:
-      manual_configuration:
-        column_mapping:
-          id: employee_id
-        insertion_order: null
-        remote_table:
-          name: events
-          schema: private
   - name: user_auth
     using:
       manual_configuration:
@@ -29,4 +20,13 @@ array_relationships:
         insertion_order: null
         remote_table:
           name: customers
+          schema: private
+  - name: events
+    using:
+      manual_configuration:
+        column_mapping:
+          id: employee_id
+        insertion_order: null
+        remote_table:
+          name: events
           schema: private
