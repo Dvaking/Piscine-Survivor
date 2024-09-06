@@ -14,18 +14,18 @@ export const GetCustomersInformation = gql`
 `;
 
 export const InsertCustomer = gql`
-  mutation InsertCustomer(
-    $id: Int
-    $email: String
+  mutation MyMutation(
+    $gender: String
     $name: String
     $surname: String
+    $id: Int
     $birth_date: String
-    $gender: String
-    $description: String
+    $email: String
+    $image: String
     $astrological_sign: String
+    $description: String
     $phone_number: String
     $address: String
-    $image: String
   ) {
     insert_private_customers(
       objects: {
@@ -35,29 +35,14 @@ export const InsertCustomer = gql`
         id: $id
         birth_date: $birth_date
         email: $email
-        description: $description
+        image: $image
         astrological_sign: $astrological_sign
+        description: $description
         phone_number: $phone_number
         address: $address
-        image: $image
       }
-      on_conflict: {
-        constraint: customers_pkey
-        update_columns: [
-          email
-          name
-          surname
-          birth_date
-          gender
-          description
-          astrological_sign
-          phone_number
-          address
-          image
-        ]
-      }
+      on_conflict: { constraint: customers_email_key }
     ) {
-      affected_rows
       returning {
         uuid
       }

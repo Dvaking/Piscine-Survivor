@@ -16,6 +16,7 @@ export async function insertCustomer(customer: CustomerProps, image: string) {
     response = await Client.request(InsertCustomer, variables);
     console.log("Utilisateur inséré avec succès");
   } catch (error) {
+    console.log(variables);
     console.error("Erreur lors de l'insertion de customer");
   }
   return response ? response.private_customers : [];

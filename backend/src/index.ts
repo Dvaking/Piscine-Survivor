@@ -34,20 +34,28 @@ async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
 
   customers.data.forEach(async (customer) => {
-    const customerById = await getCustomerById(token, customer.id);
-    const customerImage = await getCustomerImageById(token, customer.id);
+    try {
+      const customerById = await getCustomerById(token, customer.id);
+      const customerImage = await getCustomerImageById(token, customer.id);
 
-    insertCustomer(customerById.data, customerImage.data);
+      insertCustomer(customerById.data, customerImage.data);
+    } catch (error) {
+      console.error("An error occurred while inserting customers");
+    }
   });
 }
 
 async function putEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
   employees.data.forEach(async (employee) => {
-    const employeeToSend = await getEmployeeById(token, employee.id);
-    const employeeImage = await getEmployeeImageById(token, employee.id);
-
-    insertEmployee(employeeToSend.data, employeeImage.data);
+    try {
+      const employeeToSend = await getEmployeeById(token, employee.id);
+      const employeeImage = await getEmployeeImageById(token, employee.id);
+      
+      insertEmployee(employeeToSend.data, employeeImage.data);
+    } catch (error) {
+      console.error("An error occurred while inserting employees");
+    }
   });
 }
 
