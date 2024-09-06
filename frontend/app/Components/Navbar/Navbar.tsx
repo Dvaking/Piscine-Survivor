@@ -23,6 +23,12 @@ export default function Navbar() {
   const handleAccountsClick = () => {
     router.push("../../dashboard/account_man");
   };
+  const handleClientProfileClick = () => {
+    router.push("../../dashboard/client_profile");
+  };
+  const handleSignsClick = () => {
+    router.push("../../dashboard/signs");
+  };
   const handleDashboardClick = () => {
     router.push("../../dashboard");
   };
@@ -30,12 +36,15 @@ export default function Navbar() {
   return (
     <div className={styles.bar}>
       <nav className="navbar is-fixed-top">
-        <div className="navbar-brand">
+        <div className="navbar-brand is-hidden-mobile">
           <p className="navbar-item">
             <strong>Soul Connection</strong>
           </p>
         </div>
         <div className={styles.navbarLinks}>
+          <div className="navbar-item">
+            <a onClick={handleClientProfileClick}>Client Profile</a>
+          </div>
           <div className="navbar-item">
             <a onClick={handleDashboardClick}>Dashboard</a>
           </div>
@@ -57,8 +66,11 @@ export default function Navbar() {
           <div className="navbar-item">
             <a onClick={handleClothesClick}>Clothes</a>
           </div>
+          <div className="navbar-item">
+            <a onClick={handleSignsClick}>Signs</a>
+          </div>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end is-hidden-mobile">
           <div className="navbar-item">
             <img
               className="is-rounded"

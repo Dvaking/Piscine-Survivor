@@ -13,7 +13,9 @@
     "paths": {
       "@types": ["src/types/index.ts"],
       "@api": ["src/api/index.ts"],
-    }
+      "@queries": ["src/queries/index.ts"],
+      "@components": ["src/components/index.ts", "dist/components/index.js"],
+    },
   },
   "include": ["src/**/*"],
   "exclude": [" _modules", "**/*.test.ts"]
