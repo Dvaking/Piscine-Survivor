@@ -2,12 +2,20 @@
 
 import { useEffect, useRef } from "react";
 import React, { useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/router";
 import styles from "./page.module.css";
 import "bulma/css/bulma.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Home() {
+  const { user, isLoading } = useUser();
+  const router = useRouter();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!user) router.push("/");
+
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const dropdown = dropdownRef.current;

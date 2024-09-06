@@ -14,11 +14,8 @@ export type GetEmployeesInformationProps = {
   surname: string;
 };
 
-export type GetEmployeesInformationByUuidProps = {
-  birth_date: string;
-  gender: string;
-  id: number;
-  name: string;
-  surname: string;
-  uuid: string;
+export type UserAuthProps = {
+  role: string;
+  customer_uuid: string;
+  employee_uuid: string;
 };

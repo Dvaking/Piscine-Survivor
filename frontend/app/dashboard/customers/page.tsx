@@ -1,11 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import styles from "./page.module.css";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function Customers() {
+  const { user, isLoading } = useUser();
   const router = useRouter();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!user) router.push("/");
 
   return (
     <div className={`${styles.container} mt-6`}>

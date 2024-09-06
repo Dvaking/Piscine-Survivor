@@ -12,22 +12,24 @@
 
 .loginContainer {
   background-color: rgb(235, 235, 235);
-  padding: 8rem;
-  border-radius: 8px;
+  padding: 2rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 600px;
   text-align: center;
 }
 
 .title {
   font-size: 2rem;
-  text-transform: uppercase;
   margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
 }
 
 .field {
   margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .label {
@@ -66,18 +68,19 @@
 }
 
 .buttonText {
-  background: none;
+  margin-left: 0.5rem;
   border: none;
-  color: #3273dc;
+  color: white;
   cursor: pointer;
-  text-decoration: underline;
+  font-size: large;
 }
 
 .actions {
-  text-align: right;
+  text-align: center;
 }
 
 .buttonLink {
+  justify-content: center;
   padding: 0.75rem 1.5rem;
   background-color: #3273dc;
   color: #fff;

@@ -1,28 +1,50 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
 .bar nav {
-    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.bar nav p {
+  font-size: 1.6rem;
+  font-weight: 650;
+}
+
+.navbarLinks {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbarLinks a {
+  color: black;
+}
+
+.navbar-burger {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-menu.is-active {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    flex-direction: column;
   }
-  
-  .bar nav p {
-    font-size: 1.6rem;
-    font-weight: 650;
+
+  .navbar-burger {
+    display: block;
   }
-  
-  .navbarLinks {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
+
+  .navbar-item {
+    text-align: center;
   }
-  
-  .navbarLinks a {
-    color: black;
-  }
-  
+}

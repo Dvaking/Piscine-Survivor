@@ -3,15 +3,10 @@ import {
   GetEmployeesInformation,
   GetEmployeesInformationByUuid,
 } from "@queries";
-import {
-  GetEmployeesInformationProps,
-  GetEmployeesInformationByUuidProps,
-} from "@types";
+import { GetEmployeesInformationProps } from "@types";
 
 export interface Employees {
-  private_employees:
-    | GetEmployeesInformationProps[]
-    | GetEmployeesInformationByUuidProps[];
+  private_employees: GetEmployeesInformationProps[];
 }
 
 export async function getEmployeesInformation() {
@@ -24,10 +19,13 @@ export async function getEmployeesInformation() {
   return response ? response.private_employees : [];
 }
 
-export async function getEmployeesInformationByUuid() {
+export async function getEmployeesInformationByUuid(employeeUuid: string) {
+  let args = {
+    uuid: employeeUuid,
+  };
   let response: Employees | undefined = undefined;
   try {
-    response = await client.request(GetEmployeesInformationByUuid);
+    response = await client.request(GetEmployeesInformationByUuid, args);
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }

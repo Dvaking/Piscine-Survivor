@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Navbar from '../../Components/Navbar/Navbar';
 import React, { useRef } from 'react';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -15,6 +16,7 @@ import {
   Legend,
 } from 'chart.js';
 import styles from './page.module.css';
+
 import 'bulma/css/bulma.css';
 
 ChartJS.register(
@@ -27,7 +29,12 @@ ChartJS.register(
   Legend
 );
 
-const StaticticsGraph: React.FC = () => {
+export function StaticticsGraph() {
+  const { user, isLoading } = useUser();
+  const router = useRouter();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!user) router.push("/");
   const chartRef = useRef(null);
 
   const data = {
@@ -54,8 +61,6 @@ const StaticticsGraph: React.FC = () => {
       },
     },
   };
-  const router = useRouter();
-
   const handleCustomersClick = () => {
     router.push("/dashboard/customers");
   };
@@ -77,5 +82,3 @@ const StaticticsGraph: React.FC = () => {
     </main>
   );
 };
-
-export default StaticticsGraph;

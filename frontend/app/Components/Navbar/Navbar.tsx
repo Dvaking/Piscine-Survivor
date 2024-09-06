@@ -1,12 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 import "bulma/css/bulma.css";
 
 export default function Navbar() {
+  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
+  const handleBurgerClick = () => {
+    setIsActive(!isActive);
+  };
 
   const handleCustomersClick = () => {
     router.push("../../dashboard/customers");
@@ -28,36 +33,47 @@ export default function Navbar() {
     <div className={styles.bar}>
       <nav className="navbar is-fixed-top">
         <div className="navbar-brand">
-          <p className="navbar-item">
+          <a className="navbar-item" href="#">
             <strong>Soul Connection</strong>
-          </p>
+          </a>
+          <a
+            role="button"
+            className="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            onClick={handleBurgerClick}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div className={styles.navbarLinks}>
-          <div className="navbar-item">
-            <a onClick={handleDashboardClick}>Dashboard</a>
+        <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
+          <div className="navbar-start">
+            <a className="navbar-item" onClick={handleDashboardClick}>
+              Dashboard
+            </a>
+            <a className="navbar-item" onClick={handleCustomersClick}>
+              Customers
+            </a>
+            <a className="navbar-item" onClick={handleTipsClick}>
+              Tips
+            </a>
+            <a className="navbar-item" onClick={handleStaticticsClick}>
+              Statistics
+            </a>
+            <a className="navbar-item">Events</a>
+            <a className="navbar-item" onClick={handleAccountsClick}>
+              Accounts
+            </a>
           </div>
-          <div className="navbar-item">
-            <a onClick={handleCustomersClick}>Customers</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleTipsClick}>Tips</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleStaticticsClick}>Statictics</a>
-          </div>
-          <div className="navbar-item">
-            <a>Events</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleAccountsClick}>Accounts</a>
-          </div>
-        </div>
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <img
-              className="is-rounded"
-              src="https://bulma.io/assets/images/placeholders/128x128.png"
-            />
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <img
+                className="is-rounded"
+                src="https://bulma.io/assets/images/placeholders/128x128.png"
+              />
+            </div>
           </div>
         </div>
       </nav>

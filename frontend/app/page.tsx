@@ -1,55 +1,25 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
-import 'bulma/css/bulma.css';
+import "bulma/css/bulma.css";
 import styles from "./page.module.css";
-
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const { user } = useUser();
   const router = useRouter();
 
-  const handleDashboardClick = () => {
-    router.push("/dashboard");
-  };
+  if (user) router.push("/dashboard");
+
   return (
-      <main className={styles.login}>
-        <div className={styles.loginContainer}>
-          <h4 className={styles.title}>Login to your account</h4>
-
-          <form className={styles.form}>
-            <div className={styles.field}>
-              <label className={styles.label}>E-mail address</label>
-              <input
-                className={styles.input}
-                type="email"
-                placeholder="Enter your email address"
-                required
-              />
-            </div>
-
-            <div className={styles.field}>
-              <label className={styles.label}>Password</label>
-              <input
-                className={styles.input}
-                type="password"
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-
-            <div className={styles.options}>
-              <label className={styles.checkbox}>
-                <input type="checkbox" />
-                Remember me
-              </label>
-              <button className={styles.buttonText}>Forgot your password?</button>
-            </div>
-
-            <div className={styles.actions}>
-              <button className={styles.buttonLink} onClick={handleDashboardClick}>Sign In</button>
-            </div>
-          </form>
-        </div>
-      </main>
+    <main className={styles.login}>
+      <div className={styles.loginContainer}>
+        <h4 className={styles.title}>Login to access the web application</h4>
+        <div className={styles.buttonLink}>
+        <a href="/api/auth/login">
+          <div className={styles.buttonText}>Login</div>
+        </a>
+      </div>
+      </div>
+    </main>
   );
-};
+}

@@ -1,13 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import Navbar from "../../Components/Navbar/Navbar";
 import styles from "./page.module.css";
 import "bulma/css/bulma.css";
 import Image from "next/image";
 
 export default function Tips() {
+  const { user, isLoading } = useUser();
   const router = useRouter();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!user) router.push("/");
 
   const handleCustomersClick = () => {
     router.push("/dashboard/customers");
