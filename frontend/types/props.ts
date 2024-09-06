@@ -57,7 +57,7 @@ export type UpdateEmployeeProps = {
 
 export type GetClothesProps = {
   clothes: [{
-    clothe_id: number;
+    id: number;
     image: string;
     type: string;
   }]
