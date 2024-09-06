@@ -36,8 +36,22 @@ export const InsertEmployee = gql`
         email: $email
         work: $work
       }
+      on_conflict: {
+        constraint: employees_pkey
+        update_columns: [email, name, surname, birth_date, gender, work, image] # Colonnes à mettre à jour en cas de conflit
+      }
     ) {
       affected_rows
+      returning {
+        id
+        email
+        name
+        surname
+        birth_date
+        gender
+        work
+        image
+      }
     }
   }
 `;

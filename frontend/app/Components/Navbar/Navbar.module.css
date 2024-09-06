@@ -10,24 +10,24 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .bar nav p {
     font-size: 1.6rem;
     font-weight: 650;
   }
-  
+
   .navbarLinks {
     flex-grow: 1;
     display: flex;
     justify-content: center;
   }
-  
+
   .navbarLinks a {
     color: black;
   }
 
 /* mobile & tablet */
-@media (max-width: 1920px) {
+@media (max-width: 1080px) {
   .bar nav {
     display: flex;
     flex-direction: column;
@@ -35,5 +35,10 @@
     white-space: nowrap;
     padding-top: 1rem;
   }
+  .companyName {
+    display: none;
+  }
+  .profilePic {
+    display: none;
+  }
 }
-  

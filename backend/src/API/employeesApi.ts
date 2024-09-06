@@ -13,7 +13,6 @@ export async function getEmployees(
 ): Promise<AxiosResponse<EmployeeProps[]>> {
   try {
     let response: AxiosResponse<EmployeeProps[]>;
-
     try {
       response = await axios.get<EmployeeProps[]>(url, {
         headers: {
