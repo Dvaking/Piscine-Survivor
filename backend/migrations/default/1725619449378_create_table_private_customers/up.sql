@@ -1,0 +1,2 @@
+CREATE TABLE "private"."customers" ("uuid" uuid NOT NULL DEFAULT gen_random_uuid(), "id" integer NOT NULL, "name" text NOT NULL, "surname" text NOT NULL, "email" text NOT NULL, "birth_date" text, "gender" text, "description" text, "astrological_sign" text, "phone_number" text, "adress" text, "image" text, "employee_uuid" uuid, PRIMARY KEY ("uuid") , UNIQUE ("uuid"), UNIQUE ("id"), UNIQUE ("email"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

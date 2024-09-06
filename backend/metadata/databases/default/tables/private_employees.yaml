@@ -1,22 +1,12 @@
 table:
   name: employees
   schema: private
-object_relationships:
-  - name: user_auth
+array_relationships:
+  - name: customer_asing
     using:
       manual_configuration:
         column_mapping:
           uuid: employee_uuid
-        insertion_order: null
-        remote_table:
-          name: users
-          schema: public
-array_relationships:
-  - name: customers_asign
-    using:
-      manual_configuration:
-        column_mapping:
-          uuid: employee_attribute
         insertion_order: null
         remote_table:
           name: customers
