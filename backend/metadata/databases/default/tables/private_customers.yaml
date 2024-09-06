@@ -1,3 +1,22 @@
 table:
   name: customers
   schema: private
+array_relationships:
+  - name: clothes
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: clothes
+          schema: private
+  - name: encounters
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: encounters
+          schema: private
