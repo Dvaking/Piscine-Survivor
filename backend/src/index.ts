@@ -22,7 +22,12 @@ import { getTips } from "./API/tipsApi";
 import { getEvents, getEventById } from "./API/eventsApi";
 import { getClotheImage } from "./API/clothesApi";
 import { Token } from "./types/token";
-import { insertEmployee, updateEmployee, insertCustomer, updateCustomer } from "./components/";
+import {
+  insertEmployee,
+  updateEmployee,
+  insertCustomer,
+  updateCustomer,
+} from "./components/";
 import { UpdateEmployee } from "./queries/employees";
 
 async function putCustomersInDb(token: Token) {
@@ -92,7 +97,7 @@ async function updateData(): Promise<void> {
 
 function executeQuery() {
   fetchData();
-  cron.schedule("*/5 * * * *", () => {
+  cron.schedule("*/10 * * * *", () => {
     updateData();
   });
 }

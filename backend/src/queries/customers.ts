@@ -41,8 +41,26 @@ export const InsertCustomer = gql`
         address: $address
         image: $image
       }
+      on_conflict: {
+        constraint: customers_pkey
+        update_columns: [
+          email
+          name
+          surname
+          birth_date
+          gender
+          description
+          astrological_sign
+          phone_number
+          address
+          image
+        ]
+      }
     ) {
       affected_rows
+      returning {
+        uuid
+      }
     }
   }
 `;
