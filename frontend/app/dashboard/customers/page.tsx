@@ -14,7 +14,6 @@ export default function Customers() {
     <div className={`${styles.container} mt-6`}>
       <Navbar />
 
-      {/* Header section */}
       <div className={styles.headerContainer}>
         <h1 className={styles.title}>Customers Details</h1>
         <button className={styles.backButton} onClick={() => router.back()}>
@@ -22,10 +21,8 @@ export default function Customers() {
         </button>
       </div>
 
-      {/* Main content */}
       <div className={styles.container}>
         <div className="columns">
-          {/* Customer Info Section */}
           <div className="column is-one-quarter">
             <div className="box">
               <figure className="image is-128x128 mx-auto">
@@ -81,10 +78,8 @@ export default function Customers() {
             </div>
           </div>
 
-          {/* Meeting and Payment History Section */}
           <div className="column">
             <div className="box">
-              {/* Recent Meetings */}
               <h3 className="title is-5">Recent Meetings</h3>
               <div className="box">
                 <table className="table is-fullwidth is-striped">
@@ -131,7 +126,6 @@ export default function Customers() {
                 </table>
               </div>
 
-              {/* Payment History */}
               <h3 className="title is-5">Payments History</h3>
               <div className="box mt-5">
                 <table className="table is-fullwidth is-striped">
