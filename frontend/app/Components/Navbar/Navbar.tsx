@@ -36,10 +36,12 @@ export default function Navbar() {
   return (
     <div className={styles.bar}>
       <nav className="navbar is-fixed-top">
-        <div className="navbar-brand is-hidden-mobile">
+        <div className={styles.companyName}>
+        <div className="navbar-brand">
           <p className="navbar-item">
             <strong>Soul Connection</strong>
           </p>
+        </div>
         </div>
         <div className={styles.navbarLinks}>
           <div className="navbar-item">
@@ -70,12 +72,14 @@ export default function Navbar() {
             <a onClick={handleSignsClick}>Signs</a>
           </div>
         </div>
-        <div className="navbar-end is-hidden-mobile">
-          <div className="navbar-item">
+        <div className="navbar-end">
+          <div className={styles.profilePic}>
+            <div className="navbar-item">
             <img
               className="is-rounded"
               src="https://bulma.io/assets/images/placeholders/128x128.png"
             />
+            </div>
           </div>
         </div>
       </nav>

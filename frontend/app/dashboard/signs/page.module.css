@@ -1,6 +1,5 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
-
 /* Laptop & Desktop */
 .main {
   background-color: whitesmoke;
@@ -46,6 +45,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-shrink: 1;
 }
 
 .boxWrapper {
@@ -53,6 +53,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  flex-shrink: 1;
 }
 
 .resultsBoxInactive {
@@ -62,6 +63,7 @@
   justify-content: center;
   align-items: center;
   font-size: 3rem;
+  flex-shrink: 1;
 }
 
 .resultsBoxActive {
@@ -71,6 +73,7 @@
   justify-content: center;
   align-items: center;
   font-size: 5rem;
+  flex-shrink: 1;
 }
 
 .clientBoxNotSelected {
@@ -85,11 +88,13 @@
   align-items: center;
   gap: 3rem;
   position: relative;
+  flex-shrink: 1;
 }
 
 .clientBoxNotSelected p {
   font-size: 1.5rem;
   font-weight: 400;
+  flex-shrink: 1;
 }
 
 .clientBoxSelected {
@@ -104,6 +109,7 @@
   align-items: center;
   gap: 3rem;
   position: relative;
+  flex-shrink: 1;
 }
 
 .clientBoxSelected figure {
@@ -123,6 +129,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex-shrink: 1;
 }
 
 .searchInput {
@@ -176,16 +183,137 @@
   justify-content: center;
 }
 
+@media (max-width: 2111px) {
+  .resultsBoxInactive {
+    font-size: 2.7rem;
+  }
+  .resultsBoxActive {
+    font-size: 3rem;
+  }
+}
 
-/* mobile & tablet */
-@media (max-width: 1920px) {
+/* Tablet */
+@media (max-width: 1915px) {
+  .resultsBoxInactive {
+    font-size: 2.2rem;
+  }
+  .resultsBoxActive {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1597px) {
+  .resultsBoxInactive {
+    font-size: 1.7rem;
+  }
+  .resultsBoxActive {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 1265px) {
   .heading {
     padding-top: 5.5rem;
     padding-bottom: 0.5rem;
   }
   .title h1 {
     font-size: 1.5rem;
-    padding:0;
+    padding: 0;
+  }
+  .title p {
+    font-size: 1rem;
+  }
+  .containerBg {
+    padding: 0;
+  }
+  .container {
+    width: 100%;
+    height: 85vh;
+    padding: 0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    gap: 1.5rem;
+  }
+  .boxWrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .clientBoxNotSelected {
+    min-height: 12rem;
+    min-width: 24rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+  }
+  .clientBoxNotSelected p {
+    font-size: 1.5rem;
+  }
+  .clientBoxSelected {
+    min-height: 12rem;
+    min-width: 24rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .clientBoxSelected p {
+    font-size: 1.5rem;
+  }
+  .clientBoxSelected figure {
+    width: 30%;
+  }
+  .clientInfo {
+    font-size: 1rem;
+    padding: 1rem;
+    width: 60%;
+  }
+  .clientInfo h2 {
+    font-size: 0.8rem;
+  }
+
+  .clientInfo p {
+    font-size: 0.8rem;
+  }
+
+  .resultsBoxInactive {
+    min-height: 12rem;
+    min-width: 24rem;
+    font-size: 1.5rem;
+  }
+  .resultsBoxActive {
+    min-height: 12rem;
+    min-width: 24rem;
+    font-size: 1.8rem;
+  }
+  .buttonWrapper {
+    padding-top: 0;
+    padding-bottom: 3rem;
+    font-size: 1rem;
+  }
+  .dropdown1,
+  .dropdown2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 24rem;
+    min-height: 12rem;
+  }
+}
+
+/* mobile */
+@media (max-width: 500px) {
+  .heading {
+    padding-top: 5.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .title h1 {
+    font-size: 1.5rem;
+    padding: 0;
   }
   .title p {
     font-size: 1rem;
@@ -211,6 +339,8 @@
     min-height: 6rem;
     min-width: 12rem;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
   }
   .clientBoxNotSelected p {
     font-size: 1rem;
@@ -252,16 +382,15 @@
   }
   .buttonWrapper {
     padding-top: 0;
+    padding-bottom: 0;
     font-size: 1rem;
   }
-  .dropdown1 {
-    width: 20%;
-    max-height: 10rem;
-    overflow-y: auto;
-  }
-  .dropdown2 {
-    width: 20%;
-    max-height: 10rem;
-    overflow-y: auto;
+  .dropdown1, .dropdown2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 12rem;
+    min-height: 6rem;
   }
 }
