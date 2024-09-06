@@ -1,13 +1,8 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
 
-/* Laptop & Desktop */
 .main {
-  background-color: aliceblue;
-}
-
-.main nav {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: whitesmoke;
 }
 
 .heading {
@@ -47,7 +42,6 @@
 }
 
 
-/* mobile & tablet */
 @media (max-width: 1920px) {
   .main {
     background-color: white;

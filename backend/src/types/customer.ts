@@ -1,4 +1,4 @@
-export type Customer = {
+export type CustomerProps = {
   id: 0;
   email: "string";
   name: "string";
@@ -9,4 +9,5 @@ export type Customer = {
   astrological_sign: "string";
   phone_number: "string";
   address: "string";
+  image: "string";
 };

@@ -21,83 +21,28 @@ import {
 import { getTips } from "./API/tipsApi";
 import { getEvents, getEventById } from "./API/eventsApi";
 import { getClotheImage } from "./API/clothesApi";
-import { Token, InsertEmployeeProps } from "@types";
-import express from "express";
-import { ApolloServer, gql } from "apollo-server-express";
-import { GraphQLClient } from "graphql-request";
-import "dotenv/config";
-
-interface Employee {
-  private_employees: InsertEmployeeProps[];
-}
-
-export const InsertEmployee = gql`
-  mutation MyMutation(
-    $gender: String
-    $name: String
-    $surname: String
-    $id: Int
-    $birth_date: String
-  ) {
-    insert_private_employees(
-      objects: {
-        gender: $gender
-        name: $name
-        surname: $surname
-        id: $id
-        birth_date: $birth_date
-      }
-    ) {
-      returning {
-        surname
-        name
-        gender
-        birth_date
-        id
-        uuid
-      }
-    }
-  }
-`;
-
-export const client = new GraphQLClient("http://graphql-engine:8080/v1/graphql", {
-  headers: {
-    "x-hasura-admin-secret": process.env.HASURA_GRAPHQL_ADMIN_SECRET,
-  } as HeadersInit,
-});
-
-export async function insertEmployee(employees: InsertEmployeeProps) {
-  let response: Employee | undefined = undefined;
-  try {
-    response = await client.request(InsertEmployee, employees);
-    console.log("Utilisateur inséré avec succès:", response);
-  } catch (error) {
-    console.error("Erreur lors de l'insertion:", error);
-  }
-  return response ? response.private_employees : [];
-}
+import { Token } from "./types/token";
+import { insertEmployee, updateEmployee, insertCustomer, updateCustomer } from "./components/";
+import { UpdateEmployee } from "./queries/employees";
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
 
   customers.data.forEach(async (customer) => {
     const customerById = await getCustomerById(token, customer.id);
+    const customerImage = await getCustomerImageById(token, customer.id);
+
+    insertCustomer(customerById.data, customerImage.data);
   });
 }
 
 async function putEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
-
   employees.data.forEach(async (employee) => {
-    const employeeToSend = {
-      id: employee.id,
-      name: employee.name,
-      surname: employee.surname,
-      birth_date: employee.birth_date,
-      gender: employee.gender,
-      work: employee.work,
-    };
-    insertEmployee(employeeToSend);
+    const employeeToSend = await getEmployeeById(token, employee.id);
+    const employeeImage = await getEmployeeImageById(token, employee.id);
+
+    insertEmployee(employeeToSend.data, employeeImage.data);
   });
 }
 
@@ -112,7 +57,44 @@ async function fetchData(): Promise<void> {
   }
 }
 
-cron.schedule("*/10 * * * * *", () => {
+async function updateEmployeesInDb(token: Token) {
+  const employees = await getEmployees(token);
+
+  employees.data.forEach(async (employee) => {
+    const employeeById = await getEmployeeById(token, employee.id);
+    const employeeImage = await getEmployeeImageById(token, employee.id);
+
+    updateEmployee(employeeById.data, employeeImage.data);
+  });
+}
+
+async function updateCustomersInDb(token: Token) {
+  const customers = await getCustomers(token);
+
+  customers.data.forEach(async (customer) => {
+    const customerById = await getCustomerById(token, customer.id);
+    const customerImage = await getCustomerImageById(token, customer.id);
+
+    updateCustomer(customerById.data, customerImage.data);
+  });
+}
+
+async function updateData(): Promise<void> {
+  try {
+    const token = await login();
+
+    updateEmployeesInDb(token);
+    updateCustomersInDb(token);
+  } catch (error) {
+    console.error("An error occurred while updating data:", error);
+  }
+}
+
+function executeQuery() {
   fetchData();
-  console.log("-----------------------------------");
-});
+  cron.schedule("*/5 * * * *", () => {
+    updateData();
+  });
+}
+
+executeQuery();
