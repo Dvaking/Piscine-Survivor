@@ -62,3 +62,9 @@ export type GetClothesProps = {
     type: string;
   }]
 }
+
+export type GetEmployeesInformationByWorkProps = {
+  name: string;
+  image: string;
+  email: string;
+}

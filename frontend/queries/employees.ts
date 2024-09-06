@@ -26,6 +26,16 @@ export const GetEmployeesInformationByUuid = gql`
   }
 `;
 
+export const GetEmployeesInformationByWork = gql`
+  query MyQuery {
+    private_employees(where: { work: { _eq: "coach" } }) {
+      name
+      image
+      email
+    }
+  }
+`;
+
 //UPDATE
 export const UpdateEmployee = gql`
   mutation UpdateEmployee(
