@@ -2,10 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./Navbar.module.css";
-import Image from "next/image";
 import "bulma/css/bulma.css";
 
-export default function Navbar() {
+export function Navbar() {
   const router = useRouter();
 
   const handleClothesClick = () => {
@@ -51,6 +50,9 @@ export default function Navbar() {
             <a onClick={handleDashboardClick}>Dashboard</a>
           </div>
           <div className="navbar-item">
+            <a onClick={handleAccountsClick}>Coach</a>
+          </div>
+          <div className="navbar-item">
             <a onClick={handleCustomersClick}>Customers</a>
           </div>
           <div className="navbar-item">
@@ -61,9 +63,6 @@ export default function Navbar() {
           </div>
           <div className="navbar-item">
             <a>Events</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleAccountsClick}>Accounts</a>
           </div>
           <div className="navbar-item">
             <a onClick={handleClothesClick}>Clothes</a>
