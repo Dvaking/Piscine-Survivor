@@ -27,13 +27,19 @@
   }
 
 /* mobile & tablet */
-@media (max-width: 1920px) {
+@media (max-width: 1080px) {
   .bar nav {
     display: flex;
     flex-direction: column;
     overflow-x: auto;
     white-space: nowrap;
     padding-top: 1rem;
+  }
+  .companyName {
+    display: none;
+  }
+  .profilePic {
+    display: none;
   }
 }
   
