@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
 import "bulma/css/bulma.css";
 import styles from "./page.module.css";
 

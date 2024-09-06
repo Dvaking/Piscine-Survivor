@@ -10,18 +10,18 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .bar nav p {
     font-size: 1.6rem;
     font-weight: 650;
   }
-  
+
   .navbarLinks {
     flex-grow: 1;
     display: flex;
     justify-content: center;
   }
-  
+
   .navbarLinks a {
     color: black;
   }
@@ -42,4 +42,3 @@
     display: none;
   }
 }
-  
