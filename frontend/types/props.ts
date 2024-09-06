@@ -65,6 +65,7 @@ export type GetClothesProps = {
 
 export type GetEmployeesInformationByWorkProps = {
   name: string;
-  image: string;
-  email: string;
+  image?: string;
+  email?: string;
+  events?: { name?: string }[];
 }

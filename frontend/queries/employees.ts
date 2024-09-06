@@ -28,10 +28,13 @@ export const GetEmployeesInformationByUuid = gql`
 
 export const GetEmployeesInformationByWork = gql`
   query MyQuery {
-    private_employees(where: { work: { _eq: "coach" } }) {
+    private_employees(where: { work: { _ilike: "coach" } }) {
       name
       image
       email
+      events {
+        name
+      }
     }
   }
 `;

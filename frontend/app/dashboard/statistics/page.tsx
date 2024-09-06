@@ -1,8 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useEffect, useState, useRef } from 'react';
 import Navbar from '../../Components/Navbar/Navbar';
-import React, { useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -16,6 +15,8 @@ import {
 } from 'chart.js';
 import styles from './page.module.css';
 import 'bulma/css/bulma.css';
+import { getEmployeesInformationByWork } from "@components";
+import { GetEmployeesInformationByWorkProps } from '@types';
 
 ChartJS.register(
   CategoryScale,
@@ -28,13 +29,36 @@ ChartJS.register(
 );
 
 const StaticticsGraph: React.FC = () => {
+  const [employeesData, setEmployeesData] = useState<GetEmployeesInformationByWorkProps[]>([]);
   const chartRef = useRef(null);
 
+  const fetchData = async () => {
+    try {
+      const data = await getEmployeesInformationByWork();
+
+      const mappedData: GetEmployeesInformationByWorkProps[] = data.map(item => ({
+        name: item.name,
+        image: 'image' in item && typeof item.image === 'string' ? item.image : undefined,
+        email: 'email' in item && typeof item.email === 'string' ? item.email : undefined,
+        events: 'events' in item && Array.isArray(item.events) ? item.events : [],
+      }));
+
+      setEmployeesData(mappedData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const data = {
-    labels: ['Coach 1', 'Coach 2', 'Coach 3', 'Coach 4', 'Coach 5', 'Coach 6', 'Coach 7'],
+    labels: employeesData.map(employee => employee.name),
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Number of Events',
+        data: employeesData.map(employee => employee.events?.length ?? 0),
         fill: false,
         backgroundColor: 'rgb(75, 192, 192)',
         borderColor: 'rgba(75, 192, 192, 0.2)',
@@ -50,30 +74,17 @@ const StaticticsGraph: React.FC = () => {
       },
       title: {
         display: true,
-        text: 'Coaches statistics',
+        text: 'Coaches Statistics',
       },
     },
   };
-  const router = useRouter();
 
-  const handleCustomersClick = () => {
-    router.push("/dashboard/customers");
-  };
-  const handleTipsClick = () => {
-    router.push("../dashboard/tips");
-  };
-  const handleStaticticsClick = () => {
-    router.push("../dashboard/statistics");
-  }
-  const handleDashboardClick = () => {
-    router.push("../dashboard");
-  };
   return (
     <main className={styles.main}>
-    <Navbar />
-    <div className={styles['chart-container']}>
-      <Line ref={chartRef} data={data} options={options} />
-    </div>
+      <Navbar />
+      <div className={styles['chart-container']}>
+        <Line ref={chartRef} data={data} options={options} />
+      </div>
     </main>
   );
 };
