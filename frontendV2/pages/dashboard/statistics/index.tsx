@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Navbar } from "@components";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -13,7 +12,7 @@ import {
 } from "chart.js";
 import styles from "@styles/StatisticsPage.module.css";
 import "bulma/css/bulma.css";
-import { getEmployeesByWork } from "@components";
+import { getEmployeesByWork } from "@hooks";
 import { GetEmployeesByWorkProps } from "@types";
 
 ChartJS.register(
@@ -88,7 +87,6 @@ const StaticticsGraph: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles["chart-container"]}>
         <Line ref={chartRef} data={data} options={options} />
       </div>

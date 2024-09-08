@@ -1,13 +1,9 @@
-"use client";
-
-import { Navbar } from "@components";
-import styles from "./page.module.css";
+import styles from '@styles/TipsPage.module.css';
 import "bulma/css/bulma.css";
 
 export default function Tips() {
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles.pageBackground}>
         <div className={styles.tips}>
           <div className={styles.tipsContainer}>

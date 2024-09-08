@@ -1,8 +1,7 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import styles from '@styles/ClothesPage.module.css';
-import { Navbar } from "@components";
+import { GetClothesProps } from "@types";
+import {  } from "@hooks";
+import styles from "@styles/ClothesPage.module.css";
 
 export default function Customers() {
   const [clothes, setClothes] = useState<GetClothesProps[]>([]);
@@ -84,8 +83,6 @@ export default function Customers() {
 
   return (
     <main className="is-clearfix">
-      <Navbar />
-
       <div className={`${styles.clothes} is-clipped`}>
         <div className={`${styles.clothesContainer} is-clipped`}>
           <div className="form-container is-clipped">

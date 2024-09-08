@@ -1,15 +1,11 @@
 import { useRouter } from "next/navigation";
-import styles from '@styles/CustomersPage.module.css';
-import { Navbar } from "@components";
-import { useEffect } from "react";
+import styles from "@styles/CustomersPage.module.css";
 
 export default function Customers() {
   const router = useRouter();
 
   return (
     <div className={`${styles.container} mt-6`}>
-      <Navbar />
-
       <div className={styles.headerContainer}>
         <h1 className={styles.title}>Customers Details</h1>
         <button className={styles.backButton} onClick={() => router.back()}>

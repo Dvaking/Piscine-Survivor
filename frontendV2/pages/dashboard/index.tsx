@@ -1,11 +1,9 @@
-import { Navbar } from "@components";
 import styles from "@styles/DashboardPage.module.css";
 import "bulma/css/bulma.css";
 
 export default function Dashborad() {
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles.heading}>
         <h1>Dashboard</h1>
         <p>Welcome!</p>

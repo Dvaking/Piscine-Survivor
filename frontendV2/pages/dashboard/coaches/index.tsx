@@ -1,9 +1,6 @@
-"use client";
-
 import { useEffect, useRef } from "react";
 import React, { useState } from "react";
 import styles from '@styles/CoachesPage.module.css'
-import { Navbar } from "@components";
 
 export default function Home() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +54,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles.heading}>
         <div className={styles.title}>
           <h1>Employee List</h1>

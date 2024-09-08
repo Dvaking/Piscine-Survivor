@@ -1,45 +1,55 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+}
 
-.bar nav {
-    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .bar nav p {
-    font-size: 1.6rem;
-    font-weight: 650;
-  }
-  
-  .navbarLinks {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .navbarLinks a {
-    color: black;
-  }
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
-/* mobile & tablet */
-@media (max-width: 1080px) {
-  .bar nav {
-    display: flex;
-    flex-direction: column;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-top: 1rem;
-  }
-  .companyName {
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navList li {
+  margin-right: 1rem;
+}
+
+.navList a {
+  text-decoration: none;
+  color: #333;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+}
+
+.language img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .title {
     display: none;
   }
-  .profilePic {
+  .language {
     display: none;
+  }
+  .navList {
+    ;
   }
 }
-  

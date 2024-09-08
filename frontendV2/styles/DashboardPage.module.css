@@ -1,9 +1,6 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
 
-.main {
-  background-color: whitesmoke;
-}
 
 .heading {
   padding: 2rem;
@@ -39,11 +36,4 @@
 
 .secondCharts div {
   padding: 2rem;
-}
-
-
-@media (max-width: 1920px) {
-  .main {
-    background-color: white;
-  }
 }

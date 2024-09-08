@@ -1,12 +1,9 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { getCustomers } from "@hooks";
 import { GetCustomersProps } from "@types";
 import styles from "./page.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Navbar } from "@components";
 
 export default function Home() {
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
@@ -161,7 +158,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles.heading}>
         <div className={styles.title}>
           <h1>
