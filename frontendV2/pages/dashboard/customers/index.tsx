@@ -4,7 +4,7 @@ import styles from '@styles/CustomersSearchPage.module.css';
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-export default function Home() {
+export default function CustomersSearchPage() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const dropdown = dropdownRef.current;
@@ -59,7 +59,6 @@ export default function Home() {
       <div className={styles.heading}>
         <div className={styles.title}>
           <h1>Customers List</h1>
-          <p></p>
         </div>
         <div className={styles.exportAddButtons}>
           <div>
