@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from '@styles/CustomersSearchPage.module.css';
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Navbar } from "@components";
 
 export default function Home() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -57,11 +56,10 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Navbar />
       <div className={styles.heading}>
         <div className={styles.title}>
-          <h1>Employee List</h1>
-          <p>You have 87 employees</p>
+          <h1>Customers List</h1>
+          <p></p>
         </div>
         <div className={styles.exportAddButtons}>
           <div>
