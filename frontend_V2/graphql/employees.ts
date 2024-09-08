@@ -4,11 +4,15 @@ import { gql } from "graphql-request";
 export const GetEmployees = gql`
   query GetEmployees {
     private_employees {
-      birth_date
-      gender
+      uuid
       id
       name
       surname
+      email
+      gender
+      birth_date
+      image
+      work
     }
   }
 `;
@@ -27,7 +31,7 @@ export const GetEmployeesByUuid = gql`
 `;
 
 export const GetEmployeesByWork = gql`
-  query MyQuery {
+  query GetEmployeesByWork {
     private_employees(where: { work: { _ilike: "coach" } }) {
       name
       image
@@ -35,6 +39,11 @@ export const GetEmployeesByWork = gql`
       events {
         name
       }
+      birth_date
+      gender
+      surname
+      work
+      uuid
     }
   }
 `;

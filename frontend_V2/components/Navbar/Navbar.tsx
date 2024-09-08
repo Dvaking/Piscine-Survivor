@@ -1,10 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import "bulma/css/bulma.css";
 
-export default function Navbar() {
+export function Navbar() {
 
   return (
     <div className={styles.bar}>
