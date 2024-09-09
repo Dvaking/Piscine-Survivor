@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement, // Importation pour Pie chart
 } from "chart.js";
 import styles from "@styles/StatisticsPage.module.css";
 import { getEmployeesByWork } from "@hooks";
@@ -23,7 +24,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement // Enregistrement pour le graphique Pie
 );
 
 const StaticticsGraph: React.FC = () => {
@@ -60,7 +62,7 @@ const StaticticsGraph: React.FC = () => {
     fetchData();
   }, []);
 
-  const data = {
+  const lineChartData = {
     labels: employeesData.map((employee) => employee.name),
     datasets: [
       {
@@ -69,6 +71,29 @@ const StaticticsGraph: React.FC = () => {
         fill: false,
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgba(75, 192, 192, 0.2)",
+      },
+    ],
+  };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  const backgroundColors = employeesData.map(() => getRandomColor());
+
+  const pieChartData = {
+    labels: employeesData.map((employee) => employee.name),
+    datasets: [
+      {
+        label: "Events Distribution",
+        data: employeesData.map((employee) => employee.events?.length ?? 0),
+        backgroundColor: backgroundColors,
+        hoverOffset: 4,
       },
     ],
   };
@@ -87,21 +112,28 @@ const StaticticsGraph: React.FC = () => {
   };
 
   return (
-    <main className={styles.main}>
+    <main className="has-background-white-ter">
       <div className="columns is-multiline">
         <div className="column is-half-desktop is-full-mobile">
-          <div className="box is-shadowless has-background-white-ter">
+          <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
             <div className="field">
-              <div className={styles["chart-container"]}>
-                <Line ref={chartRef} data={data} options={options} />
+              <div
+                className={styles["chart-container"]}
+                style={{ height: "37rem" }}
+              >
+                <Line ref={chartRef} data={lineChartData} options={options} />
               </div>
             </div>
           </div>
         </div>
         <div className="column is-half-desktop is-full-mobile">
-          <div className="box is-shadowless has-background-white-ter">
-            <div className={styles["chart-container"]}>
-              <Line ref={chartRef} data={data} options={options} />
+          <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
+            <div
+              className={styles["chart-container"]}
+              style={{ height: "37rem" }}
+            >
+              <Pie ref={chartRef} data={pieChartData} options={options} />
+              faire que ce soit le nombre de clients par coach
             </div>
           </div>
         </div>
