@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import React, { useState } from "react";
 import styles from '@styles/CoachesPage.module.css'
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Home() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);

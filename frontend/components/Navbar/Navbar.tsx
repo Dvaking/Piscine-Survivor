@@ -10,11 +10,13 @@ export function Navbar() {
   const [isDashboard, setIsDashboard] = useState(false);
   const [isTips, setIsTips] = useState(false);
   const [isEvents, setIsEvents] = useState(false);
+  const [isSigns, setIsSigns] = useState(false);
 
   useEffect(() => {
+    setIsDashboard(router.pathname === "/dashboard");
     setIsCustomer(router.pathname === "/dashboard/customers");
     setIsCoach(router.pathname === "/dashboard/coaches");
-    setIsDashboard(router.pathname === "/dashboard");
+    setIsSigns(router.pathname === "/dashboard/signs");
     setIsEvents(router.pathname === "/dashboard/events");
     setIsTips(router.pathname === "/dashboard/tips");
   }, [router]);
@@ -45,6 +47,14 @@ export function Navbar() {
             className={isCustomer ? styles.selected : ""}
           >
             Customers
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/dashboard/signs"
+            className={isSigns ? styles.selected : ""}
+          >
+            Signs
           </Link>
         </li>
         <li>

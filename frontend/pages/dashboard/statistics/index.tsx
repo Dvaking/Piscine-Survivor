@@ -11,9 +11,10 @@ import {
   Legend,
 } from "chart.js";
 import styles from "@styles/StatisticsPage.module.css";
-import "bulma/css/bulma.css";
 import { getEmployeesByWork } from "@hooks";
 import { GetEmployeesByWorkProps } from "@types";
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 ChartJS.register(
   CategoryScale,

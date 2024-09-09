@@ -1,5 +1,6 @@
 import styles from '@styles/TipsPage.module.css';
 import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Tips() {
   return (

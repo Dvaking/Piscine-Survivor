@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCustomers } from "@hooks";
 import { GetCustomersProps } from "@types";
-import styles from "./page.module.css";
+import styles from '@styles/Signspage.module.css';
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 

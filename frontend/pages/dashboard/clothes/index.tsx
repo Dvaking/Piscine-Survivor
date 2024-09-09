@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { GetClothesProps } from "@types";
 import {  } from "@hooks";
 import styles from "@styles/ClothesPage.module.css";
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Customers() {
   const [clothes, setClothes] = useState<GetClothesProps[]>([]);
