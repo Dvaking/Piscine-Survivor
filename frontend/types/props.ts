@@ -6,15 +6,19 @@ export type InsertEmployeeProps = {
   birth_date: string;
 };
 
-export type GetEmployeesInformationProps = {
-  birth_date: string;
-  gender: string;
+export type GetEmployeesProps = {
+  uuid: string;
   id: number;
   name: string;
   surname: string;
+  email: string;
+  gender: string;
+  birth_date: string;
+  image: string;
+  work: string;
 };
 
-export type GetEmployeesInformationByUuidProps = {
+export type GetEmployeesByUuidProps = {
   id: number;
   name: string;
   surname: string;
@@ -29,19 +33,35 @@ export type InsertCustomerProps = {
   astrological_sign: string;
 };
 
-export type GetCustomersInformationProps = {
+export type GetCustomersProps = {
+  uuid: string;
   id: number;
   name: string;
   surname: string;
   astrological_sign: string;
+  birth_date: string;
+  description: string;
+  email: string;
+  employee_uuid: string;
+  gender: string;
+  image: string;
+  phone_number: string;
+  address: string;
 };
 
-export type GetCustomersInformationByUuidProps = {
+export type GetCustomersByUuidProps = {
   id: number;
   name: string;
   surname: string;
   astrological_sign: string;
-  uuid: string;
+  birth_date: string;
+  description: string;
+  email: string;
+  employee_uuid: string;
+  gender: string;
+  image: string;
+  phone_number: string;
+  address: string;
 };
 
 export type UpdateEmployeeProps = {
@@ -56,16 +76,24 @@ export type UpdateEmployeeProps = {
 };
 
 export type GetClothesProps = {
-  clothes: [{
-    id: number;
-    image: string;
-    type: string;
-  }]
-}
+  clothes: [
+    {
+      id: number;
+      image: string;
+      type: string;
+    }
+  ];
+};
 
-export type GetEmployeesInformationByWorkProps = {
+export type GetEmployeesByWorkProps = {
   name: string;
   image?: string;
   email?: string;
   events?: { name?: string }[];
-}
+  birth_date?: string;
+  gender?: string;
+  surname?: string;
+  work?: string;
+  uuid?: string;
+};
+

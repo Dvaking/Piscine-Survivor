@@ -39,7 +39,7 @@ export async function getEmployees(
     if (axios.isAxiosError(error)) {
       console.error("Request failed:", error.response?.data || error.message);
     } else {
-      console.error("Unexpected error:", error);
+      console.error("Unexpected error:");
     }
     throw new Error("Request failed");
   }

@@ -1,0 +1,52 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navList li {
+  margin-right: 1rem;
+}
+
+.navList a {
+  text-decoration: none;
+  color: #333;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+}
+
+.language img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .title {
+    display: none;
+  }
+  .language {
+    display: none;
+  }
+}
