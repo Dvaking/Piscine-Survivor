@@ -1,84 +1,51 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import styles from "./Navbar.module.css";
-import Image from "next/image";
 import "bulma/css/bulma.css";
 
 export default function Navbar() {
-  const router = useRouter();
-
-  const handleClothesClick = () => {
-    router.push("../../dashboard/clothes");
-  };
-  const handleCustomersClick = () => {
-    router.push("../../dashboard/customers");
-  };
-  const handleTipsClick = () => {
-    router.push("../../dashboard/tips");
-  };
-  const handleStaticticsClick = () => {
-    router.push("../../dashboard/statistics");
-  };
-  const handleAccountsClick = () => {
-    router.push("../../dashboard/account_man");
-  };
-  const handleClientProfileClick = () => {
-    router.push("../../dashboard/client_profile");
-  };
-  const handleSignsClick = () => {
-    router.push("../../dashboard/signs");
-  };
-  const handleDashboardClick = () => {
-    router.push("../../dashboard");
-  };
 
   return (
     <div className={styles.bar}>
       <nav className="navbar is-fixed-top">
         <div className={styles.companyName}>
-        <div className="navbar-brand">
-          <p className="navbar-item">
-            <strong>Soul Connection</strong>
-          </p>
-        </div>
+          <div className="navbar-brand">
+            <p className="navbar-item">
+              <strong>Soul Connection</strong>
+            </p>
+          </div>
         </div>
         <div className={styles.navbarLinks}>
           <div className="navbar-item">
-            <a onClick={handleClientProfileClick}>Client Profile</a>
+            <Link href="/dashboard">Dashboard</Link>
           </div>
           <div className="navbar-item">
-            <a onClick={handleDashboardClick}>Dashboard</a>
+            <Link href="/dashboard/customers">Customers</Link>
           </div>
           <div className="navbar-item">
-            <a onClick={handleCustomersClick}>Customers</a>
+            <Link href="/dashboard/account_man">Coach</Link>
           </div>
           <div className="navbar-item">
-            <a onClick={handleTipsClick}>Tips</a>
+            <Link href="/dashboard/tips">Tips</Link>
           </div>
           <div className="navbar-item">
-            <a onClick={handleStaticticsClick}>Statistics</a>
+            <Link href="/dashboard/statistics">Statistics</Link>
           </div>
           <div className="navbar-item">
-            <a>Events</a>
+            <Link href="/dashboard/clothes">Clothes</Link>
           </div>
           <div className="navbar-item">
-            <a onClick={handleAccountsClick}>Accounts</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleClothesClick}>Clothes</a>
-          </div>
-          <div className="navbar-item">
-            <a onClick={handleSignsClick}>Signs</a>
+            <Link href="/dashboard/signs">Signs</Link>
           </div>
         </div>
         <div className="navbar-end">
           <div className={styles.profilePic}>
             <div className="navbar-item">
-            <img
-              className="is-rounded"
-              src="https://bulma.io/assets/images/placeholders/128x128.png"
-            />
+              <img
+                className="is-rounded"
+                src="https://bulma.io/assets/images/placeholders/128x128.png"
+              />
             </div>
           </div>
         </div>

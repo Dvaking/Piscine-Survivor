@@ -7,11 +7,15 @@ export type InsertEmployeeProps = {
 };
 
 export type GetEmployeesProps = {
-  birth_date: string;
-  gender: string;
+  uuid: string;
   id: number;
   name: string;
   surname: string;
+  email: string;
+  gender: string;
+  birth_date: string;
+  image: string;
+  work: string;
 };
 
 export type GetEmployeesByUuidProps = {
@@ -30,10 +34,19 @@ export type InsertCustomerProps = {
 };
 
 export type GetCustomersProps = {
+  uuid: string;
   id: number;
   name: string;
   surname: string;
   astrological_sign: string;
+  birth_date: string;
+  description: string;
+  email: string;
+  employee_uuid: string;
+  gender: string;
+  image: string;
+  phone_number: string;
+  address: string;
 };
 
 export type GetCustomersByUuidProps = {
@@ -41,7 +54,14 @@ export type GetCustomersByUuidProps = {
   name: string;
   surname: string;
   astrological_sign: string;
-  uuid: string;
+  birth_date: string;
+  description: string;
+  email: string;
+  employee_uuid: string;
+  gender: string;
+  image: string;
+  phone_number: string;
+  address: string;
 };
 
 export type UpdateEmployeeProps = {
@@ -70,4 +90,10 @@ export type GetEmployeesByWorkProps = {
   image?: string;
   email?: string;
   events?: { name?: string }[];
+  birth_date?: string;
+  gender?: string;
+  surname?: string;
+  work?: string;
+  uuid?: string;
 };
+

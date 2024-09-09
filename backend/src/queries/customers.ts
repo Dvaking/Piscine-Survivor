@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
 // GET
-export const GetCustomersInformation = gql`
-  query GetCustomersInformation {
+export const GetCustomers = gql`
+  query GetCustomers {
     private_Customers {
       birth_date
       gender

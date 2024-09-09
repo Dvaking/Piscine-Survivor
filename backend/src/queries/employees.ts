@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
 //GET
-export const GetEmployeesInformation = gql`
-  query GetEmployeesInformation {
+export const GetEmployees = gql`
+  query GetEmployees {
     private_employees {
       birth_date
       gender
