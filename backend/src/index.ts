@@ -20,6 +20,7 @@ import {
   updateCustomer,
   insertClothe,
 } from "./components/";
+import fs from "fs";
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
@@ -33,14 +34,13 @@ async function putCustomersInDb(token: Token) {
 
       for (const element of clothes.data) {
         const clotheImage = await getClotheImage(token, element.id);
-        const base64Image = Buffer.from(clotheImage.data).toString("base64");
         const dataToSend = {
           ...element,
           customer_id: customerById.data.id,
         };
-        insertClothe(dataToSend, base64Image);
-      }
 
+        insertClothe(dataToSend, clotheImage);
+      }
       insertCustomer(customerById.data, customerImage.data);
     } catch (error) {
       console.error("An error occurred while inserting customers");
