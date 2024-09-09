@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetClothesProps } from "@types";
 import { getClothesByCustomerEmail } from "@hooks";
+import "bulma/css/bulma.css";
 import styles from "@styles/ClothesPage.module.css";
 
 export default function Customers() {
