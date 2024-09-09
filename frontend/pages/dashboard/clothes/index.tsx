@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetClothesProps } from "@types";
-import {  } from "@hooks";
+import { getClothesByCustomerEmail } from "@hooks";
+import "bulma/css/bulma.css";
 import styles from "@styles/ClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -31,7 +32,7 @@ export default function Customers() {
     console.log("Soumission du formulaire avec EMail :", customerEMail);
 
     try {
-      const response = await getClothesByCustomerEMail(customerEMail);
+      const response = await getClothesByCustomerEmail(customerEMail);
       setClothes(response);
     } catch (error) {
       console.error("Erreur lors de la récupération des vêtements:", error);
