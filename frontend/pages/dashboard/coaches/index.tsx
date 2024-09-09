@@ -1,57 +1,47 @@
-import { useEffect, useRef } from "react";
-import React, { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { getCustomers, getEmployees, updateCustomerAssign } from "@hooks";
+import { GetCustomersProps, GetEmployeesProps } from "@types";
 import styles from '@styles/CoachesPage.module.css'
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Home() {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [employees, setEmployees] = useState<GetEmployeesProps[]>([]);
+  const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [dropdownForClient, setDropdownForClient] = useState(false);
+
   useEffect(() => {
-    const dropdown = dropdownRef.current;
-    if (dropdown) {
-      const trigger = dropdown.querySelector(
-        ".dropdown-trigger"
-      ) as HTMLDivElement | null;
-      const handleClick = (event: MouseEvent) => {
-        event.stopPropagation();
-        console.log("Dropdown clicked");
-        dropdown.classList.toggle("is-active");
-        console.log(
-          "Dropdown class toggled:",
-          dropdown.classList.contains("is-active")
-        );
-      };
-      const handleClickOutside = (event: MouseEvent) => {
-        if (dropdown && !dropdown.contains(event.target as Node)) {
-          dropdown.classList.remove("is-active");
-        }
-      };
-      if (trigger) {
-        trigger.addEventListener("click", handleClick);
-      }
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        if (trigger) {
-          trigger.removeEventListener("click", handleClick);
-        }
-        document.removeEventListener("click", handleClickOutside);
-      };
-    }
+    const fetchData = async () => {
+      const fetchedEmployees = await getEmployees();
+      console.log(fetchedEmployees); //////////////////////////////////////////////////////////////
+      const fetchedCustomers = await getCustomers();
+      setEmployees(fetchedEmployees);
+      setCustomers(fetchedCustomers);
+    };
+    fetchData();
   }, []);
+
+  const handleActionClick = () => {
+    setDropdownForClient(!dropdownForClient);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredClients = customers.filter((client) =>
+    client.name.toLowerCase().includes(searchQuery)
+  );
+
+  const assignClient = (employee : GetEmployeesProps, client : GetCustomersProps) => {
+    setDropdownForClient(false);
+    updateCustomerAssign(employee.uuid, client.uuid);
+  };
 
   const [isPopupVisible, setPopupVisible] = useState(false);
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
-  };
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedName, setSelectedName] = useState<string | null>(null);
-  const names = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-  const handleNameClick = (name: string) => {
-    setSelectedName(name);
-    setDropdownOpen(false);
   };
 
   return (
@@ -59,7 +49,7 @@ export default function Home() {
       <div className={styles.heading}>
         <div className={styles.title}>
           <h1>Employee List</h1>
-          <p>You have 87 employees</p>
+          <p>You have {employees.length} employees</p>
         </div>
         <div className={styles.exportAddButtons}>
           <div>
@@ -72,7 +62,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {isPopupVisible && (
         <div className={styles.popupOverlay} onClick={togglePopup}>
           <div
@@ -143,18 +132,13 @@ export default function Home() {
           </div>
         </div>
       )}
-
       <div className={styles.containerBg}>
         <div className={styles.container}>
           <div className={styles.filterBar}>
             <div className={styles.dropApply}>
-              <div className="dropdown" ref={dropdownRef}>
+              <div className="dropdown">
                 <div className="dropdown-trigger">
-                  <button
-                    className="button"
-                    aria-haspopup="true"
-                    aria-controls="dropdown-menu"
-                  >
+                  <button className="button">
                     <span>Bulk Action</span>
                     <span className="icon is-small">
                       <i className="fas fa-angle-down" aria-hidden="true"></i>
@@ -191,37 +175,48 @@ export default function Home() {
               <p className={styles.actions}>Actions</p>
             </div>
           </div>
-          <div className={styles.employee}>
-            <div className={styles.checkName}>
-              <i className="far fa-square"></i>
-              <p>
-                <strong>Firstname LastName</strong>
-              </p>
-            </div>
-            <div>Email Address</div>
-            <div>Phone Number</div>
-            <div>No.</div>
-            <div className={styles.addClientButton}>
-              <button className={styles.actions} onClick={toggleDropdown}>
-                <i className="fas fa-ellipsis-h"></i>
-              </button>
-              {isDropdownOpen && (
+          {employees.map((employee, index) => (
+            <div className={styles.employee} key={employee.uuid}>
+              <div className={styles.checkName}>
+                <i className="far fa-square"></i>
+                <p>
+                  <strong>{employee.name} {employee.surname}</strong>
+                </p>
+              </div>
+              <div>{employee.email}</div>
+              <div>---</div>
+              <div>{employee.customer_asing.length}</div>
+              <div className={styles.addClientButton}>
+                <div className={styles.actions} onClick={handleActionClick}>
+                  <i className="fas fa-ellipsis-h"></i>
+                </div>
+              </div>
+              {dropdownForClient && (
                 <div className={styles.dropdown}>
+                  <div> Assign Customer </div>
+                  <input
+                    type="text"
+                    placeholder="Search Clients..."
+                    className={styles.searchInput}
+                    onChange={handleSearchChange}
+                  />
                   <ul>
-                    {names.map((name, index) => (
-                      <li
-                        key={index}
-                        onClick={() => handleNameClick(name)}
-                        className={styles.listItem}
-                      >
-                        {name}
-                      </li>
-                    ))}
+                    {filteredClients
+                      .filter((client) => client.employee_uuid === null)
+                      .map((client, index) => (
+                        <li
+                          key={index}
+                          className={styles.listItem}
+                          onClick={() => assignClient(employee, client)}
+                        >
+                          {client.name} {client.surname}
+                        </li>
+                      ))}
                   </ul>
                 </div>
               )}
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </main>
