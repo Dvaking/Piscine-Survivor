@@ -11,6 +11,7 @@ export default function Home() {
   const [employees, setEmployees] = useState<GetEmployeesProps[]>([]);
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedEmployee, setSelectedEmployee] = useState<GetEmployeesProps | null>(null);
   const [dropdownForClient, setDropdownForClient] = useState(false);
 
   useEffect(() => {
@@ -23,8 +24,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleActionClick = () => {
-    setDropdownForClient(!dropdownForClient);
+  const handleActionClick = (employee: GetEmployeesProps) => {
+    if (selectedEmployee && selectedEmployee.uuid === employee.uuid) {
+      setDropdownForClient(!dropdownForClient);
+    } else {
+      setSelectedEmployee(employee);
+      setDropdownForClient(true);
+    }
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +41,29 @@ export default function Home() {
     client.name.toLowerCase().includes(searchQuery)
   );
 
-  const assignClient = (client : GetCustomersProps, employee : GetEmployeesProps) => {
-    let res = updateCustomerEmployee(client.uuid, employee.uuid); /////// remove let res after
-    console.log("res: ", res); //////////////////////////////////////////////////////////////
-    setDropdownForClient(false);
-    router.reload();
+  const assignClient = async (client: GetCustomersProps) => {
+    try {
+      await updateCustomerEmployee(client.uuid, selectedEmployee?.uuid ?? "");
+      setDropdownForClient(false);
+      setSelectedEmployee(null);
+      router.reload();
+    } catch (error) {
+      console.error("Failed to assign client:", error);
+    }
+  };
+
+  const getEmployeeCustomerNumber = (employee: GetEmployeesProps) => {
+    console.log("Employee UUID:", employee.uuid);
+    console.log("All Customers:", customers);
+  
+    const assignedClients = customers.filter((client) => {
+      console.log("Checking Client UUID:", client.employee_uuid);
+      return client.employee_uuid === employee.uuid;
+    });
+  
+    console.log("Assigned Clients:", assignedClients);
+  
+    return assignedClients.length;
   };
 
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -148,13 +172,6 @@ export default function Home() {
                     </span>
                   </button>
                 </div>
-                <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div className="dropdown-content">
-                    <div className="dropdown-item">Insert here</div>
-                    <hr className="dropdown-divider" />
-                    <div className="dropdown-item">Insert here</div>
-                  </div>
-                </div>
               </div>
               <div>
                 <div className="button is-static">Apply</div>
@@ -178,7 +195,7 @@ export default function Home() {
               <p className={styles.actions}>Actions</p>
             </div>
           </div>
-          {employees.map((employee, index) => (
+          {employees.map((employee) => (
             <div className={styles.employee} key={employee.uuid}>
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
@@ -188,15 +205,18 @@ export default function Home() {
               </div>
               <div>{employee.email}</div>
               <div>---</div>
-              <div>{employee.customer_asing.length}</div>
+              <div>{getEmployeeCustomerNumber(employee)}</div>
               <div className={styles.addClientButton}>
-                <div className={styles.actions} onClick={handleActionClick}>
+                <div className={styles.actions} onClick={() => handleActionClick(employee)}>
                   <i className="fas fa-ellipsis-h"></i>
                 </div>
               </div>
               {dropdownForClient && (
                 <div className={styles.dropdown}>
-                  <h2> Assign Customer To Coach </h2>
+                  <div className={styles.topDropdown}>
+                    <h2> Assign Customer To Coach </h2>
+                    <i className="fas fa-x" onClick={() => setDropdownForClient(false)}></i>
+                  </div>
                   <input
                     type="text"
                     placeholder="Search Customers..."
@@ -206,11 +226,11 @@ export default function Home() {
                   <ul>
                     {filteredClients
                       .filter((client) => client.employee_uuid === null)
-                      .map((client, index) => (
+                      .map((client) => (
                         <li
-                          key={index}
+                          key={client.uuid}
                           className={styles.listItem}
-                          onClick={() => assignClient(client, employee)}
+                          onClick={() => assignClient(client)}
                         >
                           <p>{client.name} {client.surname}</p>
                         </li>

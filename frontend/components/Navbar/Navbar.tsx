@@ -2,6 +2,8 @@ import styles from "./Navbar.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export function Navbar() {
   const router = useRouter();
