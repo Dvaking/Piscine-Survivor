@@ -1,8 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from 'next/router';
-import { getCustomers, getEmployees, updateCustomerEmployee } from "@hooks";
-import { GetCustomersProps, GetEmployeesProps } from "@types";
-import styles from '@styles/EmployeesPage.module.css'
+import { useRouter } from "next/router";
+import {
+  getCustomers,
+  getEmployees,
+  updateCustomerEmployee,
+  insertEmployee,
+} from "@hooks";
+import {
+  GetCustomersProps,
+  GetEmployeesProps,
+  InsertEmployeeProps,
+} from "@types";
+import styles from "@styles/EmployeesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -11,8 +20,37 @@ export default function Home() {
   const [employees, setEmployees] = useState<GetEmployeesProps[]>([]);
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedEmployee, setSelectedEmployee] = useState<GetEmployeesProps | null>(null);
+  const [selectedEmployee, setSelectedEmployee] =
+    useState<GetEmployeesProps | null>(null);
   const [dropdownForClient, setDropdownForClient] = useState(false);
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [formData, setFormData] = useState<InsertEmployeeProps>({
+    name: "",
+    surname: "",
+    gender: "",
+    birth_date: "",
+    email: "",
+    work: "",
+    id: employees.length + 1,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await insertEmployee(formData);
+      setPopupVisible(false);
+      router.reload();
+    } catch (error) {
+      console.error("Failed to insert employee:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,20 +93,15 @@ export default function Home() {
   const getEmployeeCustomerNumber = (employee: GetEmployeesProps) => {
     console.log("Employee UUID:", employee.uuid);
     console.log("All Customers:", customers);
-  
+
     const assignedClients = customers.filter((client) => {
       console.log("Checking Client UUID:", client.employee_uuid);
       return client.employee_uuid === employee.uuid;
     });
-  
-    console.log("Assigned Clients:", assignedClients);
-  
-    return assignedClients.length;
-  };
 
-  const [isPopupVisible, setPopupVisible] = useState(false);
-  const togglePopup = () => {
-    setPopupVisible(!isPopupVisible);
+    console.log("Assigned Clients:", assignedClients);
+
+    return assignedClients.length;
   };
 
   return (
@@ -83,14 +116,17 @@ export default function Home() {
             <button className="button is-medium">Export</button>
           </div>
           <div>
-            <button className="button is-link is-large" onClick={togglePopup}>
+            <button className="button is-link is-large" onClick={() => setPopupVisible(true)}>
               <i className="fas fa-plus" aria-hidden="true"></i>
             </button>
           </div>
         </div>
       </div>
       {isPopupVisible && (
-        <div className={styles.popupOverlay} onClick={togglePopup}>
+        <div
+          className={styles.popupOverlay}
+          onClick={() => setPopupVisible(true)}
+        >
           <div
             className={styles.popupContent}
             onClick={(e) => e.stopPropagation()}
@@ -103,7 +139,49 @@ export default function Home() {
                   <input
                     className="input"
                     type="text"
-                    placeholder="Enter your full name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your first name"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Surname</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="surname"
+                    value={formData.surname}
+                    onChange={handleInputChange}
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Gender</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleInputChange}
+                    placeholder="Enter your gender"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Date of Birth</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="birth_date"
+                    value={formData.birth_date}
+                    onChange={handleInputChange}
+                    placeholder="Enter your date of birth (ex: 1990-01-01)"
                   />
                 </div>
               </div>
@@ -113,17 +191,10 @@ export default function Home() {
                   <input
                     className="input"
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="Enter your email address"
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Phone</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="phone"
-                    placeholder="Enter your phone number"
                   />
                 </div>
               </div>
@@ -133,6 +204,9 @@ export default function Home() {
                   <input
                     className="input"
                     type="job"
+                    name="work"
+                    value={formData.work}
+                    onChange={handleInputChange}
                     placeholder="Enter your job type (ex: coach)"
                   />
                 </div>
@@ -147,8 +221,7 @@ export default function Home() {
                   <div>
                     <button
                       className="button"
-                      type="button"
-                      onClick={togglePopup}
+                      onClick={() => setPopupVisible(false)}
                     >
                       Cancel
                     </button>
@@ -200,14 +273,19 @@ export default function Home() {
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
                 <p>
-                  <strong>{employee.name} {employee.surname}</strong>
+                  <strong>
+                    {employee.name} {employee.surname}
+                  </strong>
                 </p>
               </div>
               <div>{employee.email}</div>
               <div>---</div>
               <div>{getEmployeeCustomerNumber(employee)}</div>
               <div className={styles.addClientButton}>
-                <div className={styles.actions} onClick={() => handleActionClick(employee)}>
+                <div
+                  className={styles.actions}
+                  onClick={() => handleActionClick(employee)}
+                >
                   <i className="fas fa-ellipsis-h"></i>
                 </div>
               </div>
@@ -215,7 +293,10 @@ export default function Home() {
                 <div className={styles.dropdown}>
                   <div className={styles.topDropdown}>
                     <h2> Assign Customer To Coach </h2>
-                    <i className="fas fa-x" onClick={() => setDropdownForClient(false)}></i>
+                    <i
+                      className="fas fa-x"
+                      onClick={() => setDropdownForClient(false)}
+                    ></i>
                   </div>
                   <input
                     type="text"
@@ -232,7 +313,9 @@ export default function Home() {
                           className={styles.listItem}
                           onClick={() => assignClient(client)}
                         >
-                          <p>{client.name} {client.surname}</p>
+                          <p>
+                            {client.name} {client.surname}
+                          </p>
                         </li>
                       ))}
                   </ul>
