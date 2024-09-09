@@ -1,202 +1,48 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
-
-/* Laptop & Desktop */
 .main {
-  background-color: whitesmoke;
-  padding-bottom: 2rem; /* remove later */
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  min-height: 100vh; /* Assure que l'élément occupe toute la hauteur de la fenêtre */
 }
 
 .heading {
-  padding: 2rem;
-  padding-top: 6rem;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .title h1 {
-  font-size: 2.5rem;
-  font-weight: 650;
-}
-
-.title p {
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 .exportAddButtons {
   display: flex;
   flex-direction: row;
-  padding-top: 1rem;
   gap: 2rem;
 }
 
-.containerBg {
-  display: flex;
-  justify-content: center;
+.table {
+  flex-grow: 1; /* Permet à la table de s'étendre */
+  overflow-x: auto; /* Ajoute un défilement horizontal si nécessaire */
+  width: 100%;
 }
 
 .container {
-  width: 98%;
-  background-color: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
+  width: 100%; /* S'assure que la table occupe tout l'espace disponible */
 }
 
-.filterBar {
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.dropApply {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.icons {
-  display: flex;
-  flex-direction: row;
-  gap: 1.4rem;
-}
-
-.filterBar i {
-  font-size: 1.4rem;
-  font-weight: 600;
-  align-self: center;
-}
-
-.employee i {
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-.category {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-}
-
-.category div {
-  width: 100%;
-}
-
-.actions {
-  text-align: right;
-}
-
-.employee {
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-}
-
-.employee div {
-  width: 100%;
-}
-
-.checkName {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.checkName i {
-  font-weight: 100;
-  align-self: center;
-}
-
-.container button {
-  width: 100%;
+.tableContainer {
+  flex-grow: 1;
+  width: 100%; /* Laisse le tableau occuper toute la largeur */
+  overflow-x: auto; /* Ajoute un défilement horizontal si nécessaire */
 }
 
 
-.popupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popupContent {
-  background-color: whitesmoke;
-  width: 50%;
-  height: 50%;
-  border-radius: 3px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-}
-
-.popupContent h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  padding-bottom: 3.5rem;
-}
-
-.popupContent form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.formButtons {
-  display: flex;
-  flex-direction: row;
-  padding-top: 1.5rem;
-  gap: 2rem;
-}
-
-.addClientButton {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  z-index: 1000;
-  width: 100%;
-}
-
-.addClientButton ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.listItem {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.listItem:hover {
-  background-color: #f1f1f1;
-}
-
-/* mobile & tablet */
 @media (max-width: 1920px) {
   .main {
-    background-color: white;
+    background-color: whitesmoke;
   }
 }
