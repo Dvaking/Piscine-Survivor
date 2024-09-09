@@ -33,13 +33,13 @@ async function putCustomersInDb(token: Token) {
       const clothes = await getClothes(token, customer.id);
 
       for (const element of clothes.data) {
-        const clotheImage = await getClotheImage(token, element.id);
+        const base64Image = await getClotheImage(token, element.id);
         const dataToSend = {
           ...element,
           customer_id: customerById.data.id,
         };
 
-        insertClothe(dataToSend, clotheImage);
+        insertClothe(dataToSend, base64Image);
       }
       insertCustomer(customerById.data, customerImage.data);
     } catch (error) {
@@ -108,8 +108,10 @@ async function updateData(): Promise<void> {
 
 function executeQuery() {
   fetchData();
+  console.log("Data fetched successfully");
   cron.schedule("*/5 * * * *", () => {
     updateData();
+    console.log("Data updated successfully");
   });
 }
 

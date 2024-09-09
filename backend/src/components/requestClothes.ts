@@ -5,7 +5,7 @@ interface Clothe {
   private_clothes: ClotheProps[];
 }
 
-export async function insertClothe(clothe: ClotheProps, image: Buffer | string) {
+export async function insertClothe(clothe: ClotheProps, image: string | string) {
   let response: Clothe | undefined = undefined;
   let variables = { ...clothe, image };
 
