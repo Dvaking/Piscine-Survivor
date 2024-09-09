@@ -10,6 +10,7 @@ export function Navbar() {
   const [isDashboard, setIsDashboard] = useState(false);
   const [isTips, setIsTips] = useState(false);
   const [isEvents, setIsEvents] = useState(false);
+  const [isClothes, setIsClothes] = useState(false);
 
   useEffect(() => {
     setIsCustomer(router.pathname === "/dashboard/customers");
@@ -17,6 +18,7 @@ export function Navbar() {
     setIsDashboard(router.pathname === "/dashboard");
     setIsEvents(router.pathname === "/dashboard/events");
     setIsTips(router.pathname === "/dashboard/tips");
+    setIsClothes(router.pathname === "/dashboard/clothes");
   }, [router]);
 
   return (
@@ -62,6 +64,9 @@ export function Navbar() {
           >
             Events
           </Link>
+        </li>
+        <li>
+          <Link href="/dashboard/clothes">Clothes</Link>
         </li>
       </ul>
       <div className={styles.language}>
