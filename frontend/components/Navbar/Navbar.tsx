@@ -21,6 +21,7 @@ export function Navbar() {
     setIsEvents(router.pathname === "/dashboard/events");
     setIsTips(router.pathname === "/dashboard/tips");
     setIsClothes(router.pathname === "/dashboard/clothes");
+    setIsClothes(router.pathname === "/dashboard/statistics");
   }, [router]);
 
   return (
@@ -74,6 +75,9 @@ export function Navbar() {
           >
             Events
           </Link>
+        </li>
+        <li>
+          <Link href="/dashboard/statistics">Statistics</Link>
         </li>
         <li>
           <Link href="/dashboard/clothes">Clothes</Link>
