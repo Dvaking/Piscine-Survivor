@@ -1,5 +1,7 @@
 import { useRouter } from "next/navigation";
 import styles from "@styles/CustomersPage.module.css";
+import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Customers() {
   const router = useRouter();
