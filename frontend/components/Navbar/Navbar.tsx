@@ -6,7 +6,7 @@ import Link from "next/link";
 export function Navbar() {
   const router = useRouter();
   const [isCustomer, setIsCustomer] = useState(false);
-  const [isCoach, setIsCoach] = useState(false);
+  const [isEmployee, setIsEmployee] = useState(false);
   const [isDashboard, setIsDashboard] = useState(false);
   const [isTips, setIsTips] = useState(false);
   const [isEvents, setIsEvents] = useState(false);
@@ -16,7 +16,7 @@ export function Navbar() {
   useEffect(() => {
     setIsDashboard(router.pathname === "/dashboard");
     setIsCustomer(router.pathname === "/dashboard/customers");
-    setIsCoach(router.pathname === "/dashboard/coaches");
+    setIsEmployee(router.pathname === "/dashboard/employees");
     setIsSigns(router.pathname === "/dashboard/signs");
     setIsEvents(router.pathname === "/dashboard/events");
     setIsTips(router.pathname === "/dashboard/tips");
@@ -38,10 +38,10 @@ export function Navbar() {
         </li>
         <li>
           <Link
-            href="/dashboard/coaches"
-            className={isCoach ? styles.selected : ""}
+            href="/dashboard/employees"
+            className={isEmployee ? styles.selected : ""}
           >
-            Coaches
+            Employees
           </Link>
         </li>
         <li>

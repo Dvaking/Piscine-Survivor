@@ -110,13 +110,3 @@ export const InsertEmployee = gql`
     }
   }
 `;
-
-// UPDATE CUSTOMER ASSIGN
-export const UpdateCustomerAssign = gql`
-  mutation UpdateCustomerAssign($client: uuid, $uuid: uuid) {
-    update_private_employees(
-      where: { customer_asing: { uuid: { _eq: $client } } }
-      _set: { uuid: $uuid }
-    )
-  }
-`;

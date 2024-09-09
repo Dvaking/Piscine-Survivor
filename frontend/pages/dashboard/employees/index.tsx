@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import { getCustomers, getEmployees, updateCustomerAssign } from "@hooks";
+import { useRouter } from 'next/router';
+import { getCustomers, getEmployees, updateCustomerEmployee } from "@hooks";
 import { GetCustomersProps, GetEmployeesProps } from "@types";
-import styles from '@styles/CoachesPage.module.css'
+import styles from '@styles/EmployeesPage.module.css'
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function Home() {
+  const router = useRouter();
   const [employees, setEmployees] = useState<GetEmployeesProps[]>([]);
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -14,7 +16,6 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedEmployees = await getEmployees();
-      console.log(fetchedEmployees); //////////////////////////////////////////////////////////////
       const fetchedCustomers = await getCustomers();
       setEmployees(fetchedEmployees);
       setCustomers(fetchedCustomers);
@@ -34,9 +35,11 @@ export default function Home() {
     client.name.toLowerCase().includes(searchQuery)
   );
 
-  const assignClient = (employee : GetEmployeesProps, client : GetCustomersProps) => {
+  const assignClient = (client : GetCustomersProps, employee : GetEmployeesProps) => {
+    let res = updateCustomerEmployee(client.uuid, employee.uuid); /////// remove let res after
+    console.log("res: ", res); //////////////////////////////////////////////////////////////
     setDropdownForClient(false);
-    updateCustomerAssign(employee.uuid, client.uuid);
+    router.reload();
   };
 
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -193,10 +196,10 @@ export default function Home() {
               </div>
               {dropdownForClient && (
                 <div className={styles.dropdown}>
-                  <div> Assign Customer </div>
+                  <h2> Assign Customer To Coach </h2>
                   <input
                     type="text"
-                    placeholder="Search Clients..."
+                    placeholder="Search Customers..."
                     className={styles.searchInput}
                     onChange={handleSearchChange}
                   />
@@ -207,9 +210,9 @@ export default function Home() {
                         <li
                           key={index}
                           className={styles.listItem}
-                          onClick={() => assignClient(employee, client)}
+                          onClick={() => assignClient(client, employee)}
                         >
-                          {client.name} {client.surname}
+                          <p>{client.name} {client.surname}</p>
                         </li>
                       ))}
                   </ul>
