@@ -88,8 +88,23 @@ const StaticticsGraph: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <div className={styles["chart-container"]}>
-        <Line ref={chartRef} data={data} options={options} />
+      <div className="columns is-multiline">
+        <div className="column is-half-desktop is-full-mobile">
+          <div className="box is-shadowless has-background-white-ter">
+            <div className="field">
+              <div className={styles["chart-container"]}>
+                <Line ref={chartRef} data={data} options={options} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="column is-half-desktop is-full-mobile">
+          <div className="box is-shadowless has-background-white-ter">
+            <div className={styles["chart-container"]}>
+              <Line ref={chartRef} data={data} options={options} />
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
