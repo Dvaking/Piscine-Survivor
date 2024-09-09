@@ -1,0 +1,64 @@
+.pageBackground {
+  background-color: rgb(243, 243, 243);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tips {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgb(243, 243, 243);
+}
+
+.tipsContainer {
+  width: 100%;
+  margin: 0;
+  padding-top: 100px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.tipsBox {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+.dropdown summary {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 0;
+  position: relative;
+}
+
+.dropdown summary::after {
+  content: "v";
+  font-size: 0.8rem;
+  position: absolute;
+  right: 20px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.dropdown p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}

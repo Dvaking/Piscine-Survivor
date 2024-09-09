@@ -1,0 +1,90 @@
+.login {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer {
+  background-color: rgb(235, 235, 235);
+  padding: 8rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.checkbox input {
+  margin-right: 0.5rem;
+}
+
+.vSmallMarginLeft {
+  margin-left: 0;
+}
+
+.buttonText {
+  background: none;
+  border: none;
+  color: #3273dc;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.actions {
+  text-align: right;
+}
+
+.buttonLink {
+  padding: 0.75rem 1.5rem;
+  background-color: #3273dc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonLink:hover {
+  background-color: #275a9e;
+}

@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import "bulma/css/bulma.css";
-import styles from "./page.module.css";
+import styles from "@styles/LoginPage.module.css";
 
-export default function Login() {
+export default function Home() {
   const router = useRouter();
 
   const handleDashboardClick = () => {
