@@ -21,7 +21,7 @@ export async function insertEmployee(
     response = await Client.request(InsertEmployee, variables);
     console.log("Utilisateur inséré avec succès");
   } catch (error) {
-    console.error("Erreur lors de l'insertion de employee", error);
+    console.error("Erreur lors de l'insertion de employee");
   }
   return response ? response.private_employees : [];
 }
@@ -42,7 +42,7 @@ export async function updateEmployee(
     response = await Client.request(UpdateEmployee, variables);
     console.log("Utilisateur mis à jour avec succès");
   } catch (error) {
-    console.error("Erreur lors de la mise à jour de employee", error);
+    console.error("Erreur lors de la mise à jour de employee");
   }
   return response ? response.private_employees : [];
 }

@@ -4,22 +4,13 @@ import {
   getEmployees,
   getEmployeeById,
   getEmployeeImageById,
-  getEmployeeMe,
 } from "./API/employeesApi";
 import {
   getCustomers,
   getCustomerById,
-  getPaymentsHistory,
   getCustomerImageById,
   getClothes,
 } from "./API/customersApi";
-import {
-  getEncounters,
-  getEncounterByCustomerId,
-  getEncounterById,
-} from "./API/encountersApi";
-import { getTips } from "./API/tipsApi";
-import { getEvents, getEventById } from "./API/eventsApi";
 import { getClotheImage } from "./API/clothesApi";
 import { Token } from "./types/token";
 import {
@@ -27,8 +18,10 @@ import {
   updateEmployee,
   insertCustomer,
   updateCustomer,
+  insertClothe,
 } from "./components/";
 import { UpdateEmployee } from "./queries/employees";
+import { ClotheProps } from "@types";
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
@@ -37,6 +30,17 @@ async function putCustomersInDb(token: Token) {
     try {
       const customerById = await getCustomerById(token, customer.id);
       const customerImage = await getCustomerImageById(token, customer.id);
+
+      const clothes = await getClothes(token, customer.id);
+
+      for (const element of clothes.data) {
+        const clotheImage = await getClotheImage(token, element.id);
+        const dataToSend = {
+          ...element,
+          customer_id: customerById.data.id,
+        };
+        insertClothe(dataToSend, clotheImage.data);
+      }
 
       insertCustomer(customerById.data, customerImage.data);
     } catch (error) {
@@ -51,23 +55,12 @@ async function putEmployeesInDb(token: Token) {
     try {
       const employeeToSend = await getEmployeeById(token, employee.id);
       const employeeImage = await getEmployeeImageById(token, employee.id);
-      
+
       insertEmployee(employeeToSend.data, employeeImage.data);
     } catch (error) {
       console.error("An error occurred while inserting employees");
     }
   });
-}
-
-async function fetchData(): Promise<void> {
-  try {
-    const token = await login();
-
-    putEmployeesInDb(token);
-    putCustomersInDb(token);
-  } catch (error) {
-    console.error("An error occurred while fetching data:", error);
-  }
 }
 
 async function updateEmployeesInDb(token: Token) {
@@ -92,6 +85,17 @@ async function updateCustomersInDb(token: Token) {
   });
 }
 
+async function fetchData(): Promise<void> {
+  try {
+    const token = await login();
+
+    putEmployeesInDb(token);
+    putCustomersInDb(token);
+  } catch (error) {
+    console.error("An error occurred while fetching data:", error);
+  }
+}
+
 async function updateData(): Promise<void> {
   try {
     const token = await login();
@@ -105,7 +109,7 @@ async function updateData(): Promise<void> {
 
 function executeQuery() {
   fetchData();
-  cron.schedule("*/10 * * * *", () => {
+  cron.schedule("*/5 * * * *", () => {
     updateData();
   });
 }

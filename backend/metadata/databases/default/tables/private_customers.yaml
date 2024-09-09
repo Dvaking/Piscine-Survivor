@@ -6,7 +6,7 @@ array_relationships:
     using:
       manual_configuration:
         column_mapping:
-          uuid: customer_uuid
+          id: customer_id
         insertion_order: null
         remote_table:
           name: clothes
