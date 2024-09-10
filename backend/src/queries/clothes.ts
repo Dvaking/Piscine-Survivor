@@ -14,7 +14,7 @@ export const InsertClothe = gql`
         type: $type
         id: $id
       }
-      on_conflict: { constraint: clothes_pkey, update_columns: customer_id, image, type, customer_id }
+      on_conflict: { constraint: clothes_pkey, update_columns: customer_id }
     ) {
       affected_rows
     }

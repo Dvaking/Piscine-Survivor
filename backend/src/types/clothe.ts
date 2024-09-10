@@ -1,6 +1,7 @@
 export type ClotheProps = {
-  id: 0;
-  image: "string";
-  type: "string";
-  customer_id: 0;
+  id: number;
+  image: Buffer | string;
+  type: string;
+  customer_id: number;
 };
+
