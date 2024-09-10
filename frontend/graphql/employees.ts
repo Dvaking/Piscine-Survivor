@@ -13,9 +13,6 @@ export const GetEmployees = gql`
       birth_date
       image
       work
-      customer_asing {
-        uuid
-      }
     }
   }
 `;

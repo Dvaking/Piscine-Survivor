@@ -55,6 +55,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedEmployees = await getEmployees();
+      console.log("Fetched Employees:", fetchedEmployees);
       const fetchedCustomers = await getCustomers();
       setEmployees(fetchedEmployees);
       setCustomers(fetchedCustomers);
@@ -91,16 +92,9 @@ export default function Home() {
   };
 
   const getEmployeeCustomerNumber = (employee: GetEmployeesProps) => {
-    console.log("Employee UUID:", employee.uuid);
-    console.log("All Customers:", customers);
-
     const assignedClients = customers.filter((client) => {
-      console.log("Checking Client UUID:", client.employee_uuid);
       return client.employee_uuid === employee.uuid;
     });
-
-    console.log("Assigned Clients:", assignedClients);
-
     return assignedClients.length;
   };
 

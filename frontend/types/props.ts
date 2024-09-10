@@ -18,7 +18,6 @@ export type GetEmployeesProps = {
   birth_date: string;
   image: string;
   work: string;
-  customer_asing: { uuid: string }[];
 };
 
 export type GetEmployeesByUuidProps = {
@@ -27,7 +26,6 @@ export type GetEmployeesByUuidProps = {
   surname: string;
   astrological_sign: string;
   uuid: string;
-  customer_asing: { uuid: string }[];
 };
 
 export type InsertCustomerProps = {
