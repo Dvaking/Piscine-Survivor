@@ -1,4 +1,3 @@
-import * as cron from "node-cron";
 import { login } from "./API/authApi";
 import {
   getEmployees,
@@ -24,6 +23,10 @@ import {
 } from "./components/";
 import fs from "fs";
 
+import express from "express";
+import authRouter from "./auth/index";
+import cors from "cors";
+
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
 
@@ -45,7 +48,6 @@ async function putCustomersInDb(token: Token) {
       }
 
       const customer_uuid = await insertCustomer(
-
         customerById.data,
         customerImage
       );
@@ -120,12 +122,29 @@ async function updateData(): Promise<void> {
 }
 
 function executeQuery() {
-  fetchData();
+  // fetchData();
   console.log("Data fetched successfully");
-  cron.schedule("*/30 * * * *", () => {
-    updateData();
-    console.log("Data updated successfully");
-  });
+  // cron.schedule("*/30 * * * *", () => {
+  //   updateData();
+  //   console.log("Data updated successfully");
+  // });
 }
+
+
+const app = express();
+const port = 4000;
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());
+app.use('/auth', authRouter);
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
 
 executeQuery();

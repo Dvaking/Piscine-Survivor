@@ -30,34 +30,3 @@ array_relationships:
         remote_table:
           name: events
           schema: private
-select_permissions:
-  - role: user
-    permission:
-      columns:
-        - birth_date
-        - email
-        - gender
-        - id
-        - image
-        - name
-        - surname
-        - uuid
-        - work
-      filter:
-        uuid:
-          _eq: X-Hasura-User-Id
-    comment: ""
-update_permissions:
-  - role: user
-    permission:
-      columns:
-        - birth_date
-        - email
-        - gender
-        - image
-        - name
-        - surname
-        - work
-      filter: {}
-      check: null
-    comment: ""

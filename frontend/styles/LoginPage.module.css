@@ -88,3 +88,9 @@
 .buttonLink:hover {
   background-color: #275a9e;
 }
+
+.errorMessage {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
