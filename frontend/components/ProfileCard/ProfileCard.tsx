@@ -16,6 +16,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
       surname: "Name",
       address: "No Adress",
       employee_uuid: "No Employee UUID",
+      image: "No Image",
       encounters: [
         {
           id: 0,
@@ -30,7 +31,17 @@ export function ProfileCard({ customer }: ProfileCardProps) {
       description: "",
       gender: "",
       phone_number: "No Phone Number",
+      payments_history: [
+        {
+          amount: 0,
+          comment: "",
+          date: "",
+          id: 0,
+          payment_method: "",
+        },
+      ],
     });
+
   const [totalEncounters, setTotalEncounters] = useState(0);
   const [totalPositives, setTotalPositives] = useState(0);
   const [totalInProgress, setTotalInProgress] = useState(0);
@@ -43,7 +54,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
     if (!customer) return;
     setCustomerData(customer);
     setIsLoaded(true);
-    setTotalEncounters(20);
+    setTotalEncounters(customerData.encounters.length);
     setTotalPositives(5);
     setTotalInProgress(3);
     if (customer.employee_uuid) {
@@ -53,6 +64,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
       );
     }
   }, [customer]);
+  console.log(customerData.image);
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -62,7 +74,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
         <figure className="image is-128x128 mx-auto">
           <img
             className="is-rounded"
-            src="https://via.placeholder.com/128"
+            src={customerData.image ? "data:image/png;base64,"+customerData.image : "https://via.placeholder.com/128"}
             alt="Profile"
           />
         </figure>
@@ -70,14 +82,6 @@ export function ProfileCard({ customer }: ProfileCardProps) {
           <h3 className="title is-4">
             {customerData.name} {customerData.surname}
           </h3>
-          <div className="is-flex is-justify-content-center">
-            <span className="icon mr-2">
-              <i className="fas fa-envelope"></i>
-            </span>
-            <span className="icon">
-              <i className="fas fa-bookmark"></i>
-            </span>
-          </div>
           <div className={styles.ratio}>
             <div className={styles.ratioData}>
               <p>{totalEncounters}</p>

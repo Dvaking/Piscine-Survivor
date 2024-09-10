@@ -83,6 +83,15 @@ export type GetCustomersProfileByUuidProps = {
       comment: string;
     }
   ];
+  payments_history: [
+    {
+      id: number;
+      amount: number;
+      comment: string;
+      date: string;
+      payment_method: string;
+    }
+  ];
 };
 
 export type UpdateEmployeeProps = {

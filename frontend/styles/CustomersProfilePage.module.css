@@ -22,7 +22,9 @@
   gap: 1rem;
 }
 
-.headerContainer {
+.heading {
+  padding: 2rem;
+  padding-top: 6rem;
   display: flex;
   flex-direction: row;
 }
@@ -37,8 +39,21 @@
   padding-top: 1rem;
   gap: 2rem;
 }
+
+.tableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  min-width: 600px;
+}
+
 @media screen and (max-width: 768px){
   .container {
     padding: 0.5rem;
+  }
+  .table {
+    font-size: 1rem;
   }
 }

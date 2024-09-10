@@ -35,30 +35,37 @@ export const GetCustomersByUuid = gql`
 `;
 
 export const GetCustomersProfileByUuid = gql`
-query GetProfileCustomerInformationByUuid($uuid: uuid) {
-  private_customers(where: {uuid: {_eq: $uuid}}) {
-    uuid
-    name
-    surname
-    astrological_sign
-    birth_date
-    description
-    email
-    employee_uuid
-    gender
-    image
-    phone_number
-    address
-    encounters {
-      id
-      source
-      rating
-      date
-      comment
+  query GetProfileCustomerInformationByUuid($uuid: uuid) {
+    private_customers(where: { uuid: { _eq: $uuid } }) {
+      uuid
+      name
+      surname
+      astrological_sign
+      birth_date
+      description
+      email
+      employee_uuid
+      gender
+      image
+      phone_number
+      address
+      encounters {
+        id
+        source
+        rating
+        date
+        comment
+      }
+      payments_history {
+        amount
+        comment
+        date
+        id
+        payment_method
+      }
     }
   }
-}`;
-
+`;
 
 // INSERT
 export const InsertCustomer = gql`
@@ -90,10 +97,7 @@ export const InsertCustomer = gql`
 
 // UPDATE
 export const UpdateCustomerEmployee = gql`
-  mutation UpdateCustomerEmployee(
-    $uuid: uuid
-    $employee_uuid: uuid
-  ) {
+  mutation UpdateCustomerEmployee($uuid: uuid, $employee_uuid: uuid) {
     update_private_customers(
       where: { uuid: { _eq: $uuid } }
       _set: { employee_uuid: $employee_uuid }
