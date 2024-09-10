@@ -99,3 +99,11 @@ export type GetEmployeesByWorkProps = {
   uuid?: string;
 };
 
+export type GetEmployeesAssignedCustomersProps = {
+  name: string;
+  customers_assign: [
+    {
+      name: string;
+    }
+  ];
+};
