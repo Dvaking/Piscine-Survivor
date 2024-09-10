@@ -3,7 +3,7 @@ import { gql } from "graphql-request";
 export const InsertClothe = gql`
   mutation InsertClothes(
     $customer_id: Int
-    $image: bytea
+    $image: String
     $type: String
     $id: Int
   ) {

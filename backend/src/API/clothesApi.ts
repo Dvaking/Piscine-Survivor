@@ -11,7 +11,7 @@ const headers = {
 export async function getClotheImage(
   token: Token,
   id: number
-) {
+): Promise<string> {
   const newUrl = `https://soul-connection.fr/api/clothes/${id}/image`;
   try {
     let response: AxiosResponse<any>;
@@ -28,8 +28,8 @@ export async function getClotheImage(
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         let newToken = await login();
         response = await axios.get(newUrl, {
+          responseType: "arraybuffer",
           headers: {
-            responseType: "arraybuffer",
             ...headers,
             Authorization: `Bearer ${newToken.access_token}`,
           },
@@ -39,13 +39,10 @@ export async function getClotheImage(
       }
     }
 
-    const base64Image = Buffer.from(response.data, 'binary').toString('base64');
-
-
-    return "data:image/jpeg;base64," + base64Image;
+    return Buffer.from(response.data).toString("base64");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Request failed:", error.response?.data || error.message);
+      console.error("Request failed:", error.message);
     } else {
       console.error("Unexpected error:");
     }

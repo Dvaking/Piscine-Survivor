@@ -131,7 +131,7 @@ export default function Customers() {
                   </button>
                   <div className={`${styles.carousel} mt-4`}>
                     <img
-                      src={hatImages[hatIndex]}
+                      src={"data:image/png;base64,"+hatImages[hatIndex]}
                       alt={`Hat Image ${hatIndex + 1}`}
                       className={`${styles.carouselImage} carousel-image`}
                     />
@@ -159,7 +159,7 @@ export default function Customers() {
                   </button>
                   <div className={`${styles.carousel} mt-4`}>
                     <img
-                      src={topsImages[topsIndex]}
+                      src={"data:image/png;base64,"+topsImages[topsIndex]}
                       alt={`Tops Image ${topsIndex + 1}`}
                       className={`${styles.carouselImage} carousel-image`}
                     />
@@ -193,7 +193,7 @@ export default function Customers() {
                   </button>
                   <div className={`${styles.carousel} mt-4`}>
                     <img
-                      src={bottomsImages[bottomsIndex]}
+                      src={"data:image/png;base64,"+bottomsImages[bottomsIndex]}
                       alt={`Bottoms Image ${bottomsIndex + 1}`}
                       className={`${styles.carouselImage} carousel-image`}
                     />
@@ -223,7 +223,7 @@ export default function Customers() {
                   </button>
                   <div className={`${styles.carousel} mt-4`}>
                     <img
-                      src={shoesImages[shoesIndex]}
+                      src={"data:image/png;base64,"+shoesImages[shoesIndex]}
                       alt={`Shoes Image ${shoesIndex + 1}`}
                       className={`${styles.carouselImage} carousel-image`}
                     />
