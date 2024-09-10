@@ -41,7 +41,7 @@ async function putCustomersInDb(token: Token) {
 
         insertClothe(dataToSend, base64Image);
       }
-      insertCustomer(customerById.data, customerImage.data);
+      insertCustomer(customerById.data, customerImage);
     } catch (error) {
       console.error("An error occurred while inserting customers");
     }
@@ -55,7 +55,7 @@ async function putEmployeesInDb(token: Token) {
       const employeeToSend = await getEmployeeById(token, employee.id);
       const employeeImage = await getEmployeeImageById(token, employee.id);
 
-      insertEmployee(employeeToSend.data, employeeImage.data);
+      insertEmployee(employeeToSend.data, employeeImage);
     } catch (error) {
       console.error("An error occurred while inserting employees");
     }
@@ -69,7 +69,7 @@ async function updateEmployeesInDb(token: Token) {
     const employeeById = await getEmployeeById(token, employee.id);
     const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    updateEmployee(employeeById.data, employeeImage.data);
+    updateEmployee(employeeById.data, employeeImage);
   });
 }
 
@@ -80,7 +80,7 @@ async function updateCustomersInDb(token: Token) {
     const customerById = await getCustomerById(token, customer.id);
     const customerImage = await getCustomerImageById(token, customer.id);
 
-    updateCustomer(customerById.data, customerImage.data);
+    updateCustomer(customerById.data, customerImage);
   });
 }
 
