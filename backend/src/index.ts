@@ -31,7 +31,7 @@ async function putCustomersInDb(token: Token) {
     try {
       const customerById = await getCustomerById(token, customer.id);
       const customerImage = await getCustomerImageById(token, customer.id);
-
+      const payments = await getPaymentsHistory(token, customer.id);
       const clothes = await getClothes(token, customer.id);
 
       for (const element of clothes.data) {
@@ -44,9 +44,8 @@ async function putCustomersInDb(token: Token) {
         insertClothe(dataToSend, base64Image);
       }
 
-      const payments = await getPaymentsHistory(token, customer.id);
-
       const customer_uuid = await insertCustomer(
+
         customerById.data,
         customerImage
       );
@@ -54,6 +53,7 @@ async function putCustomersInDb(token: Token) {
         return;
       }
       for (const element of payments.data) {
+        console.log("Hello-------------------");
         insertPaymentHistory(element, customer_uuid);
       }
     } catch (error) {
