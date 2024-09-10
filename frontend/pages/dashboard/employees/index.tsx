@@ -55,7 +55,6 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedEmployees = await getEmployees();
-      console.log("Fetched Employees:", fetchedEmployees);
       const fetchedCustomers = await getCustomers();
       setEmployees(fetchedEmployees);
       setCustomers(fetchedCustomers);
@@ -257,6 +256,7 @@ export default function Home() {
             </div>
             <div>Email</div>
             <div>Phone</div>
+            {/* <div>Position</div> */}
             <div>Number of Customers</div>
             <div>
               <p className={styles.actions}>Actions</p>
@@ -274,6 +274,7 @@ export default function Home() {
               </div>
               <div>{employee.email}</div>
               <div>---</div>
+              {/* <div>{employee.work}</div> */}
               <div>{getEmployeeCustomerNumber(employee)}</div>
               <div className={styles.addClientButton}>
                 <div
