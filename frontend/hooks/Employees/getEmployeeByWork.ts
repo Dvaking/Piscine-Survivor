@@ -1,7 +1,7 @@
 import { client, GetEmployeesByWork } from "@graphql";
 import { GetEmployeesByWorkProps } from "@types";
 
-export interface EmployeesByWork {
+interface EmployeesByWork {
   private_employees: GetEmployeesByWorkProps[];
 }
 

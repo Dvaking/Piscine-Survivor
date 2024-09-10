@@ -107,3 +107,12 @@ export const InsertEmployee = gql`
     }
   }
 `;
+
+export const GetCoachNameByUuid = gql`
+  query GetCoachNameByUuid($uuid: uuid) {
+    private_employees(where: { uuid: { _eq: $uuid } }) {
+      name
+      surname
+    }
+  }
+`;

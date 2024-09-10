@@ -1,0 +1,60 @@
+.box {
+    background-color: white;
+    flex-direction: column;
+    border: 2px solid lightgray;
+    border-radius: 2%;
+    ;
+}
+
+.box text {
+    color: #656a7e;
+    font-size: 1rem;
+}
+
+.header {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    justify-content: space-between;
+}
+
+.ratio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+
+.ratioData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.ratioData p {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.ratioData text {
+    text-align: center
+}
+
+.body {
+    padding-left: 1rem;
+}
+
+.body div {
+    padding-bottom: 1rem;
+}
+
+.body p {
+    font-weight: 600;
+    color: #656a7e
+}

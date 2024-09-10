@@ -24,21 +24,40 @@ export const GetCustomers = gql`
 export const GetCustomersByUuid = gql`
   query GetCustomersByUuid($uuid: uuid) {
     private_customers(where: { uuid: { _eq: $uuid } }) {
-      id
+      uuid
       name
       surname
-      astrological_sign
-      birth_date
-      description
       email
-      employee_uuid
-      gender
       image
       phone_number
-      address
     }
   }
 `;
+
+export const GetCustomersProfileByUuid = gql`
+query GetProfileCustomerInformationByUuid($uuid: uuid) {
+  private_customers(where: {uuid: {_eq: $uuid}}) {
+    uuid
+    name
+    surname
+    astrological_sign
+    birth_date
+    description
+    email
+    employee_uuid
+    gender
+    image
+    phone_number
+    address
+    encounters {
+      source
+      rating
+      date
+      comment
+    }
+  }
+}`;
+
 
 // INSERT
 export const InsertCustomer = gql`

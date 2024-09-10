@@ -53,15 +53,33 @@ export type GetCustomersByUuidProps = {
   id: number;
   name: string;
   surname: string;
+  email: string;
+  employee_uuid: string;
+  image: string;
+  phone_number: string;
+};
+
+export type GetCustomersProfileByUuidProps = {
+  uuid: string;
+  name: string;
+  surname: string;
   astrological_sign: string;
   birth_date: string;
   description: string;
   email: string;
-  employee_uuid: string;
+  employee_uuid?: string;
   gender: string;
-  image: string;
+  image?: string;
   phone_number: string;
   address: string;
+  encounters: [
+    {
+      source: string;
+      rating: number;
+      date: string;
+      comment: string;
+    }
+  ];
 };
 
 export type UpdateEmployeeProps = {
@@ -97,3 +115,7 @@ export type GetEmployeesByWorkProps = {
   uuid?: string;
 };
 
+export type GetCoachNameByUuidProps = {
+  name: string;
+  surname: string;
+};
