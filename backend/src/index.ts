@@ -53,7 +53,6 @@ async function putCustomersInDb(token: Token) {
         return;
       }
       for (const element of payments.data) {
-        console.log("Hello-------------------");
         insertPaymentHistory(element, customer_uuid);
       }
     } catch (error) {
