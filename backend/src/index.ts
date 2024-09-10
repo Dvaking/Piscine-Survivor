@@ -109,7 +109,7 @@ async function updateData(): Promise<void> {
 function executeQuery() {
   fetchData();
   console.log("Data fetched successfully");
-  cron.schedule("*/5 * * * *", () => {
+  cron.schedule("*/30 * * * *", () => {
     updateData();
     console.log("Data updated successfully");
   });
