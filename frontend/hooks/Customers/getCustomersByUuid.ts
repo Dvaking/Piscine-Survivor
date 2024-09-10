@@ -1,14 +1,14 @@
 import { client, GetCustomersByUuid } from "@graphql";
-import { GetCustomersProps } from "@types";
+import { GetCustomersByUuidProps } from "@types";
 
 export interface CustomersByUuid {
-  private_customers: GetCustomersProps[];
+  private_customers: GetCustomersByUuidProps[];
 }
 
-export async function getCustomersByUuid() {
-  let response: CustomersByUuid | undefined = undefined;
+export async function getCustomersByUuid(uuid: string) {
+  let response: CustomersByUuid| undefined = undefined;
   try {
-    response = await client.request(GetCustomersByUuid);
+    response = await client.request(GetCustomersByUuid, {uuid: uuid});
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }

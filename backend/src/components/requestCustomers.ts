@@ -5,20 +5,26 @@ interface Customer {
   private_customers: CustomerProps[];
 }
 
-export async function insertCustomer(customer: CustomerProps, image: string) {
-  let response: Customer | undefined = undefined;
+export async function insertCustomer(
+  customer: CustomerProps,
+  image: string
+): Promise<string | null> {
+  let response: any;
   let variables = { ...customer, image };
 
   if (variables.image === undefined) {
     variables.image = "";
   }
+
   try {
     response = await Client.request(InsertCustomer, variables);
     console.log("Utilisateur inséré avec succès");
+    const uuid = response?.insert_private_customers?.returning[0]?.uuid;
+    return uuid;
   } catch (error) {
     console.error("Erreur lors de l'insertion de customer");
+    return null;
   }
-  return response ? response.private_customers : [];
 }
 
 export async function updateCustomer(customer: CustomerProps, image: string) {

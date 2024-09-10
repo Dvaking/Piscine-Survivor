@@ -1,7 +1,7 @@
 import { client, GetEmployeesByUuid } from "@graphql";
 import { GetEmployeesByUuidProps } from "@types";
 
-export interface EmployeesByUuid {
+interface EmployeesByUuid {
   private_employees: GetEmployeesByUuidProps[];
 }
 

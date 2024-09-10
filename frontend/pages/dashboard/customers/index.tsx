@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import React, { useState } from "react";
-import styles from '@styles/CustomersSearchPage.module.css';
+import styles from "@styles/CustomersSearchPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 

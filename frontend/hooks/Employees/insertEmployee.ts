@@ -1,7 +1,7 @@
 import { client, InsertEmployee } from "@graphql";
 import { InsertEmployeeProps } from "@types";
 
-export interface EmployeeInsert {
+interface EmployeeInsert {
   private_employees: InsertEmployeeProps[];
 }
 
