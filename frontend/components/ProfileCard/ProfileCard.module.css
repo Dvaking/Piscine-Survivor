@@ -1,0 +1,40 @@
+.ratio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+
+.ratioData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.ratioData p {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.ratioData text {
+    text-align: center
+}
+
+.body {
+    padding-left: 1rem;
+}
+
+.body div {
+    padding-bottom: 1rem;
+}
+
+.body p {
+    font-weight: 600;
+    color: #656a7e;
+}

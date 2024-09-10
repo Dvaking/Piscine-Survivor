@@ -3,4 +3,5 @@
 - "!include private_employees.yaml"
 - "!include private_encounters.yaml"
 - "!include private_events.yaml"
+- "!include private_payments_history.yaml"
 - "!include private_tips.yaml"
