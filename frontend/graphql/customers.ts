@@ -87,3 +87,18 @@ export const InsertCustomer = gql`
     }
   }
 `;
+
+// UPDATE
+export const UpdateCustomerEmployee = gql`
+  mutation UpdateCustomerEmployee(
+    $uuid: uuid
+    $employee_uuid: uuid
+  ) {
+    update_private_customers(
+      where: { uuid: { _eq: $uuid } }
+      _set: { employee_uuid: $employee_uuid }
+    ) {
+      affected_rows
+    }
+  }
+`;

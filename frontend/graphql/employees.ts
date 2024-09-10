@@ -80,27 +80,33 @@ export const UpdateEmployee = gql`
 // INSERT
 export const InsertEmployee = gql`
   mutation MyMutation(
-    $gender: String
     $name: String
     $surname: String
-    $id: Int
+    $gender: String
     $birth_date: String
+    $email: String
+    $work: String
+    $id: Int
   ) {
     insert_private_employees(
       objects: {
-        gender: $gender
         name: $name
         surname: $surname
-        id: $id
+        gender: $gender
         birth_date: $birth_date
+        email: $email
+        work: $work
+        id: $id
       }
     ) {
       affected_rows
       returning {
-        surname
         name
+        surname
         gender
         birth_date
+        email
+        work
         id
         uuid
       }

@@ -10,6 +10,7 @@ import {
   getCustomerById,
   getCustomerImageById,
   getClothes,
+  getPaymentsHistory,
 } from "./API/customersApi";
 import { getClotheImage } from "./API/clothesApi";
 import { Token } from "./types/token";
@@ -19,6 +20,7 @@ import {
   insertCustomer,
   updateCustomer,
   insertClothe,
+  insertPaymentHistory,
 } from "./components/";
 import fs from "fs";
 
@@ -41,7 +43,19 @@ async function putCustomersInDb(token: Token) {
 
         insertClothe(dataToSend, base64Image);
       }
-      insertCustomer(customerById.data, customerImage.data);
+
+      const payments = await getPaymentsHistory(token, customer.id);
+
+      const customer_uuid = await insertCustomer(
+        customerById.data,
+        customerImage
+      );
+      if (!customer_uuid) {
+        return;
+      }
+      for (const element of payments.data) {
+        insertPaymentHistory(element, customer_uuid);
+      }
     } catch (error) {
       console.error("An error occurred while inserting customers");
     }
@@ -55,7 +69,7 @@ async function putEmployeesInDb(token: Token) {
       const employeeToSend = await getEmployeeById(token, employee.id);
       const employeeImage = await getEmployeeImageById(token, employee.id);
 
-      insertEmployee(employeeToSend.data, employeeImage.data);
+      insertEmployee(employeeToSend.data, employeeImage);
     } catch (error) {
       console.error("An error occurred while inserting employees");
     }
@@ -69,7 +83,7 @@ async function updateEmployeesInDb(token: Token) {
     const employeeById = await getEmployeeById(token, employee.id);
     const employeeImage = await getEmployeeImageById(token, employee.id);
 
-    updateEmployee(employeeById.data, employeeImage.data);
+    updateEmployee(employeeById.data, employeeImage);
   });
 }
 
@@ -80,7 +94,7 @@ async function updateCustomersInDb(token: Token) {
     const customerById = await getCustomerById(token, customer.id);
     const customerImage = await getCustomerImageById(token, customer.id);
 
-    updateCustomer(customerById.data, customerImage.data);
+    updateCustomer(customerById.data, customerImage);
   });
 }
 
@@ -109,7 +123,7 @@ async function updateData(): Promise<void> {
 function executeQuery() {
   fetchData();
   console.log("Data fetched successfully");
-  cron.schedule("*/5 * * * *", () => {
+  cron.schedule("*/30 * * * *", () => {
     updateData();
     console.log("Data updated successfully");
   });

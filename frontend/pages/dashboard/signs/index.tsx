@@ -38,6 +38,7 @@ export default function Home() {
   const selectClient1 = (client: GetCustomersProps) => {
     setSelectedClient1(client);
     setDropdownForClient1(false);
+    console.log(client); //////////////////////////////////////////////////////
   };
 
   const selectClient2 = (client: GetCustomersProps) => {
@@ -182,7 +183,7 @@ export default function Home() {
                   <figure className="image">
                     <img
                       className="is-rounded"
-                      src="https://bulma.io/assets/images/placeholders/128x128.png"
+                      src={selectedClient1.image}
                       alt="Client"
                     />
                   </figure>
@@ -251,7 +252,7 @@ export default function Home() {
                   <figure className="image">
                     <img
                       className="is-rounded"
-                      src="https://bulma.io/assets/images/placeholders/128x128.png"
+                      src={selectedClient2.image}
                       alt="Client"
                     />
                   </figure>

@@ -20,3 +20,12 @@ array_relationships:
         remote_table:
           name: encounters
           schema: private
+  - name: payments_history
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: payments_history
+          schema: private
