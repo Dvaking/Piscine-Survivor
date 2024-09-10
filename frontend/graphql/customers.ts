@@ -50,6 +50,7 @@ query GetProfileCustomerInformationByUuid($uuid: uuid) {
     phone_number
     address
     encounters {
+      id
       source
       rating
       date

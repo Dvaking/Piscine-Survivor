@@ -112,7 +112,7 @@ const StaticticsGraph: React.FC = () => {
   };
 
   return (
-    <main className="has-background-white-ter">
+    <main className="has-background-white-smoke">
       <div className="columns is-multiline">
         <div className="column is-half-desktop is-full-mobile">
           <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">

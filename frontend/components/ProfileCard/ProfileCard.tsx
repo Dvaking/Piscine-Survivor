@@ -8,6 +8,29 @@ type ProfileCardProps = {
 };
 
 export function ProfileCard({ customer }: ProfileCardProps) {
+  const [customerData, setCustomerData] =
+    useState<GetCustomersProfileByUuidProps>({
+      uuid: "No UUID",
+      email: "No Email",
+      name: "No",
+      surname: "Name",
+      address: "No Adress",
+      employee_uuid: "No Employee UUID",
+      encounters: [
+        {
+          id: 0,
+          comment: "",
+          date: "",
+          rating: 0,
+          source: "",
+        },
+      ],
+      astrological_sign: "",
+      birth_date: "",
+      description: "",
+      gender: "",
+      phone_number: "No Phone Number",
+    });
   const [totalEncounters, setTotalEncounters] = useState(0);
   const [totalPositives, setTotalPositives] = useState(0);
   const [totalInProgress, setTotalInProgress] = useState(0);
@@ -18,6 +41,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
 
   useEffect(() => {
     if (!customer) return;
+    setCustomerData(customer);
     setIsLoaded(true);
     setTotalEncounters(20);
     setTotalPositives(5);
@@ -33,22 +57,27 @@ export function ProfileCard({ customer }: ProfileCardProps) {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-        <div className={styles.box}>
-          <div className={styles.header}>
-            <figure className="image is-96x96 mx-auto">
-              <img
-                className="is-rounded"
-                src={customer?.image ? customer.image : "https://via.placeholder.com/128"}
-                alt="Profile"
-              />
-            </figure>
-            <div className="has-text-centered mt-3">
-              <h3 className="title is-4">
-                {customer?.name} {customer?.surname}
-              </h3>
-            </div>
+    <div className="column is-one-quarter">
+      <div className="box">
+        <figure className="image is-128x128 mx-auto">
+          <img
+            className="is-rounded"
+            src="https://via.placeholder.com/128"
+            alt="Profile"
+          />
+        </figure>
+        <div className="has-text-centered mt-3">
+          <h3 className="title is-4">
+            {customerData.name} {customerData.surname}
+          </h3>
+          <div className="is-flex is-justify-content-center">
+            <span className="icon mr-2">
+              <i className="fas fa-envelope"></i>
+            </span>
+            <span className="icon">
+              <i className="fas fa-bookmark"></i>
+            </span>
           </div>
-          <hr />
           <div className={styles.ratio}>
             <div className={styles.ratioData}>
               <p>{totalEncounters}</p>
@@ -63,34 +92,37 @@ export function ProfileCard({ customer }: ProfileCardProps) {
               <text>In Progress</text>
             </div>
           </div>
-          <hr />
-          <div className={styles.body}>
+        </div>
+
+        <hr />
+        <div className={styles.body}>
+          <div>
+            <text>SHORT DETAILS</text>
+          </div>
+          <div>
             <div>
-              <text>SHORT DETAILS</text>
+              <text>User Id:</text>
+              <p>{customer?.uuid}</p>
             </div>
             <div>
-              <div>
-                <text>User Id:</text>
-                <p>{customer?.uuid}</p>
-              </div>
-              <div>
-                <text>Email:</text>
-                <p>{customer?.email}</p>
-              </div>
-              <div className={styles.wordbreak}>
-                <text>Address:</text>
-                <p>{customer?.address}</p>
-              </div>
-              <div>
-                <text>Last Activity:</text>
-                <p>{lastConnection}</p>
-              </div>
-              <div>
-                <text>Coach:</text>
-                <p>{coach}</p>
-              </div>
+              <text>Email:</text>
+              <p>{customer?.email}</p>
+            </div>
+            <div>
+              <text>Address:</text>
+              <p>{customer?.address}</p>
+            </div>
+            <div>
+              <text>Last Activity:</text>
+              <p>{lastConnection}</p>
+            </div>
+            <div>
+              <text>Coach:</text>
+              <p>{coach}</p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   );
 }

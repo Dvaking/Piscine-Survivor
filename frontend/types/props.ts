@@ -74,6 +74,7 @@ export type GetCustomersProfileByUuidProps = {
   address: string;
   encounters: [
     {
+      id: number;
       source: string;
       rating: number;
       date: string;
