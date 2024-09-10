@@ -10,6 +10,7 @@ import {
   getCustomerById,
   getCustomerImageById,
   getClothes,
+  getPaymentsHistory,
 } from "./API/customersApi";
 import { getClotheImage } from "./API/clothesApi";
 import { Token } from "./types/token";
@@ -19,6 +20,7 @@ import {
   insertCustomer,
   updateCustomer,
   insertClothe,
+  insertPaymentHistory,
 } from "./components/";
 import fs from "fs";
 
@@ -41,7 +43,19 @@ async function putCustomersInDb(token: Token) {
 
         insertClothe(dataToSend, base64Image);
       }
-      insertCustomer(customerById.data, customerImage);
+
+      const payments = await getPaymentsHistory(token, customer.id);
+
+      const customer_uuid = await insertCustomer(
+        customerById.data,
+        customerImage
+      );
+      if (!customer_uuid) {
+        return;
+      }
+      for (const element of payments.data) {
+        insertPaymentHistory(element, customer_uuid);
+      }
     } catch (error) {
       console.error("An error occurred while inserting customers");
     }
