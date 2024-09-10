@@ -1,12 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {
-  getCustomers,
-} from "@hooks";
-import {
-  GetCustomersProps,
-} from "@types";
+import { getCustomers, getPaymentMethodByUuid } from "@hooks";
+import { GetCustomersProps } from "@types";
 import styles from "@styles/CustomersSearchPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -14,10 +10,32 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 export default function Home() {
   const router = useRouter();
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
+  const [paymentMethods, setPaymentMethods] = useState<{
+    [key: string]: string;
+  }>({});
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [dropdownForClient, setDropdownForClient] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [emailError, setEmailError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCustomers = await getCustomers();
+      setCustomers(fetchedCustomers);
+
+      fetchedCustomers.forEach(async (customer) => {
+        const paymentMethodData = await getPaymentMethodByUuid(customer.uuid);
+        const paymentMethod =
+          paymentMethodData?.private_payments_history?.[0]?.payment_method ||
+          "No payment method found";
+        setPaymentMethods((prevMethods) => ({
+          ...prevMethods,
+          [customer.uuid]: paymentMethod,
+        }));
+      });
+    };
+    fetchData();
+  }, []);
 
   // const generateUniqueId = () => {
   //   let randomId;
@@ -69,14 +87,6 @@ export default function Home() {
   //   }
   // };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedCustomers = await getCustomers();
-      setCustomers(fetchedCustomers);
-    };
-    fetchData();
-  }, []);
-
   // const handleActionClick = (employee: GetEmployeesProps) => {
   //   if (employee.work !== "Coach" && employee.work !== "coach") {
   //     alert("Clients can only be assigned to coaches.");
@@ -119,7 +129,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {isPopupVisible && (
+      {/* {isPopupVisible && (
         <div
           className={styles.popupOverlay}
           onClick={() => setPopupVisible(true)}
@@ -232,7 +242,7 @@ export default function Home() {
             </form>
           </div>
         </div>
-      )}
+      )} */}
       <div className={styles.containerBg}>
         <div className={styles.container}>
           <div className={styles.filterBar}>
@@ -269,56 +279,56 @@ export default function Home() {
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
                 <div className={styles.clientProfileButton}>
-                <Link href={`/dashboard/customers/${customer.uuid}`}>
-                  <p>
-                    {customer.name} {customer.surname}
-                  </p>
-                </Link>
+                  <Link href={`/dashboard/customers/${customer.uuid}`}>
+                    <p>
+                      {customer.name} {customer.surname}
+                    </p>
+                  </Link>
                 </div>
               </div>
               <div className={styles.email}>{customer.email}</div>
               <div>{customer.phone_number}</div>
-              {/* <div>{customer.payment_method}</div> */}
+              <div>{paymentMethods[customer.uuid] || "Loading..."}</div>
               <div className={styles.assignClientButton}>
                 {/* <div
                   className={styles.actions}
                   onClick={() => handleActionClick(customer)}
                 > */}
-                  <i className="fas fa-ellipsis-h"></i>
-                </div>
+                <i className="fas fa-ellipsis-h"></i>
               </div>
-              // {dropdownForClient && (
-              //   <div className={styles.dropdown}>
-              //     <div className={styles.topDropdown}>
-              //       <h2> Assign Customer To Coach </h2>
-              //       <i
-              //         className="fas fa-x"
-              //         onClick={() => setDropdownForClient(false)}
-              //       ></i>
-              //     </div>
-              //     <input
-              //       type="text"
-              //       placeholder="Search Customers..."
-              //       className={styles.searchInput}
-              //       onChange={handleSearchChange}
-              //     />
-              //     <ul>
-              //       {filteredClients
-              //         .filter((client) => client.employee_uuid === null)
-              //         .map((client) => (
-              //           <li
-              //             key={client.uuid}
-              //             className={styles.listItem}
-              //             onClick={() => assignClient(client)}
-              //           >
-              //             <p>
-              //               {client.name} {client.surname}
-              //             </p>
-              //           </li>
-              //         ))}
-              //     </ul>
-              //   </div>
-              // )}
+            </div>
+            // {dropdownForClient && (
+            //   <div className={styles.dropdown}>
+            //     <div className={styles.topDropdown}>
+            //       <h2> Assign Customer To Coach </h2>
+            //       <i
+            //         className="fas fa-x"
+            //         onClick={() => setDropdownForClient(false)}
+            //       ></i>
+            //     </div>
+            //     <input
+            //       type="text"
+            //       placeholder="Search Customers..."
+            //       className={styles.searchInput}
+            //       onChange={handleSearchChange}
+            //     />
+            //     <ul>
+            //       {filteredClients
+            //         .filter((client) => client.employee_uuid === null)
+            //         .map((client) => (
+            //           <li
+            //             key={client.uuid}
+            //             className={styles.listItem}
+            //             onClick={() => assignClient(client)}
+            //           >
+            //             <p>
+            //               {client.name} {client.surname}
+            //             </p>
+            //           </li>
+            //         ))}
+            //     </ul>
+            //   </div>
+            // )}
             // </div>
           ))}
         </div>
