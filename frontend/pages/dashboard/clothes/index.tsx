@@ -45,13 +45,13 @@ export default function Customers() {
         clothes.map((c) => {
           const { clothes } = c;
           const hats = clothes
-            .filter((item) => item.type === "hats")
+            .filter((item) => item.type === "hat/cap")
             .map((item) => item.image);
           const tops = clothes
-            .filter((item) => item.type === "tops")
+            .filter((item) => item.type === "top")
             .map((item) => item.image);
           const bottoms = clothes
-            .filter((item) => item.type === "bottoms")
+            .filter((item) => item.type === "bottom")
             .map((item) => item.image);
           const shoes = clothes
             .filter((item) => item.type === "shoes")
@@ -66,7 +66,7 @@ export default function Customers() {
       }
     };
     setClothesData();
-  }, [bottomsImages, clothes, hatImages, shoesImages, topsImages]);
+  }, [clothes]);
 
   const handlePrevious = (
     index: number,
