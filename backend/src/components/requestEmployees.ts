@@ -22,7 +22,7 @@ export async function insertEmployee(
   let userVariables = {
     email: employee.email,
     password: "password",
-    role: "employee",
+    role: employee.work,
     employee_uuid: undefined,
     customer_uuid: undefined,
   };

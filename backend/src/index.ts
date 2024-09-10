@@ -21,8 +21,10 @@ import {
   insertClothe,
   insertPaymentHistory,
   insertTip,
+  insertEvent,
 } from "./components/";
 import { getTips } from "./API/tipsApi";
+import { getEventById, getEvents } from "./API/eventsApi";
 import fs from "fs";
 import { get } from "http";
 
@@ -92,6 +94,19 @@ async function putTipsInDb(token: Token) {
   });
 }
 
+async function putEventsInDb(token: Token) {
+  const events = await getEvents(token);
+
+  events.data.forEach(async (event: any) => {
+    try {
+      const eventDetailed = await getEventById(token, event.id);
+      insertEvent(eventDetailed.data);
+    } catch (error) {
+      console.error("An error occurred while inserting events");
+    }
+  });
+}
+
 async function updateEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
 
@@ -118,9 +133,10 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    putEmployeesInDb(token);
-    putCustomersInDb(token);
-    putTipsInDb(token);
+    // putEmployeesInDb(token);
+    // putCustomersInDb(token);
+    // putTipsInDb(token);
+    putEventsInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
