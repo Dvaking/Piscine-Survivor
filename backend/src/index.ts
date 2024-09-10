@@ -45,7 +45,6 @@ async function putCustomersInDb(token: Token) {
       }
 
       const customer_uuid = await insertCustomer(
-
         customerById.data,
         customerImage
       );
