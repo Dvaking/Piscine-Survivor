@@ -299,12 +299,12 @@
   .employee div {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 0;
     width: 15%;
   }
   .actions {
-    text-align: start;
+    text-align: flex-start;
   }
   .checkName {
     padding: 0;

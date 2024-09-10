@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { GetClothesProps } from "@types";
 import { getClothesByCustomerEmail } from "@hooks";
-import "bulma/css/bulma.css";
 import styles from "@styles/ClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -100,7 +99,7 @@ export default function Customers() {
                     type="text"
                     id="customer_email"
                     name="customer_email"
-                    placeholder="Entrez l'EMail du client"
+                    placeholder="Enter customer email address"
                     value={customerEMail}
                     onChange={handleChange}
                     required
@@ -110,7 +109,7 @@ export default function Customers() {
               <div className="field">
                 <div className="control">
                   <button className="button is-link" type="submit">
-                    Récupérer les vêtements
+                    Get clothes
                   </button>
                 </div>
               </div>

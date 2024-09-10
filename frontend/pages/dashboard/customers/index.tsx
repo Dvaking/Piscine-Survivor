@@ -290,46 +290,11 @@ export default function Home() {
               <div>{customer.phone_number}</div>
               <div>{paymentMethods[customer.uuid] || "Loading..."}</div>
               <div className={styles.assignClientButton}>
-                {/* <div
-                  className={styles.actions}
-                  onClick={() => handleActionClick(customer)}
-                > */}
+                <div className={styles.actions}>
                 <i className="fas fa-ellipsis-h"></i>
               </div>
             </div>
-            // {dropdownForClient && (
-            //   <div className={styles.dropdown}>
-            //     <div className={styles.topDropdown}>
-            //       <h2> Assign Customer To Coach </h2>
-            //       <i
-            //         className="fas fa-x"
-            //         onClick={() => setDropdownForClient(false)}
-            //       ></i>
-            //     </div>
-            //     <input
-            //       type="text"
-            //       placeholder="Search Customers..."
-            //       className={styles.searchInput}
-            //       onChange={handleSearchChange}
-            //     />
-            //     <ul>
-            //       {filteredClients
-            //         .filter((client) => client.employee_uuid === null)
-            //         .map((client) => (
-            //           <li
-            //             key={client.uuid}
-            //             className={styles.listItem}
-            //             onClick={() => assignClient(client)}
-            //           >
-            //             <p>
-            //               {client.name} {client.surname}
-            //             </p>
-            //           </li>
-            //         ))}
-            //     </ul>
-            //   </div>
-            // )}
-            // </div>
+            </div>
           ))}
         </div>
       </div>
