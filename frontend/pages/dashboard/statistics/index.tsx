@@ -32,8 +32,12 @@ ChartJS.register(
 );
 
 const StatisticsGraph: React.FC = () => {
-  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>([]);
-  const [assignedCustomersData, setAssignedCustomersData] = useState<GetEmployeesAssignedCustomersProps[]>([]);
+  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
+    []
+  );
+  const [assignedCustomersData, setAssignedCustomersData] = useState<
+    GetEmployeesAssignedCustomersProps[]
+  >([]);
 
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
@@ -51,7 +55,10 @@ const StatisticsGraph: React.FC = () => {
         console.log("MAPPEDDATA", mappedData);
         setEmployeesData(mappedData);
       } catch (error) {
-        console.error("Erreur lors de la récupération des données des employés :", error);
+        console.error(
+          "Erreur lors de la récupération des données des employés :",
+          error
+        );
       }
     })();
 
@@ -65,7 +72,10 @@ const StatisticsGraph: React.FC = () => {
         console.log("mappedCustomersData", mappedCustomersData);
         setAssignedCustomersData(mappedCustomersData);
       } catch (error) {
-        console.error("Erreur lors de la récupération des données des clients assignés :", error);
+        console.error(
+          "Erreur lors de la récupération des données des clients assignés :",
+          error
+        );
       }
     })();
   }, []);
@@ -99,7 +109,9 @@ const StatisticsGraph: React.FC = () => {
     datasets: [
       {
         label: "Répartition des clients",
-        data: assignedCustomersData.map((employee) => employee.customers_assign.length || 0),
+        data: assignedCustomersData.map(
+          (employee) => employee.customers_assign.length || 0
+        ),
         backgroundColor: backgroundColors,
         hoverOffset: 4,
       },
@@ -108,6 +120,7 @@ const StatisticsGraph: React.FC = () => {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
@@ -121,21 +134,29 @@ const StatisticsGraph: React.FC = () => {
 
   return (
     <main className="has-background-white-smoke">
-      <div className="columns is-multiline">
-        <div className="column is-half-desktop is-full-mobile">
-          <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
+      <div className="columns is-multiline is-mobile">
+        <div className="column is-half-desktop is-full-mobile mt-6">
+          <div className="box is-shadowless has-background-white mt-6">
             <div className="field">
-              <div className={styles["chart-container"]} style={{ height: "37rem" }}>
-                <Line ref={chartRef} data={lineChartData} options={chartOptions} />
+              <div className={styles["chart-container"]}>
+                <Line
+                  ref={chartRef}
+                  data={lineChartData}
+                  options={chartOptions}
+                />
               </div>
             </div>
           </div>
         </div>
-        <div className="column is-half-desktop is-full-mobile">
-          <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
+        <div className="column is-half-desktop is-full-mobile mt-6">
+          <div className="box is-shadowless has-background-white mt-6">
             <div className="field">
-              <div className={styles["chart-container"]} style={{ height: "37rem" }}>
-                <Pie ref={pieChartRef} data={pieChartData} options={chartOptions} />
+              <div className={styles["chart-container"]}>
+                <Pie
+                  ref={pieChartRef}
+                  data={pieChartData}
+                  options={chartOptions}
+                />
               </div>
             </div>
           </div>
@@ -144,5 +165,4 @@ const StatisticsGraph: React.FC = () => {
     </main>
   );
 };
-
 export default StatisticsGraph;
