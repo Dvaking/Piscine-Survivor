@@ -10,7 +10,6 @@ export async function insertPaymentHistory(payments: PaymentsHistoryProps, custo
   let variables = { ...payments, customer_uuid };
 
   try {
-    console.log("Inserting payment history: ", variables);
     response = await Client.request(InsertPaymentHistory, variables);
     console.log("Historique de paiement inséré avec succès");
   } catch (error) {
