@@ -48,6 +48,17 @@ export const GetEmployeesByWork = gql`
   }
 `;
 
+export const GetEmployeesAssignedCustomers = gql`
+query GetEmployeesAssignedCustomers {
+  private_employees(where: {work: {_eq: "Coach"}}) {
+    name
+    customer_asing {
+      name
+    }
+  }
+}
+`;
+
 //UPDATE
 export const UpdateEmployee = gql`
   mutation UpdateEmployee(
@@ -110,6 +121,15 @@ export const InsertEmployee = gql`
         id
         uuid
       }
+    }
+  }
+`;
+
+export const GetCoachNameByUuid = gql`
+  query GetCoachNameByUuid($uuid: uuid) {
+    private_employees(where: { uuid: { _eq: $uuid } }) {
+      name
+      surname
     }
   }
 `;

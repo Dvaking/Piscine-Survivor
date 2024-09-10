@@ -1,3 +1,17 @@
 table:
   name: payments_history
   schema: private
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - amount
+        - id
+        - comment
+        - date
+        - payment_method
+        - customer_uuid
+      filter:
+        customer_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""

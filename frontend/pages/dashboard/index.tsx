@@ -3,7 +3,7 @@ import "bulma/css/bulma.css";
 
 export default function Dashborad() {
   return (
-    <main className={styles.main}>
+    <main>
       <div className={styles.heading}>
         <h1>Dashboard</h1>
         <p>Welcome!</p>

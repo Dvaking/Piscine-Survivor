@@ -9,11 +9,14 @@ import {
   Title,
   Tooltip,
   Legend,
-  ArcElement, // Importation pour Pie chart
+  ArcElement,
 } from "chart.js";
 import styles from "@styles/StatisticsPage.module.css";
-import { getEmployeesByWork } from "@hooks";
-import { GetEmployeesByWorkProps } from "@types";
+import { getEmployeesByWork, getEmployeesAssignedCustomers } from "@hooks"; // Ajout de la nouvelle fonction
+import {
+  GetEmployeesByWorkProps,
+  GetEmployeesAssignedCustomersProps,
+} from "@types";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -25,19 +28,22 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement // Enregistrement pour le graphique Pie
+  ArcElement
 );
 
 const StaticticsGraph: React.FC = () => {
   const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
     []
   );
+  const [assignedCustomersData, setAssignedCustomersData] = useState<
+    GetEmployeesAssignedCustomersProps[]
+  >([]); // Nouvel état pour les clients assignés
   const chartRef = useRef(null);
+  const pieChartRef = useRef(null);
 
-  const fetchData = async () => {
+  const fetchEmployeesData = async () => {
     try {
       const data = await getEmployeesByWork();
-
       const mappedData: GetEmployeesByWorkProps[] = data.map((item) => ({
         name: item.name,
         image:
@@ -58,8 +64,30 @@ const StaticticsGraph: React.FC = () => {
     }
   };
 
+  const fetchAssignedCustomersData = async () => {
+    try {
+      const data = await getEmployeesAssignedCustomers();
+
+      console.log("Données des clients assignés : ", data);
+
+      const mappedCustomersData: GetEmployeesAssignedCustomersProps[] =
+        data.map((item) => ({
+          name: item.name,
+          customers_assign: item.customers_assign || [],
+        }));
+
+      setAssignedCustomersData(mappedCustomersData);
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des données des clients assignés",
+        error
+      );
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchEmployeesData();
+    fetchAssignedCustomersData();
   }, []);
 
   const lineChartData = {
@@ -84,14 +112,16 @@ const StaticticsGraph: React.FC = () => {
     return color;
   };
 
-  const backgroundColors = employeesData.map(() => getRandomColor());
+  const backgroundColors = assignedCustomersData.map(() => getRandomColor());
 
   const pieChartData = {
-    labels: employeesData.map((employee) => employee.name),
+    labels: assignedCustomersData.map((employee) => employee.name),
     datasets: [
       {
-        label: "Events Distribution",
-        data: employeesData.map((employee) => employee.events?.length ?? 0),
+        label: "Customers Distribution",
+        data: assignedCustomersData.map(
+          (employee) => employee.customers_assign?.length ?? 0
+        ),
         backgroundColor: backgroundColors,
         hoverOffset: 4,
       },
@@ -112,7 +142,7 @@ const StaticticsGraph: React.FC = () => {
   };
 
   return (
-    <main className="has-background-white-ter">
+    <main className="has-background-white-smoke">
       <div className="columns is-multiline">
         <div className="column is-half-desktop is-full-mobile">
           <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
@@ -128,12 +158,13 @@ const StaticticsGraph: React.FC = () => {
         </div>
         <div className="column is-half-desktop is-full-mobile">
           <div className="box is-shadowless has-background-white mb-6 ml-4 mr-4 mt-4">
-            <div
-              className={styles["chart-container"]}
-              style={{ height: "37rem" }}
-            >
-              <Pie ref={chartRef} data={pieChartData} options={options} />
-              faire que ce soit le nombre de clients par coach
+            <div className="field">
+              <div
+                className={styles["chart-container"]}
+                style={{ height: "37rem" }}
+              >
+                <Pie ref={pieChartRef} data={pieChartData} options={options} />
+              </div>
             </div>
           </div>
         </div>

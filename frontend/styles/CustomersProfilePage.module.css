@@ -1,0 +1,59 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+
+/* Laptop & Desktop */
+
+.headerBox {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: whitesmoke;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.heading {
+  padding: 2rem;
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.backButton {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1rem;
+  gap: 2rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  min-width: 600px;
+}
+
+@media screen and (max-width: 768px){
+  .container {
+    padding: 0.5rem;
+  }
+  .table {
+    font-size: 1rem;
+  }
+}
