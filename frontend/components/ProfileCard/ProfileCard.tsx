@@ -77,7 +77,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
                 <text>Email:</text>
                 <p>{customer?.email}</p>
               </div>
-              <div>
+              <div className={styles.wordbreak}>
                 <text>Address:</text>
                 <p>{customer?.address}</p>
               </div>
@@ -93,25 +93,4 @@ export function ProfileCard({ customer }: ProfileCardProps) {
           </div>
         </div>
   );
-}
-
-{
-  /* <div className="content">
-<p>
-  <strong>User ID:</strong> UD003054
-</p>
-<p>
-  <strong>Email:</strong> francis.mitcham@gmail.com
-</p>
-<p>
-  <strong>Address:</strong> 551 Swanston Street, Melbourne,
-  Victoria 3053 Australia
-</p>
-<p>
-  <strong>Last Activity:</strong> 15 Feb, 2024
-</p>
-<p>
-  <strong>Coach:</strong> Nicolas Latourne
-</p>
-</div> */
 }

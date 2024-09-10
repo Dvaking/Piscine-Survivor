@@ -3,7 +3,7 @@
     flex-direction: column;
     border: 2px solid lightgray;
     border-radius: 2%;
-    ;
+    display: flex;
 }
 
 .box text {
@@ -57,4 +57,15 @@
 .body p {
     font-weight: 600;
     color: #656a7e
+}
+
+.wordbreak {
+    display: flex;
+    flex-direction: column;
+    white-space: normal;
+    width: 90%;
+}
+
+.wordbreak p {
+
 }
