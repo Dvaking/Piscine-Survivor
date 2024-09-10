@@ -48,6 +48,17 @@ export const GetEmployeesByWork = gql`
   }
 `;
 
+export const GetEmployeesAssignedCustomers = gql`
+query GetEmployeesAssignedCustomers {
+  private_employees(where: {work: {_eq: "Coach"}}) {
+    name
+    customer_asing {
+      name
+    }
+  }
+}
+`;
+
 //UPDATE
 export const UpdateEmployee = gql`
   mutation UpdateEmployee(

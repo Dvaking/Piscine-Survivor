@@ -131,3 +131,12 @@ export type GetCoachNameByUuidProps = {
   name: string;
   surname: string;
 };
+
+export type GetEmployeesAssignedCustomersProps = {
+  name: string;
+  customers_assign: [
+    {
+      name: string;
+    }
+  ];
+};

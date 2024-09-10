@@ -24,6 +24,17 @@ export default function Home() {
     useState<GetEmployeesProps | null>(null);
   const [dropdownForClient, setDropdownForClient] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [emailError, setEmailError] = useState<string>("");
+
+  const generateUniqueId = () => {
+    let randomId;
+    const existingIds = employees.map((employee) => employee.id);
+    do {
+      randomId = Math.floor(Math.random() * 10000);
+    } while (existingIds.includes(randomId));
+    return randomId;
+  };
+
   const [formData, setFormData] = useState<InsertEmployeeProps>({
     name: "",
     surname: "",
@@ -31,13 +42,25 @@ export default function Home() {
     birth_date: "",
     email: "",
     work: "",
-    id: employees.length + 1,
+    id: generateUniqueId(),
   });
+
+  const isEmailInUse = (email: string) => {
+    return employees.some((employee) => employee.email === email);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    if (name === "email") {
+      if (isEmailInUse(value)) {
+        setEmailError("Email already in use");
+      } else {
+        setEmailError("");
+      }
+    }
     setFormData((prevData) => ({
-      ...prevData
+      ...prevData,
+      [name]: name === "id" ? Number(value) : value,
     }));
   };
 
@@ -45,6 +68,7 @@ export default function Home() {
     e.preventDefault();
     try {
       await insertEmployee(formData);
+      console.log("Employee inserted successfully: ", formData);
       setPopupVisible(false);
       router.reload();
     } catch (error) {
@@ -63,6 +87,10 @@ export default function Home() {
   }, []);
 
   const handleActionClick = (employee: GetEmployeesProps) => {
+    if (employee.work !== "Coach" && employee.work !== "coach") {
+      alert("Clients can only be assigned to coaches.");
+      return;
+    }
     if (selectedEmployee && selectedEmployee.uuid === employee.uuid) {
       setDropdownForClient(!dropdownForClient);
     } else {
@@ -109,7 +137,10 @@ export default function Home() {
             <button className="button is-medium">Export</button>
           </div>
           <div>
-            <button className="button is-link is-large" onClick={() => setPopupVisible(true)}>
+            <button
+              className="button is-link is-large"
+              onClick={() => setPopupVisible(true)}
+            >
               <i className="fas fa-plus" aria-hidden="true"></i>
             </button>
           </div>
@@ -125,7 +156,7 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <h2>New Employee</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="field">
                 <label className="label">Name</label>
                 <div className="control">
@@ -190,13 +221,14 @@ export default function Home() {
                     placeholder="Enter your email address"
                   />
                 </div>
+                {emailError && <p className="help is-danger">{emailError}</p>}
               </div>
               <div className="field">
                 <label className="label">Job</label>
                 <div className="control">
                   <input
                     className="input"
-                    type="job"
+                    type="work"
                     name="work"
                     value={formData.work}
                     onChange={handleInputChange}
@@ -207,7 +239,11 @@ export default function Home() {
               <div className="field">
                 <div className={styles.formButtons}>
                   <div>
-                    <button className="button is-link" type="submit">
+                    <button
+                      className="button is-link"
+                      type="submit"
+                      disabled={!!emailError}
+                    >
                       Save
                     </button>
                   </div>

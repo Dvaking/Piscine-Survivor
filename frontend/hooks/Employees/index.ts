@@ -4,3 +4,4 @@ export * from './getEmployees';
 export * from './getEmployeeByWork';
 export * from './getCoachNameByUuid';
 export * from './updateEmployee';
+export * from './getEmployeeAssignedCustomers';
