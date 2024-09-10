@@ -7,7 +7,7 @@ interface Customer {
 
 export async function insertCustomer(
   customer: CustomerProps,
-  image: string,
+  image: string
 ): Promise<string | null> {
   let response: any;
   let variables = { ...customer, image };
@@ -19,7 +19,6 @@ export async function insertCustomer(
   try {
     response = await Client.request(InsertCustomer, variables);
     console.log("Utilisateur inséré avec succès");
-    console.log("response", response);
     const uuid = response?.insert_private_customers?.returning[0]?.uuid;
     return uuid;
   } catch (error) {
