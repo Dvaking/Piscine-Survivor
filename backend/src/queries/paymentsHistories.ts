@@ -3,7 +3,7 @@ import { gql } from "graphql-request";
 // INSERT
 export const InsertPaymentHistory = gql`
   mutation MyMutation(
-    $amount: Int
+    $amount: money
     $comment: String
     $customer_uuid: uuid
     $date: String
