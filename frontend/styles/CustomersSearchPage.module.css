@@ -58,6 +58,14 @@
   gap: 1rem;
 }
 
+.dropApply button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .icons {
   display: flex;
   flex-direction: row;
@@ -68,11 +76,6 @@
   font-size: 1.4rem;
   font-weight: 600;
   align-self: center;
-}
-
-.employee i {
-  font-size: 1.4rem;
-  font-weight: 600;
 }
 
 .category {
@@ -94,16 +97,34 @@
   text-align: right;
 }
 
-.employee {
-  padding: 2rem;
+.actions i {
+  font-size: 1.9rem;
+  padding: 0;
+}
+
+.actions i:hover {
+  cursor: pointer;
+}
+
+.customer {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
-.employee div {
+.customer div {
   width: 100%;
+}
+
+.customer i {
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .checkName {
@@ -121,8 +142,17 @@
   width: 100%;
 }
 
+.clientProfileButton p {
+  font-weight: 600;
+  color: black;
+}
 
-.popupOverlay {
+.clientProfileButton p:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+/* .popupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -136,24 +166,42 @@
 }
 
 .popupContent {
+  position: fixed;
   background-color: whitesmoke;
   width: 50%;
-  height: 50%;
+  max-height: 80%;
+  height: auto;
   border-radius: 3px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  padding: 2rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow-y: auto;
 }
 
 .popupContent h2 {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 600;
-  padding-bottom: 3.5rem;
+  padding-bottom: 2rem;
 }
 
 .popupContent form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.popupContent label {
+  font-size: 1.7rem;
+}
+
+.popupContent input {
+  padding: 1rem;
+  font-size: 1.2rem;
 }
 
 .formButtons {
@@ -163,40 +211,267 @@
   gap: 2rem;
 }
 
-.addClientButton {
+.formButtons button {
+  font-size: 1.3rem;
+  border-radius: 5px;
+} */
+
+.assignClientButton {
   position: relative;
   display: inline-block;
 }
 
-.dropdown {
+/* .dropdown {
+  max-width: 50%;
+  max-height: 50%;
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 2rem;
+}
+
+.searchInput {
+  width: 99%;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  z-index: 1000;
-  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
 }
 
-.addClientButton ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.topDropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.listItem {
-  padding: 10px;
+.topDropdown h2 {
+  font-size: 2rem;
+}
+
+.topDropdown i {
+  padding-right: 0.5rem;
   cursor: pointer;
 }
 
-.listItem:hover {
-  background-color: #f1f1f1;
+.dropdown ul {
+  overflow-y: auto;
+  background-color: white;
 }
 
+.listItem {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.listItem p {
+  font-size: 1.5rem;
+}
+
+.listItem:hover {
+  background-color: #b7d8ff;
+} */
+
 /* mobile & tablet */
-@media (max-width: 1920px) {
-  .main {
-    background-color: white;
+@media (max-width: 1480px) {
+  .category {
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  .category div {
+    width: 15%;
+  }
+  .customer {
+    width: 100%;
+    justify-content: space-evenly;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  .customer div {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 0;
+    width: 15%;
+  }
+  .actions {
+    text-align: start;
+  }
+  .checkName {
+    padding: 0;
+  }
+  .checkName i {
+    display: none;
+  }
+  .checkName p {
+    text-align: center;
+  }
+  .email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .customer .dropdown {
+    width: 70% !important;
+    max-width: 100% !important;
+    gap: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .customer .topDropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .topDropdown h2 {
+    font-size: 1.4rem;
+  }
+  .searchInput {
+    font-size: 1.3rem;
+  }
+  .listItem p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .title h1 {
+    font-size: 2rem;
+    font-weight: 650;
+  }
+  .title p {
+    font-size: 1rem;
+  }
+  .email {
+    font-size: 0.7rem;
+  }
+  .exportAddButtons {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  .exportAddButtons button {
+    font-size: 1rem;
+  }
+  .exportAddButtons i {
+    font-size: 1.6rem;
+  }
+  .customer .dropdown {
+    width: 80% !important;
+    max-width: 100% !important;
+  }
+  .topDropdown h2 {
+    font-size: 1.2rem;
+  }
+  .searchInput {
+    font-size: 1rem;
+  }
+  .listItem p {
+    font-size: 1rem;
+  }
+  .popupContent {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 90%;
+  }
+  .popupContent h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+  }
+  .popupContent form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .popupContent label {
+    font-size: 1.4rem;
+  }
+  .popupContent input {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  .formButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .formButtons button {
+    font-size: 1.2rem;
+    border-radius: 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .title h1 {
+    font-size: 1.7rem;
+    font-weight: 650;
+  }
+  .title p {
+    font-size: 0.9rem;
+  }
+  .exportAddButtons {
+    gap: 0.5rem;
+  }
+  .exportAddButtons button {
+    font-size: 1rem;
+  }
+  .exportAddButtons i {
+    font-size: 1.5rem;
+  }
+  .category div {
+    font-size: 0.8rem;;
+  }
+  .checkName {
+    font-size: 0.9rem;
+  }
+  .popupContent {
+    width: 90%;
+  }
+  .popupContent h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+  }
+  .popupContent label {
+    font-size: 1.1rem;
+  }
+  .popupContent input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .formButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .formButtons button {
+    font-size: 1rem;
+    border-radius: 5px;
   }
 }

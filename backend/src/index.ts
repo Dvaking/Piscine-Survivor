@@ -20,8 +20,11 @@ import {
   updateCustomer,
   insertClothe,
   insertPaymentHistory,
+  insertTip,
 } from "./components/";
+import { getTips } from "./API/tipsApi";
 import fs from "fs";
+import { get } from "http";
 
 import express from "express";
 import authRouter from "./auth/index";
@@ -77,6 +80,18 @@ async function putEmployeesInDb(token: Token) {
   });
 }
 
+async function putTipsInDb(token: Token) {
+  const tips = await getTips(token);
+
+  tips.data.forEach(async (tip: any) => {
+    try {
+      insertTip(tip);
+    } catch (error) {
+      console.error("An error occurred while inserting tips");
+    }
+  });
+}
+
 async function updateEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
 
@@ -105,6 +120,7 @@ async function fetchData(): Promise<void> {
 
     putEmployeesInDb(token);
     putCustomersInDb(token);
+    putTipsInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }

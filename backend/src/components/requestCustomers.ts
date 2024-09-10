@@ -1,5 +1,10 @@
 import { CustomerProps } from "../types/customer";
-import { InsertCustomer, Client, UpdateCustomer } from "../queries/";
+import {
+  InsertCustomer,
+  Client,
+  UpdateCustomer,
+  InsertUser,
+} from "../queries/";
 
 interface Customer {
   private_customers: CustomerProps[];
@@ -10,16 +15,24 @@ export async function insertCustomer(
   image: string
 ): Promise<string | null> {
   let response: any;
-  let variables = { ...customer, image };
+  let customerVariables = { ...customer, image };
 
-  if (variables.image === undefined) {
-    variables.image = "";
+  if (customerVariables.image === undefined) {
+    customerVariables.image = "";
   }
-
+  let userVariables = {
+    email: customer.email,
+    password: "password",
+    role: "customer",
+    employee_uuid: undefined,
+    customer_uuid: undefined,
+  };
   try {
-    response = await Client.request(InsertCustomer, variables);
-    console.log("Utilisateur inséré avec succès");
+    response = await Client.request(InsertCustomer, customerVariables);
     const uuid = response?.insert_private_customers?.returning[0]?.uuid;
+    userVariables.customer_uuid = uuid;
+    await Client.request(InsertUser, userVariables);
+    console.log("Utilisateur inséré avec succès");
     return uuid;
   } catch (error) {
     console.error("Erreur lors de l'insertion de customer");
