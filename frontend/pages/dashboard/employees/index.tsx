@@ -24,6 +24,16 @@ export default function Home() {
     useState<GetEmployeesProps | null>(null);
   const [dropdownForClient, setDropdownForClient] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  
+  const generateUniqueId = () => {
+    let randomId;
+    const existingIds = employees.map((employee) => employee.id);
+    do {
+      randomId = Math.floor(Math.random() * 10000);
+    } while (existingIds.includes(randomId));
+    return randomId;
+  };
+  
   const [formData, setFormData] = useState<InsertEmployeeProps>({
     name: "",
     surname: "",
@@ -31,13 +41,14 @@ export default function Home() {
     birth_date: "",
     email: "",
     work: "",
-    id: employees.length + 1,
+    id: generateUniqueId(),
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
-      ...prevData
+      ...prevData,
+      [name]: name === "id" ? Number(value) : value,
     }));
   };
 
@@ -45,6 +56,7 @@ export default function Home() {
     e.preventDefault();
     try {
       await insertEmployee(formData);
+      console.log("Employee inserted successfully: ", formData);
       setPopupVisible(false);
       router.reload();
     } catch (error) {
@@ -125,7 +137,7 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <h2>New Employee</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="field">
                 <label className="label">Name</label>
                 <div className="control">
@@ -196,7 +208,7 @@ export default function Home() {
                 <div className="control">
                   <input
                     className="input"
-                    type="job"
+                    type="work"
                     name="work"
                     value={formData.work}
                     onChange={handleInputChange}
