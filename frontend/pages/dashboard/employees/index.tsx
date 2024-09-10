@@ -153,8 +153,7 @@ export default function Home() {
         >
           <div
             className={styles.popupContent}
-            onClick={(e) => e.stopPropagation()}
-          >
+            onClick={(e) => e.stopPropagation()}>
             <h2>New Employee</h2>
             <form onSubmit={handleSubmit}>
               <div className="field">
@@ -266,14 +265,11 @@ export default function Home() {
           <div className={styles.filterBar}>
             <div className={styles.dropApply}>
               <div className="dropdown">
-                <div className="dropdown-trigger">
-                  <button className="button">
-                    <span>Bulk Action</span>
-                    <span className="icon is-small">
-                      <i className="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </button>
-                </div>
+                <button className="button">
+                  <div>Bulk Action</div>
+
+                  <i className="fas fa-angle-down" aria-hidden="true"></i>
+                </button>
               </div>
               <div>
                 <div className="button is-static">Apply</div>
@@ -294,9 +290,7 @@ export default function Home() {
             <div>Phone</div>
             {/* <div>Position</div> */}
             <div>Number of Customers</div>
-            <div>
-              <p className={styles.actions}>Actions</p>
-            </div>
+            <div className={styles.actions}>Actions</div>
           </div>
           {employees.map((employee) => (
             <div className={styles.employee} key={employee.uuid}>
@@ -308,11 +302,11 @@ export default function Home() {
                   </strong>
                 </p>
               </div>
-              <div>{employee.email}</div>
+              <div className={styles.email}>{employee.email}</div>
               <div>---</div>
               {/* <div>{employee.work}</div> */}
               <div>{getEmployeeCustomerNumber(employee)}</div>
-              <div className={styles.addClientButton}>
+              <div className={styles.assignClientButton}>
                 <div
                   className={styles.actions}
                   onClick={() => handleActionClick(employee)}
