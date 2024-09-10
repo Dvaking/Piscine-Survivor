@@ -1,3 +1,34 @@
 table:
   name: clothes
   schema: private
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - customer_id
+        - id
+        - image
+        - type
+      filter:
+        customer_id:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - customer_id
+        - image
+        - type
+      filter:
+        customer_id:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        customer_id:
+          _eq: X-Hasura-User-Id
+    comment: ""

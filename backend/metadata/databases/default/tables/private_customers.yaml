@@ -1,6 +1,16 @@
 table:
   name: customers
   schema: private
+object_relationships:
+  - name: user_auth
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: customer_uuid
+        insertion_order: null
+        remote_table:
+          name: users
+          schema: public
 array_relationships:
   - name: clothes
     using:
@@ -29,3 +39,49 @@ array_relationships:
         remote_table:
           name: payments_history
           schema: private
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - id
+        - image
+        - name
+        - phone_number
+        - surname
+        - uuid
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - image
+        - name
+        - phone_number
+        - surname
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""

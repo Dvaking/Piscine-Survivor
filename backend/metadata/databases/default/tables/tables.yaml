@@ -5,3 +5,4 @@
 - "!include private_events.yaml"
 - "!include private_payments_history.yaml"
 - "!include private_tips.yaml"
+- "!include public_users.yaml"
