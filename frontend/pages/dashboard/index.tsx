@@ -77,14 +77,15 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="title is-3">Dashboard</h1>
+    <div className="container ml-6" style={{ minWidth: "95%"}}>
+      <h1 className="title">Dashboard</h1>
       <h4>Welcome</h4>
 
       <div className="columns mt-6">
-        <div className="column is-half">
+        <div className="column is-three-fifths">
           <div className="box">
-            <h2 className="title is-5">Customers Overview</h2>
+            <h2 className="title is-6 mb-0">Customers Overview</h2>
+            <h4 className="is-5 mb-6">When customers have joined in the time.</h4>
             <div className="content">
               <ul>
                 <li>Customers: 932 (+12.37%)</li>
@@ -96,7 +97,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="column is-half">
+        <div className="column is-two-fifths">
           <div className="box">
             <h2 className="title is-6 mb-0">Events</h2>
             <h4 className="is-5 mb-6">Our events and their status</h4>
@@ -113,7 +114,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="columns">
-        <div className="column is-half">
+        <div className="column is-three-fifths">
           <div className="box">
             <h2 className="title is-5">Customers by Country</h2>
             <div className="content">
@@ -125,12 +126,12 @@ const Dashboard: React.FC = () => {
               </ul>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <p>Map visualization could go here</p>
+              <p>Map visualization</p>
             </div>
           </div>
         </div>
 
-        <div className="column is-half">
+        <div className="column is-two-fifths">
           <div className="box">
             <h2 className="title is-5">Meetings Top Sources</h2>
             <Pie data={pieData} />
