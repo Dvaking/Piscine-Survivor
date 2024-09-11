@@ -5,6 +5,7 @@ import express from "express";
 import { getUserByEmail } from "./getUserByEmail";
 import { verifyUser } from "./verifyUser";
 import { hashPassword } from "./passwordHash";
+import { insertUser } from "./insertUser";
 
 const authRouter = express.Router();
 const secretKey = process.env.JWT_SECRET_KEY;
@@ -43,18 +44,19 @@ authRouter.post("/logout", async (req, res) => {
 });
 
 authRouter.post("/register", async (req, res) => {
-  const { uuid, password } = req.body;
+  const { uuid, email, password, role } = req.body;
 
   if (!password || !uuid) {
-    console.error("password not provided");
+    console.log("password not provided");
     return res.sendStatus(400);
   }
 
   const hashedPassword = await hashPassword(password);
   if (!hashedPassword) {
-    console.error("Error hashing password");
+    console.log("Error hashing password");
     return res.sendStatus(500);
   }
+  await insertUser(email, hashedPassword, role, uuid);
 
 });
 
@@ -71,7 +73,7 @@ authRouter.post("/login", async (req, res) => {
       customer_uuid: user.customer_uuid,
       password: user.password,
     };
-    const verifiedUser = verifyUser({ user: userDetails, password: password });
+    const verifiedUser = await verifyUser({ user: userDetails, password: password });
 
     if (verifiedUser.role === "NoUser") {
       return res
@@ -131,7 +133,7 @@ authRouter.post("/refresh", async (req, res) => {
       const verifiedUser: {
         role: string;
         uuid: string;
-      } = verifyUser({ user: userDetails, password: userDetails.password });
+      } = await verifyUser({ user: userDetails, password: userDetails.password });
       if (verifiedUser.role === "NoUser") return res.sendStatus(403);
 
       interface Claims {

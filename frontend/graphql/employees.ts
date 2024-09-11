@@ -112,13 +112,8 @@ export const InsertEmployee = gql`
     ) {
       affected_rows
       returning {
-        name
-        surname
-        gender
-        birth_date
         email
         work
-        id
         uuid
       }
     }

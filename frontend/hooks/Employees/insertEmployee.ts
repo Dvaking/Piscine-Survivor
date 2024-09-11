@@ -1,9 +1,12 @@
 import { client, InsertEmployee } from "@graphql";
-import { InsertEmployeeProps } from "@types";
+import { InsertEmployeeProps, ResponseInsertEmployeeProps } from "@types";
 import { refreshToken } from "@hooks";
 
 interface EmployeeInsert {
-  private_employees: InsertEmployeeProps[];
+  insert_private_employees: {
+    affected_rows: number;
+    returning: ResponseInsertEmployeeProps[];
+  };
 }
 
 export async function insertEmployee(employees: InsertEmployeeProps) {
@@ -27,5 +30,5 @@ export async function insertEmployee(employees: InsertEmployeeProps) {
         }
     }
   }
-  return response ? response.private_employees : [];
+  return response ? response.insert_private_employees.returning[0] : "";
 }

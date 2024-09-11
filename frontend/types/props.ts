@@ -8,6 +8,12 @@ export type InsertEmployeeProps = {
   id: number;
 };
 
+export type ResponseInsertEmployeeProps = {
+  uuid: string;
+  email: string;
+  work: string;
+};
+
 export type GetEmployeesProps = {
   uuid: string;
   id: number;
