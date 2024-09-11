@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
 import Cookies from "js-cookie";
@@ -23,6 +22,7 @@ import {
   GetEmployeesByWorkProps,
   GetEventsProps,
 } from "@types";
+import { SizeScale } from "chartjs-chart-geo";
 
 ChartJS.register(
   CategoryScale,
@@ -37,9 +37,13 @@ ChartJS.register(
 );
 
 export default function Dashboard() {
-  const [customerNameData, setCustomersNameData] = useState<GetCustomersNameProps[]>([]);
+  const [customerNameData, setCustomersNameData] = useState<
+    GetCustomersNameProps[]
+  >([]);
   const [eventData, setEventData] = useState<GetEventsProps[]>([]);
-  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>([]);
+  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
+    []
+  );
 
   const fetchCustomerNameData = async () => {
     try {
@@ -62,11 +66,13 @@ export default function Dashboard() {
   const fetchEventData = async () => {
     try {
       const data = await getEvents();
-      setEventData(data.map((item) => ({
-        name: item.name,
-        type: item.type,
-        date: item.date,
-      })));
+      setEventData(
+        data.map((item) => ({
+          name: item.name,
+          type: item.type,
+          date: item.date,
+        }))
+      );
     } catch (error) {
       console.error("Erreur lors de la récupération des données", error);
     }
@@ -84,7 +90,8 @@ export default function Dashboard() {
 
   const totalCustomers = customerNameData.length;
   const totalCoaches = employeesData.length;
-  const customersPerCoach = totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
+  const customersPerCoach =
+    totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
 
   const eventDates = eventData.map((event) => event.date);
   const eventsCountPerDate = eventDates.reduce<Record<string, number>>(
@@ -95,7 +102,10 @@ export default function Dashboard() {
     {}
   );
 
-  const totalEvents = Object.values(eventsCountPerDate).reduce((acc, count) => acc + count, 0);
+  const totalEvents = Object.values(eventsCountPerDate).reduce(
+    (acc, count) => acc + count,
+    0
+  );
   const numberOfDays = new Set(eventDates).size;
   const numberOfWeeks = Math.ceil(numberOfDays / 7);
   const numberOfMonths = Math.ceil(numberOfDays / 30);
@@ -181,6 +191,35 @@ export default function Dashboard() {
           "rgba(153, 102, 255, 1)",
         ],
         borderWidth: 1,
+        radius: "50%",
+      },
+    ],
+  };
+
+  const doughnutCustomerData = {
+    labels: topEventTypes.map(([type]) => type),
+    datasets: [
+      {
+        label: "Event Types",
+        data: topEventTypes.map(([, count]) => count),
+        backgroundColor: [
+          "rgba(255, 99, 71, 0.6)",
+          "rgba(100, 149, 237, 0.6)",
+          "rgba(255, 105, 180, 0.6)",
+          "rgba(60, 179, 113, 0.6)",
+          "rgba(255, 165, 0, 0.6)",
+          "rgba(255, 20, 147, 0.6)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 71, 1)",
+          "rgba(100, 149, 237, 1)",
+          "rgba(255, 105, 180, 1)",
+          "rgba(60, 179, 113, 1)",
+          "rgba(255, 165, 0, 1)",
+          "rgba(255, 20, 147, 1)",
+        ],
+        borderWidth: 1,
+        radius: "50%",
       },
     ],
   };
@@ -188,9 +227,12 @@ export default function Dashboard() {
   return (
     <main className="has-background-white-smoke">
       <div className={`${styles["container-wide"]}`}>
-        <h3 className="title is-size-4-mobile is-size-3-tablet is-size-2-desktop">Dashboard</h3>
-        <h4 className="is-size-5-mobile">Welcome!</h4>
-
+        <div>
+          <h3 className="title is-size-4-mobile is-size-3-tablet is-size-2-desktop">
+            Dashboard
+          </h3>
+          <h4 className="is-size-5-mobile">Welcome!</h4>
+        </div>
         <div className="columns is-multiline">
           <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
@@ -240,7 +282,7 @@ export default function Dashboard() {
             <div className="box">
               <h2 className="title is-5">Customers by Country</h2>
               <div style={{ textAlign: "center" }}>
-                <p>Map visualization</p>
+                <Doughnut data={doughnutCustomerData} />
               </div>
               <div className="content">
                 <ul>
@@ -263,4 +305,4 @@ export default function Dashboard() {
       </div>
     </main>
   );
-};
+}
