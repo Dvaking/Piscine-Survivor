@@ -21,8 +21,12 @@ import {
   updateCustomer,
   insertClothe,
   insertPaymentHistory,
+  insertTip,
+  insertEvent,
 } from "./components/";
-import fs from "fs";
+import { getTips } from "./API/tipsApi";
+import { getEventById, getEvents } from "./API/eventsApi";
+import { getEncounterById, getEncounters } from "./API/encountersApi";
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
@@ -45,7 +49,6 @@ async function putCustomersInDb(token: Token) {
       }
 
       const customer_uuid = await insertCustomer(
-
         customerById.data,
         customerImage
       );
@@ -68,9 +71,34 @@ async function putEmployeesInDb(token: Token) {
       const employeeToSend = await getEmployeeById(token, employee.id);
       const employeeImage = await getEmployeeImageById(token, employee.id);
 
-      insertEmployee(employeeToSend.data, employeeImage);
+      await insertEmployee(employeeToSend.data, employeeImage);
     } catch (error) {
       console.error("An error occurred while inserting employees");
+    }
+  });
+}
+
+async function putTipsInDb(token: Token) {
+  const tips = await getTips(token);
+
+  tips.data.forEach(async (tip: any) => {
+    try {
+      insertTip(tip);
+    } catch (error) {
+      console.error("An error occurred while inserting tips");
+    }
+  });
+}
+
+async function putEventsInDb(token: Token) {
+  const events = await getEvents(token);
+
+  events.data.forEach(async (event: any) => {
+    try {
+      const eventDetailed = await getEventById(token, event.id);
+      insertEvent(eventDetailed.data);
+    } catch (error) {
+      console.error("An error occurred while inserting events");
     }
   });
 }
@@ -101,8 +129,10 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    putEmployeesInDb(token);
+    await putEmployeesInDb(token);
     putCustomersInDb(token);
+    putTipsInDb(token);
+    await putEventsInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }

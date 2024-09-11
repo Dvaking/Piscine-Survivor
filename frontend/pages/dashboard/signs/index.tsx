@@ -38,7 +38,6 @@ export default function Home() {
   const selectClient1 = (client: GetCustomersProps) => {
     setSelectedClient1(client);
     setDropdownForClient1(false);
-    console.log(client); //////////////////////////////////////////////////////
   };
 
   const selectClient2 = (client: GetCustomersProps) => {
@@ -182,9 +181,10 @@ export default function Home() {
                 <>
                   <figure className="image">
                     <img
+                      src={selectedClient1.image ? `data:image/png;base64,${selectedClient1.image}`
+                      : "https://via.placeholder.com/128"}
+                      alt={selectedClient1.name}
                       className="is-rounded"
-                      src={selectedClient1.image}
-                      alt="Client"
                     />
                   </figure>
                   <div className={styles.clientInfo}>
@@ -250,10 +250,11 @@ export default function Home() {
               {selectedClient2 ? (
                 <>
                   <figure className="image">
-                    <img
+                  <img
+                      src={selectedClient2.image ? `data:image/png;base64,${selectedClient2.image}`
+                      : "https://via.placeholder.com/128"}
+                      alt={selectedClient2.name}
                       className="is-rounded"
-                      src={selectedClient2.image}
-                      alt="Client"
                     />
                   </figure>
                   <div className={styles.clientInfo}>

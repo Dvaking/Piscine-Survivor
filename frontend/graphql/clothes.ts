@@ -12,3 +12,14 @@ export const GetClothesByCustomerEmail = gql`
     }
   }
 `;
+
+export const GetClothesByCustomerUuid = gql`
+  query GetClothesByCustomerUuid($uuid: uuid) {
+    private_customers(where: { uuid: { _eq: $uuid } }) {
+      clothes {
+        image
+        type
+      }
+    }
+  }
+`;

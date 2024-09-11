@@ -1,244 +1,100 @@
 import { useEffect, useState } from "react";
-import { GetClothesProps } from "@types";
-import { getClothesByCustomerEmail } from "@hooks";
-import "bulma/css/bulma.css";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { getCustomers, getClothesByCustomerUuid } from "@hooks";
+import { GetCustomersProps, GetClothesProps } from "@types";
 import styles from "@styles/ClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-export default function Customers() {
-  const [clothes, setClothes] = useState<GetClothesProps[]>([]);
-  const [hatImages, setHatImages] = useState<string[]>([]);
-  const [hatIndex, setHatIndex] = useState(0);
+type ClientWithClothes = {
+  client: GetCustomersProps;
+  clothes: GetClothesProps[];
+};
 
-  const [topsImages, setTopsImages] = useState<string[]>([]);
-  const [topsIndex, setTopsIndex] = useState(0);
-
-  const [bottomsImages, setBottomsImages] = useState<string[]>([]);
-  const [bottomsIndex, setBottomsIndex] = useState(0);
-
-  const [shoesImages, setShoesImages] = useState<string[]>([]);
-  const [shoesIndex, setShoesIndex] = useState(0);
-
-  const [customerEMail, setCustomerEMail] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomerEMail(e.target.value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log("Soumission du formulaire avec EMail :", customerEMail);
-
-    try {
-      const response = await getClothesByCustomerEmail(customerEMail);
-      setClothes(response);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des vêtements:", error);
-    }
-  };
+export default function Home() {
+  const router = useRouter();
+  const [clothesData, setClothesData] = useState<ClientWithClothes[]>([]);
+  const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    const setClothesData = () => {
-      if (clothes && clothes.length > 0) {
-        clothes.map((c) => {
-          const { clothes } = c;
-          const hats = clothes
-            .filter((item) => item.type === "hat/cap")
-            .map((item) => item.image);
-          const tops = clothes
-            .filter((item) => item.type === "top")
-            .map((item) => item.image);
-          const bottoms = clothes
-            .filter((item) => item.type === "bottom")
-            .map((item) => item.image);
-          const shoes = clothes
-            .filter((item) => item.type === "shoes")
-            .map((item) => item.image);
-          setHatImages(hats);
-          setTopsImages(tops);
-          setBottomsImages(bottoms);
-          setShoesImages(shoes);
-        });
-      } else {
-        console.log("Aucun vêtement trouvé pour cette adresse E-mail.");
-      }
+    const fetchData = async () => {
+      const fetchedCustomers = await getCustomers();
+      const fetchedClothesData = await fetchAllClothesData(fetchedCustomers);
+      setCustomers(fetchedCustomers);
+      setClothesData(fetchedClothesData);
     };
-    setClothesData();
-  }, [clothes]);
+    fetchData();
+  }, []);
 
-  const handlePrevious = (
-    index: number,
-    setIndex: React.Dispatch<React.SetStateAction<number>>,
-    images: string[]
-  ) => {
-    setIndex(index === 0 ? images.length - 1 : index - 1);
+  const fetchAllClothesData = async (customers: GetCustomersProps[]) => {
+    const clothesData = await Promise.all(
+      customers.map(async (client) => {
+        const clothes = await getClothesByCustomerUuid(client.uuid);
+        return { client, clothes };
+      })
+    );
+    return clothesData;
   };
 
-  const handleNext = (
-    index: number,
-    setIndex: React.Dispatch<React.SetStateAction<number>>,
-    images: string[]
-  ) => {
-    setIndex(index === images.length - 1 ? 0 : index + 1);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value.toLowerCase());
   };
+
+  const filteredClients = customers.filter((client) =>
+    client.name.toLowerCase().includes(searchQuery)
+  );
+
+  const filteredClientsWithClothes = clothesData
+    .filter(({ clothes }) => clothes.length > 0)
+    .map(({ client }) => client);
 
   return (
-    <main className="is-clearfix">
-      <div className={`${styles.clothes} is-clipped`}>
-        <div className={`${styles.clothesContainer} is-clipped`}>
-          <div className="form-container is-clipped">
-            <form
-              onSubmit={handleSubmit}
-              className="box is-shadowless has-background-white-ter"
-            >
-              <div className="field">
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    id="customer_email"
-                    name="customer_email"
-                    placeholder="Entrez l'EMail du client"
-                    value={customerEMail}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <button className="button is-link" type="submit">
-                    Récupérer les vêtements
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div className="carousel-container is-clipped">
-            {hatImages.length > 0 && (
-              <>
-                <div className={`${styles.carouselContainer} mt-4`}>
-                  <button
-                    className={`${styles.arrow} ${styles.leftArrow}`}
-                    onClick={() =>
-                      handlePrevious(hatIndex, setHatIndex, hatImages)
-                    }
-                  >
-                    ❮
-                  </button>
-                  <div className={`${styles.carousel} mt-4`}>
-                    <img
-                      src={"data:image/png;base64,"+hatImages[hatIndex]}
-                      alt={`Hat Image ${hatIndex + 1}`}
-                      className={`${styles.carouselImage} carousel-image`}
-                    />
-                  </div>
-                  <button
-                    className={`${styles.arrow} ${styles.rightArrow}`}
-                    onClick={() => handleNext(hatIndex, setHatIndex, hatImages)}
-                  >
-                    ❯
-                  </button>
-                </div>
-              </>
-            )}
-
-            {topsImages.length > 0 && (
-              <>
-                <div className={`${styles.carouselContainer} mt-4`}>
-                  <button
-                    className={`${styles.arrow} ${styles.leftArrow}`}
-                    onClick={() =>
-                      handlePrevious(topsIndex, setTopsIndex, topsImages)
-                    }
-                  >
-                    ❮
-                  </button>
-                  <div className={`${styles.carousel} mt-4`}>
-                    <img
-                      src={"data:image/png;base64,"+topsImages[topsIndex]}
-                      alt={`Tops Image ${topsIndex + 1}`}
-                      className={`${styles.carouselImage} carousel-image`}
-                    />
-                  </div>
-                  <button
-                    className={`${styles.arrow} ${styles.rightArrow}`}
-                    onClick={() =>
-                      handleNext(topsIndex, setTopsIndex, topsImages)
-                    }
-                  >
-                    ❯
-                  </button>
-                </div>
-              </>
-            )}
-
-            {bottomsImages.length > 0 && (
-              <>
-                <div className={`${styles.carouselContainer} mt-4`}>
-                  <button
-                    className={`${styles.arrow} ${styles.leftArrow}`}
-                    onClick={() =>
-                      handlePrevious(
-                        bottomsIndex,
-                        setBottomsIndex,
-                        bottomsImages
-                      )
-                    }
-                  >
-                    ❮
-                  </button>
-                  <div className={`${styles.carousel} mt-4`}>
-                    <img
-                      src={"data:image/png;base64,"+bottomsImages[bottomsIndex]}
-                      alt={`Bottoms Image ${bottomsIndex + 1}`}
-                      className={`${styles.carouselImage} carousel-image`}
-                    />
-                  </div>
-                  <button
-                    className={`${styles.arrow} ${styles.rightArrow}`}
-                    onClick={() =>
-                      handleNext(bottomsIndex, setBottomsIndex, bottomsImages)
-                    }
-                  >
-                    ❯
-                  </button>
-                </div>
-              </>
-            )}
-
-            {shoesImages.length > 0 && (
-              <>
-                <div className={`${styles.carouselContainer} mt-4`}>
-                  <button
-                    className={`${styles.arrow} ${styles.leftArrow}`}
-                    onClick={() =>
-                      handlePrevious(shoesIndex, setShoesIndex, shoesImages)
-                    }
-                  >
-                    ❮
-                  </button>
-                  <div className={`${styles.carousel} mt-4`}>
-                    <img
-                      src={"data:image/png;base64,"+shoesImages[shoesIndex]}
-                      alt={`Shoes Image ${shoesIndex + 1}`}
-                      className={`${styles.carouselImage} carousel-image`}
-                    />
-                  </div>
-                  <button
-                    className={`${styles.arrow} ${styles.rightArrow}`}
-                    onClick={() =>
-                      handleNext(shoesIndex, setShoesIndex, shoesImages)
-                    }
-                  >
-                    ❯
-                  </button>
-                </div>
-              </>
-            )}
+    <main className={styles.main}>
+      <div className={styles.heading}>
+        <div className={styles.title}>
+          <h1>Customers Clothing</h1>
+          <p>Build an outfit</p>
+        </div>
+      </div>
+      <div className={styles.containerBg}>
+        <div className={styles.container}>
+          <div className={styles.chooseClientBox}>
+            <h2>Select a customer to view their wardrobe</h2>
+            <input
+              type="text"
+              placeholder="Search for a customer"
+              className={styles.searchInput}
+              onChange={handleSearchChange}
+            />
+            <div className={styles.clientListWrapper}>
+              <ul className={styles.clientList}>
+                {filteredClientsWithClothes.map((client) => (
+                  <li key={client.uuid} className={styles.listItem}>
+                    <Link href={`/dashboard/clothes/${client.uuid}`}>
+                      <div className={styles.ppName}>
+                        <div>
+                          <img
+                            src={
+                              client.image
+                                ? `data:image/png;base64,${client.image}`
+                                : "https://via.placeholder.com/128"
+                            }
+                            alt={client.name}
+                            className={styles.avatar}
+                          />
+                        </div>
+                        <h3>
+                          {client.name} {client.surname}
+                        </h3>
+                        <p>{client.email}</p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -13,6 +13,15 @@ export const GetEmployees = gql`
   }
 `;
 
+// GET
+export const GetEmployeeUuidById = gql`
+  query GetEmployeeUuidById($id: Int) {
+    private_employees(where: { id: { _eq: $id } }) {
+      uuid
+    }
+  }
+`;
+
 // INSERT
 export const InsertEmployee = gql`
   mutation InsertEmployee(
@@ -43,14 +52,7 @@ export const InsertEmployee = gql`
     ) {
       affected_rows
       returning {
-        id
-        email
-        name
-        surname
-        birth_date
-        gender
-        work
-        image
+        uuid
       }
     }
   }

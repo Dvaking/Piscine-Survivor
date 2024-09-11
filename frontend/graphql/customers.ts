@@ -67,6 +67,14 @@ export const GetCustomersProfileByUuid = gql`
   }
 `;
 
+export const GetPaymentMethodByUuid = gql`
+  query GetPaymentMethodByUuid($uuid: uuid) {
+    private_payments_history(where: { customer_uuid: { _eq: $uuid } }) {
+      payment_method
+    }
+  }
+`;
+
 // INSERT
 export const InsertCustomer = gql`
   mutation MyMutation(

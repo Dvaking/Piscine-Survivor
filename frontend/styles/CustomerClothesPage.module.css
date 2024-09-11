@@ -1,0 +1,59 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 6rem;
+  background-color: whitesmoke;
+}
+
+.clothesContainer {
+  width: 98%;
+  height: auto;
+  background-color: white;
+  padding: 3rem;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.carouselImage {
+  max-width: 30%;
+  height: auto;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.leftArrow {
+  left: 0.5rem;
+}
+
+.rightArrow {
+  right: 0.5rem;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
