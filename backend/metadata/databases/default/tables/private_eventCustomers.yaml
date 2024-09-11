@@ -2,7 +2,7 @@ table:
   name: eventCustomers
   schema: private
 object_relationships:
-  - name: customers
+  - name: customer_assign
     using:
       manual_configuration:
         column_mapping:
@@ -11,3 +11,42 @@ object_relationships:
         remote_table:
           name: customers
           schema: private
+insert_permissions:
+  - role: coach
+    permission:
+      check: {}
+      columns:
+        - customer_uuid
+        - event_uuid
+    comment: ""
+select_permissions:
+  - role: coach
+    permission:
+      columns:
+        - customer_uuid
+        - event_uuid
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - customer_uuid
+        - event_uuid
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+    comment: ""

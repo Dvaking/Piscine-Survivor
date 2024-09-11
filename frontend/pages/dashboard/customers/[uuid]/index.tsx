@@ -4,22 +4,26 @@ import { getCustomersProfileByUuid } from "@hooks";
 import { GetCustomersProfileByUuidProps } from "@types";
 import { useRouter } from "next/router";
 import { DateFormate, GenerateStarsRating, ProfileCard } from "@components";
+import Cookies from "js-cookie";
 
 export default function Customers() {
   const [customers, setCustomers] = useState<GetCustomersProfileByUuidProps>();
   const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter();
-
   const customersUuid = router.query.uuid as string;
 
+
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     if (!customersUuid) return;
     getCustomersProfileByUuid(customersUuid).then((data) =>
       setCustomers(data[0])
     );
     setIsLoaded(true);
   }, [customersUuid]);
-  console.log(customers);
 
   if (!isLoaded) return <div>Loading...</div>;
 

@@ -1,4 +1,5 @@
 import { client, GetEmployeesByUuid } from "@graphql";
+import { refreshToken } from "@hooks";
 import { GetEmployeesByUuidProps } from "@types";
 
 interface EmployeesByUuid {
@@ -10,7 +11,20 @@ export async function getEmployeesInformationByUuid() {
   try {
     response = await client.request(GetEmployeesByUuid);
   } catch (error) {
-    console.error("Erreur lors de l'insertion:", error);
+    if (
+      (error as any).response &&
+      (error as any).response.errors &&
+      (error as any).response.errors[0].message === "JWTExpired"
+    ) {
+      const refresh = await refreshToken();
+      if (refresh)
+        try {
+          response = await client.request(GetEmployeesByUuid);
+          console.log("Utilisateur inséré avec succès");
+        } catch (error) {
+          console.error("Erreur lors de l'insertion:", error);
+        }
+    }
   }
   return response ? response.private_employees : [];
 }

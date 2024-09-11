@@ -1,7 +1,18 @@
 import styles from "@styles/DashboardPage.module.css";
 import "bulma/css/bulma.css";
+import { use, useEffect } from "react";
+import Cookies from "js-cookie";
+import router from "next/router";
 
 export default function Dashborad() {
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
+
   return (
     <main>
       <div className={styles.heading}>

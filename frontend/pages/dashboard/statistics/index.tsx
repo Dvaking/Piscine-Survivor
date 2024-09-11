@@ -19,6 +19,8 @@ import {
 } from "@types";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 ChartJS.register(
   CategoryScale,
@@ -41,8 +43,13 @@ const StatisticsGraph: React.FC = () => {
 
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     (async () => {
       try {
         const data = await getEmployeesByWork();

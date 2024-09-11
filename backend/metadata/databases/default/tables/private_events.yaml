@@ -1,12 +1,20 @@
 table:
   name: events
   schema: private
+array_relationships:
+  - name: customer_assign
+    using:
+      manual_configuration:
+        column_mapping:
+          uuid: event_uuid
+        insertion_order: null
+        remote_table:
+          name: eventCustomers
+          schema: private
 insert_permissions:
-  - role: user
+  - role: coach
     permission:
-      check:
-        employee_id:
-          _eq: X-Hasura-User-Id
+      check: {}
       columns:
         - date
         - duration
@@ -20,7 +28,7 @@ insert_permissions:
         - type
     comment: ""
 select_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
         - duration
@@ -33,30 +41,38 @@ select_permissions:
         - location_y
         - name
         - type
+        - uuid
       filter:
-        employee_id:
-          _eq: X-Hasura-User-Id
+        customer_assign:
+          customer_assign:
+            employee_uuid:
+              _eq: X-Hasura-User-Id
     comment: ""
 update_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
         - date
         - duration
-        - employee_id
         - location_name
         - location_x
         - location_y
         - max_participants
         - name
         - type
-      filter: {}
+      filter:
+        customer_assign:
+          customer_assign:
+            employee_uuid:
+              _eq: X-Hasura-User-Id
       check: null
     comment: ""
 delete_permissions:
-  - role: user
+  - role: coach
     permission:
       filter:
-        employee_id:
-          _eq: X-Hasura-User-Id
+        customer_assign:
+          customer_assign:
+            employee_uuid:
+              _eq: X-Hasura-User-Id
     comment: ""

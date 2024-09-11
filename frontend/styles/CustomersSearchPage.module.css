@@ -505,7 +505,7 @@
     flex-direction: row;
     gap: 2rem;
   }
-  
+
   .formButtons button {
     font-size: 1.2rem;
     border-radius: 5px;
@@ -555,7 +555,7 @@
     flex-direction: row;
     gap: 1.5rem;
   }
-  
+
   .formButtons button {
     font-size: 1rem;
     border-radius: 5px;

@@ -4,12 +4,20 @@ import { GetTipsProps } from "@types";
 import styles from "@styles/TipsPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Tips() {
   const [tips, setTips] = useState<GetTipsProps[]>([]);
   const [visibleTipIndex, setVisibleTipIndex] = useState<number | null>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     const fetchTips = async () => {
       const fetchedTips = await getTips();
       setTips(fetchedTips);
