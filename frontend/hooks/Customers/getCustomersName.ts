@@ -1,12 +1,12 @@
 import { client, GetCustomersName } from "@graphql";
 import { GetCustomersNameProps } from "@types";
 
-export interface Customers {
+export interface CustomersName {
   private_customers: GetCustomersNameProps[];
 }
 
 export async function getCustomersName() {
-  let response: Customers | undefined = undefined;
+  let response: CustomersName | undefined = undefined;
   try {
     response = await client.request(GetCustomersName);
   } catch (error) {

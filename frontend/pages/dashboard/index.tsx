@@ -13,9 +13,11 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
-import { getEmployeeNameByWork } from "@hooks";
+import { getCustomersName, getEvents, getEmployeesByWork } from "@hooks";
 import {
-  GetEmployeesNameByWorkProps,
+  GetCustomersNameProps,
+  GetEmployeesByWorkProps,
+  GetEventsProps,
 } from "@types";
 
 ChartJS.register(
@@ -31,51 +33,96 @@ ChartJS.register(
 );
 
 const Dashboard: React.FC = () => {
-  const [employeeNameData, setEmployeeNameData] = useState<GetEmployeesNameByWorkProps[]>(
+  const [customerNameData, setCustomersNameData] = useState<GetCustomersNameProps[]>(
+    []);
+  const [eventData, setEventData] = useState<GetEventsProps[]>(
+    []);
+  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
     []
   );
 
   const lineChartRef = useRef(null);
 
-  const fetchEmployeeNameData = async () => {
+  const fetchCustomerNameData = async () => {
     try {
-      const data = await getEmployeeNameByWork();
-      const mappedData: GetEmployeesNameByWorkProps[] = data.map((item) => ({
+      const data = await getCustomersName();
+      const mappedData: GetCustomersNameProps[] = data.map((item) => ({
         name: item.name,
       }));
 
-      setEmployeeNameData(mappedData);
+      setCustomersNameData(mappedData);
+      console.log("CustomerNameData", mappedData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données", error);
+    }
+  };
+
+  const fetchEmployeesByWorkData = async () => {
+    try {
+      const data = await getEmployeesByWork();
+      const mappedData: GetEmployeesByWorkProps[] = data.map((item) => ({
+        name: item.name,
+      }));
+
+      setEmployeesData(mappedData);
+      console.log("CustomerNameData", mappedData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données", error);
+    }
+  };
+
+  const fetchEventData = async () => {
+    try {
+      const data = await getEvents();
+      const mappedData: GetEventsProps[] = data.map((item) => ({
+        name: item.name,
+        type: item.type,
+        date: item.date,
+      }));
+
+      setEventData(mappedData);
+      console.log("EventData", mappedData);
     } catch (error) {
       console.error("Erreur lors de la récupération des données", error);
     }
   };
 
   useEffect(() => {
-    fetchEmployeeNameData();
+    fetchCustomerNameData();
+    fetchEventData();
+    fetchEmployeesByWorkData();
   }, []);
 
+  const totalCustomers = customerNameData.length;
+
+  // Définir le nombre total de coaches (exemple: 10)
+  const totalCoaches = employeesData.length;
+
+  const customersPerCoach =
+    totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
 
   // Line Chart Data (Customers Overview)
   const lineChartData = {
-    labels: employeeNameData.map((employee) => employee.name),
+    labels: [
+      "01 Jul",
+      "05 Jul",
+      "10 Jul",
+      "15 Jul",
+      "20 Jul",
+      "25 Jul",
+      "30 Jul",
+    ],
     datasets: [
       {
         label: "Number customers",
-        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
+        data: customerNameData.map((customer) => customer.name?.length ?? 0),
         fill: false,
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgba(75, 192, 192, 0.2)",
       },
       {
-        label: "Number customers",
-        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
-        fill: false,
-        backgroundColor: "rgb(75, 192, 192)",
-        borderColor: "rgba(75, 192, 192, 0.2)",
-      },
-      {
-        label: "Number customers",
-        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
+        label: "Number events",
+        data: eventData.map((events) => events.name.length ?? 0),
         fill: false,
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgba(75, 192, 192, 0.2)",
@@ -133,40 +180,40 @@ const Dashboard: React.FC = () => {
         <h1 className="title mb-6">Dashboard</h1>
         <h4>Welcome!</h4>
 
-      <div className="is-align-items-flex-start">
-        <div className="columns mt-6">
-          <div className="column is-three-fifths">
-            <div className="box">
-              <h2 className="title is-6 mb-0">Customers Overview</h2>
-              <h4 className="is-5 mb-6">
-                When customers have joined in the time.
-              </h4>
-              <div className="content">
-                <ul>
-                  <li>Customers: 932 (+12.37%)</li>
-                  <li>Doing Meetings: 28.49% (-12.37%)</li>
-                  <li>Customers by Coach: 34</li>
-                </ul>
+        <div className="is-align-items-flex-start">
+          <div className="columns mt-6">
+            <div className="column is-three-fifths">
+              <div className="box">
+                <h2 className="title is-6 mb-0">Customers Overview</h2>
+                <h4 className="is-5 mb-6">
+                  When customers have joined in the time.
+                </h4>
+                <div className="content">
+                  <ul>
+                    <li>Customers: {totalCustomers}</li>
+                    <li>Doing Meetings: 28.49%</li>
+                    <li>Customers by Coach: {customersPerCoach}</li>
+                  </ul>
+                </div>
+                <Line data={lineChartData} />
               </div>
-              <Line data={lineChartData} />
             </div>
-          </div>
 
-          <div className="column is-two-fifths">
-            <div className="box">
-              <h2 className="title is-6 mb-0">Events</h2>
-              <h4 className="is-5 mb-6">Our events and their status</h4>
-              <div className="content">
-                <ul>
-                  <li>Monthly: 83 (+4.63%)</li>
-                  <li>Weekly: 20 (-1.92%)</li>
-                  <li>Daily (Avg): 3 (+3.45%)</li>
-                </ul>
+            <div className="column is-two-fifths">
+              <div className="box">
+                <h2 className="title is-6 mb-0">Events</h2>
+                <h4 className="is-5 mb-6">Our events and their status</h4>
+                <div className="content">
+                  <ul>
+                    <li>Monthly: 83 (+4.63%)</li>
+                    <li>Weekly: 20 (-1.92%)</li>
+                    <li>Daily (Avg): 3 (+3.45%)</li>
+                  </ul>
+                </div>
+                <Bar data={barData} />
               </div>
-              <Bar data={barData} />
             </div>
           </div>
-        </div>
         </div>
         <div className="columns">
           <div className="column is-three-fifths">
