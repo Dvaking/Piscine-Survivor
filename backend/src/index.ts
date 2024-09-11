@@ -47,17 +47,17 @@ async function putCustomersInDb(token: Token) {
         const customerImage = await getCustomerImageById(token, customer.id);
         const payments = await getPaymentsHistory(token, customer.id);
         const clothes = await getClothes(token, customer.id);
-
+  
         for (const element of clothes.data) {
           const base64Image = await getClotheImage(token, element.id);
           const dataToSend = {
             ...element,
             customer_id: customerById.data.id,
           };
-
+  
           insertClothe(dataToSend, base64Image);
         }
-
+  
         const customer_uuid = await insertCustomer(
           customerById.data,
           customerImage
@@ -68,6 +68,7 @@ async function putCustomersInDb(token: Token) {
         for (const element of payments.data) {
           insertPaymentHistory(element, customer_uuid);
         }
+
       } catch (error) {
         console.error("An error occurred while inserting customers");
       }
@@ -78,17 +79,21 @@ async function putCustomersInDb(token: Token) {
 }
 
 async function putEmployeesInDb(token: Token) {
-  const employees = await getEmployees(token);
-  employees.data.forEach(async (employee) => {
-    try {
-      const employeeToSend = await getEmployeeById(token, employee.id);
-      const employeeImage = await getEmployeeImageById(token, employee.id);
-
-      await insertEmployee(employeeToSend.data, employeeImage);
+  try {
+    const employees = await getEmployees(token);
+    employees.data.forEach(async (employee) => {
+      try{
+        const employeeToSend = await getEmployeeById(token, employee.id);
+        const employeeImage = await getEmployeeImageById(token, employee.id);
+  
+        await insertEmployee(employeeToSend.data, employeeImage);
     } catch (error) {
       console.error("An error occurred while inserting employees");
     }
-  });
+    });
+  } catch (error) {
+    console.error("An error occurred while inserting employees");
+  }
 }
 
 async function putTipsInDb(token: Token) {
@@ -96,11 +101,7 @@ async function putTipsInDb(token: Token) {
     const tips = await getTips(token);
 
     tips.data.forEach(async (tip: any) => {
-      try {
-        insertTip(tip);
-      } catch (error) {
-        console.error("An error occurred while inserting tips");
-      }
+      insertTip(tip);
     });
   } catch (error) {
     console.error("An error occurred while inserting tips");
@@ -108,104 +109,124 @@ async function putTipsInDb(token: Token) {
 }
 
 async function putEventsInDb(token: Token) {
-  const events = await getEvents(token);
-
-  events.data.forEach(async (event: any) => {
-    try {
-      const eventDetailed = await getEventById(token, event.id);
-      await insertEvent(eventDetailed.data);
-    } catch (error) {
-      console.error("An error occurred while inserting events");
-    }
-  });
+  try {
+    const events = await getEvents(token);
+  
+    events.data.forEach(async (event: any) => {
+      try {
+        const eventDetailed = await getEventById(token, event.id);
+        await insertEvent(eventDetailed.data);
+      } catch (error) {
+        console.error("An error occurred while inserting events");
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred while inserting events");
+  }
 }
 
 async function putEncountersInDb(token: Token) {
-  const encounters = await getEncounters(token);
+  try {
+    const encounters = await getEncounters(token);
 
-  encounters.data.forEach(async (encounter: any) => {
-    try {
+    encounters.data.forEach(async (encounter: any) => {
       const encounterDetailed = await getEncounterById(token, encounter.id);
       await insertEncounter(encounterDetailed.data);
-    } catch (error) {
-      console.error("An error occurred while inserting encounters", error);
-    }
-  });
+    });
+  } catch (error) {
+    console.error("An error occurred while inserting encounters");
+  }
 }
 
 async function updateEmployeesInDb(token: Token) {
-  const employees = await getEmployees(token);
-  employees.data.forEach(async (employee) => {
-    try {
-      const employeeToSend = await getEmployeeById(token, employee.id);
-      const employeeImage = await getEmployeeImageById(token, employee.id);
+  try {
+    const employees = await getEmployees(token);
+    employees.data.forEach(async (employee) => {
+      try {
+        const employeeToSend = await getEmployeeById(token, employee.id);
+        const employeeImage = await getEmployeeImageById(token, employee.id);
 
-      await updateEmployee(employeeToSend.data, employeeImage);
-    } catch (error) {
-      console.error("An error occurred while updating employees");
-    }
-  });
+        await updateEmployee(employeeToSend.data, employeeImage);
+      } catch (error) {
+        console.error("An error occurred while updating employees");
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred while updating employees");
+  }
 }
 
 async function updateCustomersInDb(token: Token) {
-  const customers = await getCustomers(token);
+  try {
+    const customers = await getCustomers(token);
 
-  customers.data.forEach(async (customer) => {
-    try {
-      const customerById = await getCustomerById(token, customer.id);
-      const customerImage = await getCustomerImageById(token, customer.id);
-      const payments = await getPaymentsHistory(token, customer.id);
-      const clothes = await getClothes(token, customer.id);
+    customers.data.forEach(async (customer) => {
+      try {
+        const customerById = await getCustomerById(token, customer.id);
+        const customerImage = await getCustomerImageById(token, customer.id);
+        const payments = await getPaymentsHistory(token, customer.id);
+        const clothes = await getClothes(token, customer.id);
 
-      for (const element of clothes.data) {
-        const base64Image = await getClotheImage(token, element.id);
-        const dataToSend = {
-          ...element,
-          customer_id: customerById.data.id,
-        };
+        for (const element of clothes.data) {
+          const base64Image = await getClotheImage(token, element.id);
+          const dataToSend = {
+            ...element,
+            customer_id: customerById.data.id,
+          };
 
-        await updateClothe(dataToSend, base64Image);
+          await updateClothe(dataToSend, base64Image);
+        }
+
+        const customer_uuid = await updateCustomer(
+          customerById.data,
+          customerImage
+        );
+        if (!customer_uuid) {
+          return;
+        }
+        for (const element of payments.data) {
+          await updatePaymentHistory(element, customer_uuid);
+        }
+      } catch (error) {
+        console.error("An error occurred while updating customers");
       }
-
-      const customer_uuid = await updateCustomer(
-        customerById.data,
-        customerImage
-      );
-      if (!customer_uuid) {
-        return;
-      }
-      for (const element of payments.data) {
-        await updatePaymentHistory(element, customer_uuid);
-      }
-    } catch (error) {
-      console.error("An error occurred while updating customers");
-    }
-  });
+    });
+  } catch (error) {
+    console.error("An error occurred while updating customers");
+  }
 }
 
 async function updateTipInDb(token: Token) {
-  const tips = await getTips(token);
+  try {
+    const tips = await getTips(token);
 
-  tips.data.forEach(async (tip: any) => {
-    try {
-      updateTip(tip);
-    } catch (error) {
-      console.error("An error occurred while updating tips");
-    }
-  });
+    tips.data.forEach(async (tip: any) => {
+      try {
+        updateTip(tip);
+      } catch (error) {
+        console.error("An error occurred while updating tips");
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred while updating tips");
+  }
 }
 
 async function updateEventsInDb(token: Token) {
-  const events = await getEvents(token);
+  try {
+    const events = await getEvents(token);
 
-  events.data.forEach(async (event: any) => {
-    try {
-      const eventDetailed = await getEventById(token, event.id);
-      await updateEvent(eventDetailed.data);
-    } catch (error) {
-      console.error("An error occurred while updating events");
-    }
-  });
+    events.data.forEach(async (event: any) => {
+      try {
+        const eventDetailed = await getEventById(token, event.id);
+        await updateEvent(eventDetailed.data);
+      } catch (error) {
+        console.error("An error occurred while updating events");
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred while updating events");
+  }
 }
 
 async function updateEncountersInDb(token: Token) {

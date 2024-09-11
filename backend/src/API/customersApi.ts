@@ -113,7 +113,8 @@ export async function getCustomerImageById(
           },
         });
       } else {
-        throw error;
+        console.error("Request failed");
+        return "";
       }
     }
 
@@ -124,7 +125,7 @@ export async function getCustomerImageById(
     } else {
       console.error("Unexpected error:");
     }
-    throw new Error("Request failed");
+    return "";
   }
 }
 
