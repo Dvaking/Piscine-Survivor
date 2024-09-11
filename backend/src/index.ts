@@ -46,7 +46,7 @@ async function putCustomersInDb(token: Token) {
           customer_id: customerById.data.id,
         };
 
-        insertClothe(dataToSend, base64Image);
+        await insertClothe(dataToSend, base64Image);
       }
 
       const customer_uuid = await insertCustomer(
@@ -57,7 +57,7 @@ async function putCustomersInDb(token: Token) {
         return;
       }
       for (const element of payments.data) {
-        insertPaymentHistory(element, customer_uuid);
+        await insertPaymentHistory(element, customer_uuid);
       }
     } catch (error) {
       console.error("An error occurred while inserting customers");
@@ -97,7 +97,7 @@ async function putEventsInDb(token: Token) {
   events.data.forEach(async (event: any) => {
     try {
       const eventDetailed = await getEventById(token, event.id);
-      insertEvent(eventDetailed.data);
+      await insertEvent(eventDetailed.data);
     } catch (error) {
       console.error("An error occurred while inserting events");
     }
@@ -110,7 +110,7 @@ async function putEncountersInDb(token: Token) {
   encounters.data.forEach(async (encounter: any) => {
     try {
       const encounterDetailed = await getEncounterById(token, encounter.id);
-      insertEncounter(encounterDetailed.data);
+      await insertEncounter(encounterDetailed.data);
     } catch (error) {
       console.error("An error occurred while inserting encounters", error);
     }
@@ -132,10 +132,13 @@ async function updateCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
 
   customers.data.forEach(async (customer) => {
-    const customerById = await getCustomerById(token, customer.id);
-    const customerImage = await getCustomerImageById(token, customer.id);
-
-    updateCustomer(customerById.data, customerImage);
+    try {
+      const customerById = await getCustomerById(token, customer.id);
+      const customerImage = await getCustomerImageById(token, customer.id);
+      updateCustomer(customerById.data, customerImage);
+    } catch (error) {
+      console.error("An error occurred while updating customers");
+    }
   });
 }
 
@@ -143,11 +146,11 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    await putEmployeesInDb(token);
-    // await putCustomersInDb(token);
+    putEmployeesInDb(token);
+    putCustomersInDb(token);
     putTipsInDb(token);
-    await putEventsInDb(token);
-    // await putEncountersInDb(token);
+    putEventsInDb(token);
+    putEncountersInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }

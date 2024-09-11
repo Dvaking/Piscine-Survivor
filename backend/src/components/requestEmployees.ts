@@ -34,16 +34,16 @@ export async function insertEmployee(
     const uuid = response?.insert_private_employees?.returning[0]?.uuid;
     userVariables.employee_uuid = uuid;
     await Client.request(InsertUser, userVariables);
-    console.log("Utilisateur inséré avec succès");
+    console.log("Employee inserted successfully");
     return uuid;
   } catch (error: any) {
     if (
       error.message.includes("duplicate key value violates unique constraint")
     ) {
-      console.error("L'employé existe déjà");
+      console.error("Employee already exists");
       return null;
     }
-    console.error("Erreur lors de l'insertion de employee");
+    console.error("Error inserting employee");
     return null;
   }
 }
@@ -62,9 +62,9 @@ export async function updateEmployee(
   }
   try {
     response = await Client.request(UpdateEmployee, variables);
-    console.log("Utilisateur mis à jour avec succès");
+    console.log("Employee updated successfully");
   } catch (error) {
-    console.error("Erreur lors de la mise à jour de employee");
+    console.error("Error updating employee");
   }
   return response ? response.private_employees : [];
 }
