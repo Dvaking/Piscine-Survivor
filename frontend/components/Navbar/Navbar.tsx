@@ -5,6 +5,8 @@ import Link from "next/link";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Cookie from "js-cookie";
+import { logout } from "@hooks";
+import { log } from "console";
 
 export function Navbar() {
   const router = useRouter();
@@ -28,6 +30,20 @@ export function Navbar() {
     setIsClothes(router.pathname === "/dashboard/statistics");
     setIsManager(Cookie.get("role") === "admin");
   }, [router]);
+
+  const disconnect = async () => {
+    try {
+      const success = await logout();
+
+      if (success) {
+        router.push("/login");
+      } else {
+        console.error("Error during logout");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -91,7 +107,12 @@ export function Navbar() {
         </li>
       </ul>
       <div className={styles.language}>
-        <span>EN</span>
+        <div>
+          <span>EN</span>
+        </div>
+        <div>
+          <button onClick={() => disconnect()}>Logout</button>
+        </div>
       </div>
     </nav>
   );

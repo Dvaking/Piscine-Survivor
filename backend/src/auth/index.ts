@@ -1,98 +1,75 @@
 import bodyParser from "body-parser";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import { GetUserByEmail, Client } from "../queries/";
 import express from "express";
-
+import { getUserByEmail } from "./getUserByEmail";
+import { verifyUser } from "./verifyUser";
+import { hashPassword } from "./passwordHash";
 
 const authRouter = express.Router();
 const secretKey = process.env.JWT_SECRET_KEY;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
+let refreshTokens: { [key: string]: string } = {};
 
 authRouter.use(bodyParser.json());
 
-let refreshTokens: { [key: string]: string } = {};
+authRouter.post("/logout", async (req, res) => {
+  const { refreshToken } = req.body;
 
-type InterfaceUser = {
-  users: User[];
-};
-
-type User = {
-  email: string;
-  password: string;
-  role: string;
-  customer_uuid: string;
-  employee_uuid: string;
-};
-
-async function getUserByEmail(email: string): Promise<{
-  role: string;
-  employee_uuid: string;
-  customer_uuid: string;
-  password: string;
-}> {
-  let response: InterfaceUser | undefined = undefined;
-  let returnedUser = {
-    role: "NoUser",
-    employee_uuid: "",
-    customer_uuid: "",
-    password: "",
-  };
-  try {
-    response = await Client.request(GetUserByEmail, { email: email });
-    if (!response) return returnedUser;
-    returnedUser.customer_uuid = response.users[0].customer_uuid;
-    returnedUser.employee_uuid = response.users[0].employee_uuid;
-    returnedUser.role = response.users[0].role;
-    returnedUser.password = response.users[0].password;
-    return returnedUser;
-  } catch (error) {
-    console.error("Lors du get du User");
-    return returnedUser;
-  }
-}
-
-function verifyUser(
-  user: {
-    role: string;
-    employee_uuid: string;
-    customer_uuid: string;
-    password: string;
-  },
-  password: string
-) {
-  let returnedUser = {
-    role: "NoUser",
-    uuid: "",
-  };
-
-  if (user.role === "NoUser" || user.password !== password) {
-    return returnedUser;
+  if (!refreshToken) {
+    console.error("No refresh token provided");
+    return res.sendStatus(400);
   }
 
-  if (user.role === "customer") {
-    returnedUser.role = "customer";
-    returnedUser.uuid = user.customer_uuid;
-  } else if (user.role.toLowerCase() === "coach") {
-    returnedUser.role = "coach";
-    returnedUser.uuid = user.employee_uuid;
-  } else if (user.role.toLowerCase() === "admin") {
-    returnedUser.role = "admin";
-    returnedUser.uuid = user.employee_uuid;
-  } else {
-    returnedUser.role = "manager";
-    returnedUser.uuid = user.employee_uuid;
+  jwt.verify(
+    refreshToken,
+    refreshTokenSecret as string,
+    (err: Error | null, user: any) => {
+      if (err) {
+        console.error("Token verification failed:", err.message);
+        return res.sendStatus(403);
+      }
+
+      if (!refreshTokens) {
+        console.error("No token found in store for user");
+        return res.sendStatus(403);
+      }
+
+      delete refreshTokens[user.sub];
+      console.log("User successfully logged out");
+      res.sendStatus(204);
+    }
+  );
+});
+
+authRouter.post("/register", async (req, res) => {
+  const { uuid, password } = req.body;
+
+  if (!password || !uuid) {
+    console.error("password not provided");
+    return res.sendStatus(400);
   }
 
-  return returnedUser;
-}
+  const hashedPassword = await hashPassword(password);
+  if (!hashedPassword) {
+    console.error("Error hashing password");
+    return res.sendStatus(500);
+  }
+  
+});
 
 authRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await getUserByEmail(email);
-    const verifiedUser = verifyUser(user, password);
+    const userDetails = {
+      role: user.role,
+      employee_uuid: user.employee_uuid,
+      customer_uuid: user.customer_uuid,
+      password: user.password,
+    };
+    const verifiedUser = verifyUser({ user: userDetails, password: password });
 
     if (verifiedUser.role === "NoUser") {
       return res
@@ -120,7 +97,12 @@ authRouter.post("/login", async (req, res) => {
 
     refreshTokens[email] = refreshToken;
 
-    res.json({ token, refreshToken, role: verifiedUser.role, uuid: verifiedUser.uuid});
+    res.json({
+      token,
+      refreshToken,
+      role: verifiedUser.role,
+      uuid: verifiedUser.uuid,
+    });
   } catch (error) {
     console.error("Error during login process:", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -147,7 +129,7 @@ authRouter.post("/refresh", async (req, res) => {
       const verifiedUser: {
         role: string;
         uuid: string;
-      } = verifyUser(userDetails, userDetails.password);
+      } = verifyUser({ user: userDetails, password: userDetails.password });
       if (verifiedUser.role === "NoUser") return res.sendStatus(403);
 
       interface Claims {

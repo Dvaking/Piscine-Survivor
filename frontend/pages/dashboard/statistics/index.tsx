@@ -71,8 +71,6 @@ const StaticticsGraph: React.FC = () => {
     try {
       const data = await getEmployeesAssignedCustomers();
 
-      console.log("Données des clients assignés : ", data);
-
       const mappedCustomersData: GetEmployeesAssignedCustomersProps[] =
         data.map((item) => ({
           name: item.name,

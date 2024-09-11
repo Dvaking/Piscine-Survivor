@@ -24,7 +24,6 @@ export default function Customers() {
     );
     setIsLoaded(true);
   }, [customersUuid]);
-  console.log(customers);
 
   if (!isLoaded) return <div>Loading...</div>;
 

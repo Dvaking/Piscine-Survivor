@@ -1,5 +1,6 @@
 import { client, GetCustomers } from "@graphql";
 import { GetCustomersProps } from "@types";
+import { refreshToken } from "@hooks";
 
 export interface Customers {
   private_customers: GetCustomersProps[];
@@ -10,7 +11,20 @@ export async function getCustomers() {
   try {
     response = await client.request(GetCustomers);
   } catch (error) {
-    console.error("Erreur lors de l'insertion:", error);
+    if (
+      (error as any).response &&
+      (error as any).response.errors &&
+      (error as any).response.errors[0].message === "JWTExpired"
+    ) {
+      const refresh = await refreshToken();
+      if (refresh)
+        try {
+          response = await client.request(GetCustomers);
+          console.log("Utilisateur inséré avec succès");
+        } catch (error) {
+          console.error("Erreur lors de l'insertion:", error);
+        }
+    }
   }
   return response ? response.private_customers : [];
 }

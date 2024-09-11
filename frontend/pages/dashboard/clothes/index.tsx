@@ -40,8 +40,6 @@ export default function Customers() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("Soumission du formulaire avec EMail :", customerEMail);
-
     try {
       const response = await getClothesByCustomerEmail(customerEMail);
       setClothes(response);

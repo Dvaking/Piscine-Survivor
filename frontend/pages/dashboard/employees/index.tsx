@@ -69,7 +69,6 @@ export default function Home() {
     e.preventDefault();
     try {
       await insertEmployee(formData);
-      console.log("Employee inserted successfully: ", formData);
       setPopupVisible(false);
       router.reload();
     } catch (error) {

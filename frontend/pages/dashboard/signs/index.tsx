@@ -45,7 +45,6 @@ export default function Home() {
   const selectClient1 = (client: GetCustomersProps) => {
     setSelectedClient1(client);
     setDropdownForClient1(false);
-    console.log(client); //////////////////////////////////////////////////////
   };
 
   const selectClient2 = (client: GetCustomersProps) => {

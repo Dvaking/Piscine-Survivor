@@ -35,3 +35,16 @@ export const InsertUser = gql`
     }
   }
 `;
+
+// UPDATE
+
+export const UpdateUser = gql`
+  mutation MyMutation($password: String, $uuid: uuid) {
+    update_users(
+      where: { uuid: { _eq: $uuid } }
+      _set: { password: $password }
+    ) {
+      affected_rows
+    }
+  }
+`;
