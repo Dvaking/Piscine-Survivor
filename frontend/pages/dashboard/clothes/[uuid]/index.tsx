@@ -5,6 +5,7 @@ import { getClothesByCustomerUuid } from "@hooks";
 import styles from "@styles/CustomerClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Link from "next/link";
 
 export default function Customers() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Customers() {
   const [topsImages, setTopsImages] = useState<string[]>([]);
   const [bottomsImages, setBottomsImages] = useState<string[]>([]);
   const [shoesImages, setShoesImages] = useState<string[]>([]);
-  
+
   const [hatIndex, setHatIndex] = useState(0);
   const [topsIndex, setTopsIndex] = useState(0);
   const [bottomsIndex, setBottomsIndex] = useState(0);
@@ -33,24 +34,24 @@ export default function Customers() {
         setIsLoaded(true);
 
         const hats = fetchedClothes
-          .flatMap(item => item.clothes)
-          .filter(item => item.type === "hat/cap")
-          .map(item => item.image);
-          
+          .flatMap((item) => item.clothes)
+          .filter((item) => item.type === "hat/cap")
+          .map((item) => item.image);
+
         const tops = fetchedClothes
-          .flatMap(item => item.clothes)
-          .filter(item => item.type === "top")
-          .map(item => item.image);
-          
+          .flatMap((item) => item.clothes)
+          .filter((item) => item.type === "top")
+          .map((item) => item.image);
+
         const bottoms = fetchedClothes
-          .flatMap(item => item.clothes)
-          .filter(item => item.type === "bottom")
-          .map(item => item.image);
-          
+          .flatMap((item) => item.clothes)
+          .filter((item) => item.type === "bottom")
+          .map((item) => item.image);
+
         const shoes = fetchedClothes
-          .flatMap(item => item.clothes)
-          .filter(item => item.type === "shoes")
-          .map(item => item.image);
+          .flatMap((item) => item.clothes)
+          .filter((item) => item.type === "shoes")
+          .map((item) => item.image);
 
         setHatImages(hats);
         setTopsImages(tops);
@@ -85,102 +86,117 @@ export default function Customers() {
 
   return (
     <main className={styles.main}>
-      <div className={styles.clothesContainer}>
-        {hatImages.length > 0 && (
-          <div className={styles.carouselContainer}>
-            <button
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              onClick={() => handlePrevious(hatIndex, setHatIndex, hatImages)}
-            >
-              ❮
-            </button>
-            <div className={styles.carousel}>
-              <img
-                src={"data:image/png;base64," + hatImages[hatIndex]}
-                alt={`Hat Image ${hatIndex + 1}`}
-                className={styles.carouselImage}
-              />
+      <div className={styles.heading}>
+        <button onClick={() => window.history.back()}> <i className="fas fa-arrow-left"></i> Back </button>
+      </div>
+      <div className={styles.containerBg}>
+        <div className={styles.clothesContainer}>
+          {hatImages.length > 0 && (
+            <div className={styles.carouselContainer}>
+              <button
+                className={`${styles.arrow} ${styles.leftArrow}`}
+                onClick={() => handlePrevious(hatIndex, setHatIndex, hatImages)}
+              >
+                ❮
+              </button>
+              <div className={styles.carousel}>
+                <img
+                  src={"data:image/png;base64," + hatImages[hatIndex]}
+                  alt={`Hat Image ${hatIndex + 1}`}
+                  className={styles.carouselImage}
+                />
+              </div>
+              <button
+                className={`${styles.arrow} ${styles.rightArrow}`}
+                onClick={() => handleNext(hatIndex, setHatIndex, hatImages)}
+              >
+                ❯
+              </button>
             </div>
-            <button
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              onClick={() => handleNext(hatIndex, setHatIndex, hatImages)}
-            >
-              ❯
-            </button>
-          </div>
-        )}
+          )}
 
-        {topsImages.length > 0 && (
-          <div className={styles.carouselContainer}>
-            <button
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              onClick={() => handlePrevious(topsIndex, setTopsIndex, topsImages)}
-            >
-              ❮
-            </button>
-            <div className={styles.carousel}>
-              <img
-                src={"data:image/png;base64," + topsImages[topsIndex]}
-                alt={`Tops Image ${topsIndex + 1}`}
-                className={styles.carouselImage}
-              />
+          {topsImages.length > 0 && (
+            <div className={styles.carouselContainer}>
+              <button
+                className={`${styles.arrow} ${styles.leftArrow}`}
+                onClick={() =>
+                  handlePrevious(topsIndex, setTopsIndex, topsImages)
+                }
+              >
+                ❮
+              </button>
+              <div className={styles.carousel}>
+                <img
+                  src={"data:image/png;base64," + topsImages[topsIndex]}
+                  alt={`Tops Image ${topsIndex + 1}`}
+                  className={styles.carouselImage}
+                />
+              </div>
+              <button
+                className={`${styles.arrow} ${styles.rightArrow}`}
+                onClick={() => handleNext(topsIndex, setTopsIndex, topsImages)}
+              >
+                ❯
+              </button>
             </div>
-            <button
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              onClick={() => handleNext(topsIndex, setTopsIndex, topsImages)}
-            >
-              ❯
-            </button>
-          </div>
-        )}
+          )}
 
-        {bottomsImages.length > 0 && (
-          <div className={styles.carouselContainer}>
-            <button
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              onClick={() => handlePrevious(bottomsIndex, setBottomsIndex, bottomsImages)}
-            >
-              ❮
-            </button>
-            <div className={styles.carousel}>
-              <img
-                src={"data:image/png;base64," + bottomsImages[bottomsIndex]}
-                alt={`Bottoms Image ${bottomsIndex + 1}`}
-                className={styles.carouselImage}
-              />
+          {bottomsImages.length > 0 && (
+            <div className={styles.carouselContainer}>
+              <button
+                className={`${styles.arrow} ${styles.leftArrow}`}
+                onClick={() =>
+                  handlePrevious(bottomsIndex, setBottomsIndex, bottomsImages)
+                }
+              >
+                ❮
+              </button>
+              <div className={styles.carousel}>
+                <img
+                  src={"data:image/png;base64," + bottomsImages[bottomsIndex]}
+                  alt={`Bottoms Image ${bottomsIndex + 1}`}
+                  className={styles.carouselImage}
+                />
+              </div>
+              <button
+                className={`${styles.arrow} ${styles.rightArrow}`}
+                onClick={() =>
+                  handleNext(bottomsIndex, setBottomsIndex, bottomsImages)
+                }
+              >
+                ❯
+              </button>
             </div>
-            <button
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              onClick={() => handleNext(bottomsIndex, setBottomsIndex, bottomsImages)}
-            >
-              ❯
-            </button>
-          </div>
-        )}
+          )}
 
-        {shoesImages.length > 0 && (
-          <div className={styles.carouselContainer}>
-            <button
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              onClick={() => handlePrevious(shoesIndex, setShoesIndex, shoesImages)}
-            >
-              ❮
-            </button>
-            <div className={styles.carousel}>
-              <img
-                src={"data:image/png;base64," + shoesImages[shoesIndex]}
-                alt={`Shoes Image ${shoesIndex + 1}`}
-                className={styles.carouselImage}
-              />
+          {shoesImages.length > 0 && (
+            <div className={styles.carouselContainer}>
+              <button
+                className={`${styles.arrow} ${styles.leftArrow}`}
+                onClick={() =>
+                  handlePrevious(shoesIndex, setShoesIndex, shoesImages)
+                }
+              >
+                ❮
+              </button>
+              <div className={styles.carousel}>
+                <img
+                  src={"data:image/png;base64," + shoesImages[shoesIndex]}
+                  alt={`Shoes Image ${shoesIndex + 1}`}
+                  className={styles.carouselImage}
+                />
+              </div>
+              <button
+                className={`${styles.arrow} ${styles.rightArrow}`}
+                onClick={() =>
+                  handleNext(shoesIndex, setShoesIndex, shoesImages)
+                }
+              >
+                ❯
+              </button>
             </div>
-            <button
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              onClick={() => handleNext(shoesIndex, setShoesIndex, shoesImages)}
-            >
-              ❯
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </main>
   );

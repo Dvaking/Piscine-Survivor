@@ -262,7 +262,6 @@ export default function Home() {
               <div className="dropdown">
                 <button className="button">
                   <div>Bulk Action</div>
-
                   <i className="fas fa-angle-down" aria-hidden="true"></i>
                 </button>
               </div>
