@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Line, Bar, Pie } from "react-chartjs-2";
+import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
 import "bulma/css/bulma.min.css";
 import {
   Chart as ChartJS,
@@ -33,9 +33,13 @@ ChartJS.register(
 );
 
 const Dashboard: React.FC = () => {
-  const [customerNameData, setCustomersNameData] = useState<GetCustomersNameProps[]>([]);
+  const [customerNameData, setCustomersNameData] = useState<
+    GetCustomersNameProps[]
+  >([]);
   const [eventData, setEventData] = useState<GetEventsProps[]>([]);
-  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>([]);
+  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
+    []
+  );
 
   const fetchCustomerNameData = async () => {
     try {
@@ -58,11 +62,13 @@ const Dashboard: React.FC = () => {
   const fetchEventData = async () => {
     try {
       const data = await getEvents();
-      setEventData(data.map((item) => ({
-        name: item.name,
-        type: item.type,
-        date: item.date,
-      })));
+      setEventData(
+        data.map((item) => ({
+          name: item.name,
+          type: item.type,
+          date: item.date,
+        }))
+      );
     } catch (error) {
       console.error("Erreur lors de la récupération des données", error);
     }
@@ -76,13 +82,17 @@ const Dashboard: React.FC = () => {
 
   const totalCustomers = customerNameData.length;
   const totalCoaches = employeesData.length;
-  const customersPerCoach = totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
+  const customersPerCoach =
+    totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
 
   const eventDates = eventData.map((event) => event.date);
-  const eventsCountPerDate = eventDates.reduce<Record<string, number>>((acc, date) => {
-    acc[date] = (acc[date] || 0) + 1;
-    return acc;
-  }, {});
+  const eventsCountPerDate = eventDates.reduce<Record<string, number>>(
+    (acc, date) => {
+      acc[date] = (acc[date] || 0) + 1;
+      return acc;
+    },
+    {}
+  );
 
   // Bar Data (Events)
   const barData = {
@@ -121,8 +131,8 @@ const Dashboard: React.FC = () => {
         label: "Number events",
         data: eventData.map((events) => events.name.length ?? 0),
         fill: false,
-        backgroundColor: "rgb(75, 192, 192)",
-        borderColor: "rgba(75, 192, 192, 0.2)",
+        backgroundColor: "rgb(110, 110, 110)",
+        borderColor: "rgba(110, 110, 110, 0.2)",
       },
     ],
   };
@@ -164,11 +174,17 @@ const Dashboard: React.FC = () => {
                   When customers have joined in the time.
                 </h4>
                 <div className="content">
-                  <ul>
-                    <li>Customers: {totalCustomers}</li>
-                    <li>Doing Meetings: 28.49%</li>
-                    <li>Customers by Coach: {customersPerCoach}</li>
-                  </ul>
+                  <div className="columns is-mobile is-centered">
+                    <div className="column is-narrow">
+                      <p>Customers: {totalCustomers}</p>
+                    </div>
+                    <div className="column is-narrow">
+                      <p>Doing Meetings: 28.49%</p>
+                    </div>
+                    <div className="column is-narrow">
+                      <p>Customers by Coach: {customersPerCoach}</p>
+                    </div>
+                  </div>
                 </div>
                 <Line data={lineChartData} />
               </div>
@@ -179,11 +195,17 @@ const Dashboard: React.FC = () => {
                 <h2 className="title is-6 mb-0">Events</h2>
                 <h4 className="is-5 mb-6">Our events and their status</h4>
                 <div className="content">
-                  <ul>
-                    <li>Monthly: 83 (+4.63%)</li>
-                    <li>Weekly: 20 (-1.92%)</li>
-                    <li>Daily (Avg): 3 (+3.45%)</li>
-                  </ul>
+                  <div className="columns is-mobile is-centered">
+                    <div className="column is-narrow">
+                      <p>Monthly: 83 (+4.63%)</p>
+                    </div>
+                    <div className="column is-narrow">
+                      <p>Weekly: 20 (-1.92%)</p>
+                    </div>
+                    <div className="column is-narrow">
+                      <p>Daily (Avg): 3 (+3.45%)</p>
+                    </div>
+                  </div>
                 </div>
                 <Bar data={barData} />
               </div>
@@ -194,6 +216,9 @@ const Dashboard: React.FC = () => {
           <div className="column is-three-fifths">
             <div className="box">
               <h2 className="title is-5">Customers by Country</h2>
+              <div style={{ textAlign: "center" }}>
+                <p>Map visualization</p>
+              </div>
               <div className="content">
                 <ul>
                   <li>France: 130 (23.54%)</li>
@@ -202,16 +227,13 @@ const Dashboard: React.FC = () => {
                   <li>Other: 120 (49.88%)</li>
                 </ul>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <p>Map visualization</p>
-              </div>
             </div>
           </div>
 
           <div className="column is-two-fifths">
             <div className="box">
               <h2 className="title is-5">Meetings Top Sources</h2>
-              <Pie data={pieData} />
+              <Doughnut data={pieData} />
             </div>
           </div>
         </div>
