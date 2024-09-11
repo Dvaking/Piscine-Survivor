@@ -11,3 +11,64 @@ array_relationships:
         remote_table:
           name: eventCustomers
           schema: private
+insert_permissions:
+  - role: coach
+    permission:
+      check: {}
+      set:
+        employee_uuid: x-hasura-User-Id
+      columns:
+        - date
+        - duration
+        - employee_uuid
+        - id
+        - location_name
+        - location_x
+        - location_y
+        - max_participants
+        - name
+        - type
+    comment: ""
+select_permissions:
+  - role: coach
+    permission:
+      columns:
+        - duration
+        - id
+        - max_participants
+        - date
+        - location_name
+        - location_x
+        - location_y
+        - name
+        - type
+        - employee_uuid
+        - uuid
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - date
+        - duration
+        - location_name
+        - location_x
+        - location_y
+        - max_participants
+        - name
+        - type
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""

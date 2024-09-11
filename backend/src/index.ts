@@ -27,6 +27,7 @@ import { getTips } from "./API/tipsApi";
 import { getEventById, getEvents } from "./API/eventsApi";
 import fs from "fs";
 import { get } from "http";
+import cron from "node-cron";
 
 import express from "express";
 import authRouter from "./auth/index";
@@ -133,9 +134,9 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    // putEmployeesInDb(token);
-    // putCustomersInDb(token);
-    // putTipsInDb(token);
+    putEmployeesInDb(token);
+    putCustomersInDb(token);
+    putTipsInDb(token);
     putEventsInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
@@ -154,12 +155,12 @@ async function updateData(): Promise<void> {
 }
 
 function executeQuery() {
-  // fetchData();
+  fetchData();
   console.log("Data fetched successfully");
-  // cron.schedule("*/30 * * * *", () => {
-  //   updateData();
-  //   console.log("Data updated successfully");
-  // });
+  cron.schedule("*/30 * * * *", () => {
+    updateData();
+    console.log("Data updated successfully");
+  });
 }
 
 

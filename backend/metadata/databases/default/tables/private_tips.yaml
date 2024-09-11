@@ -1,3 +1,12 @@
 table:
   name: tips
   schema: private
+select_permissions:
+  - role: coach
+    permission:
+      columns:
+        - id
+        - tip
+        - title
+      filter: {}
+    comment: ""

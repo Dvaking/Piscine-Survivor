@@ -39,3 +39,68 @@ array_relationships:
         remote_table:
           name: payments_history
           schema: private
+insert_permissions:
+  - role: coach
+    permission:
+      check: {}
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - id
+        - image
+        - name
+        - phone_number
+        - surname
+    comment: ""
+select_permissions:
+  - role: coach
+    permission:
+      columns:
+        - id
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - gender
+        - image
+        - name
+        - phone_number
+        - surname
+        - employee_uuid
+        - uuid
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - gender
+        - image
+        - name
+        - phone_number
+        - surname
+      filter: {}
+      check:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""

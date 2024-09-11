@@ -1,3 +1,42 @@
 table:
   name: encounters
   schema: private
+object_relationships:
+  - name: customer_assign
+    using:
+      manual_configuration:
+        column_mapping:
+          customer_uuid: uuid
+        insertion_order: null
+        remote_table:
+          name: customers
+          schema: private
+select_permissions:
+  - role: coach
+    permission:
+      columns:
+        - id
+        - rating
+        - comment
+        - date
+        - source
+        - customer_uuid
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - comment
+        - date
+        - rating
+        - source
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+      check: null
+    comment: ""

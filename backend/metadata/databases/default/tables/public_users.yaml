@@ -9,3 +9,33 @@ select_permissions:
         - password
       filter: {}
     comment: ""
+  - role: coach
+    permission:
+      columns:
+        - email
+        - password
+        - role
+        - uuid
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - email
+        - password
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
