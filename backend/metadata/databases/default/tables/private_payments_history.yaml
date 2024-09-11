@@ -1,17 +1,50 @@
 table:
   name: payments_history
   schema: private
+object_relationships:
+  - name: customer_assign
+    using:
+      manual_configuration:
+        column_mapping:
+          customer_uuid: uuid
+        insertion_order: null
+        remote_table:
+          name: customers
+          schema: private
 select_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
-        - amount
         - id
+        - amount
         - comment
         - date
         - payment_method
         - customer_uuid
       filter:
-        customer_uuid:
-          _eq: X-Hasura-User-Id
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - amount
+        - comment
+        - date
+        - payment_method
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
     comment: ""

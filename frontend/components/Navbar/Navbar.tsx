@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookie from "js-cookie";
+import { logout } from "@hooks";
+import { log } from "console";
 
 export function Navbar() {
   const router = useRouter();
@@ -14,6 +17,7 @@ export function Navbar() {
   const [isEvents, setIsEvents] = useState(false);
   const [isSigns, setIsSigns] = useState(false);
   const [isClothes, setIsClothes] = useState(false);
+  const [isManager, setIsManager] = useState(false);
 
   useEffect(() => {
     setIsDashboard(router.pathname === "/dashboard");
@@ -24,7 +28,22 @@ export function Navbar() {
     setIsTips(router.pathname === "/dashboard/tips");
     setIsClothes(router.pathname === "/dashboard/clothes");
     setIsClothes(router.pathname === "/dashboard/statistics");
+    setIsManager(Cookie.get("role") === "admin");
   }, [router]);
+
+  const disconnect = async () => {
+    try {
+      const success = await logout();
+
+      if (success) {
+        router.push("/login");
+      } else {
+        console.error("Error during logout");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -38,14 +57,16 @@ export function Navbar() {
             Dashboard
           </Link>
         </li>
-        <li>
-          <Link
-            href="/dashboard/employees"
-            className={isEmployee ? styles.selected : ""}
-          >
-            Employees
-          </Link>
-        </li>
+        {isManager && (
+          <li>
+            <Link
+              href="/dashboard/employees"
+              className={isEmployee ? styles.selected : ""}
+            >
+              Employees
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             href="/dashboard/customers"
@@ -78,15 +99,22 @@ export function Navbar() {
             Events
           </Link>
         </li>
-        <li>
-          <Link href="/dashboard/statistics">Statistics</Link>
-        </li>
+        {isManager && (
+          <li>
+            <Link href="/dashboard/statistics">Statistics</Link>
+          </li>
+        )}
         <li>
           <Link href="/dashboard/clothes">Clothes</Link>
         </li>
       </ul>
       <div className={styles.language}>
-        <span>EN</span>
+        <div>
+          <span>EN</span>
+        </div>
+        <div>
+          <button onClick={() => disconnect()}>Logout</button>
+        </div>
       </div>
     </nav>
   );

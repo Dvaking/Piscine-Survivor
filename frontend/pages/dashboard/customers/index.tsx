@@ -6,6 +6,7 @@ import { GetCustomersProps } from "@types";
 import styles from "@styles/CustomersSearchPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
@@ -19,8 +20,14 @@ export default function Home() {
   const [emailError, setEmailError] = useState<string>("");
 
   useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.push("/login");
+    }
     const fetchData = async () => {
       const fetchedCustomers = await getCustomers();
+      console.log(Cookies.get("token"));
       setCustomers(fetchedCustomers);
 
       fetchedCustomers.forEach(async (customer) => {
@@ -92,7 +99,6 @@ export default function Home() {
   //   e.preventDefault();
   //   try {
   //     await insertEmployee(formData);
-  //     console.log("Employee inserted successfully: ", formData);
   //     setPopupVisible(false);
   //     router.reload();
   //   } catch (error) {
@@ -262,7 +268,6 @@ export default function Home() {
               <div className="dropdown">
                 <button className="button">
                   <div>Bulk Action</div>
-
                   <i className="fas fa-angle-down" aria-hidden="true"></i>
                 </button>
               </div>

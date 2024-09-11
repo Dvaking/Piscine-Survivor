@@ -20,3 +20,19 @@ export const InsertClothe = gql`
     }
   }
 `;
+
+export const UpdateClothe = gql`
+  mutation UpdateClothes(
+    $customer_id: Int
+    $image: String
+    $type: String
+    $id: Int
+  ) {
+    update_private_clothes(
+      where: { id: { _eq: $id } }
+      _set: { customer_id: $customer_id, image: $image, type: $type }
+    ) {
+      affected_rows
+    }
+  }
+`;

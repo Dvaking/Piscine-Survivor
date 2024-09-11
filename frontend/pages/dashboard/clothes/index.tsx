@@ -6,6 +6,7 @@ import { GetCustomersProps, GetClothesProps } from "@types";
 import styles from "@styles/ClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
 
 type ClientWithClothes = {
   client: GetCustomersProps;
@@ -19,6 +20,8 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) router.push("/login");
     const fetchData = async () => {
       const fetchedCustomers = await getCustomers();
       const fetchedClothesData = await fetchAllClothesData(fetchedCustomers);

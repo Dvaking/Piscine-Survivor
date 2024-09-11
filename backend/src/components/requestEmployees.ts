@@ -4,6 +4,7 @@ import {
   Client,
   UpdateEmployee,
   InsertUser,
+  UpdateUser,
 } from "../queries/";
 
 interface Employee {
@@ -51,20 +52,38 @@ export async function insertEmployee(
 export async function updateEmployee(
   employee: EmployeeProps,
   employeeImage: string
-) {
-  let response: Employee | undefined = undefined;
-  let variables = {
+): Promise<string | null> {
+  let response: any;
+  let employeeVariables = {
     ...employee,
     image: employeeImage,
   };
-  if (variables.image === undefined) {
-    variables.image = "";
+  let userVariables = {
+    email: employee.email,
+    password: "password",
+    role: employee.work,
+    employee_uuid: undefined,
+    customer_uuid: undefined,
+  };
+  if (employeeVariables.image === undefined) {
+    employeeVariables.image = "";
   }
   try {
-    response = await Client.request(UpdateEmployee, variables);
+    employeeVariables.image = "";
+    response = await Client.request(UpdateEmployee, employeeVariables);
+    const uuid = response?.insert_private_employees?.returning[0]?.uuid;
+    userVariables.employee_uuid = uuid;
+    await Client.request(UpdateUser, userVariables);
     console.log("Employee updated successfully");
-  } catch (error) {
+    return uuid;
+  } catch (error: any) {
+    if (
+      error.message.includes("duplicate key value violates unique constraint")
+    ) {
+      console.error("Employee already exists");
+      return null;
+    }
     console.error("Error updating employee");
+    return null;
   }
-  return response ? response.private_employees : [];
 }

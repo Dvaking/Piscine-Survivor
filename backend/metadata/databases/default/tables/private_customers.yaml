@@ -25,7 +25,7 @@ array_relationships:
     using:
       manual_configuration:
         column_mapping:
-          uuid: customer_uuid
+          id: customer_id
         insertion_order: null
         remote_table:
           name: encounters
@@ -39,8 +39,26 @@ array_relationships:
         remote_table:
           name: payments_history
           schema: private
+insert_permissions:
+  - role: coach
+    permission:
+      check: {}
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - id
+        - image
+        - name
+        - phone_number
+        - surname
+    comment: ""
 select_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
         - address
@@ -57,11 +75,11 @@ select_permissions:
         - surname
         - uuid
       filter:
-        uuid:
+        employee_uuid:
           _eq: X-Hasura-User-Id
     comment: ""
 update_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
         - address
@@ -69,17 +87,18 @@ update_permissions:
         - birth_date
         - description
         - email
-        - employee_uuid
         - gender
         - image
         - name
         - phone_number
         - surname
-      filter: {}
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
       check: null
     comment: ""
 delete_permissions:
-  - role: user
+  - role: coach
     permission:
       filter:
         employee_uuid:

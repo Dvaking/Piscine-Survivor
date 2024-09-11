@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCustomers } from "@hooks";
 import { GetCustomersProps } from "@types";
-import styles from '@styles/Signspage.module.css';
+import styles from "@styles/Signspage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
@@ -16,8 +18,13 @@ export default function Home() {
   const [dropdownForClient1, setDropdownForClient1] = useState(false);
   const [dropdownForClient2, setDropdownForClient2] = useState(false);
   const [result, setResult] = useState<number | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     const fetchData = async () => {
       const fetchedCustomers = await getCustomers();
       setCustomers(fetchedCustomers);

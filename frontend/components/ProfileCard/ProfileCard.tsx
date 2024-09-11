@@ -58,13 +58,11 @@ export function ProfileCard({ customer }: ProfileCardProps) {
     setTotalPositives(5);
     setTotalInProgress(3);
     if (customer.employee_uuid) {
-      console.log(`Marde ${customer.employee_uuid}`);
       getCoachNameByUuid(customer.employee_uuid).then((data) =>
         setCoach(`${data[0].name} ${data[0].surname}`)
       );
     }
   }, [customer]);
-  console.log(customerData.image);
 
   if (!isLoaded) return <div>Loading...</div>;
   

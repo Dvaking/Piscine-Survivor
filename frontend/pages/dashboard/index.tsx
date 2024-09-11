@@ -1,5 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
+import Cookies from "js-cookie";
+import router from "next/router";
 import "bulma/css/bulma.min.css";
 import styles from "@styles/Dashboard.module.css";
 import {
@@ -33,7 +36,7 @@ ChartJS.register(
   BarElement
 );
 
-const Dashboard: React.FC = () => {
+export default function Dashboard() {
   const [customerNameData, setCustomersNameData] = useState<GetCustomersNameProps[]>([]);
   const [eventData, setEventData] = useState<GetEventsProps[]>([]);
   const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>([]);
@@ -70,6 +73,10 @@ const Dashboard: React.FC = () => {
   };
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     fetchCustomerNameData();
     fetchEventData();
     fetchEmployeesByWorkData();
@@ -257,5 +264,3 @@ const Dashboard: React.FC = () => {
     </main>
   );
 };
-
-export default Dashboard;

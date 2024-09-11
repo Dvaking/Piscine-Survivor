@@ -1,24 +1,53 @@
 .main {
+  background-color: whitesmoke;
+}
+
+.containerBg {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.heading {
   padding-top: 6rem;
-  background-color: whitesmoke;
+  padding-bottom: 2rem;
+  padding-left: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.heading i {
+  font-size: 2rem;
+  font-weight: 650;
+  padding-right: 0.5rem;
+}
+
+.heading i:hover {
+  cursor: pointer;
+  color: blue;
 }
 
 .clothesContainer {
   width: 98%;
-  height: auto;
+  min-height: 85vh;
+  max-height: 85vh;
   background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .carouselContainer {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 40%;
   overflow: hidden;
 }
 
@@ -26,12 +55,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 20rem;
 }
 
 .carouselImage {
-  max-width: 30%;
-  height: auto;
+  max-width: 100%;
+  max-height: 90%;
 }
 
 .arrow {

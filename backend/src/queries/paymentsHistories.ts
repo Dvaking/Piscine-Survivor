@@ -28,3 +28,28 @@ export const InsertPaymentHistory = gql`
     }
   }
 `;
+
+// UPDATE
+export const UpdatePaymentHistory = gql`
+  mutation MyMutation(
+    $amount: money
+    $comment: String
+    $customer_uuid: uuid
+    $date: String
+    $id: Int
+    $payment_method: String
+  ) {
+    update_private_payments_history(
+      where: { id: { _eq: $id } }
+      _set: {
+        amount: $amount
+        comment: $comment
+        customer_uuid: $customer_uuid
+        date: $date
+        payment_method: $payment_method
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;

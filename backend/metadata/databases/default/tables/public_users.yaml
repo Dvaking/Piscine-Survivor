@@ -1,3 +1,45 @@
 table:
   name: users
   schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - customer_uuid
+        - email
+        - employee_uuid
+        - password
+        - role
+      filter: {}
+    comment: ""
+  - role: coach
+    permission:
+      columns:
+        - email
+        - employee_uuid
+        - password
+        - role
+        - uuid
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - email
+        - password
+        - role
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        employee_uuid:
+          _eq: X-Hasura-User-Id
+    comment: ""

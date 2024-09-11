@@ -29,3 +29,28 @@ export const InsertEncounter = gql`
     }
   }
 `;
+
+// UPDATE
+export const UpdateEncounter = gql`
+  mutation UpdateEncounter(
+    $id: Int!
+    $date: String
+    $rating: Int
+    $comment: String
+    $source: String
+    $customer_id: Int
+  ) {
+    update_private_encounters(
+      where: { id: { _eq: $id } }
+      _set: {
+        date: $date
+        rating: $rating
+        comment: $comment
+        source: $source
+        customer_id: $customer_id
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;

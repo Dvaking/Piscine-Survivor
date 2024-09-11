@@ -61,18 +61,19 @@ export const InsertEmployee = gql`
 // UPDATE
 export const UpdateEmployee = gql`
   mutation UpdateEmployee(
-    $id: Int
-    $birth_date: String
-    $email: String
-    $gender: String
+    $id: Int!
+    $email: String!
     $name: String
     $surname: String
+    $birth_date: String
+    $gender: String
     $work: String
     $image: String
   ) {
     update_private_employees(
       where: { id: { _eq: $id } }
       _set: {
+        id: $id
         birth_date: $birth_date
         email: $email
         gender: $gender
@@ -82,7 +83,9 @@ export const UpdateEmployee = gql`
         image: $image
       }
     ) {
-      affected_rows
+      returning {
+        uuid
+      }
     }
   }
 `;

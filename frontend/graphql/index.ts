@@ -3,3 +3,4 @@ export * from './employees';
 export * from './clothes';
 export * from './client';
 export * from './events';
+export * from './tips';

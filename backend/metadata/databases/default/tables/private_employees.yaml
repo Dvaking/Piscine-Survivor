@@ -12,7 +12,7 @@ object_relationships:
           name: users
           schema: public
 array_relationships:
-  - name: customer_asing
+  - name: customer_assign
     using:
       manual_configuration:
         column_mapping:
@@ -31,24 +31,24 @@ array_relationships:
           name: events
           schema: private
 select_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
+        - id
         - birth_date
         - email
         - gender
-        - id
         - image
         - name
         - surname
-        - uuid
         - work
+        - uuid
       filter:
         uuid:
           _eq: X-Hasura-User-Id
     comment: ""
 update_permissions:
-  - role: user
+  - role: coach
     permission:
       columns:
         - birth_date
@@ -58,6 +58,15 @@ update_permissions:
         - name
         - surname
         - work
-      filter: {}
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
       check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
     comment: ""
