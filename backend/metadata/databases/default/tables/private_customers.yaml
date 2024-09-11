@@ -25,7 +25,7 @@ array_relationships:
     using:
       manual_configuration:
         column_mapping:
-          uuid: customer_uuid
+          id: customer_id
         insertion_order: null
         remote_table:
           name: encounters
@@ -61,18 +61,17 @@ select_permissions:
   - role: coach
     permission:
       columns:
-        - id
         - address
         - astrological_sign
         - birth_date
         - description
         - email
         - gender
+        - id
         - image
         - name
         - phone_number
         - surname
-        - employee_uuid
         - uuid
       filter:
         employee_uuid:
@@ -92,10 +91,10 @@ update_permissions:
         - name
         - phone_number
         - surname
-      filter: {}
-      check:
+      filter:
         employee_uuid:
           _eq: X-Hasura-User-Id
+      check: null
     comment: ""
 delete_permissions:
   - role: coach

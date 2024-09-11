@@ -26,3 +26,25 @@ select_permissions:
           employee_uuid:
             _eq: X-Hasura-User-Id
     comment: ""
+update_permissions:
+  - role: coach
+    permission:
+      columns:
+        - amount
+        - comment
+        - date
+        - payment_method
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+      check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        customer_assign:
+          employee_uuid:
+            _eq: X-Hasura-User-Id
+    comment: ""

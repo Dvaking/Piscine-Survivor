@@ -57,8 +57,16 @@ update_permissions:
         - image
         - name
         - surname
+        - work
       filter:
         uuid:
           _eq: X-Hasura-User-Id
       check: null
+    comment: ""
+delete_permissions:
+  - role: coach
+    permission:
+      filter:
+        uuid:
+          _eq: X-Hasura-User-Id
     comment: ""
