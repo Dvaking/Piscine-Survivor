@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
 import "bulma/css/bulma.min.css";
+import styles from "@styles/Dashboard.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -179,57 +180,56 @@ const Dashboard: React.FC = () => {
 
   return (
     <main className="has-background-white-smoke">
-      <div className="container ml-6" style={{ minWidth: "95%" }}>
-        <h1 className="title mb-6">Dashboard</h1>
-        <h4>Welcome!</h4>
+      <div className={`${styles["container-wide"]}`}>
+        <h3 className="title is-size-4-mobile is-size-3-tablet is-size-2-desktop">Dashboard</h3>
+        <h4 className="is-size-5-mobile">Welcome!</h4>
 
-        <div className="is-align-items-flex-start">
-          <div className="columns mt-6">
-            <div className="column is-three-fifths">
-              <div className="box">
-                <h2 className="title is-6 mb-0">Customers Overview</h2>
-                <h4 className="is-5 mb-6">When customers have joined in the time.</h4>
-                <div className="content">
-                  <div className="columns is-mobile is-centered">
-                    <div className="column is-narrow">
-                      <p>Customers: {totalCustomers}</p>
-                    </div>
-                    <div className="column is-narrow">
-                      <p>Doing Meetings: 28.49%</p>
-                    </div>
-                    <div className="column is-narrow">
-                      <p>Customers by Coach: {customersPerCoach}</p>
-                    </div>
+        <div className="columns is-multiline">
+          <div className="column is-12-mobile is-8-tablet is-6-desktop">
+            <div className="box">
+              <h2 className="title is-6">Customers Overview</h2>
+              <h4 className="is-5">When customers have joined in the time.</h4>
+              <div className="content">
+                <div className="columns is-mobile is-centered">
+                  <div className="column is-narrow">
+                    <p>Customers: {totalCustomers}</p>
+                  </div>
+                  <div className="column is-narrow">
+                    <p>Doing Meetings: 28.49%</p>
+                  </div>
+                  <div className="column is-narrow">
+                    <p>Customers by Coach: {customersPerCoach}</p>
                   </div>
                 </div>
-                <Line data={lineChartData} />
               </div>
+              <Line data={lineChartData} />
             </div>
+          </div>
 
-            <div className="column is-two-fifths">
-              <div className="box">
-                <h2 className="title is-6 mb-0">Events</h2>
-                <h4 className="is-5 mb-6">Our events and their status</h4>
-                <div className="content">
-                  <div className="columns is-mobile is-centered">
-                    <div className="column is-narrow">
-                      <p>Monthly: {monthlyAverage}</p>
-                    </div>
-                    <div className="column is-narrow">
-                      <p>Weekly: {weeklyAverage}</p>
-                    </div>
-                    <div className="column is-narrow">
-                      <p>Daily (Avg): {dailyAverage}</p>
-                    </div>
+          <div className="column is-12-mobile is-8-tablet is-6-desktop">
+            <div className="box">
+              <h2 className="title is-6">Events</h2>
+              <h4 className="is-5">Our events and their status</h4>
+              <div className="content">
+                <div className="columns is-mobile is-centered">
+                  <div className="column is-narrow">
+                    <p>Monthly: {monthlyAverage}</p>
+                  </div>
+                  <div className="column is-narrow">
+                    <p>Weekly: {weeklyAverage}</p>
+                  </div>
+                  <div className="column is-narrow">
+                    <p>Daily (Avg): {dailyAverage}</p>
                   </div>
                 </div>
-                <Bar data={barData} />
               </div>
+              <Bar data={barData} />
             </div>
           </div>
         </div>
-        <div className="columns">
-          <div className="column is-three-fifths">
+
+        <div className="columns is-multiline">
+          <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
               <h2 className="title is-5">Customers by Country</h2>
               <div style={{ textAlign: "center" }}>
@@ -246,7 +246,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <div className="column is-two-fifths">
+          <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
               <h2 className="title is-5">Meetings Top Sources</h2>
               <Doughnut data={doughnutData} />
