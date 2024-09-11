@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
 import "bulma/css/bulma.min.css";
 import {
@@ -13,6 +13,10 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
+import { getEmployeeNameByWork } from "@hooks";
+import {
+  GetEmployeesNameByWorkProps,
+} from "@types";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +31,9 @@ ChartJS.register(
 );
 
 const Dashboard: React.FC = () => {
+  const [employeesData, setEmployeesData] = useState<GetEmployeesNameByWorkProps[]>(
+    []
+  );
   // Line Chart Data (Customers Overview)
   const lineData = {
     labels: ["01 Jul", "08 Jul", "15 Jul", "22 Jul", "30 Jul"],
@@ -98,6 +105,7 @@ const Dashboard: React.FC = () => {
         <h1 className="title mb-6">Dashboard</h1>
         <h4>Welcome!</h4>
 
+      <div className="is-align-items-flex-start">
         <div className="columns mt-6">
           <div className="column is-three-fifths">
             <div className="box">
@@ -131,7 +139,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-
+        </div>
         <div className="columns">
           <div className="column is-three-fifths">
             <div className="box">

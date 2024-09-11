@@ -1,12 +1,12 @@
 import { client, GetEmployeesNameByWork } from "@graphql";
 import { GetEmployeesNameByWorkProps } from "@types";
 
-export interface Employees {
+export interface EmployeesName {
   private_employees: GetEmployeesNameByWorkProps[];
 }
 
-export async function getEmployeesNameByWork() {
-  let response: Employees | undefined = undefined;
+export async function getEmployeeNameByWork() {
+  let response: EmployeesName | undefined = undefined;
   try {
     response = await client.request(GetEmployeesNameByWork);
   } catch (error) {

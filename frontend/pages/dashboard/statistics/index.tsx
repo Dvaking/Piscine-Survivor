@@ -12,7 +12,7 @@ import {
   ArcElement,
 } from "chart.js";
 import styles from "@styles/StatisticsPage.module.css";
-import { getEmployeesByWork, getEmployeesAssignedCustomers } from "@hooks"; // Ajout de la nouvelle fonction
+import { getEmployeesByWork, getEmployeesAssignedCustomers } from "@hooks";
 import {
   GetEmployeesByWorkProps,
   GetEmployeesAssignedCustomersProps,
@@ -37,7 +37,7 @@ const StaticticsGraph: React.FC = () => {
   );
   const [assignedCustomersData, setAssignedCustomersData] = useState<
     GetEmployeesAssignedCustomersProps[]
-  >([]); // Nouvel état pour les clients assignés
+  >([]);
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
 
