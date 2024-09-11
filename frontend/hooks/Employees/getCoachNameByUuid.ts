@@ -20,7 +20,6 @@ export async function getCoachNameByUuid(uuid: string) {
       if (refresh)
         try {
           response = await client.request(GetCoachNameByUuid, { uuid: uuid });
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

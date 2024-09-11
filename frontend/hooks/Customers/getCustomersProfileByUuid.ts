@@ -19,8 +19,9 @@ export async function getCustomersProfileByUuid(uuid: string) {
       const refresh = await refreshToken();
       if (refresh)
         try {
-          response = await client.request(GetCustomersProfileByUuid, { uuid: uuid });
-          console.log("Utilisateur inséré avec succès");
+          response = await client.request(GetCustomersProfileByUuid, {
+            uuid: uuid,
+          });
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

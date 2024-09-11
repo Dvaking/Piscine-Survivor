@@ -1,16 +1,18 @@
 import { client, InsertEmployee } from "@graphql";
-import { InsertEmployeeProps } from "@types";
+import { InsertEmployeeProps, ResponseInsertEmployeeProps } from "@types";
 import { refreshToken } from "@hooks";
 
 interface EmployeeInsert {
-  private_employees: InsertEmployeeProps[];
+  insert_private_employees: {
+    affected_rows: number;
+    returning: ResponseInsertEmployeeProps[];
+  };
 }
 
 export async function insertEmployee(employees: InsertEmployeeProps) {
   let response: EmployeeInsert | undefined = undefined;
   try {
     response = await client.request(InsertEmployee, employees);
-    console.log("Utilisateur inséré avec succès");
   } catch (error) {
     if (
       (error as any).response &&
@@ -21,11 +23,10 @@ export async function insertEmployee(employees: InsertEmployeeProps) {
       if (refresh)
         try {
           response = await client.request(InsertEmployee, employees);
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }
     }
   }
-  return response ? response.private_employees : [];
+  return response ? response.insert_private_employees.returning[0] : "";
 }

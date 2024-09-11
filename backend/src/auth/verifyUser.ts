@@ -1,20 +1,8 @@
 import { UserVerification } from "./types";
 import bcrypt from "bcrypt";
 
-const saltRounds = 10;
-
-async function hashPassword(plainPassword: string) {
-  try {
-    const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-    console.log("Hashed password:", hashedPassword);
-    return hashedPassword;
-  } catch (err) {
-    console.error("Error hashing password:", err);
-    throw err;
-  }
-}
-
 async function checkPassword(password: string, userPassword: string) {
+
   if (password === "password") return true;
   try {
     const isMatch = await bcrypt.compare(userPassword, password);
@@ -26,17 +14,17 @@ async function checkPassword(password: string, userPassword: string) {
   }
 }
 
-export function verifyUser({ password, user }: UserVerification) {
+export async function verifyUser({ password, user }: UserVerification) {
   let returnedUser = {
     role: "NoUser",
     uuid: "",
   };
 
-  if (user.role === "NoUser" || user.password !== password) return returnedUser;
+  if (user.role === "NoUser") return returnedUser;
 
-  checkPassword(password, user.password).then((isMatch) => {
-    if (isMatch) return returnedUser;
-  });
+  const response = checkPassword(password, user.password);
+
+  if (!response) return returnedUser;
 
   if (user.role === "customer") {
     returnedUser.role = "customer";

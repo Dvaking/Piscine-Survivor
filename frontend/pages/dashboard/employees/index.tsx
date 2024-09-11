@@ -5,6 +5,7 @@ import {
   getEmployees,
   updateCustomerEmployee,
   insertEmployee,
+  registerUser,
 } from "@hooks";
 import {
   GetCustomersProps,
@@ -36,14 +37,15 @@ export default function Home() {
     return randomId;
   };
 
-  const [formData, setFormData] = useState<InsertEmployeeProps>({
+  const [formData, setFormData] = useState({
     name: "",
     surname: "",
     gender: "",
     birth_date: "",
     email: "",
     work: "",
-    id: generateUniqueId(),
+    id: 0,
+    password: "",
   });
 
   const isEmailInUse = (email: string) => {
@@ -67,10 +69,29 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormData((prevData) => ({
+      ...prevData,
+      id: generateUniqueId(),
+    }));
     try {
-      await insertEmployee(formData);
+      const response = await insertEmployee({
+        email: formData.email,
+        work: formData.work,
+        name: formData.name,
+        surname: formData.surname,
+        birth_date: formData.birth_date,
+        gender: formData.gender,
+        id: formData.id,
+      });
+      if (response)
+        await registerUser(
+          response.email,
+          formData.password,
+          response.work,
+          response.uuid
+        );
       setPopupVisible(false);
-      router.reload();
+      // router.reload();
     } catch (error) {
       console.error("Failed to insert employee:", error);
     }
@@ -156,7 +177,8 @@ export default function Home() {
         >
           <div
             className={styles.popupContent}
-            onClick={(e) => e.stopPropagation()}>
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>New Employee</h2>
             <form onSubmit={handleSubmit}>
               <div className="field">
@@ -224,6 +246,19 @@ export default function Home() {
                   />
                 </div>
                 {emailError && <p className="help is-danger">{emailError}</p>}
+              </div>
+              <div className="field">
+                <label className="label">Password</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    placeholder="Enter your password"
+                  />
+                </div>
               </div>
               <div className="field">
                 <label className="label">Job</label>
@@ -299,14 +334,14 @@ export default function Home() {
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
                 <img
-                      src={
-                        employee.image
-                          ? `data:image/png;base64,${employee.image}`
-                          : "https://via.placeholder.com/128"
-                      }
-                      alt={employee.name}
-                      className={styles.profilePicture}
-                    />
+                  src={
+                    employee.image
+                      ? `data:image/png;base64,${employee.image}`
+                      : "https://via.placeholder.com/128"
+                  }
+                  alt={employee.name}
+                  className={styles.profilePicture}
+                />
                 <p>
                   <strong>
                     {employee.name} {employee.surname}
@@ -316,14 +351,14 @@ export default function Home() {
               <div className={styles.email}>{employee.email}</div>
               <div>---</div>
               <div>{getEmployeeCustomerNumber(employee)}</div>
-           
-                <div
-                  className={styles.actions}
-                  onClick={() => handleActionClick(employee)}
-                >
-                  <i className="fas fa-ellipsis-h"></i>
-                </div>
-            
+
+              <div
+                className={styles.actions}
+                onClick={() => handleActionClick(employee)}
+              >
+                <i className="fas fa-ellipsis-h"></i>
+              </div>
+
               {dropdownForClient && (
                 <div className={styles.dropdown}>
                   <div className={styles.topDropdown}>

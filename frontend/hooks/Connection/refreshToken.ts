@@ -11,7 +11,6 @@ export async function refreshToken() {
   });
 
   if (!response.ok) {
-    console.log("Error refreshing token");
     return false;
   }
 
