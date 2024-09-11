@@ -55,7 +55,12 @@ export const UpdateUser = gql`
         employee_uuid: $employee_uuid
         customer_uuid: $customer_uuid
       }
-    )
+    ) {
+      affected_rows
+      returning {
+        email
+      }
+    }
   }
 `;
 
