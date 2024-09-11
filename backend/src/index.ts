@@ -25,6 +25,7 @@ import {
 } from "./components/";
 import { getTips } from "./API/tipsApi";
 import { getEventById, getEvents } from "./API/eventsApi";
+<<<<<<< HEAD
 import fs from "fs";
 import { get } from "http";
 import cron from "node-cron";
@@ -32,6 +33,9 @@ import cron from "node-cron";
 import express from "express";
 import authRouter from "./auth/index";
 import cors from "cors";
+=======
+import { getEncounterById, getEncounters } from "./API/encountersApi";
+>>>>>>> 2e85d404a815d6fd820f89053e9ccbb87b6ac386
 
 async function putCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
@@ -76,7 +80,7 @@ async function putEmployeesInDb(token: Token) {
       const employeeToSend = await getEmployeeById(token, employee.id);
       const employeeImage = await getEmployeeImageById(token, employee.id);
 
-      insertEmployee(employeeToSend.data, employeeImage);
+      await insertEmployee(employeeToSend.data, employeeImage);
     } catch (error) {
       console.error("An error occurred while inserting employees");
     }
@@ -138,10 +142,17 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
+<<<<<<< HEAD
     putEmployeesInDb(token);
     putCustomersInDb(token);
     putTipsInDb(token);
     putEventsInDb(token);
+=======
+    await putEmployeesInDb(token);
+    putCustomersInDb(token);
+    putTipsInDb(token);
+    await putEventsInDb(token);
+>>>>>>> 2e85d404a815d6fd820f89053e9ccbb87b6ac386
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
