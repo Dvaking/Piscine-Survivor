@@ -4,3 +4,4 @@ export * from './Employees';
 export * from './Events';
 export * from './Tips';
 export * from './Connection';
+export * from './Encounters';

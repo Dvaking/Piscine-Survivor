@@ -160,3 +160,7 @@ export type GetTipsProps = {
   title: string;
   id: number;
 };
+
+export type GetEncountersProps = {
+  source: string;
+};

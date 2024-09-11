@@ -16,13 +16,13 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
-import { getCustomersName, getEvents, getEmployeesByWork } from "@hooks";
+import { getCustomersName, getEvents, getEmployeesByWork, getEncounters } from "@hooks";
 import {
   GetCustomersNameProps,
   GetEmployeesByWorkProps,
+  GetEncountersProps,
   GetEventsProps,
 } from "@types";
-import { SizeScale } from "chartjs-chart-geo";
 
 ChartJS.register(
   CategoryScale,
@@ -44,6 +44,7 @@ export default function Dashboard() {
   const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
     []
   );
+  const [encountersData, setEncountersData] = useState<GetEncountersProps[]>([]);
 
   const fetchCustomerNameData = async () => {
     try {
@@ -78,6 +79,15 @@ export default function Dashboard() {
     }
   };
 
+  const fetchEncountersData = async () => {
+    try {
+      const data = await getEncounters();
+      setEncountersData(data.map((item) => ({ source: item.source })));
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données", error);
+    }
+  };
+
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
@@ -86,6 +96,7 @@ export default function Dashboard() {
     fetchCustomerNameData();
     fetchEventData();
     fetchEmployeesByWorkData();
+    fetchEncountersData();
   }, []);
 
   const totalCustomers = customerNameData.length;
@@ -157,25 +168,25 @@ export default function Dashboard() {
     ],
   };
 
-  // Doughnut Chart Data (Top Event Types)
-  const eventTypeCounts = eventData.reduce<Record<string, number>>(
-    (acc, event) => {
-      acc[event.type] = (acc[event.type] || 0) + 1;
+  // Doughnut Chart Data (Top Meetings Types)
+  const encountersTypeCounts = encountersData.reduce<Record<string, number>>(
+    (acc, encounters) => {
+      acc[encounters.source] = (acc[encounters.source] || 0) + 1;
       return acc;
     },
     {}
   );
 
-  const topEventTypes = Object.entries(eventTypeCounts)
+  const topEncountersSource = Object.entries(encountersTypeCounts)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 5);
 
   const doughnutData = {
-    labels: topEventTypes.map(([type]) => type),
+    labels: topEncountersSource.map(([type]) => type),
     datasets: [
       {
-        label: "Event Types",
-        data: topEventTypes.map(([, count]) => count),
+        label: "Meetings Types",
+        data: topEncountersSource.map(([, count]) => count),
         backgroundColor: [
           "rgba(54, 162, 235, 0.6)",
           "rgba(255, 206, 86, 0.6)",
@@ -197,11 +208,11 @@ export default function Dashboard() {
   };
 
   const doughnutCustomerData = {
-    labels: topEventTypes.map(([type]) => type),
+    labels: topEncountersSource.map(([type]) => type),
     datasets: [
       {
         label: "Event Types",
-        data: topEventTypes.map(([, count]) => count),
+        data: topEncountersSource.map(([, count]) => count),
         backgroundColor: [
           "rgba(255, 99, 71, 0.6)",
           "rgba(100, 149, 237, 0.6)",
@@ -239,7 +250,7 @@ export default function Dashboard() {
               <h2 className="title is-6">Customers Overview</h2>
               <h4 className="is-5">When customers have joined in the time.</h4>
               <div className="content">
-                <div className="columns is-mobile is-centered">
+                <div className="columns is-centered">
                   <div className="column is-narrow">
                     <p>Customers: {totalCustomers}</p>
                   </div>
