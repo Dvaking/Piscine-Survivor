@@ -61,8 +61,8 @@ export const InsertEmployee = gql`
 // UPDATE
 export const UpdateEmployee = gql`
   mutation UpdateEmployee(
-    $id: Int
-    $email: String
+    $id: Int!
+    $email: String!
     $name: String
     $surname: String
     $birth_date: String
@@ -83,7 +83,9 @@ export const UpdateEmployee = gql`
         image: $image
       }
     ) {
-      affected_rows
+      returning {
+        uuid
+      }
     }
   }
 `;

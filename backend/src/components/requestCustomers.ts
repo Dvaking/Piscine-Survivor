@@ -4,6 +4,7 @@ import {
   Client,
   UpdateCustomer,
   InsertUser,
+  UpdateUser,
 } from "../queries/";
 
 interface Customer {
@@ -67,8 +68,8 @@ export async function updateCustomer(
     response = await Client.request(UpdateCustomer, customerVariables);
     const uuid = response?.insert_private_customers?.returning[0]?.uuid;
     userVariables.customer_uuid = uuid;
-    await Client.request(InsertUser, userVariables);
-    console.log("Customer inserted successfully");
+    await Client.request(UpdateUser, userVariables);
+    console.log("Customer updated successfully");
     return uuid;
   } catch (error: any) {
     if (

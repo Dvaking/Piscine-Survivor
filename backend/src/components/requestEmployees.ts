@@ -4,6 +4,7 @@ import {
   Client,
   UpdateEmployee,
   InsertUser,
+  UpdateUser,
 } from "../queries/";
 
 interface Employee {
@@ -68,10 +69,11 @@ export async function updateEmployee(
     employeeVariables.image = "";
   }
   try {
+    employeeVariables.image = "";
     response = await Client.request(UpdateEmployee, employeeVariables);
     const uuid = response?.insert_private_employees?.returning[0]?.uuid;
     userVariables.employee_uuid = uuid;
-    await Client.request(InsertUser, userVariables);
+    await Client.request(UpdateUser, userVariables);
     console.log("Employee updated successfully");
     return uuid;
   } catch (error: any) {

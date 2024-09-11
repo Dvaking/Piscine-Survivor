@@ -66,7 +66,7 @@ export const UpdateCustomer = gql`
     $surname: String
     $id: Int!
     $birth_date: String
-    $email: String
+    $email: String!
     $image: String
     $astrological_sign: String
     $description: String
@@ -88,7 +88,9 @@ export const UpdateCustomer = gql`
         image: $image
       }
     ) {
-      affected_rows
+      returning {
+        uuid
+      }
     }
   }
 `;

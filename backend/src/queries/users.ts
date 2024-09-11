@@ -22,3 +22,28 @@ export const InsertUser = gql`
     }
   }
 `;
+
+// UPDATE
+
+export const UpdateUser = gql`
+  mutation UpdateUser(
+    $email: String!
+    $password: String
+    $role: String
+    $employee_uuid: uuid
+    $customer_uuid: uuid
+  ) {
+    update_users(
+      where: { email: { _eq: $email } }
+      _set: {
+        email: $email
+        password: $password
+        role: $role
+        employee_uuid: $employee_uuid
+        customer_uuid: $customer_uuid
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;

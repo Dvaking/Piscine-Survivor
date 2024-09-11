@@ -198,16 +198,19 @@ async function updateEventsInDb(token: Token) {
 }
 
 async function updateEncountersInDb(token: Token) {
-  const encounters = await getEncounters(token);
-
-  encounters.data.forEach(async (encounter: any) => {
-    try {
-      const encounterDetailed = await getEncounterById(token, encounter.id);
-      await updateEncounter(encounterDetailed.data);
-    } catch (error) {
-      console.error("An error occurred while updating encounters", error);
-    }
-  });
+  try {
+    const encounters = await getEncounters(token);
+    encounters.data.forEach(async (encounter: any) => {
+      try {
+        const encounterDetailed = await getEncounterById(token, encounter.id);
+        await updateEncounter(encounterDetailed.data);
+      } catch (error) {
+        console.error("An error occurred while updating encounters", error);
+      }
+    });
+  } catch (error) {
+    console.error("An error occurred while updating encounters");
+  }
 }
 
 async function fetchData(): Promise<void> {
@@ -239,7 +242,8 @@ async function updateData(): Promise<void> {
 }
 
 function executeQuery() {
-  fetchData();
+  // fetchData();
+  updateData();
   console.log("Data fetched successfully");
   cron.schedule("*/30 * * * *", () => {
     updateData();
