@@ -9,6 +9,7 @@ export async function getEmployeesAssignedCustomers() {
   let response: EmployeesAssignedCustomers | undefined = undefined;
   try {
     response = await client.request(GetEmployeesAssignedCustomers);
+    console.log(response);
   } catch (error) {
     console.error("Erreur lors de l'insertion:", error);
   }
