@@ -55,11 +55,13 @@ authRouter.post("/register", async (req, res) => {
     console.error("Error hashing password");
     return res.sendStatus(500);
   }
-  
+
 });
 
 authRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("email", email);
+  console.log("password", password);
 
   try {
     const user = await getUserByEmail(email);

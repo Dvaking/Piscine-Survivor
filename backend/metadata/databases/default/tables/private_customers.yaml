@@ -66,6 +66,7 @@ select_permissions:
         - birth_date
         - description
         - email
+        - employee_uuid
         - gender
         - id
         - image

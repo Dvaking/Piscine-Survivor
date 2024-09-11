@@ -99,9 +99,11 @@ export function Navbar() {
             Events
           </Link>
         </li>
-        <li>
-          <Link href="/dashboard/statistics">Statistics</Link>
-        </li>
+        {isManager && (
+          <li>
+            <Link href="/dashboard/statistics">Statistics</Link>
+          </li>
+        )}
         <li>
           <Link href="/dashboard/clothes">Clothes</Link>
         </li>
