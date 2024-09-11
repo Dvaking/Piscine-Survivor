@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 import "bulma/css/bulma.min.css";
 import {
   Chart as ChartJS,
@@ -33,13 +33,9 @@ ChartJS.register(
 );
 
 const Dashboard: React.FC = () => {
-  const [customerNameData, setCustomersNameData] = useState<
-    GetCustomersNameProps[]
-  >([]);
+  const [customerNameData, setCustomersNameData] = useState<GetCustomersNameProps[]>([]);
   const [eventData, setEventData] = useState<GetEventsProps[]>([]);
-  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>(
-    []
-  );
+  const [employeesData, setEmployeesData] = useState<GetEmployeesByWorkProps[]>([]);
 
   const fetchCustomerNameData = async () => {
     try {
@@ -62,13 +58,11 @@ const Dashboard: React.FC = () => {
   const fetchEventData = async () => {
     try {
       const data = await getEvents();
-      setEventData(
-        data.map((item) => ({
-          name: item.name,
-          type: item.type,
-          date: item.date,
-        }))
-      );
+      setEventData(data.map((item) => ({
+        name: item.name,
+        type: item.type,
+        date: item.date,
+      })));
     } catch (error) {
       console.error("Erreur lors de la récupération des données", error);
     }
@@ -82,8 +76,7 @@ const Dashboard: React.FC = () => {
 
   const totalCustomers = customerNameData.length;
   const totalCoaches = employeesData.length;
-  const customersPerCoach =
-    totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
+  const customersPerCoach = totalCoaches > 0 ? Math.floor(totalCustomers / totalCoaches) : 0;
 
   const eventDates = eventData.map((event) => event.date);
   const eventsCountPerDate = eventDates.reduce<Record<string, number>>(
@@ -95,9 +88,9 @@ const Dashboard: React.FC = () => {
   );
 
   const totalEvents = Object.values(eventsCountPerDate).reduce((acc, count) => acc + count, 0);
-  const numberOfDays = new Set(eventDates).size; // Assuming each date represents a unique day
-  const numberOfWeeks = Math.ceil(numberOfDays / 7); // Approximation of weeks
-  const numberOfMonths = Math.ceil(numberOfDays / 30); // Approximation of months
+  const numberOfDays = new Set(eventDates).size;
+  const numberOfWeeks = Math.ceil(numberOfDays / 7);
+  const numberOfMonths = Math.ceil(numberOfDays / 30);
 
   const monthlyAverage = Math.floor(totalEvents / numberOfMonths);
   const weeklyAverage = Math.floor(totalEvents / numberOfWeeks);
@@ -146,22 +139,38 @@ const Dashboard: React.FC = () => {
     ],
   };
 
-  // Pie Chart Data (Meetings Top Sources)
-  const pieData = {
-    labels: ["Dating App", "Social Media", "Website"],
+  // Doughnut Chart Data (Top Event Types)
+  const eventTypeCounts = eventData.reduce<Record<string, number>>(
+    (acc, event) => {
+      acc[event.type] = (acc[event.type] || 0) + 1;
+      return acc;
+    },
+    {}
+  );
+
+  const topEventTypes = Object.entries(eventTypeCounts)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 5);
+
+  const doughnutData = {
+    labels: topEventTypes.map(([type]) => type),
     datasets: [
       {
-        label: "Meetings Sources",
-        data: [300, 150, 100],
+        label: "Event Types",
+        data: topEventTypes.map(([, count]) => count),
         backgroundColor: [
           "rgba(54, 162, 235, 0.6)",
           "rgba(255, 206, 86, 0.6)",
           "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
         ],
         borderColor: [
           "rgba(54, 162, 235, 1)",
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
+          "rgba(255, 99, 132, 1)",
+          "rgba(153, 102, 255, 1)",
         ],
         borderWidth: 1,
       },
@@ -179,9 +188,7 @@ const Dashboard: React.FC = () => {
             <div className="column is-three-fifths">
               <div className="box">
                 <h2 className="title is-6 mb-0">Customers Overview</h2>
-                <h4 className="is-5 mb-6">
-                  When customers have joined in the time.
-                </h4>
+                <h4 className="is-5 mb-6">When customers have joined in the time.</h4>
                 <div className="content">
                   <div className="columns is-mobile is-centered">
                     <div className="column is-narrow">
@@ -242,7 +249,7 @@ const Dashboard: React.FC = () => {
           <div className="column is-two-fifths">
             <div className="box">
               <h2 className="title is-5">Meetings Top Sources</h2>
-              <Doughnut data={pieData} />
+              <Doughnut data={doughnutData} />
             </div>
           </div>
         </div>
