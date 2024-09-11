@@ -1,6 +1,5 @@
 import { EventProps } from "../types/event";
 import { Client, InsertEvent, GetEmployeeUuidById } from "../queries/";
-import { UUID } from "crypto";
 
 interface Event {
   private_events: EventProps[];
@@ -10,19 +9,16 @@ type EmployeeResponse = {
   private_employees: { uuid: string }[];
 };
 
-export async function getUuidById(id: number): Promise<string> {
+async function getUuidById(id: number): Promise<string> {
   try {
     const response = await Client.request<EmployeeResponse>(
       GetEmployeeUuidById,
       { id }
     );
 
-    console.log("UUID de l'employé récupéré avec succès", response);
-
     if (response.private_employees && response.private_employees.length > 0) {
       return response.private_employees[0].uuid;
     } else {
-      console.error("Aucun employé trouvé avec cet id");
       return "";
     }
   } catch (error: unknown) {

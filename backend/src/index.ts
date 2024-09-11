@@ -23,6 +23,7 @@ import {
   insertPaymentHistory,
   insertTip,
   insertEvent,
+  insertEncounter,
 } from "./components/";
 import { getTips } from "./API/tipsApi";
 import { getEventById, getEvents } from "./API/eventsApi";
@@ -103,6 +104,19 @@ async function putEventsInDb(token: Token) {
   });
 }
 
+async function putEncountersInDb(token: Token) {
+  const encounters = await getEncounters(token);
+
+  encounters.data.forEach(async (encounter: any) => {
+    try {
+      const encounterDetailed = await getEncounterById(token, encounter.id);
+      insertEncounter(encounterDetailed.data);
+    } catch (error) {
+      console.error("An error occurred while inserting encounters", error);
+    }
+  });
+}
+
 async function updateEmployeesInDb(token: Token) {
   const employees = await getEmployees(token);
 
@@ -130,9 +144,10 @@ async function fetchData(): Promise<void> {
     const token = await login();
 
     await putEmployeesInDb(token);
-    putCustomersInDb(token);
+    // await putCustomersInDb(token);
     putTipsInDb(token);
     await putEventsInDb(token);
+    // await putEncountersInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }
