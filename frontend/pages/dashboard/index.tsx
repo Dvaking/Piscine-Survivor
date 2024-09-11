@@ -269,7 +269,7 @@ export default function Dashboard() {
           <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
               <h2 className="title is-6 mb-3">Events</h2>
-              <h4 className="is-5 mb-5">Our events and their status</h4>
+              <h4 className="is-5 mb-5">Our events and their status.</h4>
               <div className="content">
                 <div className="columns is-mobile is-centered">
                   <div className="column is-narrow">
