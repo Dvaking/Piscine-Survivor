@@ -94,6 +94,15 @@ const Dashboard: React.FC = () => {
     {}
   );
 
+  const totalEvents = Object.values(eventsCountPerDate).reduce((acc, count) => acc + count, 0);
+  const numberOfDays = new Set(eventDates).size; // Assuming each date represents a unique day
+  const numberOfWeeks = Math.ceil(numberOfDays / 7); // Approximation of weeks
+  const numberOfMonths = Math.ceil(numberOfDays / 30); // Approximation of months
+
+  const monthlyAverage = Math.floor(totalEvents / numberOfMonths);
+  const weeklyAverage = Math.floor(totalEvents / numberOfWeeks);
+  const dailyAverage = Math.floor(totalEvents / numberOfDays);
+
   // Bar Data (Events)
   const barData = {
     labels: Object.keys(eventsCountPerDate),
@@ -197,13 +206,13 @@ const Dashboard: React.FC = () => {
                 <div className="content">
                   <div className="columns is-mobile is-centered">
                     <div className="column is-narrow">
-                      <p>Monthly: 83 (+4.63%)</p>
+                      <p>Monthly: {monthlyAverage}</p>
                     </div>
                     <div className="column is-narrow">
-                      <p>Weekly: 20 (-1.92%)</p>
+                      <p>Weekly: {weeklyAverage}</p>
                     </div>
                     <div className="column is-narrow">
-                      <p>Daily (Avg): 3 (+3.45%)</p>
+                      <p>Daily (Avg): {dailyAverage}</p>
                     </div>
                   </div>
                 </div>
