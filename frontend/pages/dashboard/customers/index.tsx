@@ -46,7 +46,7 @@ export default function Home() {
       case "PayPal":
         return "https://img.icons8.com/?size=100&id=70557&format=png&color=000000";
       default:
-        return "/images/default.png";
+        return "https://img.icons8.com/?size=100&id=kMV_RnIVubYa&format=png&color=000000";
     }
   };
 
@@ -292,6 +292,15 @@ export default function Home() {
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
                 <div className={styles.clientProfileButton}>
+                    <img
+                      src={
+                        customer.image
+                          ? `data:image/png;base64,${customer.image}`
+                          : "https://via.placeholder.com/128"
+                      }
+                      alt={customer.name}
+                      className={styles.profilePicture}
+                    />
                   <Link href={`/dashboard/customers/${customer.uuid}`}>
                     <p>
                       {customer.name} {customer.surname}
@@ -313,15 +322,13 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className={styles.assignClientButton}>
-                <div className={styles.actions}>
-                  <Link
-                    href={`/dashboard/clothes/${customer.uuid}`}
-                    className={styles.actionLink}
-                  >
-                    <i className="fas fa-ellipsis-h"></i>
-                  </Link>
-                </div>
+              <div className={styles.actions}>
+                <Link
+                  href={`/dashboard/clothes/${customer.uuid}`}
+                  className={styles.actionLink}
+                >
+                  <i className="fas fa-ellipsis-h"></i>
+                </Link>
               </div>
             </div>
           ))}
