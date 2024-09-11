@@ -5,15 +5,18 @@ interface Customer {
   private_paymentsHistory: PaymentsHistoryProps[];
 }
 
-export async function insertPaymentHistory(payments: PaymentsHistoryProps, customer_uuid: string) {
+export async function insertPaymentHistory(
+  payments: PaymentsHistoryProps,
+  customer_uuid: string
+) {
   let response: Customer | undefined = undefined;
   let variables = { ...payments, customer_uuid };
 
   try {
     response = await Client.request(InsertPaymentHistory, variables);
-    console.log("Historique de paiement inséré avec succès");
+    console.log("Payment history inserted successfully");
   } catch (error) {
-    console.error("Erreur lors de l'insertion de l'historique de paiement", error);
+    console.error("Error inserting payment history");
   }
   return response ? response.private_paymentsHistory : [];
 }

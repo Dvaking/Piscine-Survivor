@@ -5,7 +5,10 @@ interface Clothe {
   private_clothes: ClotheProps[];
 }
 
-export async function insertClothe(clothe: ClotheProps, image: string | string) {
+export async function insertClothe(
+  clothe: ClotheProps,
+  image: string | string
+) {
   let response: Clothe | undefined = undefined;
   let variables = { ...clothe, image };
 
@@ -15,9 +18,9 @@ export async function insertClothe(clothe: ClotheProps, image: string | string)
 
   try {
     response = await Client.request(InsertClothe, variables);
-    console.log("Vêtement inséré avec succès");
+    console.log("Clothe inserted successfully");
   } catch (error) {
-    console.error("Erreur lors de l'insertion de vêtement", error);
+    console.error("Error inserting clothe");
   }
   return response ? response.private_clothes : [];
 }

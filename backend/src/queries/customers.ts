@@ -13,6 +13,14 @@ export const GetCustomers = gql`
   }
 `;
 
+export const GetCustomerById = gql`
+  query GetCustomerById($id: Int) {
+    private_customers(where: { id: { _eq: $id } }) {
+      uuid
+    }
+  }
+`;
+
 export const InsertCustomer = gql`
   mutation MyMutation(
     $gender: String
