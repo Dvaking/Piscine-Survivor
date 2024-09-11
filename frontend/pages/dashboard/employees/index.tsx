@@ -124,7 +124,6 @@ export default function Home() {
     });
     return assignedClients.length;
   };
-
   return (
     <main className={styles.main}>
       <div className={styles.heading}>
@@ -288,7 +287,6 @@ export default function Home() {
             </div>
             <div>Email</div>
             <div>Phone</div>
-            {/* <div>Position</div> */}
             <div>Number of Customers</div>
             <div className={styles.actions}>Actions</div>
           </div>
@@ -296,6 +294,15 @@ export default function Home() {
             <div className={styles.employee} key={employee.uuid}>
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
+                <img
+                      src={
+                        employee.image
+                          ? `data:image/png;base64,${employee.image}`
+                          : "https://via.placeholder.com/128"
+                      }
+                      alt={employee.name}
+                      className={styles.profilePicture}
+                    />
                 <p>
                   <strong>
                     {employee.name} {employee.surname}
@@ -304,16 +311,15 @@ export default function Home() {
               </div>
               <div className={styles.email}>{employee.email}</div>
               <div>---</div>
-              {/* <div>{employee.work}</div> */}
               <div>{getEmployeeCustomerNumber(employee)}</div>
-              <div className={styles.assignClientButton}>
+           
                 <div
                   className={styles.actions}
                   onClick={() => handleActionClick(employee)}
                 >
                   <i className="fas fa-ellipsis-h"></i>
                 </div>
-              </div>
+            
               {dropdownForClient && (
                 <div className={styles.dropdown}>
                   <div className={styles.topDropdown}>

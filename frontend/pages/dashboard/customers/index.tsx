@@ -120,7 +120,6 @@ export default function Home() {
   // const filteredClients = customers.filter((client) =>
   //   client.name.toLowerCase().includes(searchQuery)
   // );
-
   return (
     <main className={styles.main}>
       <div className={styles.heading}>
