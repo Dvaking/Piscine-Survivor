@@ -10,9 +10,9 @@ export async function insertTip(tip: TipProps) {
 
   try {
     response = await Client.request(InsertTip, tip);
-    console.log("Conseil inséré avec succès");
+    console.log("Tip inserted successfully");
   } catch (error) {
-    console.error("Erreur lors de l'insertion du conseil", error);
+    console.error("Error inserting tip");
   }
   return response ? response.private_tip : [];
 }
