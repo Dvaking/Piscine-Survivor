@@ -1,7 +1,7 @@
 import { client, GetClothesByCustomerEmail } from "@graphql";
 import { GetClothesProps } from "@types";
 
-export interface Clothes {
+export interface Clothing {
   private_customers: GetClothesProps[];
 }
 
@@ -9,7 +9,7 @@ export async function getClothesByCustomerEmail(email: string) {
   let arg = {
     email: email,
   };
-  let response: Clothes | undefined = undefined;
+  let response: Clothing | undefined = undefined;
   try {
     response = await client.request(GetClothesByCustomerEmail, arg);
   } catch (error) {

@@ -25,7 +25,7 @@ array_relationships:
     using:
       manual_configuration:
         column_mapping:
-          uuid: employee_uuid
+          id: employee_id
         insertion_order: null
         remote_table:
           name: events

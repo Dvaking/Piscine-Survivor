@@ -22,6 +22,7 @@ import {
   insertPaymentHistory,
   insertTip,
   insertEvent,
+  insertEncounter,
 } from "./components/";
 import { getTips } from "./API/tipsApi";
 import { getEventById, getEvents } from "./API/eventsApi";
@@ -29,6 +30,7 @@ import cron from "node-cron";
 import express from "express";
 import authRouter from "./auth/index";
 import cors from "cors";
+import { getEncounterById, getEncounters } from "./API/encountersApi";
 
 async function putCustomersInDb(token: Token) {
   try {
@@ -106,9 +108,22 @@ async function putEventsInDb(token: Token) {
   events.data.forEach(async (event: any) => {
     try {
       const eventDetailed = await getEventById(token, event.id);
-      insertEvent(eventDetailed.data);
+      await insertEvent(eventDetailed.data);
     } catch (error) {
       console.error("An error occurred while inserting events");
+    }
+  });
+}
+
+async function putEncountersInDb(token: Token) {
+  const encounters = await getEncounters(token);
+
+  encounters.data.forEach(async (encounter: any) => {
+    try {
+      const encounterDetailed = await getEncounterById(token, encounter.id);
+      await insertEncounter(encounterDetailed.data);
+    } catch (error) {
+      console.error("An error occurred while inserting encounters", error);
     }
   });
 }
@@ -131,7 +146,6 @@ async function updateCustomersInDb(token: Token) {
     try {
       const customerById = await getCustomerById(token, customer.id);
       const customerImage = await getCustomerImageById(token, customer.id);
-
       updateCustomer(customerById.data, customerImage);
     } catch (error) {
       console.error("An error occurred while updating customers");
@@ -143,10 +157,11 @@ async function fetchData(): Promise<void> {
   try {
     const token = await login();
 
-    await putEmployeesInDb(token);
+    putEmployeesInDb(token);
     putCustomersInDb(token);
     putTipsInDb(token);
-    await putEventsInDb(token);
+    putEventsInDb(token);
+    putEncountersInDb(token);
   } catch (error) {
     console.error("An error occurred while fetching data:", error);
   }

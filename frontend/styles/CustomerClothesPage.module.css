@@ -1,0 +1,88 @@
+.main {
+  background-color: whitesmoke;
+}
+
+.containerBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.heading {
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+  padding-left: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.heading i {
+  font-size: 2rem;
+  font-weight: 650;
+  padding-right: 0.5rem;
+}
+
+.heading i:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.clothesContainer {
+  width: 98%;
+  min-height: 85vh;
+  max-height: 85vh;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  max-width: 40%;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}
+
+.carouselImage {
+  max-width: 100%;
+  max-height: 90%;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.leftArrow {
+  left: 0.5rem;
+}
+
+.rightArrow {
+  right: 0.5rem;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

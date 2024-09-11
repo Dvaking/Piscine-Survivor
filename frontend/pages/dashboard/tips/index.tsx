@@ -1,68 +1,58 @@
+import { useEffect, useState, useRef } from "react";
+import { getTips } from "@hooks";
+import { GetTipsProps } from "@types";
 import styles from "@styles/TipsPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 export default function Tips() {
+  const [tips, setTips] = useState<GetTipsProps[]>([]);
+  const [visibleTipIndex, setVisibleTipIndex] = useState<number | null>(null);
+
   const router = useRouter();
+
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
       router.push("/login");
     }
+    const fetchTips = async () => {
+      const fetchedTips = await getTips();
+      setTips(fetchedTips);
+    };
+    fetchTips();
   }, []);
+
+  const toggleAnswer = (index: number) => {
+    setVisibleTipIndex(visibleTipIndex === index ? null : index);
+  };
+
   return (
     <main className={styles.main}>
-      <div className={styles.pageBackground}>
-        <div className={styles.tips}>
-          <div className={styles.tipsContainer}>
-            <h1 className={styles.title}>Tips for Coaches</h1>
-
-            <div className={styles.tipsBox}>
-              <details className={styles.dropdown}>
-                <summary>Help to choose the right clothes</summary>
-                <p>
-                  It is important to choose the right clothes for the first
-                  date. The first impression is very important. The first thing
-                  that a person sees is the appearance. It is important to
-                  choose the right clothes for the first date. The first
-                  impression is very important. The first thing that a person
-                  sees is the appearance.
-                </p>
-              </details>
-              <details className={styles.dropdown}>
-                <summary>How to choose the right perfume?</summary>
-                <p>
-                  Platea imperdiet nam odio posuere est nulla neque. Nec
-                  pellentesque tristique tempus felis vitae bibendum dolor
-                  maecenas.
-                </p>
-              </details>
-              <details className={styles.dropdown}>
-                <summary>Some dating app tips</summary>
-                <p>
-                  Habitant egestas ligula magnis pretium tortor enim.
-                  Scelerisque ante blandit egestas bibendum a maecenas.
-                </p>
-              </details>
-              <details className={styles.dropdown}>
-                <summary>How to choose a good place for a date?</summary>
-                <p>
-                  Convallis pretium pretium nascetur felis donec! Aliquet nisi
-                  torquent bibendum tristique tellus tincidunt bibendum magnis.
-                </p>
-              </details>
-              <details className={styles.dropdown}>
-                <summary>How to choose photos for a dating profile?</summary>
-                <p>
-                  Lorem ipsum odor amet, consectetuer adipiscing elit. Tortor
-                  nibh integer placerat vitae porttitor vitae.
-                </p>
-              </details>
+      <div className={styles.heading}>
+        <h1>Tips for Coaches</h1>
+      </div>
+      <div className={styles.containerBg}>
+        <div className={styles.container}>
+          {tips.map((tip, index) => (
+            <div className={styles.tip} key={index}>
+              <div className={styles.question} onClick={() => toggleAnswer(index)}>
+                <h2>{tip.title}</h2>
+                {visibleTipIndex === index ? (
+                  <i className="fas fa-chevron-up"></i>
+                ) : (
+                  <i className="fas fa-chevron-down"></i>
+                )}
+              </div>
+              <div className={`${styles.answer} ${
+                  visibleTipIndex === index ? styles.show : ""
+                }`}>
+              <p>{tip.tip}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </main>

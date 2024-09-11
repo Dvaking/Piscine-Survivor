@@ -65,7 +65,7 @@ export function ProfileCard({ customer }: ProfileCardProps) {
   }, [customer]);
 
   if (!isLoaded) return <div>Loading...</div>;
-
+  
   return (
     <div className="column is-one-quarter">
       <div className="box">

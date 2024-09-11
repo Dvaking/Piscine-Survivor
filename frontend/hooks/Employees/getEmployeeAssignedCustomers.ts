@@ -10,6 +10,7 @@ export async function getEmployeesAssignedCustomers() {
   let response: EmployeesAssignedCustomers | undefined = undefined;
   try {
     response = await client.request(GetEmployeesAssignedCustomers);
+    console.log(response);
   } catch (error) {
     if (
       (error as any).response &&

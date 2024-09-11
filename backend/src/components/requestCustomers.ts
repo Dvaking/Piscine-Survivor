@@ -32,16 +32,16 @@ export async function insertCustomer(
     const uuid = response?.insert_private_customers?.returning[0]?.uuid;
     userVariables.customer_uuid = uuid;
     await Client.request(InsertUser, userVariables);
-    console.log("Utilisateur inséré avec succès");
+    console.log("Customer inserted successfully");
     return uuid;
   } catch (error: any) {
     if (
       error.message.includes("duplicate key value violates unique constraint")
     ) {
-      console.error("Le client existe déjà");
+      console.error("Customer already exists");
       return null;
     }
-    console.error("Erreur lors de l'insertion de customer");
+    console.error("Error inserting customer");
     return null;
   }
 }
@@ -55,9 +55,9 @@ export async function updateCustomer(customer: CustomerProps, image: string) {
   }
   try {
     response = await Client.request(UpdateCustomer, variables);
-    console.log("Utilisateur mis à jour avec succès");
+    console.log("Customer updated successfully");
   } catch (error) {
-    console.error("Erreur lors de la mise à jour de customer:");
+    console.error("Error updating customer");
   }
   return response ? response.private_customers : [];
 }

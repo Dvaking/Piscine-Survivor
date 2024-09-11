@@ -140,3 +140,9 @@ export type GetEmployeesAssignedCustomersProps = {
     }
   ];
 };
+
+export type GetTipsProps = {
+  tip: string;
+  title: string;
+  id: number;
+};
