@@ -37,6 +37,19 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const getPaymentMethodImage = (paymentMethod: string) => {
+    switch (paymentMethod) {
+      case "Bank Transfer":
+        return "https://img.icons8.com/?size=100&id=woHAoqQoqxX1&format=png&color=000000";
+      case "Credit Card":
+        return "https://img.icons8.com/?size=100&id=pFNd0FTuBU2Q&format=png&color=000000";
+      case "PayPal":
+        return "https://img.icons8.com/?size=100&id=70557&format=png&color=000000";
+      default:
+        return "/images/default.png";
+    }
+  };
+
   // const generateUniqueId = () => {
   //   let randomId;
   //   const existingIds = employees.map((employee) => employee.id);
@@ -288,14 +301,28 @@ export default function Home() {
               </div>
               <div className={styles.email}>{customer.email}</div>
               <div>{customer.phone_number}</div>
-              <div>{paymentMethods[customer.uuid] || "Loading..."}</div>
+              <div className={styles.paymentMethod}>
+                <div className={styles.paymentImageContainer}>
+                  <img
+                    src={getPaymentMethodImage(paymentMethods[customer.uuid])}
+                    alt="Payment Method"
+                    className={styles.paymentImage}
+                  />
+                  <div className={styles.paymentTooltip}>
+                    {paymentMethods[customer.uuid] || "Loading..."}
+                  </div>
+                </div>
+              </div>
               <div className={styles.assignClientButton}>
                 <div className={styles.actions}>
-                <Link href={`/dashboard/clothes/${customer.uuid}`}>
-                <i className="fas fa-ellipsis-h"></i>
-                </Link>
+                  <Link
+                    href={`/dashboard/clothes/${customer.uuid}`}
+                    className={styles.actionLink}
+                  >
+                    <i className="fas fa-ellipsis-h"></i>
+                  </Link>
+                </div>
               </div>
-            </div>
             </div>
           ))}
         </div>

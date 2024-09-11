@@ -93,17 +93,86 @@
   width: 100%;
 }
 
+.paymentMethod {
+  position: relative;
+}
+
+.paymentImageContainer {
+  position: relative;
+  display: inline-block;
+  /* background-color: red; */
+}
+
+.paymentImage {
+  width: 50px;
+  height: 50px;
+}
+
+.paymentTooltip {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.paymentImageContainer:hover .paymentTooltip {
+  opacity: 1;
+}
+
 .actions {
+  position: relative;
   text-align: right;
+}
+
+.actionLink {
+  position: relative;
+  display: inline-block;
+}
+
+.actionLink i:hover::after {
+  content: "See clothes";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+  text-align: center !important;
+  text-transform: none !important;
+  letter-spacing: 2px !important;
+}
+
+.actionLink i:hover::after {
+  opacity: 1;
 }
 
 .actions i {
   font-size: 1.9rem;
   padding: 0;
+  color: black;
 }
 
 .actions i:hover {
   cursor: pointer;
+  color: blue;
 }
 
 .customer {
@@ -316,6 +385,7 @@
   .actions {
     text-align: flex-start;
   }
+
   .checkName {
     padding: 0;
   }
