@@ -11,3 +11,15 @@ export const InsertTip = gql`
     }
   }
 `;
+
+// UPDATE
+export const UpdateTip = gql`
+  mutation MyMutation($id: Int, $title: String, $tip: String) {
+    update_private_tips(
+      where: { id: { _eq: $id } }
+      _set: { title: $title, tip: $tip }
+    ) {
+      affected_rows
+    }
+  }
+`;

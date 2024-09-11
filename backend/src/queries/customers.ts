@@ -61,25 +61,24 @@ export const InsertCustomer = gql`
 // UPDATE
 export const UpdateCustomer = gql`
   mutation UpdateCustomer(
-    $id: Int
-    $email: String
+    $gender: String
     $name: String
     $surname: String
+    $id: Int!
     $birth_date: String
-    $gender: String
-    $description: String
+    $email: String
+    $image: String
     $astrological_sign: String
+    $description: String
     $phone_number: String
     $address: String
-    $image: String
   ) {
-    update_private_employees(
+    update_private_customers(
       where: { id: { _eq: $id } }
       _set: {
         gender: $gender
         name: $name
         surname: $surname
-        id: $id
         birth_date: $birth_date
         email: $email
         description: $description

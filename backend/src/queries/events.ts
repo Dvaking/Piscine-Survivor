@@ -35,3 +35,36 @@ export const InsertEvent = gql`
     }
   }
 `;
+
+// UPDATE
+export const UpdateEvent = gql`
+  mutation MyMutation(
+    $date: String
+    $duration: Int
+    $type: String
+    $name: String
+    $max_participants: Int
+    $location_y: String
+    $location_x: String
+    $location_name: String
+    $id: Int
+    $employee_id: Int
+  ) {
+    update_private_events(
+      where: { id: { _eq: $id } }
+      _set: {
+        date: $date
+        duration: $duration
+        type: $type
+        name: $name
+        max_participants: $max_participants
+        location_y: $location_y
+        location_x: $location_x
+        location_name: $location_name
+        employee_id: $employee_id
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
