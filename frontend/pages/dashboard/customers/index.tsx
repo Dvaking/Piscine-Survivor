@@ -291,7 +291,9 @@ export default function Home() {
               <div>{paymentMethods[customer.uuid] || "Loading..."}</div>
               <div className={styles.assignClientButton}>
                 <div className={styles.actions}>
+                <Link href={`/dashboard/clothes/${customer.uuid}`}>
                 <i className="fas fa-ellipsis-h"></i>
+                </Link>
               </div>
             </div>
             </div>
