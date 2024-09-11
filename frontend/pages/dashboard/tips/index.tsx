@@ -32,6 +32,11 @@ export default function Tips() {
             <div className={styles.tip} key={index}>
               <div className={styles.question} onClick={() => toggleAnswer(index)}>
                 <h2>{tip.title}</h2>
+                {visibleTipIndex === index ? (
+                  <i className="fas fa-chevron-up"></i>
+                ) : (
+                  <i className="fas fa-chevron-down"></i>
+                )}
               </div>
               <div className={`${styles.answer} ${
                   visibleTipIndex === index ? styles.show : ""
