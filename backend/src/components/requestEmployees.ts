@@ -69,7 +69,6 @@ export async function updateEmployee(
     employeeVariables.image = "";
   }
   try {
-    employeeVariables.image = "";
     response = await Client.request(UpdateEmployee, employeeVariables);
     const uuid = response?.insert_private_employees?.returning[0]?.uuid;
     userVariables.employee_uuid = uuid;
