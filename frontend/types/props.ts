@@ -140,3 +140,17 @@ export type GetEmployeesAssignedCustomersProps = {
     }
   ];
 };
+
+export type GetCustomersNameProps = {
+  name: String
+};
+
+export type GetEmployeesNameByWorkProps = {
+  name: string;
+}
+
+export type GetEventsProps = {
+  name: string;
+  type: string;
+  date: string;
+}
