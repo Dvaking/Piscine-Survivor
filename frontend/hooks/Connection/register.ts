@@ -15,7 +15,6 @@ export async function registerUser(
   });
 
   if (!response.ok) {
-    console.log("Error during registration ", response.status);
     return false;
   }
   return true;

@@ -20,7 +20,6 @@ export async function getCustomers() {
       if (refresh)
         try {
           response = await client.request(GetCustomers);
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

@@ -27,7 +27,6 @@ export default function Home() {
     }
     const fetchData = async () => {
       const fetchedCustomers = await getCustomers();
-      console.log(Cookies.get("token"));
       setCustomers(fetchedCustomers);
 
       fetchedCustomers.forEach(async (customer) => {

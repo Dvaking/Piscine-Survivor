@@ -20,7 +20,6 @@ export async function getEmployeesInformationByUuid() {
       if (refresh)
         try {
           response = await client.request(GetEmployeesByUuid);
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

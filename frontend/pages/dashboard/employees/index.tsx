@@ -84,13 +84,11 @@ export default function Home() {
         id: formData.id,
       });
       if (response)
-        console.log(
-          await registerUser(
-            response.email,
-            formData.password,
-            response.work,
-            response.uuid
-          )
+        await registerUser(
+          response.email,
+          formData.password,
+          response.work,
+          response.uuid
         );
       setPopupVisible(false);
       // router.reload();

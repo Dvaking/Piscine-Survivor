@@ -29,7 +29,6 @@ export default function Customers() {
 
       try {
         const fetchedClothes = await getClothesByCustomerUuid(customerUuid);
-        console.log("Fetched Clothes:", fetchedClothes);
         setClothes(fetchedClothes);
         setIsLoaded(true);
 

@@ -16,7 +16,6 @@ export async function updateEmployee(props: UpdateEmployeeProps) {
       if (refresh)
         try {
           response = await client.request(UpdateEmployee, props);
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

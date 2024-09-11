@@ -62,8 +62,6 @@ authRouter.post("/register", async (req, res) => {
 
 authRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log("email", email);
-  console.log("password", password);
 
   try {
     const user = await getUserByEmail(email);
@@ -100,7 +98,7 @@ authRouter.post("/login", async (req, res) => {
     );
 
     refreshTokens[email] = refreshToken;
-
+    console.log("User logged in successfully");
     res.json({
       token,
       refreshToken,

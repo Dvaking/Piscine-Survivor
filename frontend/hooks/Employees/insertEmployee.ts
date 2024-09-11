@@ -13,7 +13,6 @@ export async function insertEmployee(employees: InsertEmployeeProps) {
   let response: EmployeeInsert | undefined = undefined;
   try {
     response = await client.request(InsertEmployee, employees);
-    console.log("Utilisateur inséré avec succès");
   } catch (error) {
     if (
       (error as any).response &&
@@ -24,7 +23,6 @@ export async function insertEmployee(employees: InsertEmployeeProps) {
       if (refresh)
         try {
           response = await client.request(InsertEmployee, employees);
-          console.log("Utilisateur inséré avec succès");
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }

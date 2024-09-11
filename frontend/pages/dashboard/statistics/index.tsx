@@ -59,7 +59,6 @@ const StatisticsGraph: React.FC = () => {
           email: typeof item.email === "string" ? item.email : undefined,
           events: Array.isArray(item.events) ? item.events : [],
         }));
-        console.log("MAPPEDDATA", mappedData);
         setEmployeesData(mappedData);
       } catch (error) {
         console.error(
@@ -76,7 +75,6 @@ const StatisticsGraph: React.FC = () => {
           name: item.name,
           customers_assign: item.customer_asing || [],
         }));
-        console.log("mappedCustomersData", mappedCustomersData);
         setAssignedCustomersData(mappedCustomersData);
       } catch (error) {
         console.error(
