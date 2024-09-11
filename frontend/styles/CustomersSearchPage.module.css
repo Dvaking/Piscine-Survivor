@@ -100,22 +100,22 @@
 .paymentImageContainer {
   position: relative;
   display: inline-block;
-  /* background-color: red; */
 }
 
 .paymentImage {
-  width: 50px;
-  height: 50px;
+  width: 3rem;
+  height: 3rem;
 }
 
 .paymentTooltip {
   position: absolute;
   top: 50%;
-  left: 100%;
+  left: 15%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
-  padding: 1rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
   border-radius: 5px;
   white-space: nowrap;
   font-size: 1rem;
@@ -123,6 +123,9 @@
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 10;
+  max-height: 100%;
+  max-width: 30%;
+  text-align: center;
 }
 
 .paymentImageContainer:hover .paymentTooltip {
