@@ -79,36 +79,111 @@
 }
 
 .category {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
 .category div {
   width: 100%;
+  font-size: 1.3rem;
+}
+
+.paymentMethod {
+  position: relative;
+}
+
+.paymentImageContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.paymentImage {
+  width: 3rem;
+  height: 3rem;
+  display: block;;
+}
+
+.paymentTooltip {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+  max-height: 100%;
+  max-width: 30%;
+  text-align: center;
+}
+
+.paymentImage:hover + .paymentTooltip {
+  opacity: 1;
 }
 
 .actions {
+  position: relative;
   text-align: right;
+}
+
+.actionLink {
+  position: relative;
+  display: inline-block;
+}
+
+.actionLink i:hover::after {
+  content: "See clothes";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+  text-align: center !important;
+  text-transform: none !important;
+  letter-spacing: 2px !important;
+}
+
+.actionLink i:hover::after {
+  opacity: 1;
 }
 
 .actions i {
   font-size: 1.9rem;
   padding: 0;
+  color: black;
 }
 
 .actions i:hover {
   cursor: pointer;
+  color: blue;
 }
 
 .customer {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
@@ -120,6 +195,7 @@
 
 .customer div {
   width: 100%;
+  font-size: 1.3rem;
 }
 
 .customer i {
@@ -130,7 +206,7 @@
 .checkName {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .checkName i {
@@ -142,6 +218,13 @@
   width: 100%;
 }
 
+.clientProfileButton {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+}
+
 .clientProfileButton p {
   font-weight: 600;
   color: black;
@@ -150,6 +233,13 @@
 .clientProfileButton p:hover {
   cursor: pointer;
   color: blue;
+}
+
+.profilePicture {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* .popupOverlay {
@@ -215,11 +305,6 @@
   font-size: 1.3rem;
   border-radius: 5px;
 } */
-
-.assignClientButton {
-  position: relative;
-  display: inline-block;
-}
 
 /* .dropdown {
   max-width: 50%;
@@ -309,13 +394,14 @@
   .customer div {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 0;
     width: 15%;
   }
   .actions {
-    text-align: start;
+    text-align: flex-start;
   }
+
   .checkName {
     padding: 0;
   }

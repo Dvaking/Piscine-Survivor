@@ -1,0 +1,13 @@
+table:
+  name: eventCustomers
+  schema: private
+object_relationships:
+  - name: customers
+    using:
+      manual_configuration:
+        column_mapping:
+          customer_uuid: uuid
+        insertion_order: null
+        remote_table:
+          name: customers
+          schema: private

@@ -1,6 +1,5 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
-
 /* Laptop & Desktop */
 .main {
   background-color: whitesmoke;
@@ -79,10 +78,10 @@
 }
 
 .category {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -91,6 +90,7 @@
 
 .category div {
   width: 100%;
+  font-size: 1.3rem;
 }
 
 .actions {
@@ -107,10 +107,10 @@
 }
 
 .employee {
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -120,6 +120,7 @@
 
 .employee div {
   width: 100%;
+  font-size: 1.3rem;
 }
 
 .employee i {
@@ -130,12 +131,19 @@
 .checkName {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .checkName i {
   font-weight: 100;
-  align-self: center;
+}
+
+.profilePicture {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .container button {
@@ -204,11 +212,6 @@
 .formButtons button {
   font-size: 1.3rem;
   border-radius: 5px;
-}
-
-.assignClientButton {
-  position: relative;
-  display: inline-block;
 }
 
 .dropdown {
@@ -299,12 +302,14 @@
   .employee div {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 0;
     width: 15%;
   }
   .actions {
-    text-align: start;
+    position: relative;
+    display: inline-block;
+    text-align: flex-start;
   }
   .checkName {
     padding: 0;
@@ -409,7 +414,7 @@
     flex-direction: row;
     gap: 2rem;
   }
-  
+
   .formButtons button {
     font-size: 1.2rem;
     border-radius: 5px;
@@ -434,7 +439,7 @@
     font-size: 1.5rem;
   }
   .category div {
-    font-size: 0.8rem;;
+    font-size: 0.8rem;
   }
   .checkName {
     font-size: 0.9rem;
@@ -459,7 +464,7 @@
     flex-direction: row;
     gap: 1.5rem;
   }
-  
+
   .formButtons button {
     font-size: 1rem;
     border-radius: 5px;

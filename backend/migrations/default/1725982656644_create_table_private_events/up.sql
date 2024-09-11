@@ -1,0 +1,2 @@
+CREATE TABLE "private"."events" ("uuid" uuid NOT NULL DEFAULT gen_random_uuid(), "id" integer NOT NULL, "name" text NOT NULL, "date" text NOT NULL, "duration" integer NOT NULL, "max_participants" integer NOT NULL, "location_x" text NOT NULL, "location_y" text NOT NULL, "type" text NOT NULL, "employee_uuid" uuid, "location_name" text NOT NULL, PRIMARY KEY ("uuid") , UNIQUE ("uuid"), UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

@@ -13,6 +13,15 @@ export const GetEmployees = gql`
   }
 `;
 
+// GET
+export const GetEmployeeUuidById = gql`
+  query GetEmployeeUuidById($id: Int) {
+    private_employees(where: { id: { _eq: $id } }) {
+      uuid
+    }
+  }
+`;
+
 // INSERT
 export const InsertEmployee = gql`
   mutation InsertEmployee(

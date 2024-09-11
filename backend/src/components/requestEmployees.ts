@@ -22,7 +22,7 @@ export async function insertEmployee(
   let userVariables = {
     email: employee.email,
     password: "password",
-    role: "employee",
+    role: employee.work,
     employee_uuid: undefined,
     customer_uuid: undefined,
   };
@@ -36,7 +36,13 @@ export async function insertEmployee(
     await Client.request(InsertUser, userVariables);
     console.log("Utilisateur inséré avec succès");
     return uuid;
-  } catch (error) {
+  } catch (error: any) {
+    if (
+      error.message.includes("duplicate key value violates unique constraint")
+    ) {
+      console.error("L'employé existe déjà");
+      return null;
+    }
     console.error("Erreur lors de l'insertion de employee");
     return null;
   }

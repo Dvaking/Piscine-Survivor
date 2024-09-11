@@ -34,7 +34,13 @@ export async function insertCustomer(
     await Client.request(InsertUser, userVariables);
     console.log("Utilisateur inséré avec succès");
     return uuid;
-  } catch (error) {
+  } catch (error: any) {
+    if (
+      error.message.includes("duplicate key value violates unique constraint")
+    ) {
+      console.error("Le client existe déjà");
+      return null;
+    }
     console.error("Erreur lors de l'insertion de customer");
     return null;
   }

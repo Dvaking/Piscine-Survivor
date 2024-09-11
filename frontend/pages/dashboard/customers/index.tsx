@@ -37,6 +37,19 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const getPaymentMethodImage = (paymentMethod: string) => {
+    switch (paymentMethod) {
+      case "Bank Transfer":
+        return "https://img.icons8.com/?size=100&id=woHAoqQoqxX1&format=png&color=000000";
+      case "Credit Card":
+        return "https://img.icons8.com/?size=100&id=pFNd0FTuBU2Q&format=png&color=000000";
+      case "PayPal":
+        return "https://img.icons8.com/?size=100&id=70557&format=png&color=000000";
+      default:
+        return "https://img.icons8.com/?size=100&id=kMV_RnIVubYa&format=png&color=000000";
+    }
+  };
+
   // const generateUniqueId = () => {
   //   let randomId;
   //   const existingIds = employees.map((employee) => employee.id);
@@ -107,7 +120,6 @@ export default function Home() {
   // const filteredClients = customers.filter((client) =>
   //   client.name.toLowerCase().includes(searchQuery)
   // );
-
   return (
     <main className={styles.main}>
       <div className={styles.heading}>
@@ -279,6 +291,15 @@ export default function Home() {
               <div className={styles.checkName}>
                 <i className="far fa-square"></i>
                 <div className={styles.clientProfileButton}>
+                    <img
+                      src={
+                        customer.image
+                          ? `data:image/png;base64,${customer.image}`
+                          : "https://via.placeholder.com/128"
+                      }
+                      alt={customer.name}
+                      className={styles.profilePicture}
+                    />
                   <Link href={`/dashboard/customers/${customer.uuid}`}>
                     <p>
                       {customer.name} {customer.surname}
@@ -288,48 +309,27 @@ export default function Home() {
               </div>
               <div className={styles.email}>{customer.email}</div>
               <div>{customer.phone_number}</div>
-              <div>{paymentMethods[customer.uuid] || "Loading..."}</div>
-              <div className={styles.assignClientButton}>
-                {/* <div
-                  className={styles.actions}
-                  onClick={() => handleActionClick(customer)}
-                > */}
-                <i className="fas fa-ellipsis-h"></i>
+              <div className={styles.paymentMethod}>
+                <div className={styles.paymentImageContainer}>
+                  <img
+                    src={getPaymentMethodImage(paymentMethods[customer.uuid])}
+                    alt="Payment Method"
+                    className={styles.paymentImage}
+                  />
+                  <div className={styles.paymentTooltip}>
+                    {paymentMethods[customer.uuid] || "Loading..."}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.actions}>
+                <Link
+                  href={`/dashboard/clothes/${customer.uuid}`}
+                  className={styles.actionLink}
+                >
+                  <i className="fas fa-ellipsis-h"></i>
+                </Link>
               </div>
             </div>
-            // {dropdownForClient && (
-            //   <div className={styles.dropdown}>
-            //     <div className={styles.topDropdown}>
-            //       <h2> Assign Customer To Coach </h2>
-            //       <i
-            //         className="fas fa-x"
-            //         onClick={() => setDropdownForClient(false)}
-            //       ></i>
-            //     </div>
-            //     <input
-            //       type="text"
-            //       placeholder="Search Customers..."
-            //       className={styles.searchInput}
-            //       onChange={handleSearchChange}
-            //     />
-            //     <ul>
-            //       {filteredClients
-            //         .filter((client) => client.employee_uuid === null)
-            //         .map((client) => (
-            //           <li
-            //             key={client.uuid}
-            //             className={styles.listItem}
-            //             onClick={() => assignClient(client)}
-            //           >
-            //             <p>
-            //               {client.name} {client.surname}
-            //             </p>
-            //           </li>
-            //         ))}
-            //     </ul>
-            //   </div>
-            // )}
-            // </div>
           ))}
         </div>
       </div>
