@@ -14,6 +14,7 @@ import {
 import styles from "@styles/EmployeesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
@@ -77,6 +78,10 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     const fetchData = async () => {
       const fetchedEmployees = await getEmployees();
       const fetchedCustomers = await getCustomers();

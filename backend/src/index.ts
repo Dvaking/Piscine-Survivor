@@ -123,10 +123,14 @@ async function updateCustomersInDb(token: Token) {
   const customers = await getCustomers(token);
 
   customers.data.forEach(async (customer) => {
+    try {
     const customerById = await getCustomerById(token, customer.id);
     const customerImage = await getCustomerImageById(token, customer.id);
 
     updateCustomer(customerById.data, customerImage);
+    } catch (error) {
+      console.error("An error occurred while updating customers");
+    }
   });
 }
 

@@ -1,8 +1,18 @@
-import styles from '@styles/TipsPage.module.css';
+import styles from "@styles/TipsPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Tips() {
+  const router = useRouter();
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
   return (
     <main className={styles.main}>
       <div className={styles.pageBackground}>

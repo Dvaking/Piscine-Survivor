@@ -40,18 +40,18 @@ services:
       retries: 5
       start_period: 5s
 
-  backend:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-    ports:
-      - "4000:4000"
-    depends_on:
-      data-connector-agent:
-        condition: service_healthy
-    environment:
-      - CLIENT_URL=http://graphql-engine:8080/v1/graphql
-      - REFRESH_TOKEN_SECRET=a5a65bd42b8a44a1693132cac28e130765e32c650013be532b01fa4a46a25821
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: backend/Dockerfile
+  #   ports:
+  #     - "4000:4000"
+  #   depends_on:
+  #     data-connector-agent:
+  #       condition: service_healthy
+  #   environment:
+  #     - CLIENT_URL=http://graphql-engine:8080/v1/graphql
+  #     - REFRESH_TOKEN_SECRET=a5a65bd42b8a44a1693132cac28e130765e32c650013be532b01fa4a46a25821
 
 volumes:
   db_data:

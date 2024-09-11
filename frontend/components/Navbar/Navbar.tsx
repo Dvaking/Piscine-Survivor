@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookie from "js-cookie";
 
 export function Navbar() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export function Navbar() {
   const [isEvents, setIsEvents] = useState(false);
   const [isSigns, setIsSigns] = useState(false);
   const [isClothes, setIsClothes] = useState(false);
+  const [isManager, setIsManager] = useState(false);
 
   useEffect(() => {
     setIsDashboard(router.pathname === "/dashboard");
@@ -24,6 +26,7 @@ export function Navbar() {
     setIsTips(router.pathname === "/dashboard/tips");
     setIsClothes(router.pathname === "/dashboard/clothes");
     setIsClothes(router.pathname === "/dashboard/statistics");
+    setIsManager(Cookie.get("role") === "admin");
   }, [router]);
 
   return (
@@ -38,14 +41,16 @@ export function Navbar() {
             Dashboard
           </Link>
         </li>
-        <li>
-          <Link
-            href="/dashboard/employees"
-            className={isEmployee ? styles.selected : ""}
-          >
-            Employees
-          </Link>
-        </li>
+        {isManager && (
+          <li>
+            <Link
+              href="/dashboard/employees"
+              className={isEmployee ? styles.selected : ""}
+            >
+              Employees
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             href="/dashboard/customers"

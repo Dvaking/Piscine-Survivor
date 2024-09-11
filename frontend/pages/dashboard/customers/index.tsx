@@ -6,6 +6,7 @@ import { GetCustomersProps } from "@types";
 import styles from "@styles/CustomersSearchPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
@@ -19,6 +20,11 @@ export default function Home() {
   const [emailError, setEmailError] = useState<string>("");
 
   useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.push("/login");
+    }
     const fetchData = async () => {
       const fetchedCustomers = await getCustomers();
       setCustomers(fetchedCustomers);

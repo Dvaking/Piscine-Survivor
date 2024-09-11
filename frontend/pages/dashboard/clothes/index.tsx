@@ -5,6 +5,8 @@ import "bulma/css/bulma.css";
 import styles from "@styles/ClothesPage.module.css";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Customers() {
   const [clothes, setClothes] = useState<GetClothesProps[]>([]);
@@ -21,6 +23,15 @@ export default function Customers() {
   const [shoesIndex, setShoesIndex] = useState(0);
 
   const [customerEMail, setCustomerEMail] = useState("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCustomerEMail(e.target.value);

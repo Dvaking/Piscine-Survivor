@@ -19,6 +19,8 @@ import {
 } from "@types";
 import "bulma/css/bulma.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 ChartJS.register(
   CategoryScale,
@@ -40,6 +42,7 @@ const StaticticsGraph: React.FC = () => {
   >([]); // Nouvel état pour les clients assignés
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
+  const router = useRouter();
 
   const fetchEmployeesData = async () => {
     try {
@@ -86,6 +89,10 @@ const StaticticsGraph: React.FC = () => {
   };
 
   useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      router.push("/login");
+    }
     fetchEmployeesData();
     fetchAssignedCustomersData();
   }, []);
