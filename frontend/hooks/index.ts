@@ -4,3 +4,4 @@ export * from "./Employees";
 export * from "./Clothes";
 // export * from "./Users";
 export * from "./Tips";
+export * from './Events';

@@ -152,3 +152,14 @@ export type GetTipsProps = {
   title: string;
   id: number;
 };
+
+export type GetEventsProps = {
+  name: string;
+  date: string;
+  location_name: string;
+  location_x: number;
+  location_y: number;
+  max_participants: number;
+  type: string;
+  id: number;
+};

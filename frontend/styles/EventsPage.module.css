@@ -1,0 +1,12 @@
+.eventCell {
+    position: relative;
+  }
+  
+  .eventMarker {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+    font-size: 0.8em;
+  }  
