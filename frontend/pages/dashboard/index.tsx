@@ -31,26 +31,54 @@ ChartJS.register(
 );
 
 const Dashboard: React.FC = () => {
-  const [employeesData, setEmployeesData] = useState<GetEmployeesNameByWorkProps[]>(
+  const [employeeNameData, setEmployeeNameData] = useState<GetEmployeesNameByWorkProps[]>(
     []
   );
+
+  const lineChartRef = useRef(null);
+
+  const fetchEmployeeNameData = async () => {
+    try {
+      const data = await getEmployeeNameByWork();
+      const mappedData: GetEmployeesNameByWorkProps[] = data.map((item) => ({
+        name: item.name,
+      }));
+
+      setEmployeeNameData(mappedData);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployeeNameData();
+  }, []);
+
+
   // Line Chart Data (Customers Overview)
-  const lineData = {
-    labels: ["01 Jul", "08 Jul", "15 Jul", "22 Jul", "30 Jul"],
+  const lineChartData = {
+    labels: employeeNameData.map((employee) => employee.name),
     datasets: [
       {
-        label: "Customers",
-        data: [800, 850, 900, 880, 932],
-        borderColor: "rgba(54, 162, 235, 1)",
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        fill: true,
+        label: "Number customers",
+        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
+        fill: false,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 0.2)",
       },
       {
-        label: "Doing Meetings",
-        data: [300, 250, 400, 380, 280],
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        fill: true,
+        label: "Number customers",
+        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
+        fill: false,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 0.2)",
+      },
+      {
+        label: "Number customers",
+        data: employeeNameData.map((employee) => employee.name?.length ?? 0),
+        fill: false,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 0.2)",
       },
     ],
   };
@@ -120,7 +148,7 @@ const Dashboard: React.FC = () => {
                   <li>Customers by Coach: 34</li>
                 </ul>
               </div>
-              <Line data={lineData} />
+              <Line data={lineChartData} />
             </div>
           </div>
 
