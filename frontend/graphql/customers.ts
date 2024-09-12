@@ -85,6 +85,14 @@ export const GetPaymentMethodByUuid = gql`
   }
 `;
 
+export const GetCustomersName = gql`
+  query GetCustomersName {
+    private_customers {
+      name
+    }
+  }
+`;
+
 // INSERT
 export const InsertCustomer = gql`
   mutation MyMutation(

@@ -146,6 +146,20 @@ export type GetEmployeesAssignedCustomersProps = {
   ];
 };
 
+export type GetCustomersNameProps = {
+  name: String
+};
+
+export type GetEmployeesNameByWorkProps = {
+  name: string;
+}
+
+export type GetEventsProps = {
+  name: string;
+  type: string;
+  date: string;
+}
+
 export type GetTipsProps = {
   tip: string;
   title: string;
@@ -172,3 +186,7 @@ export interface GetCustomersUnassignedProps {
   name: string;
   surname: string;
 }
+
+export type GetEncountersProps = {
+  source: string;
+};

@@ -39,8 +39,7 @@ const StatisticsGraph: React.FC = () => {
   );
   const [assignedCustomersData, setAssignedCustomersData] = useState<
     GetEmployeesAssignedCustomersProps[]
-  >([]);
-
+  >([]); // Nouvel état pour les clients assignés
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
   const router = useRouter();

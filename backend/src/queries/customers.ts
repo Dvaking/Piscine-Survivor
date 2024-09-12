@@ -88,8 +88,11 @@ export const UpdateCustomer = gql`
         image: $image
       }
     ) {
+      affected_rows
       returning {
-        uuid
+        id
+        name
+        email
       }
     }
   }
