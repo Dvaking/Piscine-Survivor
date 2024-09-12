@@ -40,11 +40,8 @@ export async function verifyUser({
   } else if (user.role.toLowerCase() === "coach") {
     returnedUser.role = "coach";
     returnedUser.uuid = user.employee_uuid;
-  }else if (user.role.toLowerCase() === "admin"){
-    returnedUser.role = "admin";
-    returnedUser.uuid = user.employee_uuid;
    }else {
-    returnedUser.role = "manager";
+    returnedUser.role = "admin";
     returnedUser.uuid = user.employee_uuid;
   }
 
