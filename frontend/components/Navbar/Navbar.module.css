@@ -6,7 +6,9 @@
   align-items: center;
   padding: 1rem;
   background-color: #ffffff;
-  z-index: 1000
+  z-index: 1000;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .title {
@@ -22,7 +24,7 @@
 }
 
 .navList li {
-  margin-right: 1rem;
+  margin: 0 1rem;
 }
 
 .navList a {
@@ -33,9 +35,8 @@
 .language {
   display: flex;
   align-items: center;
-  gap: 1rem
+  gap: 1rem;
 }
-
 
 .selected {
   font-weight: bold;

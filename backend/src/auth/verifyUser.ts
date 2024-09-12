@@ -1,8 +1,12 @@
 import { UserVerification } from "./types";
 import bcrypt from "bcrypt";
 
-async function checkPassword(password: string, userPassword: string) {
-
+async function checkPassword(
+  password: string,
+  userPassword: string,
+  isRefreshToken?: boolean
+) {
+  if (isRefreshToken) return true;
   if (password === "password") return true;
   try {
     const isMatch = await bcrypt.compare(userPassword, password);
@@ -14,7 +18,11 @@ async function checkPassword(password: string, userPassword: string) {
   }
 }
 
-export async function verifyUser({ password, user }: UserVerification) {
+export async function verifyUser({
+  password,
+  user,
+  isRefreshToken,
+}: UserVerification) {
   let returnedUser = {
     role: "NoUser",
     uuid: "",
@@ -22,7 +30,7 @@ export async function verifyUser({ password, user }: UserVerification) {
 
   if (user.role === "NoUser") return returnedUser;
 
-  const response = checkPassword(password, user.password);
+  const response = checkPassword(password, user.password, isRefreshToken);
 
   if (!response) return returnedUser;
 
@@ -32,8 +40,11 @@ export async function verifyUser({ password, user }: UserVerification) {
   } else if (user.role.toLowerCase() === "coach") {
     returnedUser.role = "coach";
     returnedUser.uuid = user.employee_uuid;
-  } else {
+  }else if (user.role.toLowerCase() === "admin"){
     returnedUser.role = "admin";
+    returnedUser.uuid = user.employee_uuid;
+   }else {
+    returnedUser.role = "manager";
     returnedUser.uuid = user.employee_uuid;
   }
 

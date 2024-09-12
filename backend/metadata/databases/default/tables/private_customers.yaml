@@ -57,6 +57,23 @@ insert_permissions:
         - phone_number
         - surname
     comment: ""
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - image
+        - name
+        - phone_number
+        - surname
+        - uuid
+    comment: ""
 select_permissions:
   - role: coach
     permission:
@@ -78,6 +95,26 @@ select_permissions:
         employee_uuid:
           _eq: X-Hasura-User-Id
     comment: ""
+  - role: manager
+    permission:
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - id
+        - image
+        - name
+        - origin
+        - phone_number
+        - surname
+        - uuid
+      filter: {}
+      allow_aggregations: true
+    comment: ""
 update_permissions:
   - role: coach
     permission:
@@ -97,10 +134,31 @@ update_permissions:
           _eq: X-Hasura-User-Id
       check: null
     comment: ""
+  - role: manager
+    permission:
+      columns:
+        - address
+        - astrological_sign
+        - birth_date
+        - description
+        - email
+        - employee_uuid
+        - gender
+        - image
+        - name
+        - phone_number
+        - surname
+      filter: {}
+      check: null
+    comment: ""
 delete_permissions:
   - role: coach
     permission:
       filter:
         employee_uuid:
           _eq: X-Hasura-User-Id
+    comment: ""
+  - role: manager
+    permission:
+      filter: {}
     comment: ""

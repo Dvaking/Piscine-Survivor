@@ -167,6 +167,33 @@ export type GetTipsProps = {
   id: number;
 };
 
+export interface GetEmployeeTableInformationProps {
+  id: number;
+  email: string;
+  name: string;
+  surname: string;
+  uuid: string;
+  work: string;
+  image: string;
+  customer_assign_aggregate: {
+    aggregate: {
+      count: number;
+    };
+  };
+}
+
+export interface HowManyEmployeesProps {
+  aggregate: {
+    count: 48
+  }
+}
+
+export interface GetCustomersUnassignedProps {
+  uuid: string;
+  name: string;
+  surname: string;
+}
+
 export type GetEncountersProps = {
   source: string;
 };

@@ -30,6 +30,20 @@ array_relationships:
         remote_table:
           name: events
           schema: private
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - birth_date
+        - email
+        - gender
+        - image
+        - name
+        - surname
+        - uuid
+        - work
+    comment: ""
 select_permissions:
   - role: coach
     permission:
@@ -47,6 +61,21 @@ select_permissions:
         uuid:
           _eq: X-Hasura-User-Id
     comment: ""
+  - role: manager
+    permission:
+      columns:
+        - id
+        - birth_date
+        - email
+        - gender
+        - image
+        - name
+        - surname
+        - work
+        - uuid
+      filter: {}
+      allow_aggregations: true
+    comment: ""
 update_permissions:
   - role: coach
     permission:
@@ -63,10 +92,27 @@ update_permissions:
           _eq: X-Hasura-User-Id
       check: null
     comment: ""
+  - role: manager
+    permission:
+      columns:
+        - birth_date
+        - email
+        - gender
+        - image
+        - name
+        - surname
+        - work
+      filter: {}
+      check: null
+    comment: ""
 delete_permissions:
   - role: coach
     permission:
       filter:
         uuid:
           _eq: X-Hasura-User-Id
+    comment: ""
+  - role: manager
+    permission:
+      filter: {}
     comment: ""

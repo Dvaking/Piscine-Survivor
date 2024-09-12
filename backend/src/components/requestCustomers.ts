@@ -78,7 +78,7 @@ export async function updateCustomer(
       console.error("Customer already exists");
       return null;
     }
-    console.error("Error updating customer");
+    console.error("Error updating customer", error);
     return null;
   }
 }

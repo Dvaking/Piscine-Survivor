@@ -17,6 +17,35 @@ export const GetEmployees = gql`
   }
 `;
 
+export const GetEmployeeTableInformation = gql`
+  query GetEmployeeTableInformation {
+    private_employees {
+      id
+      email
+      name
+      surname
+      uuid
+      work
+      image
+      customer_assign_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+`;
+
+export const HowManyEmployees = gql`
+  query HowManyEmployees {
+    private_employees_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export const GetEmployeesByUuid = gql`
   query GetEmployeesByUuid($uuid: uuid) {
     private_employees(where: { uuid: { _eq: $uuid } }) {
@@ -63,6 +92,9 @@ export const GetEmployeesNameByWork = gql`
   query GetEmployeesNameByWork {
     private_employees(where: { work: { _eq: "Coach" } }) {
       name
+      customer_asing {
+        name
+      }
     }
   }
 `;
@@ -105,7 +137,6 @@ export const InsertEmployee = gql`
     $birth_date: String
     $email: String
     $work: String
-    $id: Int
   ) {
     insert_private_employees(
       objects: {
@@ -115,7 +146,6 @@ export const InsertEmployee = gql`
         birth_date: $birth_date
         email: $email
         work: $work
-        id: $id
       }
     ) {
       affected_rows

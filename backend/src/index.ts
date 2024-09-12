@@ -47,17 +47,17 @@ async function putCustomersInDb(token: Token) {
         const customerImage = await getCustomerImageById(token, customer.id);
         const payments = await getPaymentsHistory(token, customer.id);
         const clothes = await getClothes(token, customer.id);
-  
+
         for (const element of clothes.data) {
           const base64Image = await getClotheImage(token, element.id);
           const dataToSend = {
             ...element,
             customer_id: customerById.data.id,
           };
-  
+
           insertClothe(dataToSend, base64Image);
         }
-  
+
         const customer_uuid = await insertCustomer(
           customerById.data,
           customerImage
@@ -68,7 +68,6 @@ async function putCustomersInDb(token: Token) {
         for (const element of payments.data) {
           insertPaymentHistory(element, customer_uuid);
         }
-
       } catch (error) {
         console.error("An error occurred while inserting customers");
       }
@@ -82,14 +81,14 @@ async function putEmployeesInDb(token: Token) {
   try {
     const employees = await getEmployees(token);
     employees.data.forEach(async (employee) => {
-      try{
+      try {
         const employeeToSend = await getEmployeeById(token, employee.id);
         const employeeImage = await getEmployeeImageById(token, employee.id);
-  
+
         await insertEmployee(employeeToSend.data, employeeImage);
-    } catch (error) {
-      console.error("An error occurred while inserting employees");
-    }
+      } catch (error) {
+        console.error("An error occurred while inserting employees");
+      }
     });
   } catch (error) {
     console.error("An error occurred while inserting employees");
@@ -111,7 +110,7 @@ async function putTipsInDb(token: Token) {
 async function putEventsInDb(token: Token) {
   try {
     const events = await getEvents(token);
-  
+
     events.data.forEach(async (event: any) => {
       try {
         const eventDetailed = await getEventById(token, event.id);

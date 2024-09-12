@@ -11,18 +11,15 @@ export async function getCustomersByUuid(uuid: string) {
   try {
     response = await client.request(GetCustomersByUuid, { uuid: uuid });
   } catch (error) {
-    if (
-      (error as any).response &&
-      (error as any).response.errors &&
-      (error as any).response.errors[0].message === "JWTExpired"
-    ) {
+    if ((error as any).response.errors[0].message.includes("JWTExpired")) {
       const refresh = await refreshToken();
-      if (refresh)
+      if (refresh) {
         try {
           response = await client.request(GetCustomersByUuid, { uuid: uuid });
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }
+      } else console.log("erreur refresh token");
     }
   }
   return response ? response.private_customers : [];
