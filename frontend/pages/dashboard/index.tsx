@@ -204,6 +204,34 @@ export default function Dashboard() {
     ],
   };
 
+  // const doughnutCustomerData = {
+  //   labels: topEncountersSource.map(([type]) => type),
+  //   datasets: [
+  //     {
+  //       label: "Event Types",
+  //       data: topEncountersSource.map(([, count]) => count),
+  //       backgroundColor: [
+  //         "rgba(255, 99, 71, 0.6)",
+  //         "rgba(100, 149, 237, 0.6)",
+  //         "rgba(255, 105, 180, 0.6)",
+  //         "rgba(60, 179, 113, 0.6)",
+  //         "rgba(255, 165, 0, 0.6)",
+  //         "rgba(255, 20, 147, 0.6)",
+  //       ],
+  //       borderColor: [
+  //         "rgba(255, 99, 71, 1)",
+  //         "rgba(100, 149, 237, 1)",
+  //         "rgba(255, 105, 180, 1)",
+  //         "rgba(60, 179, 113, 1)",
+  //         "rgba(255, 165, 0, 1)",
+  //         "rgba(255, 20, 147, 1)",
+  //       ],
+  //       borderWidth: 1,
+  //       radius: "50%",
+  //     },
+  //   ],
+  // };
+
   return (
     <main className="has-background-white-smoke">
       <div className={`${styles["container-wide"]}`}>
