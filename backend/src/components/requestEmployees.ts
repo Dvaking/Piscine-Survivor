@@ -62,8 +62,6 @@ export async function updateEmployee(
     email: employee.email,
     password: "password",
     role: employee.work,
-    employee_uuid: undefined,
-    customer_uuid: undefined,
   };
   if (employeeVariables.image === undefined) {
     employeeVariables.image = "";
@@ -71,7 +69,6 @@ export async function updateEmployee(
   try {
     response = await Client.request(UpdateEmployee, employeeVariables);
     const uuid = response?.insert_private_employees?.returning[0]?.uuid;
-    userVariables.employee_uuid = uuid;
     await Client.request(UpdateUser, userVariables);
     console.log("Employee updated successfully");
     return uuid;
