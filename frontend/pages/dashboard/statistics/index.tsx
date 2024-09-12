@@ -39,7 +39,7 @@ const StatisticsGraph: React.FC = () => {
   );
   const [assignedCustomersData, setAssignedCustomersData] = useState<
     GetEmployeesAssignedCustomersProps[]
-  >([]); // Nouvel état pour les clients assignés
+  >([]);
   const chartRef = useRef(null);
   const pieChartRef = useRef(null);
   const router = useRouter();
@@ -72,9 +72,10 @@ const StatisticsGraph: React.FC = () => {
         const data = await getEmployeesAssignedCustomers();
         const mappedCustomersData = data.map((item: any) => ({
           name: item.name,
-          customers_assign: item.customer_asing || [],
+          customers_assign: item.customer_assign || [],
         }));
         setAssignedCustomersData(mappedCustomersData);
+        console.log(mappedCustomersData);
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données des clients assignés :",
