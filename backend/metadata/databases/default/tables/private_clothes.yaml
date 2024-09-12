@@ -17,6 +17,7 @@ insert_permissions:
       check: {}
       columns:
         - customer_id
+        - id
         - image
         - type
     comment: ""

@@ -38,6 +38,7 @@ insert_permissions:
         - birth_date
         - email
         - gender
+        - id
         - image
         - name
         - surname

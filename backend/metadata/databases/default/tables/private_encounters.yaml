@@ -19,6 +19,7 @@ insert_permissions:
         - comment
         - customer_id
         - date
+        - id
         - rating
         - source
     comment: ""

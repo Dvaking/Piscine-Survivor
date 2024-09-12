@@ -20,6 +20,7 @@ insert_permissions:
         - comment
         - customer_uuid
         - date
+        - id
         - payment_method
     comment: ""
 select_permissions:

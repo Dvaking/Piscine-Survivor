@@ -25,6 +25,7 @@ insert_permissions:
       columns:
         - customer_uuid
         - event_uuid
+        - uuid
     comment: ""
 select_permissions:
   - role: coach

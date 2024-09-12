@@ -336,7 +336,8 @@ export default function Home() {
                   <tbody>
                     {employees.map((employee) => (
                       <tr key={employee.id}>
-                        <td className={styles.checkName}>
+                        <td>
+                          <div className={styles.checkName}>
                           <i className="far fa-square"></i>
                           <img
                             src={
@@ -352,6 +353,7 @@ export default function Home() {
                               {employee.name} {employee.surname}
                             </strong>
                           </p>
+                          </div>
                         </td>
                         <td>{employee.email}</td>
                         <td>-----</td>

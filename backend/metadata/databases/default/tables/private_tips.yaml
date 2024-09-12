@@ -6,6 +6,7 @@ insert_permissions:
     permission:
       check: {}
       columns:
+        - id
         - tip
         - title
     comment: ""

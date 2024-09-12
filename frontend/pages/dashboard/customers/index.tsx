@@ -298,7 +298,9 @@ export default function Home() {
                   <tbody>
                     {customers.map((customer) => (
                       <tr key={customer.id}>
-                        <td className={styles.clientProfileButton}>
+                        <td>
+                          <div className={styles.clientProfileButton}>
+                          <i className="far fa-square"></i>
                           <img
                             src={
                               customer.image
@@ -313,6 +315,7 @@ export default function Home() {
                               {customer.name} {customer.surname}
                             </p>
                           </Link>
+                          </div>
                         </td>
                         <td>{customer.email}</td>
                         <td>{customer.phone_number}</td>

@@ -18,6 +18,7 @@ export function Navbar() {
   const [isSigns, setIsSigns] = useState(false);
   const [isClothes, setIsClothes] = useState(false);
   const [isManager, setIsManager] = useState(false);
+  const [isStat, setIsStat] = useState(false);
 
   useEffect(() => {
     setIsDashboard(router.pathname === "/dashboard");
@@ -27,8 +28,10 @@ export function Navbar() {
     setIsEvents(router.pathname === "/dashboard/events");
     setIsTips(router.pathname === "/dashboard/tips");
     setIsClothes(router.pathname === "/dashboard/clothes");
-    setIsClothes(router.pathname === "/dashboard/statistics");
-    setIsManager(Cookie.get("role") === "admin" || Cookie.get("role") === "manager" );
+    setIsStat(router.pathname === "/dashboard/statistics");
+    setIsManager(
+      Cookie.get("role") === "admin" || Cookie.get("role") === "manager"
+    );
   }, [router]);
 
   const disconnect = async () => {
@@ -101,11 +104,21 @@ export function Navbar() {
         </li>
         {isManager && (
           <li>
-            <Link href="/dashboard/statistics">Statistics</Link>
+            <Link
+              href="/dashboard/statistics"
+              className={isStat ? styles.selected : ""}
+            >
+              Statistics
+            </Link>
           </li>
         )}
         <li>
-          <Link href="/dashboard/clothes">Clothes</Link>
+          <Link
+            href="/dashboard/clothes"
+            className={isClothes ? styles.selected : ""}
+          >
+            Clothes
+          </Link>
         </li>
       </ul>
       <div className={styles.language}>

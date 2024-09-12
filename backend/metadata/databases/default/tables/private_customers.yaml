@@ -68,8 +68,10 @@ insert_permissions:
         - email
         - employee_uuid
         - gender
+        - id
         - image
         - name
+        - origin
         - phone_number
         - surname
         - uuid
