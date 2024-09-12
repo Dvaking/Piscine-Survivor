@@ -288,8 +288,9 @@ export default function Dashboard() {
           </div>
         </div>
 
+          {/* If is not usable dont show */}
         <div className="columns is-multiline">
-          <div className="column is-12-mobile is-8-tablet is-6-desktop">
+          {/* <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
               <h2 className="title is-5">Customers by Country</h2>
               <div style={{ textAlign: "center" }}>
@@ -304,8 +305,7 @@ export default function Dashboard() {
                 </ul>
               </div>
             </div>
-          </div>
-
+          </div> */}
           <div className="column is-12-mobile is-8-tablet is-6-desktop">
             <div className="box">
               <h2 className="title is-5">Meetings Top Sources</h2>

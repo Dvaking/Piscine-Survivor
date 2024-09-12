@@ -280,61 +280,71 @@ export default function Home() {
               <i className="fas fa-cog" aria-hidden="true"></i>
             </div>
           </div>
-          <div className={styles.category}>
-            <div className={styles.checkName}>
-              <i className="far fa-square"></i>
-              Customer
-            </div>
-            <div>Email</div>
-            <div>Phone</div>
-            <div>Payment Methods</div>
-            <div className={styles.actions}>Actions</div>
-          </div>
-          {customers.map((customer) => (
-            <div className={styles.customer} key={customer.uuid}>
-              <div className={styles.checkName}>
-                <i className="far fa-square"></i>
-                <div className={styles.clientProfileButton}>
-                    <img
-                      src={
-                        customer.image
-                          ? `data:image/png;base64,${customer.image}`
-                          : "https://via.placeholder.com/128"
-                      }
-                      alt={customer.name}
-                      className={styles.profilePicture}
-                    />
-                  <Link href={`/dashboard/customers/${customer.uuid}`}>
-                    <p>
-                      {customer.name} {customer.surname}
-                    </p>
-                  </Link>
-                </div>
-              </div>
-              <div className={styles.email}>{customer.email}</div>
-              <div>{customer.phone_number}</div>
-              <div className={styles.paymentMethod}>
-                <div className={styles.paymentImageContainer}>
-                  <img
-                    src={getPaymentMethodImage(paymentMethods[customer.uuid])}
-                    alt="Payment Method"
-                    className={styles.paymentImage}
-                  />
-                  <div className={styles.paymentTooltip}>
-                    {paymentMethods[customer.uuid] || "Loading..."}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.actions}>
-                <Link
-                  href={`/dashboard/clothes/${customer.uuid}`}
-                  className={styles.actionLink}
+          <div className="column">
+            <div className="box">
+              <div className={`table-container ${styles.tableContainer}`}>
+                <table
+                  className={`table is-fullwidth is-striped ${styles.table}`}
                 >
-                  <i className="fas fa-ellipsis-h"></i>
-                </Link>
+                  <thead>
+                    <tr>
+                      <th>Customers</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Payment Method</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {customers.map((customer) => (
+                      <tr key={customer.id}>
+                        <td className={styles.clientProfileButton}>
+                          <img
+                            src={
+                              customer.image
+                                ? `data:image/png;base64,${customer.image}`
+                                : "https://via.placeholder.com/128"
+                            }
+                            alt={customer.name}
+                            className={styles.profilePicture}
+                          />
+                          <Link href={`/dashboard/customers/${customer.uuid}`}>
+                            <p>
+                              {customer.name} {customer.surname}
+                            </p>
+                          </Link>
+                        </td>
+                        <td>{customer.email}</td>
+                        <td>{customer.phone_number}</td>
+                        <td className={styles.paymentMethod}>
+                          <div className={styles.paymentImageContainer}>
+                            <img
+                              src={getPaymentMethodImage(
+                                paymentMethods[customer.uuid]
+                              )}
+                              alt="Payment Method"
+                              className={styles.paymentImage}
+                            />
+                            <div className={styles.paymentTooltip}>
+                              {paymentMethods[customer.uuid] || "Loading..."}
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <Link
+                            href={`/dashboard/clothes/${customer.uuid}`}
+                            className={styles.actionLink}
+                          >
+                            <i className="fas fa-ellipsis-h"></i>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </main>

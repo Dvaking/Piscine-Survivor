@@ -28,7 +28,7 @@ export function Navbar() {
     setIsTips(router.pathname === "/dashboard/tips");
     setIsClothes(router.pathname === "/dashboard/clothes");
     setIsClothes(router.pathname === "/dashboard/statistics");
-    setIsManager(Cookie.get("role") === "admin");
+    setIsManager(Cookie.get("role") === "admin" || Cookie.get("role") === "manager" );
   }, [router]);
 
   const disconnect = async () => {

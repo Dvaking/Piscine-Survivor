@@ -5,6 +5,7 @@ export type InsertEmployeeProps = {
   birth_date: string;
   email: string;
   work: string;
+  id: number;
 };
 
 export type ResponseInsertEmployeeProps = {
@@ -179,6 +180,12 @@ export interface GetEmployeeTableInformationProps {
       count: number;
     };
   };
+}
+
+export interface HowManyEmployeesProps {
+  aggregate: {
+    count: 48
+  }
 }
 
 export interface GetCustomersUnassignedProps {

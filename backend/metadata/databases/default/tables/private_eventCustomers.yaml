@@ -19,6 +19,13 @@ insert_permissions:
         - customer_uuid
         - event_uuid
     comment: ""
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - customer_uuid
+        - event_uuid
+    comment: ""
 select_permissions:
   - role: coach
     permission:
@@ -29,6 +36,14 @@ select_permissions:
         customer_assign:
           employee_uuid:
             _eq: X-Hasura-User-Id
+    comment: ""
+  - role: manager
+    permission:
+      columns:
+        - customer_uuid
+        - event_uuid
+        - uuid
+      filter: {}
     comment: ""
 update_permissions:
   - role: coach
@@ -42,6 +57,14 @@ update_permissions:
             _eq: X-Hasura-User-Id
       check: null
     comment: ""
+  - role: manager
+    permission:
+      columns:
+        - customer_uuid
+        - event_uuid
+      filter: {}
+      check: null
+    comment: ""
 delete_permissions:
   - role: coach
     permission:
@@ -49,4 +72,8 @@ delete_permissions:
         customer_assign:
           employee_uuid:
             _eq: X-Hasura-User-Id
+    comment: ""
+  - role: manager
+    permission:
+      filter: {}
     comment: ""

@@ -11,6 +11,17 @@ object_relationships:
         remote_table:
           name: customers
           schema: private
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - comment
+        - customer_id
+        - date
+        - rating
+        - source
+    comment: ""
 select_permissions:
   - role: coach
     permission:
@@ -25,4 +36,32 @@ select_permissions:
         customer_assign:
           employee_uuid:
             _eq: X-Hasura-User-Id
+    comment: ""
+  - role: manager
+    permission:
+      columns:
+        - comment
+        - customer_id
+        - date
+        - id
+        - rating
+        - source
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - comment
+        - customer_id
+        - date
+        - rating
+        - source
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: manager
+    permission:
+      filter: {}
     comment: ""

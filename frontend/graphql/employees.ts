@@ -36,6 +36,16 @@ export const GetEmployeeTableInformation = gql`
   }
 `;
 
+export const HowManyEmployees = gql`
+  query HowManyEmployees {
+    private_employees_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export const GetEmployeesByUuid = gql`
   query GetEmployeesByUuid($uuid: uuid) {
     private_employees(where: { uuid: { _eq: $uuid } }) {

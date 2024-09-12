@@ -470,3 +470,12 @@
     border-radius: 5px;
   }
 }
+
+.tableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  min-width: 1000px;
+}

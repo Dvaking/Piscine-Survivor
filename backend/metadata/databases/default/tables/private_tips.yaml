@@ -1,6 +1,14 @@
 table:
   name: tips
   schema: private
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - tip
+        - title
+    comment: ""
 select_permissions:
   - role: coach
     permission:
@@ -8,5 +16,27 @@ select_permissions:
         - id
         - tip
         - title
+      filter: {}
+    comment: ""
+  - role: manager
+    permission:
+      columns:
+        - id
+        - tip
+        - title
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - tip
+        - title
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: manager
+    permission:
       filter: {}
     comment: ""

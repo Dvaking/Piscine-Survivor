@@ -242,133 +242,14 @@
   object-fit: cover;
 }
 
-/* .popupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.tableContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.popupContent {
-  position: fixed;
-  background-color: whitesmoke;
-  width: 50%;
-  max-height: 80%;
-  height: auto;
-  border-radius: 3px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  overflow-y: auto;
+.table {
+  min-width: 1000px;
 }
-
-.popupContent h2 {
-  font-size: 2.2rem;
-  font-weight: 600;
-  padding-bottom: 2rem;
-}
-
-.popupContent form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.popupContent label {
-  font-size: 1.7rem;
-}
-
-.popupContent input {
-  padding: 1rem;
-  font-size: 1.2rem;
-}
-
-.formButtons {
-  display: flex;
-  flex-direction: row;
-  padding-top: 1.5rem;
-  gap: 2rem;
-}
-
-.formButtons button {
-  font-size: 1.3rem;
-  border-radius: 5px;
-} */
-
-/* .dropdown {
-  max-width: 50%;
-  max-height: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: whitesmoke;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.2rem;
-  padding: 2rem;
-}
-
-.searchInput {
-  width: 99%;
-  padding: 0.7rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-}
-
-.topDropdown {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.topDropdown h2 {
-  font-size: 2rem;
-}
-
-.topDropdown i {
-  padding-right: 0.5rem;
-  cursor: pointer;
-}
-
-.dropdown ul {
-  overflow-y: auto;
-  background-color: white;
-}
-
-.listItem {
-  cursor: pointer;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.listItem p {
-  font-size: 1.5rem;
-}
-
-.listItem:hover {
-  background-color: #b7d8ff;
-} */
 
 /* mobile & tablet */
 @media (max-width: 1480px) {
