@@ -61,13 +61,10 @@ export async function updateCustomer(
     email: customer.email,
     password: "password",
     role: "customer",
-    employee_uuid: undefined,
-    customer_uuid: undefined,
   };
   try {
     response = await Client.request(UpdateCustomer, customerVariables);
     const uuid = response?.insert_private_customers?.returning[0]?.uuid;
-    userVariables.customer_uuid = uuid;
     await Client.request(UpdateUser, userVariables);
     console.log("Customer updated successfully");
     return uuid;
