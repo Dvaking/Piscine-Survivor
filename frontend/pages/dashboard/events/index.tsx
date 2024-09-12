@@ -26,6 +26,8 @@ const Events = () => {
   const router = useRouter();
   const [events, setEvents] = useState<GetEventsProps[]>();
 
+  console.log(events);
+
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
@@ -70,7 +72,15 @@ const Events = () => {
               zoom={13}
               center={defaultCenter}
             >
-              <Marker position={defaultCenter} />
+              {events?.map((event, index) => (
+                <Marker
+                  key={index}
+                  position={{
+                    lat: parseFloat(event.location_x),
+                    lng: parseFloat(event.location_y),
+                  }}
+                />
+              ))}
             </GoogleMap>
           </LoadScript>
         </div>

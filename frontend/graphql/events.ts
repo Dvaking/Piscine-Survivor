@@ -7,6 +7,8 @@ export const GetEvents = gql`
       type
       date
       duration
+      location_x
+      location_y
     }
   }
 `;

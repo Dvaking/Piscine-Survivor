@@ -160,6 +160,8 @@ export type GetEventsProps = {
   type: string;
   date: string;
   duration: string;
+  location_x: string;
+  location_y: string;
 }
 
 export type GetTipsProps = {
