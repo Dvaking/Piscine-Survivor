@@ -12,13 +12,9 @@ export async function updateCustomerEmployee(
       employee_uuid,
     });
   } catch (error) {
-    if (
-      (error as any).response &&
-      (error as any).response.errors &&
-      (error as any).response.errors[0].message === "JWTExpired"
-    ) {
+    if ((error as any).response.errors[0].message.includes("JWTExpired")) {
       const refresh = await refreshToken();
-      if (refresh)
+      if (refresh) {
         try {
           response = await client.request(UpdateCustomerEmployee, {
             uuid,
@@ -27,6 +23,7 @@ export async function updateCustomerEmployee(
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }
+      } else console.log("erreur refresh token");
     }
   }
   return response;

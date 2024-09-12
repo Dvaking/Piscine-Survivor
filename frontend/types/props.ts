@@ -5,7 +5,6 @@ export type InsertEmployeeProps = {
   birth_date: string;
   email: string;
   work: string;
-  id: number;
 };
 
 export type ResponseInsertEmployeeProps = {
@@ -152,3 +151,24 @@ export type GetTipsProps = {
   title: string;
   id: number;
 };
+
+export interface GetEmployeeTableInformationProps {
+  id: number;
+  email: string;
+  name: string;
+  surname: string;
+  uuid: string;
+  work: string;
+  image: string;
+  customer_assign_aggregate: {
+    aggregate: {
+      count: number;
+    };
+  };
+}
+
+export interface GetCustomersUnassignedProps {
+  uuid: string;
+  name: string;
+  surname: string;
+}

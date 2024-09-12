@@ -21,6 +21,16 @@ export const GetCustomers = gql`
   }
 `;
 
+export const GetCustomersUnassigned = gql`
+  query GetCustomersUnassigned {
+    private_customers(where: { employee_uuid: { _is_null: true } }) {
+      uuid
+      name
+      surname
+    }
+  }
+`;
+
 export const GetCustomersByUuid = gql`
   query GetCustomersByUuid($uuid: uuid) {
     private_customers(where: { uuid: { _eq: $uuid } }) {

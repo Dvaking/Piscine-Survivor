@@ -1,16 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
-  getCustomers,
-  getEmployees,
   updateCustomerEmployee,
   insertEmployee,
   registerUser,
+  getEmployeeTableInformation,
+  getCustomersUnassigned,
 } from "@hooks";
 import {
-  GetCustomersProps,
-  GetEmployeesProps,
-  InsertEmployeeProps,
+  GetCustomersUnassignedProps,
+  GetEmployeeTableInformationProps,
 } from "@types";
 import styles from "@styles/EmployeesPage.module.css";
 import "bulma/css/bulma.css";
@@ -19,34 +18,27 @@ import Cookies from "js-cookie";
 
 export default function Home() {
   const router = useRouter();
-  const [employees, setEmployees] = useState<GetEmployeesProps[]>([]);
-  const [customers, setCustomers] = useState<GetCustomersProps[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedEmployee, setSelectedEmployee] =
-    useState<GetEmployeesProps | null>(null);
-  const [dropdownForClient, setDropdownForClient] = useState(false);
-  const [isPopupVisible, setPopupVisible] = useState(false);
-  const [emailError, setEmailError] = useState<string>("");
-
-  const generateUniqueId = () => {
-    let randomId;
-    const existingIds = employees.map((employee) => employee.id);
-    do {
-      randomId = Math.floor(Math.random() * 10000);
-    } while (existingIds.includes(randomId));
-    return randomId;
-  };
-
-  const [formData, setFormData] = useState({
+  const relaodForms = {
     name: "",
     surname: "",
     gender: "",
     birth_date: "",
     email: "",
     work: "",
-    id: 0,
     password: "",
-  });
+  }
+  const [employees, setEmployees] = useState<
+    GetEmployeeTableInformationProps[]
+  >([]);
+  const [customers, setCustomers] = useState<GetCustomersUnassignedProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedEmployee, setSelectedEmployee] =
+    useState<GetEmployeeTableInformationProps | null>(null);
+  const [dropdownForClient, setDropdownForClient] = useState(false);
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [emailError, setEmailError] = useState<string>("");
+  const [reload, setReload] = useState(true);
+  const [formData, setFormData] = useState(relaodForms);
 
   const isEmailInUse = (email: string) => {
     return employees.some((employee) => employee.email === email);
@@ -69,10 +61,6 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormData((prevData) => ({
-      ...prevData,
-      id: generateUniqueId(),
-    }));
     try {
       const response = await insertEmployee({
         email: formData.email,
@@ -81,7 +69,6 @@ export default function Home() {
         surname: formData.surname,
         birth_date: formData.birth_date,
         gender: formData.gender,
-        id: formData.id,
       });
       if (response)
         await registerUser(
@@ -91,7 +78,8 @@ export default function Home() {
           response.uuid
         );
       setPopupVisible(false);
-      // router.reload();
+      setReload(true);
+      setFormData(relaodForms);
     } catch (error) {
       console.error("Failed to insert employee:", error);
     }
@@ -103,15 +91,18 @@ export default function Home() {
       router.push("/login");
     }
     const fetchData = async () => {
-      const fetchedEmployees = await getEmployees();
-      const fetchedCustomers = await getCustomers();
+      const fetchedEmployees = await getEmployeeTableInformation();
+      const fetchedCustomers = await getCustomersUnassigned();
       setEmployees(fetchedEmployees);
       setCustomers(fetchedCustomers);
     };
-    fetchData();
-  }, []);
+    if (reload) {
+      fetchData();
+      setReload(false);
+    }
+  }, [reload]);
 
-  const handleActionClick = (employee: GetEmployeesProps) => {
+  const handleActionClick = (employee: GetEmployeeTableInformationProps) => {
     if (employee.work !== "Coach" && employee.work !== "coach") {
       alert("Clients can only be assigned to coaches.");
       return;
@@ -132,23 +123,17 @@ export default function Home() {
     client.name.toLowerCase().includes(searchQuery)
   );
 
-  const assignClient = async (client: GetCustomersProps) => {
+  const assignClient = async (client: GetCustomersUnassignedProps) => {
     try {
       await updateCustomerEmployee(client.uuid, selectedEmployee?.uuid ?? "");
       setDropdownForClient(false);
       setSelectedEmployee(null);
-      router.reload();
+      setReload(true);
     } catch (error) {
       console.error("Failed to assign client:", error);
     }
   };
 
-  const getEmployeeCustomerNumber = (employee: GetEmployeesProps) => {
-    const assignedClients = customers.filter((client) => {
-      return client.employee_uuid === employee.uuid;
-    });
-    return assignedClients.length;
-  };
   return (
     <main className={styles.main}>
       <div className={styles.heading}>
@@ -350,7 +335,7 @@ export default function Home() {
               </div>
               <div className={styles.email}>{employee.email}</div>
               <div>---</div>
-              <div>{getEmployeeCustomerNumber(employee)}</div>
+              <div>{employee.customer_assign_aggregate.aggregate.count}</div>
 
               <div
                 className={styles.actions}
@@ -375,19 +360,17 @@ export default function Home() {
                     onChange={handleSearchChange}
                   />
                   <ul>
-                    {filteredClients
-                      .filter((client) => client.employee_uuid === null)
-                      .map((client) => (
-                        <li
-                          key={client.uuid}
-                          className={styles.listItem}
-                          onClick={() => assignClient(client)}
-                        >
-                          <p>
-                            {client.name} {client.surname}
-                          </p>
-                        </li>
-                      ))}
+                    {customers.map((client) => (
+                      <li
+                        key={client.uuid}
+                        className={styles.listItem}
+                        onClick={() => assignClient(client)}
+                      >
+                        <p>
+                          {client.name} {client.surname}
+                        </p>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}

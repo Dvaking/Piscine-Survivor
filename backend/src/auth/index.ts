@@ -57,7 +57,6 @@ authRouter.post("/register", async (req, res) => {
     return res.sendStatus(500);
   }
   await insertUser(email, hashedPassword, role, uuid);
-
 });
 
 authRouter.post("/login", async (req, res) => {
@@ -71,7 +70,10 @@ authRouter.post("/login", async (req, res) => {
       customer_uuid: user.customer_uuid,
       password: user.password,
     };
-    const verifiedUser = await verifyUser({ user: userDetails, password: password });
+    const verifiedUser = await verifyUser({
+      user: userDetails,
+      password: password,
+    });
 
     if (verifiedUser.role === "NoUser") {
       return res
@@ -131,7 +133,11 @@ authRouter.post("/refresh", async (req, res) => {
       const verifiedUser: {
         role: string;
         uuid: string;
-      } = await verifyUser({ user: userDetails, password: userDetails.password });
+      } = await verifyUser({
+        user: userDetails,
+        password: userDetails.password,
+        isRefreshToken: true,
+      });
       if (verifiedUser.role === "NoUser") return res.sendStatus(403);
 
       interface Claims {

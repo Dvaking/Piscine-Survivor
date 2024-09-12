@@ -13,6 +13,7 @@ type GetUser = {
 export interface UserVerification {
   user: User;
   password: string;
+  isRefreshToken?: boolean;
 }
 
 

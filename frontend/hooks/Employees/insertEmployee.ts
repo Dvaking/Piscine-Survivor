@@ -20,13 +20,16 @@ export async function insertEmployee(employees: InsertEmployeeProps) {
       (error as any).response.errors[0].message === "JWTExpired"
     ) {
       const refresh = await refreshToken();
-      if (refresh)
+      if (refresh) {
         try {
           response = await client.request(InsertEmployee, employees);
         } catch (error) {
           console.error("Erreur lors de l'insertion:", error);
         }
+      }
+      console.log("erreur refresh token");
     }
+    console.error("Erreur lors de l'insertion:", error);
   }
   return response ? response.insert_private_employees.returning[0] : "";
 }
