@@ -8,8 +8,21 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { getEvents } from "@hooks";
 import { GetEventsProps } from "@types";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const Events = () => {
+  const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+  const mapStyles = {
+    height: "400px",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: 48.8566,
+    lng: 2.3522,
+  };
+
   const router = useRouter();
   const [events, setEvents] = useState<GetEventsProps[]>();
 
@@ -47,6 +60,19 @@ const Events = () => {
               date: event.date,
             }))}
           />
+        </div>
+      </div>
+      <div className="column">
+        <div className={`box ${styles.calendarContainer}`}>
+          <LoadScript googleMapsApiKey={googleMapsApiKey}>
+            <GoogleMap
+              mapContainerStyle={mapStyles}
+              zoom={13}
+              center={defaultCenter}
+            >
+              <Marker position={defaultCenter} />
+            </GoogleMap>
+          </LoadScript>
         </div>
       </div>
     </div>
