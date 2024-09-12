@@ -159,6 +159,7 @@ export type GetEventsProps = {
   name: string;
   type: string;
   date: string;
+  duration: string;
 }
 
 export type GetTipsProps = {

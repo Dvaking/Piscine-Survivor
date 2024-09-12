@@ -6,6 +6,7 @@ export const GetEvents = gql`
       name
       type
       date
+      duration
     }
   }
 `;
