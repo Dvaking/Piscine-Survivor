@@ -81,7 +81,7 @@ export const GetEmployeesAssignedCustomers = gql`
   query GetEmployeesAssignedCustomers {
     private_employees(where: { work: { _eq: "Coach" } }) {
       name
-      customer_asing {
+      customer_assign {
         name
       }
     }
